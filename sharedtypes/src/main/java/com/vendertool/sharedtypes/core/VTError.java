@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 
+//Adding a comment.
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = { "errorCode", "errorMessage", "severity", "domain" })
 public class VTError {
