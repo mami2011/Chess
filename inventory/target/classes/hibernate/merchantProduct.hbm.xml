@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.vendertool.inventory.DBL.MerchantProduct" catalog="stool" lazy="false" table="MERCHANT_PRODUCT">
+        <id name="productId" type="int">
+            <column name="PRODUCT_ID" precision="5" scale="0" />
+            <generator class="increment" />
+        </id>
+        <property name="productName" type="string">
+            <column name="PRODUCT_NAME" length="20" not-null="true" />
+        </property>
+        
+         <property name="productTitle" type="string">
+            <column name="PRODUCT_TITLE" length="20" not-null="true" />
+        </property>
+        <property name="descriptionId" type="int">
+            <column name="PRODUCT_DESCRIPTION_ID" precision="5" scale="0"  />
+        </property>
+        <property name="productSKU" type="string">
+            <column name="PRODUCT_SKU" length="20" not-null="true" />
+        </property>
+        <property name="productType" type="string">
+            <column name="PRODUCT_TYPE" length="20" not-null="true" />
+        </property>
+                <property name="productCode" type="string">
+            <column name="PRODUCT_CODE" length="20" not-null="true" />
+        </property>
+        
+         <property name="productURL" type="string">
+            <column name="PRODUCT_URL" length="20" not-null="true" />
+        </property>
+        <property name="availableQuantity" type="int">
+            <column name="AVAILABEL_QUANTITY" precision="5" scale="0" />
+        </property>
+
+        <property name="changeWho" type="string">
+            <column name="CHANGE_WHO" length="20" not-null="true" />
+        </property>
+        
+        	
+	
+	
+    </class>
+</hibernate-mapping>

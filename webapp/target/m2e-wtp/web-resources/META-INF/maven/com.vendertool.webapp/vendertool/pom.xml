@@ -1,0 +1,94 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+	<groupId>com.vendertool.parent</groupId>
+	<artifactId>parent</artifactId>
+	<version>1.0</version>
+	<relativePath>../parent/pom.xml</relativePath>
+  </parent>
+  
+  <groupId>com.vendertool.webapp</groupId>
+  <artifactId>vendertool</artifactId>
+  <packaging>war</packaging>
+  <name>webapp Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  
+  <dependencies>
+      <dependency>
+      <groupId>com.vendertool.sharedtypes</groupId>
+      <artifactId>sharedtypes</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.vendertool.common</groupId>
+      <artifactId>common</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.vendertool.metadata</groupId>
+      <artifactId>metadata</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.vendertool.signin</groupId>
+      <artifactId>signin</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.vendertool.registration</groupId>
+      <artifactId>registration</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.vendertool.rolemanagement</groupId>
+      <artifactId>rolemanagement</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.vendertool.inventory</groupId>
+      <artifactId>inventory</artifactId>
+      <version>1.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.vendertool.listing</groupId>
+      <artifactId>listing</artifactId>
+      <version>1.0</version>
+    </dependency>
+        
+    <dependency>
+      <groupId>com.vendertool.mercadolibreadapter</groupId>
+      <artifactId>mercadolibreadapter</artifactId>
+      <version>1.0</version>
+    </dependency>
+   	
+  </dependencies>
+  
+  <build>
+    <finalName>vendertool</finalName>
+    
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>tomcat-maven-plugin</artifactId>
+        </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+            <source>1.7</source>
+            <target>1.7</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
