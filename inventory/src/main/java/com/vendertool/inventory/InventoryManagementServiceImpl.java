@@ -36,6 +36,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 		IInventoryManagementService {
 	
 	@GET
+	@Path("/getProduct")
 	@ProduceMime({ "application/xml", "application/json" })
 	public GetProductResponse getProduct(@QueryParam("productId") String id) {
 		GetProductResponse response = new GetProductResponse();
@@ -55,6 +56,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 	}
 
 	@POST
+	@Path("/addProduct")
 	@ConsumeMime({ "application/xml", "application/json" })
 	@ProduceMime({ "application/xml", "application/json" })
 	public AddProductResponse addProduct(AddProductRequest request) {
@@ -67,6 +69,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 	}
 
 	@POST
+	@Path("/updateProduct")
 	@ConsumeMime({ "application/xml", "application/json" })
 	@ProduceMime({ "application/xml", "application/json" })
 	public UpdateProductResponse updateProduct(UpdateProductRequest request) {
@@ -74,12 +77,14 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 	}
 
 	@GET
+	@Path("/removeProduct")
 	@ProduceMime({ "application/xml", "application/json" })
 	public RemoveProductResponse removeProduct(String productId) {
 		return null;
 	}
 
 	@POST
+	@Path("/updateProductPriceQuantity")
 	@ConsumeMime({ "application/xml", "application/json" })
 	@ProduceMime({ "application/xml", "application/json" })
 	public UpdateProductPriceQuanityResponse updateProductPriceQuantity(
@@ -88,6 +93,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 	}
 
 	@POST
+	@Path("/adjustQuantity")
 	@ConsumeMime({ "application/xml", "application/json" })
 	@ProduceMime({ "application/xml", "application/json" })
 	public AdjustProductQuantityResponse adjustQuantity(
@@ -96,12 +102,14 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 	}
 
 	@GET
+	@Path("/duplicateProduct")
 	@ProduceMime({ "application/xml", "application/json" })
 	public DuplicateProductResponse duplicateProduct(String productId) {
 		return null;
 	}
 
 	@POST
+	@Path("/addProductVariation")
 	@ConsumeMime({ "application/xml", "application/json" })
 	@ProduceMime({ "application/xml", "application/json" })
 	public AddProductVariationResponse addProductVariation(
@@ -110,6 +118,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 	}
 
 	@GET
+	@Path("/removeProductVariation")
 	@ProduceMime({ "application/xml", "application/json" })
 	public RemoveProductVariationResponse removeProductVariation(
 			String productId, String variationId) {
@@ -117,6 +126,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 	}
 
 	@GET
+	@Path("/getProductVariation")
 	@ProduceMime({ "application/xml", "application/json" })
 	public GetProductVariationResponse getProductVariation(String productId,
 			String variationId) {
@@ -124,6 +134,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 	}
 
 	@POST
+	@Path("/addProductImage")
 	@ConsumeMime({ "application/xml", "application/json" })
 	@ProduceMime({ "application/xml", "application/json" })
 	public AddProductImageResponse addProductImage(

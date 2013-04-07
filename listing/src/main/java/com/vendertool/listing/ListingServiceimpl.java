@@ -35,6 +35,7 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 	
 
 	@GET
+	@Path("/getListing")
 	@ProduceMime({ "application/xml", "application/json" })
 	public GetListingResponse getListing(@QueryParam("listingId") String id) {
 //		GetListingResponse response = new GetListingResponse();
@@ -66,6 +67,7 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 	}
 	
 	@POST
+	@Path("/addListing")
 	@ConsumeMime({ "application/xml", "application/json" })
 	@ProduceMime({ "application/xml", "application/json" })
 	public AddListingResponse addListing(AddListingRequest request) {
@@ -80,41 +82,72 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 		return response;
 	}
 
+	@GET
+	@Path("/getListingPriceQuantity")
+	@ProduceMime({ "application/xml", "application/json" })
 	public GetListingPriceQuantityResponse getListingPriceQuantity(
 			String listingId) {
 		return null;
 	}
 
+	@GET
+	@Path("/endListing")
+	@ProduceMime({ "application/xml", "application/json" })
 	public EndListingResponse endListing(String listingId) {
 		return null;
 	}
 
+	@POST
+	@Path("/updateListing")
+	@ConsumeMime({ "application/xml", "application/json" })
+	@ProduceMime({ "application/xml", "application/json" })
 	public UpdateListingResponse updateListing(UpdateListingRequest request) {
 		return null;
 	}
 
+	@POST
+	@Path("/updateListingPriceQuantity")
+	@ConsumeMime({ "application/xml", "application/json" })
+	@ProduceMime({ "application/xml", "application/json" })
 	public UpdateListingPriceQuanityResponse updateListingPriceQuantity(
 			UpdateListingPriceQuantityRequest request) {
 		return null;
 	}
 
+	@POST
+	@Path("/adjustListingQuantity")
+	@ConsumeMime({ "application/xml", "application/json" })
+	@ProduceMime({ "application/xml", "application/json" })
 	public AdjustListingQuantityResponse adjustListingQuantity(
 			AdjustListingQuantityRequest request) {
 		return null;
 	}
 
+	@GET
+	@Path("/duplicateListing")
+	@ProduceMime({ "application/xml", "application/json" })
 	public DuplicateListingResponse duplicateListing(String listingId) {
 		return null;
 	}
 
+	@GET
+	@Path("/getAuctionBidCount")
+	@ProduceMime({ "application/xml", "application/json" })
 	public GetAuctionBidCountResponse getAuctionBidCount(String listingId) {
 		return null;
 	}
 
+	@GET
+	@Path("/getAuctionHighBidder")
+	@ProduceMime({ "application/xml", "application/json" })
 	public GetAuctionHighBidderResponse getAuctionHighBidder(String listingId) {
 		return null;
 	}
 
+	@POST
+	@Path("/verifyListing")
+	@ConsumeMime({ "application/xml", "application/json" })
+	@ProduceMime({ "application/xml", "application/json" })
 	public VerifyListingResponse verifyListing(VerifyListingRequest request) {
 		return null;
 	}
