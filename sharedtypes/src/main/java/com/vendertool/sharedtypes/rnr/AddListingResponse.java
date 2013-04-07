@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class AddListingResponse extends BaseResponse {
 	private String listingId;
 
+	public AddListingResponse(){}
+	
 	public String getListingId() {
 		return listingId;
 	}

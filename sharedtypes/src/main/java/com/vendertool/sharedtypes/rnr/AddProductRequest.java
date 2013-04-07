@@ -1,6 +1,5 @@
 package com.vendertool.sharedtypes.rnr;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.vendertool.sharedtypes.core.Product;
@@ -9,6 +8,8 @@ import com.vendertool.sharedtypes.core.Product;
 public class AddProductRequest extends BaseRequest{
 	private Product product;
 
+	public AddProductRequest(){}
+	
 	public Product getProduct() {
 		return product;
 	}

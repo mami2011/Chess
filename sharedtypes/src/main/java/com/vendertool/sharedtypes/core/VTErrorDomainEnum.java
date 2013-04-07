@@ -3,7 +3,7 @@ package com.vendertool.sharedtypes.core;
 import javax.xml.bind.annotation.XmlEnum;
 
 @XmlEnum
-public enum VTErrorDomain {
+public enum VTErrorDomainEnum {
 	UNKNOWN(0, "UNKNOWN"),
 	SYSTEM(1, "SYSTEM"),
 	SIGNIN(2, "SIGNIN"),
@@ -22,7 +22,7 @@ public enum VTErrorDomain {
 	private int id;
 	private String name;
 	
-	VTErrorDomain(int id, String name){
+	VTErrorDomainEnum(int id, String name){
 		this.id = id;
 		this.name = name;
 	}
@@ -33,5 +33,13 @@ public enum VTErrorDomain {
 	
 	public String getName(){
 		return name;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

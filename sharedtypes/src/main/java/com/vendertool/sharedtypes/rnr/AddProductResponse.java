@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class AddProductResponse extends BaseResponse {
 	String productId;
 
+	public AddProductResponse(){}
+	
 	public String getProductId() {
 		return productId;
 	}

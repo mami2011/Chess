@@ -23,18 +23,55 @@
     </dependency>
     
     <dependency>
+      <groupId>com.vendertool.common</groupId>
+      <artifactId>common</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.vendertool.metadata</groupId>
+      <artifactId>metadata</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.vendertool.signin</groupId>
+      <artifactId>signin</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.vendertool.registration</groupId>
+      <artifactId>registration</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.vendertool.rolemanagement</groupId>
+      <artifactId>rolemanagement</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
+    <dependency>
       <groupId>com.vendertool.inventory</groupId>
       <artifactId>inventory</artifactId>
       <version>1.0</version>
     </dependency>
-    
+
     <dependency>
       <groupId>com.vendertool.listing</groupId>
       <artifactId>listing</artifactId>
       <version>1.0</version>
     </dependency>
-    
+        
+    <dependency>
+      <groupId>com.vendertool.mercadolibreadapter</groupId>
+      <artifactId>mercadolibreadapter</artifactId>
+      <version>1.0</version>
+    </dependency>
+   	
   </dependencies>
+  
   <build>
     <finalName>vendertool</finalName>
     
@@ -45,10 +82,11 @@
         </plugin>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-            <source>1.5</source>
-            <target>1.5</target>
+            <source>1.7</source>
+            <target>1.7</target>
         </configuration>
       </plugin>
     </plugins>

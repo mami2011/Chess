@@ -6,4 +6,8 @@ public class VTRuntimeException extends RuntimeException {
 	public VTRuntimeException(String ex){
 		super(ex);
 	}
+	
+	public VTRuntimeException(Exception ex) {
+		super(ex);
+	}
 }

@@ -7,19 +7,34 @@ import javax.ws.rs.Path;
 import javax.ws.rs.ProduceMime;
 import javax.ws.rs.QueryParam;
 
+import com.vendertool.common.service.BaseVenderToolServiceImpl;
 import com.vendertool.sharedtypes.core.InventoryErrorCode;
 import com.vendertool.sharedtypes.core.Product;
 import com.vendertool.sharedtypes.core.VTError;
-import com.vendertool.sharedtypes.core.VTErrorDomain;
-import com.vendertool.sharedtypes.core.VTErrorSeverity;
+import com.vendertool.sharedtypes.core.VTErrorDomainEnum;
+import com.vendertool.sharedtypes.core.VTErrorSeverityEnum;
+import com.vendertool.sharedtypes.rnr.AddProductImageRequest;
+import com.vendertool.sharedtypes.rnr.AddProductImageResponse;
 import com.vendertool.sharedtypes.rnr.AddProductRequest;
 import com.vendertool.sharedtypes.rnr.AddProductResponse;
+import com.vendertool.sharedtypes.rnr.AddProductVariationRequest;
+import com.vendertool.sharedtypes.rnr.AddProductVariationResponse;
+import com.vendertool.sharedtypes.rnr.AdjustProductQuantityRequest;
+import com.vendertool.sharedtypes.rnr.AdjustProductQuantityResponse;
+import com.vendertool.sharedtypes.rnr.DuplicateProductResponse;
 import com.vendertool.sharedtypes.rnr.GetProductResponse;
+import com.vendertool.sharedtypes.rnr.GetProductVariationResponse;
+import com.vendertool.sharedtypes.rnr.RemoveProductResponse;
+import com.vendertool.sharedtypes.rnr.RemoveProductVariationResponse;
+import com.vendertool.sharedtypes.rnr.UpdateProductPriceQuanityResponse;
+import com.vendertool.sharedtypes.rnr.UpdateProductPriceQuantityRequest;
+import com.vendertool.sharedtypes.rnr.UpdateProductRequest;
+import com.vendertool.sharedtypes.rnr.UpdateProductResponse;
 
 @Path("/inventory")
-public class InventoryManagementServiceImpl implements
+public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl implements
 		IInventoryManagementService {
-
+	
 	@GET
 	@ProduceMime({ "application/xml", "application/json" })
 	public GetProductResponse getProduct(@QueryParam("productId") String id) {
@@ -33,8 +48,8 @@ public class InventoryManagementServiceImpl implements
 		response.setProduct(product);
 		response.addError(new VTError(
 				InventoryErrorCode.INSUFFICIENT_PRODUCT_INFORMATION,
-				"Insuffient product information", VTErrorSeverity.WARNING,
-				VTErrorDomain.INVENTORY));
+				"Insuffient product information", VTErrorSeverityEnum.WARNING,
+				VTErrorDomainEnum.INVENTORY));
 		
 		return response;
 	}
@@ -51,4 +66,68 @@ public class InventoryManagementServiceImpl implements
 		return response;
 	}
 
+	@POST
+	@ConsumeMime({ "application/xml", "application/json" })
+	@ProduceMime({ "application/xml", "application/json" })
+	public UpdateProductResponse updateProduct(UpdateProductRequest request) {
+		return null;
+	}
+
+	@GET
+	@ProduceMime({ "application/xml", "application/json" })
+	public RemoveProductResponse removeProduct(String productId) {
+		return null;
+	}
+
+	@POST
+	@ConsumeMime({ "application/xml", "application/json" })
+	@ProduceMime({ "application/xml", "application/json" })
+	public UpdateProductPriceQuanityResponse updateProductPriceQuantity(
+			UpdateProductPriceQuantityRequest request) {
+		return null;
+	}
+
+	@POST
+	@ConsumeMime({ "application/xml", "application/json" })
+	@ProduceMime({ "application/xml", "application/json" })
+	public AdjustProductQuantityResponse adjustQuantity(
+			AdjustProductQuantityRequest request) {
+		return null;
+	}
+
+	@GET
+	@ProduceMime({ "application/xml", "application/json" })
+	public DuplicateProductResponse duplicateProduct(String productId) {
+		return null;
+	}
+
+	@POST
+	@ConsumeMime({ "application/xml", "application/json" })
+	@ProduceMime({ "application/xml", "application/json" })
+	public AddProductVariationResponse addProductVariation(
+			AddProductVariationRequest request) {
+		return null;
+	}
+
+	@GET
+	@ProduceMime({ "application/xml", "application/json" })
+	public RemoveProductVariationResponse removeProductVariation(
+			String productId, String variationId) {
+		return null;
+	}
+
+	@GET
+	@ProduceMime({ "application/xml", "application/json" })
+	public GetProductVariationResponse getProductVariation(String productId,
+			String variationId) {
+		return null;
+	}
+
+	@POST
+	@ConsumeMime({ "application/xml", "application/json" })
+	@ProduceMime({ "application/xml", "application/json" })
+	public AddProductImageResponse addProductImage(
+			AddProductImageRequest request) {
+		return null;
+	}
 }

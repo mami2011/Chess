@@ -2,29 +2,23 @@ package com.vendertool.sharedtypes.core;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
 
-
-//Adding a comment.
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = { "errorCode", "errorMessage", "severity", "domain" })
 public class VTError {
 	private VTErrorCode errorCode;
 	private String errorMessage;
-	private VTErrorSeverity severity;
-	private VTErrorDomain domain;
+	private VTErrorSeverityEnum severity;
+	private VTErrorDomainEnum domain;
 
-	public VTError() {
-		//default constructor for container or jaxb
-	}
+	public VTError() {}
 	
-	public VTError(VTErrorCode errorCode, String errorMessage, VTErrorDomain domain){
-		this(errorCode, errorMessage, VTErrorSeverity.ERROR, domain);
+	public VTError(VTErrorCode errorCode, String errorMessage, VTErrorDomainEnum domain){
+		this(errorCode, errorMessage, VTErrorSeverityEnum.ERROR, domain);
 	}
 	
 	public VTError(VTErrorCode errorCode, String errorMessage,
-			VTErrorSeverity severity, VTErrorDomain domain) {
+			VTErrorSeverityEnum severity, VTErrorDomainEnum domain) {
 		this.errorCode = errorCode;
 		this.errorMessage = errorMessage;
 		this.domain = domain;
@@ -47,21 +41,19 @@ public class VTError {
 		this.errorMessage = errorMessage;
 	}
 
-	public VTErrorSeverity getSeverity() {
+	public VTErrorSeverityEnum getSeverity() {
 		return severity;
 	}
 
-	public void setSeverity(VTErrorSeverity severity) {
+	public void setSeverity(VTErrorSeverityEnum severity) {
 		this.severity = severity;
 	}
 
-	public VTErrorDomain getDomain() {
+	public VTErrorDomainEnum getDomain() {
 		return domain;
 	}
 
-	public void setDomain(VTErrorDomain domain) {
+	public void setDomain(VTErrorDomainEnum domain) {
 		this.domain = domain;
 	}
-	
-	
 }

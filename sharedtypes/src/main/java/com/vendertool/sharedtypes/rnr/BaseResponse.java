@@ -3,13 +3,13 @@ package com.vendertool.sharedtypes.rnr;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-
 import com.vendertool.sharedtypes.core.VTError;
 
 public class BaseResponse {
+	public enum ResponseAckStatusEnum{ SUCCESS, FAILURE, PARTIAL_SUCCESS_WITH_FAILURE; }
+	
 	private List<VTError> errors;
+	private ResponseAckStatusEnum status;
 
 	public BaseResponse() {
 		errors = new ArrayList<VTError>();
@@ -41,5 +41,13 @@ public class BaseResponse {
 	
 	public boolean hasErrors(){
 		return !errors.isEmpty();
+	}
+
+	public ResponseAckStatusEnum getStatus() {
+		return status;
+	}
+
+	public void setStatus(ResponseAckStatusEnum status) {
+		this.status = status;
 	}
 }

@@ -26,5 +26,24 @@
       <artifactId>sharedtypes</artifactId>
       <version>1.0</version>
     </dependency>
+    
+    <dependency>
+      <groupId>com.vendertool.common</groupId>
+      <artifactId>common</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.vendertool.metadata</groupId>
+      <artifactId>metadata</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.vendertool.signin</groupId>
+      <artifactId>signin</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
   </dependencies>
 </project>

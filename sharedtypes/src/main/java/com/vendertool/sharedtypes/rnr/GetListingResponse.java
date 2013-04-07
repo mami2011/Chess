@@ -8,6 +8,8 @@ import com.vendertool.sharedtypes.core.Listing;
 public class GetListingResponse extends BaseResponse {
 	private Listing listing;
 
+	public GetListingResponse(){}
+	
 	public Listing getListing() {
 		return listing;
 	}

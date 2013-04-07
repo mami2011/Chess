@@ -8,6 +8,8 @@ import com.vendertool.sharedtypes.core.Listing;
 public class AddListingRequest extends BaseRequest {
 	private Listing listing;
 
+	public AddListingRequest(){}
+	
 	public Listing getListing() {
 		return listing;
 	}

@@ -4,6 +4,7 @@
 
   <groupId>com.vendertool.parent</groupId>
   <artifactId>parent</artifactId>
+ <!-- <version>${vendertool.version}</version> -->
   <version>1.0</version>
   <packaging>pom</packaging>
 
@@ -12,7 +13,22 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!--<vendertool-version>${verndertool.version}</vendertool-version> -->
   </properties>
+
+	<!--
+  <build>
+	<resources>
+	  <resource>
+	    <directory>${basedir}/src/main/resource</directory>
+	    <filtering>false</filtering>
+        <includes>
+	      <include>VenderToolVersion.prop</include>
+	    </includes>
+	  </resource>
+	</resources>
+  </build>
+  -->
 
   <dependencies>
     <dependency>
@@ -32,8 +48,14 @@
   
   <modules>
     <module>../sharedtypes</module>
+    <module>../common</module>
+    <module>../metadata</module>
+    <module>../signin</module>
+    <module>../registration</module>
+    <module>../rolemanagement</module>
 	<module>../inventory</module>
 	<module>../listing</module>
+	<module>../mercadolibreadapter</module>
 	<module>../webapp</module>
   </modules>
 	

@@ -4,12 +4,10 @@ import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
 
 import com.vendertool.sharedtypes.exception.DuplicateException;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType
 public abstract class VTErrorCode {
 	private String errorCode;
 

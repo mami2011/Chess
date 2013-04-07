@@ -3,7 +3,7 @@ package com.vendertool.sharedtypes.core;
 import javax.xml.bind.annotation.XmlEnum;
 
 @XmlEnum
-public enum VTErrorSeverity {
+public enum VTErrorSeverityEnum {
 	
 	INFO(1, "INFO"),
 	WARNING(2, "WARNING"),	
@@ -13,7 +13,7 @@ public enum VTErrorSeverity {
 	private int id;
 	private String name;
 	
-	VTErrorSeverity(int id, String name){
+	VTErrorSeverityEnum(int id, String name){
 		this.id = id;
 		this.name = name;
 	}
@@ -24,5 +24,13 @@ public enum VTErrorSeverity {
 	
 	public String getName(){
 		return name;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

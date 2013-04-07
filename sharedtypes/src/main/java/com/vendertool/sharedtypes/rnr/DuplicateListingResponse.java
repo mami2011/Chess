@@ -3,8 +3,10 @@ package com.vendertool.sharedtypes.rnr;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class GetListingRequest extends BaseRequest {
+public class DuplicateListingResponse extends BaseResponse {
 	private String listingId;
+	
+	public DuplicateListingResponse(){}
 
 	public String getListingId() {
 		return listingId;

@@ -9,6 +9,8 @@ import com.vendertool.sharedtypes.core.Product;
 public class GetProductResponse extends BaseResponse {
 	private Product product;
 
+	public GetProductResponse(){}
+	
 	public Product getProduct() {
 		return product;
 	}

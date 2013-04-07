@@ -8,11 +8,9 @@ import java.util.Locale;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType (name="Amount", propOrder={"currency", "value", "locale"})
 public class Amount {
 	private static final Locale DEFAULT_LOCALE = Locale.US;
 	private static final Currency DEFAULT_CURRENCY = Currency.getInstance(DEFAULT_LOCALE);
@@ -59,7 +57,7 @@ public class Amount {
 	/**
 	 * Formats the value to the defined currency and locale
 	 * 
-	 * TODO: need to have our custom pattern to format the amount
+	 * Need to have our custom pattern to format the amount
 	 * 
 	 * @return
 	 */
@@ -68,5 +66,24 @@ public class Amount {
 		        NumberFormat.getCurrencyInstance(locale);
 		
 		return currencyFormatter.format(value);
+	}
+	
+	public BigDecimal getValue() {
+		return value;
+	}
+	public void setValue(BigDecimal value) {
+		this.value = value;
+	}
+	public Currency getCurrency() {
+		return currency;
+	}
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
+	}
+	public Locale getLocale() {
+		return locale;
+	}
+	public void setLocale(Locale locale) {
+		this.locale = locale;
 	}
 }
