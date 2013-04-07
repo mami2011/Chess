@@ -29,7 +29,7 @@ import com.vendertool.sharedtypes.rnr.UpdateListingResponse;
 import com.vendertool.sharedtypes.rnr.VerifyListingRequest;
 import com.vendertool.sharedtypes.rnr.VerifyListingResponse;
 
-@Path("/${project.version}/listing")
+@Path("/1.0/listing")
 public class ListingServiceimpl extends BaseVenderToolServiceImpl 
 	implements IListingService {
 	

@@ -31,7 +31,7 @@ import com.vendertool.sharedtypes.rnr.UpdateProductPriceQuantityRequest;
 import com.vendertool.sharedtypes.rnr.UpdateProductRequest;
 import com.vendertool.sharedtypes.rnr.UpdateProductResponse;
 
-@Path("/inventory")
+@Path("/1.0/inventory")
 public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl implements
 		IInventoryManagementService {
 	

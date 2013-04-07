@@ -39,11 +39,11 @@
 
     <servlet-mapping>
         <servlet-name>Inventory Web Application</servlet-name>
-        <url-pattern>/inventory/*</url-pattern>
+        <url-pattern>/1.0/inventory/*</url-pattern>
     </servlet-mapping>
     
         <servlet-mapping>
         <servlet-name>Listing Web Application</servlet-name>
-        <url-pattern>/listing/*</url-pattern>
+        <url-pattern>/1.0/listing/*</url-pattern>
     </servlet-mapping>
 </web-app>
