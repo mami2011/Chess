@@ -69,6 +69,12 @@
       <artifactId>mercadolibreadapter</artifactId>
       <version>1.0</version>
     </dependency>
+    
+    <dependency>
+      <groupId>com.vendertool.fts</groupId>
+      <artifactId>fts</artifactId>
+      <version>1.0</version>
+    </dependency>
    	
   </dependencies>
   

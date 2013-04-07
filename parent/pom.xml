@@ -87,6 +87,7 @@
 	<module>../inventory</module>
 	<module>../listing</module>
 	<module>../mercadolibreadapter</module>
+	<module>../fts</module>
 	<module>../webapp</module>
   </modules>
 	
