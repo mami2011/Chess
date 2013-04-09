@@ -4,13 +4,15 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
  
     <!-- Stock business object -->
-   <bean id="merchantProductBo" class="com.vendertool.inventory.DBL.MerchantProductBoImpl" >
+   <bean id="merchantProductBo" class="com.vendertool.inventory.dal.bof.MerchantProductBoImpl" >
    		<property name="merchantProductDao" ref="merchantProductDao" />
    </bean>
  
    <!-- Stock Data Access Object -->
-   <bean id="merchantProductDao" class="com.vendertool.inventory.DBL.MerchantProductDaoImpl" >
+   <bean id="merchantProductDao" class="com.vendertool.inventory.dal.dao.MerchantProductDaoImpl" >
    		<property name="sessionFactory" ref="sessionFactory"></property>
    </bean>
+ 
+ 
  
 </beans>
