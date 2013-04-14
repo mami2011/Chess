@@ -38,32 +38,13 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 	@Path("/getListing")
 	@ProduceMime({ "application/xml", "application/json" })
 	public GetListingResponse getListing(@QueryParam("listingId") String id) {
-//		GetListingResponse response = new GetListingResponse();
-//		
-//		Product product = new Product("iPhone 4S");
-//		String pid = "P234567891";
-//		if(id == null) {
-//			id = pid;
-//		}
-//		product.setProductId(id);
-//		
-//		Listing listing = new Listing();
-//		listing.setProduct(product);
-//		listing.setPrice(new Amount(300));
-//		listing.setCondition("NEW");
-//		listing.setQuantity(3);
-//		
-//		response.setListing(listing);
-//		return response;
-		CountryEnum countryId = CountryEnum.BRAZIL;
+		CountryEnum countryId = CountryEnum.ALL;
 		MarketEnum marketId = MarketEnum.MERCADO_LIBRE;
-		String marketListingId = "MLA449467442";
 		
 		IMarketListingAdapter adapter = MarketListingRegistry.getInstance().getMarketListingAdapter(
 				new MarketCountryKey(countryId, marketId));
-		adapter.getListing(marketListingId);
 		
-		return null;
+		return adapter.getListing(id);
 	}
 	
 	@POST

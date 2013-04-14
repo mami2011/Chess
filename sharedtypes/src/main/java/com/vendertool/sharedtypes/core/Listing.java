@@ -23,7 +23,7 @@ public class Listing {
 	private Amount price;
 	private int quantity;
 	private String condition;
-	private PaymentMethod paymentMethod;
+	private List<PaymentMethod> paymentMethods;
 	private ReturnPolicy returnPolicy;
 	private ShippingPolicy shippingPolicy;
 	private MarketEnum market;
@@ -80,11 +80,11 @@ public class Listing {
 	public void setClassification(List<Classification> classifications) {
 		this.classifications = classifications;
 	}
-	public PaymentMethod getPaymentMethods() {
-		return paymentMethod;
+	public List<PaymentMethod> getPaymentMethods() {
+		return paymentMethods;
 	}
-	public void setPaymentMethods(PaymentMethod paymentMethods) {
-		this.paymentMethod = paymentMethods;
+	public void setPaymentMethods(List<PaymentMethod> paymentMethods) {
+		this.paymentMethods = paymentMethods;
 	}
 	public ReturnPolicy getReturnPolicy() {
 		return returnPolicy;
@@ -97,12 +97,6 @@ public class Listing {
 	}
 	public void setShippingPolicy(ShippingPolicy shippingPolicy) {
 		this.shippingPolicy = shippingPolicy;
-	}
-	public PaymentMethod getPaymentMethod() {
-		return paymentMethod;
-	}
-	public void setPaymentMethod(PaymentMethod paymentMethod) {
-		this.paymentMethod = paymentMethod;
 	}
 	public MarketEnum getMarket() {
 		return market;

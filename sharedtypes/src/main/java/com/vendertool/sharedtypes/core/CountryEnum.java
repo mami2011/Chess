@@ -253,22 +253,37 @@ public enum CountryEnum {
 
 	
 	
+	private static Map<String, String> ISO2_To_Iso3_Map;
+	private static Map<String, String> ISO3_To_Iso2_Map;
+	private static Map<Integer, String> ID_To_Iso2_Map;
+	private static boolean IS_INITIALIZED;
+
 	private String displayName;
 	private String iso2Code;
 	private String iso3Code;
 	private int id;
 	
-	private static Map<String, String> ISO2_To_Iso3_Map = new HashMap<String, String>();
-	private static Map<String, String> ISO3_To_Iso2_Map = new HashMap<String, String>();
-	private static Map<Integer, String> ID_To_Iso2_Map = new HashMap<Integer, String>();
-	
 	CountryEnum(String displayName, String iso2Code, String iso3Code, int id){
+		if(!isInitialized()){
+			init();
+		}
 		setDisplayName(displayName);
 		setIso2Code(iso2Code);
 		setIso3Code(iso3Code);
 		setId(id);
 		
 		mapISOCodes(iso2Code, iso3Code, id);
+	}
+	
+	private boolean isInitialized(){
+		return IS_INITIALIZED;
+	}
+	
+	private synchronized void init(){
+		ISO2_To_Iso3_Map = new HashMap<String, String>();
+		ISO3_To_Iso2_Map = new HashMap<String, String>();
+		ID_To_Iso2_Map = new HashMap<Integer, String>();
+		IS_INITIALIZED = true;
 	}
 	
 	private void mapISOCodes(String iso2Code, String iso3Code, int id){

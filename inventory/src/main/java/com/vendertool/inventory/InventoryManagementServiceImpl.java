@@ -1,6 +1,7 @@
 package com.vendertool.inventory;
 
 import javax.ws.rs.ConsumeMime;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -31,7 +32,7 @@ import com.vendertool.sharedtypes.rnr.UpdateProductPriceQuantityRequest;
 import com.vendertool.sharedtypes.rnr.UpdateProductRequest;
 import com.vendertool.sharedtypes.rnr.UpdateProductResponse;
 
-@Path("/1.0/inventory")
+@Path("/inventory")
 public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl implements
 		IInventoryManagementService {
 	
@@ -76,7 +77,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 		return null;
 	}
 
-	@GET
+	@DELETE
 	@Path("/removeProduct")
 	@ProduceMime({ "application/xml", "application/json" })
 	public RemoveProductResponse removeProduct(String productId) {
@@ -101,7 +102,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 		return null;
 	}
 
-	@GET
+	@POST
 	@Path("/duplicateProduct")
 	@ProduceMime({ "application/xml", "application/json" })
 	public DuplicateProductResponse duplicateProduct(String productId) {
@@ -117,7 +118,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 		return null;
 	}
 
-	@GET
+	@DELETE
 	@Path("/removeProductVariation")
 	@ProduceMime({ "application/xml", "application/json" })
 	public RemoveProductVariationResponse removeProductVariation(
@@ -128,8 +129,8 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 	@GET
 	@Path("/getProductVariation")
 	@ProduceMime({ "application/xml", "application/json" })
-	public GetProductVariationResponse getProductVariation(String productId,
-			String variationId) {
+	public GetProductVariationResponse getProductVariation(@QueryParam("productId")String productId,
+			@QueryParam("variationId")String variationId) {
 		return null;
 	}
 

@@ -25,7 +25,9 @@ public class MarketCountryKey {
 		return countryId;
 	}
 
-	public boolean equals(MarketCountryKey key) {
+	@Override
+	public boolean equals(Object key1) {
+		MarketCountryKey key = (MarketCountryKey)key1;
 		if(key == null) {
 			return false;
 		}
@@ -33,4 +35,8 @@ public class MarketCountryKey {
 		return ((getCountryId() == key.getCountryId()) && 
 				(getMarketId() == key.getMarketId()));
 	}
+	
+	public int hashCode() {
+        return getCountryId().hashCode() ^ getMarketId().hashCode();
+    }
 }
