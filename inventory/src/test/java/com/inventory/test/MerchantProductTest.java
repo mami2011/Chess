@@ -22,13 +22,15 @@ public class MerchantProductTest {
 		MerchantProduct product = new MerchantProduct();
 
 		// TODO Auto-generated method stub
-		SessionFactory sf = new Configuration().configure("hibernate/hibernate.cfg.xml").buildSessionFactory();
-		Session session = sf.openSession();
-		session.beginTransaction();
+//		SessionFactory sf = new Configuration().configure("spring/config/BeanLocations.xml").buildSessionFactory();
+//		Session session = sf.openSession();
+//		session.beginTransaction();
+		
+	
 		System.out.println("Transaction Began:");
 
 
-		product.setProductId(4);
+		product.setProductId(26);
 		product.setAvailableQuantity(100);
 		product.setChangeWho("VenderToolTeam");
 		product.setDescriptionId(1);
@@ -46,7 +48,7 @@ public class MerchantProductTest {
 //		merchantProductDao.setSessionFactory(sf);
 //		stockBo.setMerchantProductDao(merchantProductDao);
 
-		stockBo.save(product);
+		stockBo.insert(product);
 		System.out.println("Test it");
 		stockBo.findByStockCode(null);
 		

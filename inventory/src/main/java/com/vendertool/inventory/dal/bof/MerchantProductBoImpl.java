@@ -8,7 +8,7 @@ public class MerchantProductBoImpl implements MerchantProductBo {
  public void setMerchantProductDao(MerchantProductDao merchantProductDao) {
 		this.merchantProductDao = merchantProductDao;
 	}
-	public void save(MerchantProduct product) {
+	public void insert(MerchantProduct product) {
 		// TODO Auto-generated method stub
 		merchantProductDao.save(product);
 	}

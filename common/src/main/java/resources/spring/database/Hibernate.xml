@@ -8,7 +8,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 
-		<property name="dataSource">
+<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
 
@@ -17,13 +17,22 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
-		</property>
+		</property> 
 
 		<property name="mappingResources">
 			<list>
-				<value>/hibernate/merchantProduct.hbm.xml</value>
+				<!-- Inventory -->
+				<value>/hibernate/MerchantProduct.hbm.xml</value>
+				<!-- USER login 
+				<value>/hibernate/Account.hbm.xml</value>
+				<value>/hibernate/Address.hbm.xml</value>
+				<value>/hibernate/AccountSubscription.hbm.xml</value>
+				<value>/hibernate/SubscriptionDetail.hbm.xml</value>
+				<value>/hibernate/Description.hbm.xml</value>  -->
 			</list>
 		</property>
 
 	</bean>
+	
+
 </beans>

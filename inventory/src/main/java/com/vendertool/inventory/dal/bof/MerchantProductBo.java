@@ -2,7 +2,7 @@ package com.vendertool.inventory.dal.bof;
 
 public interface MerchantProductBo {
 
-	void save(MerchantProduct product);
+	void insert(MerchantProduct product);
 
 	void update(MerchantProduct product);
 
