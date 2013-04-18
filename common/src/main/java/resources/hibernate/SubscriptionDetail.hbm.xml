@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.vendertool.inventory.dal.bof.SubscriptionDetail" catalog="stool" lazy="false" table="SUBSAIL">
+        <id name="subscriptionId" type="int">
+            <column name="SUBSCRIPTION_ID" precision="5" scale="0" />
+            <!-- <generator class="increment" /> -->
+        </id>
+        <property name="subscriptionName" type="string">
+            <column name="SUBSCRIPTION_NAME" length="45" />
+        </property>
+        <property name="descriptionCode" type="int">
+            <column name="DESCRIPTION_CODE" precision="5" scale="0" />
+        </property>
+         <property name="createDate" type="date">
+            <column name="CREATE_DATE"  length="45" />
+        </property>
+        <property name="modifyDate" type="date">
+            <column name="MODIFY_DATE"  length="45" />
+        </property>
+        <property name="changeWho" type="string">
+            <column name="CHANGE_WHO" length="45" not-null="true" />
+        </property>
+        
+        	
+	
+	
+    </class>
+</hibernate-mapping>

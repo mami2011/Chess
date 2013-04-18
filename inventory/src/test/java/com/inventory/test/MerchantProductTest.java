@@ -1,16 +1,9 @@
 package com.inventory.test;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.vendertool.inventory.dal.bof.MerchantProduct;
 import com.vendertool.inventory.dal.bof.MerchantProductBo;
-import com.vendertool.inventory.dal.bof.MerchantProductBoImpl;
-import com.vendertool.inventory.dal.dao.MerchantProductDao;
-import com.vendertool.inventory.dal.dao.MerchantProductDaoImpl;
 
 public class MerchantProductTest {
 
