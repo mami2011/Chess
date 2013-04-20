@@ -9,10 +9,10 @@
 	<relativePath>../parent/pom.xml</relativePath>
   </parent>
   
-  <groupId>com.vendertool.webapp</groupId>
-  <artifactId>vendertool</artifactId>
+  <groupId>com.vendertool.webservicesapp</groupId>
+  <artifactId>webservicesapp</artifactId>
   <packaging>war</packaging>
-  <name>webapp Maven Webapp</name>
+  <name>Vendertool Webservices App</name>
   <url>http://maven.apache.org</url>
   
   <dependencies>
@@ -79,7 +79,7 @@
   </dependencies>
   
   <build>
-    <finalName>vendertool</finalName>
+    <finalName>vendertoolsrvs</finalName>
     
       <plugins>
         <plugin>

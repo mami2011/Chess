@@ -115,7 +115,8 @@
 	<module>../listing</module>
 	<module>../mercadolibreadapter</module>
 	<module>../fts</module>
-	<module>../webapp</module>
+	<module>../webservicesapp</module>
+	<module>../sitewebapp</module>
   </modules>
   
   
