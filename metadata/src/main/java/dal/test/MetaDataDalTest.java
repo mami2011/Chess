@@ -21,35 +21,35 @@ public class MetaDataDalTest {
 				new ClassPathXmlApplicationContext("dal/resources/BeanLocations.xml");
 
 		try{
-			System.out.println("MercadolibreCategories dal Test Began !!!");
-			MercadolibreCategories mercadolibreCategories = new MercadolibreCategories();
-			MercadolibreCategoriesDao mercadolibreCategoriesDao = (MercadolibreCategoriesDao) appContext.getBean("mercadolibreCategoriesDAO"); 
-			//mercadolibreCategoriesDao.insert(mercadolibreCategories);
-			mercadolibreCategories.setCategoryId(1);
-			List<MercadolibreCategories> mercadolibreCategories1 =  mercadolibreCategoriesDao.findByCategoryId(mercadolibreCategories);
-			System.out.println(mercadolibreCategories1.get(0).getMeliCategoryName());
+			System.out.println("MlCategories dal Test Began !!!");
+			MlCategories mlCategories = new MlCategories();
+			MlCategoriesDao mlCategoriesDao = (MlCategoriesDao) appContext.getBean("mlCategoriesDAO"); 
+			//MlCategoriesDao.insert(MlCategories);
+			mlCategories.setCategoryId(1);
+			List<MlCategories> mlCategories1 =  mlCategoriesDao.findByCategoryId(mlCategories);
+			System.out.println(mlCategories1.get(0).getMeliCategoryName());
 		} finally {
 
 		}
 		try{
-			System.out.println("MercadolibreCategoryAttributes dal Test Began !!!");
-			MercadolibreCategoryAttributes mercadolibreCategoryAttributes = new MercadolibreCategoryAttributes();
-			MercadolibreCategoryAttributesDao mercadolibreCategoryAttributesDao = (MercadolibreCategoryAttributesDao) appContext.getBean("mercadolibreCategoryAttributesDAO"); 
-			//mercadolibreCategoryAttributesDao.insert(mercadolibreCategoryAttributes);
-			mercadolibreCategoryAttributes.setCategoryId(1);
-			List<MercadolibreCategoryAttributes> mercadolibreCategoryAttributes1 =  mercadolibreCategoryAttributesDao.findByAttributeId(mercadolibreCategoryAttributes);
-			System.out.println(mercadolibreCategoryAttributes1.get(0).getMeliAttributeName());
+			System.out.println("MlCategoryAttributes dal Test Began !!!");
+			MlCategoryAttributes mlCategoryAttributes = new MlCategoryAttributes();
+			MlCategoryAttributesDao mlCategoryAttributesDao = (MlCategoryAttributesDao) appContext.getBean("mlCategoryAttributesDAO"); 
+			//MlCategoryAttributesDao.insert(MlCategoryAttributes);
+			mlCategoryAttributes.setCategoryId(1);
+			List<MlCategoryAttributes> mlCategoryAttributes1 =  mlCategoryAttributesDao.findByAttributeId(mlCategoryAttributes);
+			System.out.println(mlCategoryAttributes1.get(0).getMeliAttributeName());
 		} finally {
 
 		}
 		try{
-			System.out.println("MercadolibreCategoryAttributeValues dal Test Began !!!");
-			MercadolibreCategoryAttributeValues mercadolibreCategoryAttributeValues = new MercadolibreCategoryAttributeValues();
-			MercadolibreCategoryAttributeValuesDao mercadolibreCategoryAttributeValuesDao = (MercadolibreCategoryAttributeValuesDao) appContext.getBean("mercadolibreCategoryAttributeValuesDAO"); 
-			//mercadolibreCategoryAttributeValuesDao.insert(mercadolibreCategoryAttributeValues);
-			mercadolibreCategoryAttributeValues.setAttributeId(1);
-			List<MercadolibreCategoryAttributeValues> mercadolibreCategoryAttributeValues1 =  mercadolibreCategoryAttributeValuesDao.findByAttributeValueId(mercadolibreCategoryAttributeValues);
-			System.out.println(mercadolibreCategoryAttributeValues1.get(0).getMeliValueNameExtended());
+			System.out.println("MlCategoryAttributeValues dal Test Began !!!");
+			MlCategoryAttributeValues mlCategoryAttributeValues = new MlCategoryAttributeValues();
+			MlCategoryAttributeValuesDao mlCategoryAttributeValuesDao = (MlCategoryAttributeValuesDao) appContext.getBean("mlCategoryAttributeValuesDAO"); 
+			//MlCategoryAttributeValuesDao.insert(MlCategoryAttributeValues);
+			mlCategoryAttributeValues.setAttributeId(1);
+			List<MlCategoryAttributeValues> mlCategoryAttributeValues1 =  mlCategoryAttributeValuesDao.findByAttributeValueId(mlCategoryAttributeValues);
+			System.out.println(mlCategoryAttributeValues1.get(0).getMeliValueNameExtended());
 		} finally {
 
 		}

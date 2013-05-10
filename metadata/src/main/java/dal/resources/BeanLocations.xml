@@ -24,9 +24,9 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 			<list>
 			
 				<!-- Inventory -->
-				<value>dal.dao.MercadolibreCategories</value>
-				<value>dal.dao.MercadolibreCategoryAttributes</value>
-				<value>dal.dao.MercadolibreCategoryAttributeValues</value>
+				<value>dal.dao.MlCategories</value>
+				<value>dal.dao.MlCategoryAttributes</value>
+				<value>dal.dao.MlCategoryAttributeValues</value>
 				
 			</list>
 		</property>
@@ -34,13 +34,13 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<!-- Hibernate session factory -->
 
-	<bean id="mercadolibreCategoriesDAO" class="dal.dao.MercadolibreCategoriesDaoImpl">
+	<bean id="mlCategoriesDAO" class="dal.dao.MlCategoriesDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="mercadolibreCategoryAttributesDAO" class="dal.dao.MercadolibreCategoryAttributesDaoImpl">
+	<bean id="mlCategoryAttributesDAO" class="dal.dao.MlCategoryAttributesDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<bean id="mercadolibreCategoryAttributeValuesDAO" class="dal.dao.MercadolibreCategoryAttributeValuesDaoImpl">
+	<bean id="mlCategoryAttributeValuesDAO" class="dal.dao.MlCategoryAttributeValuesDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 </beans>

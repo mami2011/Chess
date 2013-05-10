@@ -1,6 +1,6 @@
 package dal.dao;
 
-// Generated May 8, 2013 9:53:22 AM by Hibernate Tools 3.4.0.CR1
+// Generated May 10, 2013 11:43:56 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -9,21 +9,21 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Home object for domain model class MercadolibreCategoryAttributes.
- * @see dal.dao.MercadolibreCategoryAttributes
+ * Home object for domain model class MlCategoryAttributeValues.
+ * @see dal.dao.MlCategoryAttributeValues
  * @author Hibernate Tools
  */
 @Stateless
-public class MercadolibreCategoryAttributesHome {
+public class MlCategoryAttributeValuesHome {
 
 	private static final Log log = LogFactory
-			.getLog(MercadolibreCategoryAttributesHome.class);
+			.getLog(MlCategoryAttributeValuesHome.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(MercadolibreCategoryAttributes transientInstance) {
-		log.debug("persisting MercadolibreCategoryAttributes instance");
+	public void persist(MlCategoryAttributeValues transientInstance) {
+		log.debug("persisting MlCategoryAttributeValues instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -33,8 +33,8 @@ public class MercadolibreCategoryAttributesHome {
 		}
 	}
 
-	public void remove(MercadolibreCategoryAttributes persistentInstance) {
-		log.debug("removing MercadolibreCategoryAttributes instance");
+	public void remove(MlCategoryAttributeValues persistentInstance) {
+		log.debug("removing MlCategoryAttributeValues instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -44,11 +44,11 @@ public class MercadolibreCategoryAttributesHome {
 		}
 	}
 
-	public MercadolibreCategoryAttributes merge(
-			MercadolibreCategoryAttributes detachedInstance) {
-		log.debug("merging MercadolibreCategoryAttributes instance");
+	public MlCategoryAttributeValues merge(
+			MlCategoryAttributeValues detachedInstance) {
+		log.debug("merging MlCategoryAttributeValues instance");
 		try {
-			MercadolibreCategoryAttributes result = entityManager
+			MlCategoryAttributeValues result = entityManager
 					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -58,12 +58,11 @@ public class MercadolibreCategoryAttributesHome {
 		}
 	}
 
-	public MercadolibreCategoryAttributes findById(Integer id) {
-		log.debug("getting MercadolibreCategoryAttributes instance with id: "
-				+ id);
+	public MlCategoryAttributeValues findById(Integer id) {
+		log.debug("getting MlCategoryAttributeValues instance with id: " + id);
 		try {
-			MercadolibreCategoryAttributes instance = entityManager.find(
-					MercadolibreCategoryAttributes.class, id);
+			MlCategoryAttributeValues instance = entityManager.find(
+					MlCategoryAttributeValues.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

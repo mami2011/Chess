@@ -1,6 +1,6 @@
 package dal.dao;
 
-// Generated May 8, 2013 9:53:22 AM by Hibernate Tools 3.4.0.CR1
+// Generated May 10, 2013 11:43:56 AM by Hibernate Tools 3.4.0.CR1
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -9,21 +9,20 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Home object for domain model class MercadolibreCategories.
- * @see dal.dao.MercadolibreCategories
+ * Home object for domain model class MlCategories.
+ * @see dal.dao.MlCategories
  * @author Hibernate Tools
  */
 @Stateless
-public class MercadolibreCategoriesHome {
+public class MlCategoriesHome {
 
-	private static final Log log = LogFactory
-			.getLog(MercadolibreCategoriesHome.class);
+	private static final Log log = LogFactory.getLog(MlCategoriesHome.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(MercadolibreCategories transientInstance) {
-		log.debug("persisting MercadolibreCategories instance");
+	public void persist(MlCategories transientInstance) {
+		log.debug("persisting MlCategories instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -33,8 +32,8 @@ public class MercadolibreCategoriesHome {
 		}
 	}
 
-	public void remove(MercadolibreCategories persistentInstance) {
-		log.debug("removing MercadolibreCategories instance");
+	public void remove(MlCategories persistentInstance) {
+		log.debug("removing MlCategories instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -44,11 +43,10 @@ public class MercadolibreCategoriesHome {
 		}
 	}
 
-	public MercadolibreCategories merge(MercadolibreCategories detachedInstance) {
-		log.debug("merging MercadolibreCategories instance");
+	public MlCategories merge(MlCategories detachedInstance) {
+		log.debug("merging MlCategories instance");
 		try {
-			MercadolibreCategories result = entityManager
-					.merge(detachedInstance);
+			MlCategories result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -57,11 +55,10 @@ public class MercadolibreCategoriesHome {
 		}
 	}
 
-	public MercadolibreCategories findById(Integer id) {
-		log.debug("getting MercadolibreCategories instance with id: " + id);
+	public MlCategories findById(Integer id) {
+		log.debug("getting MlCategories instance with id: " + id);
 		try {
-			MercadolibreCategories instance = entityManager.find(
-					MercadolibreCategories.class, id);
+			MlCategories instance = entityManager.find(MlCategories.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {
