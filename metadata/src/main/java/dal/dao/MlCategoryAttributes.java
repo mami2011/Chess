@@ -1,6 +1,6 @@
 package dal.dao;
 
-// Generated May 10, 2013 11:43:56 AM by Hibernate Tools 3.4.0.CR1
+// Generated May 10, 2013 2:06:06 PM by Hibernate Tools 3.4.0.CR1
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

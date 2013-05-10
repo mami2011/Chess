@@ -9,4 +9,7 @@
 	<table-filter match-name="ml_category_attributes"
 		match-catalog="stool">
 	</table-filter>
+	<table-filter match-name="ml_categories_dump_date"
+		match-catalog="stool">
+	</table-filter>
 </hibernate-reverse-engineering>

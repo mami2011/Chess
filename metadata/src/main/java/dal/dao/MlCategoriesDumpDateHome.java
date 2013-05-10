@@ -9,20 +9,21 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Home object for domain model class MlCategories.
- * @see dal.dao.MlCategories
+ * Home object for domain model class MlCategoriesDumpDate.
+ * @see dal.dao.MlCategoriesDumpDate
  * @author Hibernate Tools
  */
 @Stateless
-public class MlCategoriesHome {
+public class MlCategoriesDumpDateHome {
 
-	private static final Log log = LogFactory.getLog(MlCategoriesHome.class);
+	private static final Log log = LogFactory
+			.getLog(MlCategoriesDumpDateHome.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void persist(MlCategories transientInstance) {
-		log.debug("persisting MlCategories instance");
+	public void persist(MlCategoriesDumpDate transientInstance) {
+		log.debug("persisting MlCategoriesDumpDate instance");
 		try {
 			entityManager.persist(transientInstance);
 			log.debug("persist successful");
@@ -32,8 +33,8 @@ public class MlCategoriesHome {
 		}
 	}
 
-	public void remove(MlCategories persistentInstance) {
-		log.debug("removing MlCategories instance");
+	public void remove(MlCategoriesDumpDate persistentInstance) {
+		log.debug("removing MlCategoriesDumpDate instance");
 		try {
 			entityManager.remove(persistentInstance);
 			log.debug("remove successful");
@@ -43,10 +44,10 @@ public class MlCategoriesHome {
 		}
 	}
 
-	public MlCategories merge(MlCategories detachedInstance) {
-		log.debug("merging MlCategories instance");
+	public MlCategoriesDumpDate merge(MlCategoriesDumpDate detachedInstance) {
+		log.debug("merging MlCategoriesDumpDate instance");
 		try {
-			MlCategories result = entityManager.merge(detachedInstance);
+			MlCategoriesDumpDate result = entityManager.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -55,10 +56,11 @@ public class MlCategoriesHome {
 		}
 	}
 
-	public MlCategories findById(Integer id) {
-		log.debug("getting MlCategories instance with id: " + id);
+	public MlCategoriesDumpDate findById(String id) {
+		log.debug("getting MlCategoriesDumpDate instance with id: " + id);
 		try {
-			MlCategories instance = entityManager.find(MlCategories.class, id);
+			MlCategoriesDumpDate instance = entityManager.find(
+					MlCategoriesDumpDate.class, id);
 			log.debug("get successful");
 			return instance;
 		} catch (RuntimeException re) {

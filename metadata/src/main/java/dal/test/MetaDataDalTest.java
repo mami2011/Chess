@@ -54,6 +54,18 @@ public class MetaDataDalTest {
 
 		}
 
+		
+		try{
+			System.out.println("MlCategoryDumpdate dal Test Began !!!");
+			MlCategoriesDumpDate mlCategoriesDumpDate = new MlCategoriesDumpDate();
+			MlCategoriesDumpDateDao mlCategoriesDumpDateDao = (MlCategoriesDumpDateDao) appContext.getBean("mlCategoriesDumpDateDAO"); 
+			//MlCategoryAttributeValuesDao.insert(MlCategoryAttributeValues);
+			mlCategoriesDumpDate.setSiteId("AR");
+			List<MlCategoriesDumpDate> mlCategoriesDumpDate1 =  mlCategoriesDumpDateDao.findBySiteId(mlCategoriesDumpDate);
+			System.out.println(mlCategoriesDumpDate1.get(0).getDumpDate());
+		} finally {
+
+		}
 
 	}
 

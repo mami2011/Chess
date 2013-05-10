@@ -27,7 +27,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 				<value>dal.dao.MlCategories</value>
 				<value>dal.dao.MlCategoryAttributes</value>
 				<value>dal.dao.MlCategoryAttributeValues</value>
-				
+				<value>dal.dao.MlCategoriesDumpDate</value>				
 			</list>
 		</property>
 	</bean>
@@ -41,6 +41,9 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="mlCategoryAttributeValuesDAO" class="dal.dao.MlCategoryAttributeValuesDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="mlCategoriesDumpDateDAO" class="dal.dao.MlCategoriesDumpDateDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 </beans>
