@@ -22,14 +22,14 @@ public class MlCategories implements java.io.Serializable {
 	private String siteId;
 	private boolean hasAttributes;
 	private String rootId;
-	private String listingAllowed;
-	private String buyingAllowed;
+	private boolean listingAllowed;
+	private boolean buyingAllowed;
 
 	public MlCategories() {
 	}
 
 	public MlCategories(boolean hasAttributes, String rootId,
-			String listingAllowed, String buyingAllowed) {
+			boolean listingAllowed, boolean buyingAllowed) {
 		this.hasAttributes = hasAttributes;
 		this.rootId = rootId;
 		this.listingAllowed = listingAllowed;
@@ -38,7 +38,7 @@ public class MlCategories implements java.io.Serializable {
 
 	public MlCategories(String meliCategoryId, String meliCategoryName,
 			String siteId, boolean hasAttributes, String rootId,
-			String listingAllowed, String buyingAllowed) {
+			boolean listingAllowed, boolean buyingAllowed) {
 		this.meliCategoryId = meliCategoryId;
 		this.meliCategoryName = meliCategoryName;
 		this.siteId = siteId;
@@ -105,20 +105,20 @@ public class MlCategories implements java.io.Serializable {
 	}
 
 	@Column(name = "listing_allowed", nullable = false, length = 2)
-	public String getListingAllowed() {
+	public boolean getListingAllowed() {
 		return this.listingAllowed;
 	}
 
-	public void setListingAllowed(String listingAllowed) {
+	public void setListingAllowed(boolean listingAllowed) {
 		this.listingAllowed = listingAllowed;
 	}
 
 	@Column(name = "buying_allowed", nullable = false, length = 2)
-	public String getBuyingAllowed() {
+	public boolean getBuyingAllowed() {
 		return this.buyingAllowed;
 	}
 
-	public void setBuyingAllowed(String buyingAllowed) {
+	public void setBuyingAllowed(boolean buyingAllowed) {
 		this.buyingAllowed = buyingAllowed;
 	}
 
