@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import dal.dao.MlCategories;
 
@@ -53,5 +54,21 @@ public class MlCategoriesDaoImpl extends HibernateDaoSupport implements MlCatego
 		List <MlCategories> results =getHibernateTemplate().find(sql,mlCategories.getCategoryId());
 		return  results;
 	}
+	
+/*	public List<MlCategories> findByCategoryId(MlCategories mlCategories) {
+		// TODO Auto-generated method stub
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Query query = session.createSQLQuery(
+				"select * from ML_CATEGORIES m where m.category_id = :categoryId")
+				.addEntity(MlCategories.class)
+				.setParameter("categoryId",mlCategories.getCategoryId() );
+				List results = query.list();
+				
+		return  results;
+	}
+	
+*/
+	
+	
 
 }

@@ -24,7 +24,7 @@ public class MetaDataDalTest {
 			System.out.println("MlCategories dal Test Began !!!");
 			MlCategories mlCategories = new MlCategories();
 			MlCategoriesDao mlCategoriesDao = (MlCategoriesDao) appContext.getBean("mlCategoriesDAO"); 
-			//MlCategoriesDao.insert(MlCategories);
+			//MlCategoriesDao.insert(mlCategories);
 			mlCategories.setCategoryId(1);
 			List<MlCategories> mlCategories1 =  mlCategoriesDao.findByCategoryId(mlCategories);
 			System.out.println(mlCategories1.get(0).getMeliCategoryName());

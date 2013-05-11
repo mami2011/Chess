@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+
+
+
+	<table-filter match-name="image" match-catalog="stool"></table-filter>
+	<table-filter match-name="image_group" match-catalog="stool"></table-filter>
+	<table-filter match-name="listing" match-catalog="stool"></table-filter>
+	<table-filter match-name="merchant_product" match-catalog="stool"></table-filter>
+	<table-filter match-name="merchant_product_description"
+		match-catalog="stool">
+	</table-filter>
+	<table-filter match-name="merchant_product_group"
+		match-catalog="stool">
+	</table-filter>
+	<table-filter match-name="product_attribute"
+		match-catalog="stool">
+	</table-filter>
+	<table-filter match-name="product_classification"
+		match-catalog="stool">
+	</table-filter>
+	<table-filter match-name="product_specification"
+		match-catalog="stool">
+	</table-filter>
+	<table-filter match-name="product_variation"
+		match-catalog="stool">
+	</table-filter>
+	<table-filter match-name="return_policy_template"
+		match-catalog="stool">
+	</table-filter>
+	<table-filter match-name="variations_value" match-catalog="stool"></table-filter>
+</hibernate-reverse-engineering>
