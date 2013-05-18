@@ -1,13 +1,17 @@
 /**
  * 
  */
-package com.vendertool.registration.dal.dao;
+package com.dal.dao;
 import java.util.List;
 
+import javax.jms.Session;
+
+import org.hibernate.FlushMode;
 import org.hibernate.SQLQuery;
+import org.hibernate.Transaction;
 
 import com.vendertool.common.dal.BaseDaoImpl;
-import com.vendertool.registration.dal.bof.Address;
+
 
 /**
  * @author murali
@@ -18,13 +22,30 @@ public class AddressDaoImpl extends BaseDaoImpl implements AddressDao {
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#save(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public void insert (Address address) {
+/*	public void insert (Address address) {
 		// TODO Auto-generated method stub
-		
-		getHibernateTemplate().save(address);
-		
+		org.hibernate.Session session = super.getSession();
+		session.setFlushMode(FlushMode.MANUAL );
+		session.save(address);
+		session.flush();
 	}
+	
+	public void insert (Address address,FlushMode flushMode ) {
+		// TODO Auto-generated method stub
+		org.hibernate.Session session = super.getSession();
+		session.setFlushMode(flushMode);
+		
+		session.save(address);
+		session.flush();
+	
+	}*/
 
+	public void insert(Address address) {
+		// TODO Auto-generated method stub
+		getHibernateTemplate().save(address);
+
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#update(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
@@ -46,21 +67,14 @@ public class AddressDaoImpl extends BaseDaoImpl implements AddressDao {
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#findByStockCode(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public Address findByStockCode(Address address) {
+	public List<Address> findByAddressId(Address address) {
 		// TODO Auto-generated method stub
-		String sql = "select * from merchant_product";
-			
+		String sql = "select * from address where address_id = :address_id";
 		SQLQuery query=getSession().createSQLQuery(sql);
+		query.setParameter("address_id", address.getAddressId());
 		query.addEntity(Address.class);
-		List results = query.list();
-		
-		
-	/*	String sql = "SELECT * FROM EMPLOYEE WHERE id = :employee_id";
-		SQLQuery query = session.createSQLQuery(sql);
-		query.addEntity(Employee.class);
-		query.setParameter("employee_id", 10);
-		List results = query.list();*/
-		return null;
+		List<Address> results = query.list();
+		return results;
 	}
 
 }

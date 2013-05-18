@@ -1,6 +1,7 @@
-package com.vendertool.registration.dal.dao;
+package com.dal.dao;
 
-import com.vendertool.registration.dal.bof.Account;
+import java.util.List;
+
 
 public interface AccountDao {
 
@@ -10,6 +11,6 @@ public interface AccountDao {
 
 	void delete(Account account);
 
-	Account findByStockCode(Account account);
+	List<Account> findByAccountId(Account account);
 	
 }
