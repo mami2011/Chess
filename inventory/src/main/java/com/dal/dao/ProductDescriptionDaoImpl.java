@@ -14,15 +14,15 @@ import com.vendertool.common.dal.BaseDaoImpl;
  *HibernateDaoSupport
  */
 
-public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
+public class ProductDescriptionDaoImpl extends BaseDaoImpl implements ProductDescriptionDao {
 
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#save(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public void insert (Account account) {
+	public void insert (ProductDescription productDescription) {
 		// TODO Auto-generated method stub
 		
-		getHibernateTemplate().save(account);
+		getHibernateTemplate().save(productDescription);
 		
 		
 	}
@@ -30,31 +30,31 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#update(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public void update(Account account) {
+	public void update(ProductDescription productDescription) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().update(account);
+		getHibernateTemplate().update(productDescription);
 
 	}
 
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#delete(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public void delete(Account account) {
+	public void delete(ProductDescription productDescription) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(account);
+		getHibernateTemplate().delete(productDescription);
 
 	}
 
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#findByStockCode(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public List<Account> findByAccountId(Account account) {
+	public List<ProductDescription> findByProductId(long productId) {
 		// TODO Auto-generated method stub
-		String sql = "select * from account where account_id = :account_id";
+		String sql = "select * from Product_Description where product_id = :product_id";
 		SQLQuery query=getSession().createSQLQuery(sql);
-		query.setParameter("account_id", account.getAccountId());
-		query.addEntity(Account.class);
-		List<Account> results = query.list();
+		query.setParameter("product_id", productId);
+		query.addEntity(ProductDescription.class);
+		List<ProductDescription> results = query.list();
 		return  results;
 	}
 

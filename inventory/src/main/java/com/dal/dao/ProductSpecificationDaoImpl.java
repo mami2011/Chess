@@ -14,15 +14,15 @@ import com.vendertool.common.dal.BaseDaoImpl;
  *HibernateDaoSupport
  */
 
-public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
+public class ProductSpecificationDaoImpl extends BaseDaoImpl implements ProductSpecificationDao {
 
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#save(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public void insert (Account account) {
+	public void insert (ProductSpecification productSpecification) {
 		// TODO Auto-generated method stub
 		
-		getHibernateTemplate().save(account);
+		getHibernateTemplate().save(productSpecification);
 		
 		
 	}
@@ -30,31 +30,33 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#update(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public void update(Account account) {
+	public void update(ProductSpecification productSpecification) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().update(account);
+		getHibernateTemplate().update(productSpecification);
 
 	}
 
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#delete(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public void delete(Account account) {
+	public void delete(ProductSpecification productSpecification) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(account);
+		getHibernateTemplate().delete(productSpecification);
 
 	}
 
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#findByStockCode(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public List<Account> findByAccountId(Account account) {
+	public List<ProductSpecification> findByRefIdAndRefType(long refId,Byte refType) {
 		// TODO Auto-generated method stub
-		String sql = "select * from account where account_id = :account_id";
+		String sql = "select * from Product_Specification where ref_id = :ref_id and ref_type = :ref_type";
 		SQLQuery query=getSession().createSQLQuery(sql);
-		query.setParameter("account_id", account.getAccountId());
-		query.addEntity(Account.class);
-		List<Account> results = query.list();
+		query.setParameter("ref_id", refId);
+		query.addEntity(ProductSpecification.class);
+		query.setParameter("ref_type", refType);
+		query.addEntity(ProductSpecification.class);
+		List<ProductSpecification> results = query.list();
 		return  results;
 	}
 

@@ -14,15 +14,15 @@ import com.vendertool.common.dal.BaseDaoImpl;
  *HibernateDaoSupport
  */
 
-public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
+public class ImageDaoImpl extends BaseDaoImpl implements ImageDao {
 
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#save(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public void insert (Account account) {
+	public void insert (Image image) {
 		// TODO Auto-generated method stub
 		
-		getHibernateTemplate().save(account);
+		getHibernateTemplate().save(image);
 		
 		
 	}
@@ -30,31 +30,31 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#update(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public void update(Account account) {
+	public void update(Image image) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().update(account);
+		getHibernateTemplate().update(image);
 
 	}
 
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#delete(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public void delete(Account account) {
+	public void delete(Image image) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(account);
+		getHibernateTemplate().delete(image);
 
 	}
 
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#findByStockCode(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public List<Account> findByAccountId(Account account) {
+	public List<Image> findByAccountId(long accountId) {
 		// TODO Auto-generated method stub
-		String sql = "select * from account where account_id = :account_id";
+		String sql = "select * from image where account_id = :account_id";
 		SQLQuery query=getSession().createSQLQuery(sql);
-		query.setParameter("account_id", account.getAccountId());
-		query.addEntity(Account.class);
-		List<Account> results = query.list();
+		query.setParameter("account_id", accountId);
+		query.addEntity(Image.class);
+		List<Image> results = query.list();
 		return  results;
 	}
 
