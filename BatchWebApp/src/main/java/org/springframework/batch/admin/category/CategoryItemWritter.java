@@ -53,7 +53,7 @@ public class CategoryItemWritter implements ItemWriter<Object> {
 	 * @param cat
 	 */
 	private void insertData(Category cat) {
-		dal.dao.MlCategories categories = new dal.dao.MlCategories();
+		/*dal.dao.MlCategories categories = new dal.dao.MlCategories();
 		
 		categories.setMeliCategoryName(cat.getName());
 		categories.setMeliCategoryId(cat.getId());
@@ -110,12 +110,12 @@ public class CategoryItemWritter implements ItemWriter<Object> {
 				}
 			}
 		}
-		/*categories.setHasAttributes(hasAttributes);
+		categories.setHasAttributes(hasAttributes);
 		categories.setListingAllowed(listingAllowed);
 		categories.setMeliCategoryId(meliCategoryId);
 		categories.setMeliCategoryName(meliCategoryName);
 		categories.setRootId(rootId);
-		categories.setSiteId(siteId);*/
+		categories.setSiteId(siteId);
 		
 		String categoryId = cat.getId();
 		String categoryName = cat.getName();
@@ -124,6 +124,6 @@ public class CategoryItemWritter implements ItemWriter<Object> {
 		
 		//Save ALL
 		//categories --> save it
-		
+*/		
 	}
 }
