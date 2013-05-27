@@ -1,6 +1,6 @@
 package com.dal.dao;
 
-// Generated May 26, 2013 1:11:57 PM by Hibernate Tools 3.4.0.CR1
+// Generated May 26, 2013 5:21:40 PM by Hibernate Tools 3.4.0.CR1
 
 import java.math.BigDecimal;
 import java.util.Date;
