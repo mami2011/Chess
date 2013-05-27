@@ -5,6 +5,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 CREATE SCHEMA IF NOT EXISTS `PRODUCTDB` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `PRODUCTDB` ;
 
+
 -- -----------------------------------------------------
 -- Table `PRODUCTDB`.`MERCHANT_PRODUCT`
 -- -----------------------------------------------------
