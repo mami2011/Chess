@@ -6,6 +6,7 @@ CREATE SCHEMA IF NOT EXISTS `PRODUCTDB` DEFAULT CHARACTER SET utf8 COLLATE utf8_
 USE `PRODUCTDB` ;
 
 
+
 -- -----------------------------------------------------
 -- Table `PRODUCTDB`.`MERCHANT_PRODUCT`
 -- -----------------------------------------------------
