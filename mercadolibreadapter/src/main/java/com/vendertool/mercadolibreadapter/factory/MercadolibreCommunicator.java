@@ -5,7 +5,7 @@ import javax.ws.rs.core.MediaType;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.vendertool.mercadolibreadapter.factory.MercadolibreCommunicatorVO.MethodEnum;
+import com.vendertool.sharedtypes.core.HttpMethodEnum;
 
 public class MercadolibreCommunicator {
 	private static MercadolibreCommunicator uniqInstance;
@@ -27,16 +27,16 @@ public class MercadolibreCommunicator {
 		mediaType[0] = communicatorVO.getMediaType();
 
 		ClientResponse response = null;
-		if (communicatorVO.getMethodEnum() == MethodEnum.GET) {
+		if (communicatorVO.getMethodEnum() == HttpMethodEnum.GET) {
 			response = (ClientResponse) resource.accept(mediaType).get(
 					ClientResponse.class);
-		} else if (communicatorVO.getMethodEnum() == MethodEnum.POST) {
+		} else if (communicatorVO.getMethodEnum() == HttpMethodEnum.POST) {
 			response = resource.post(ClientResponse.class,
 					communicatorVO.getRequestObject());
-		} else if (communicatorVO.getMethodEnum() == MethodEnum.DELETE) {
+		} else if (communicatorVO.getMethodEnum() == HttpMethodEnum.DELETE) {
 			response = resource.delete(ClientResponse.class,
 					communicatorVO.getRequestObject());
-		} else if (communicatorVO.getMethodEnum() == MethodEnum.PUT) {
+		} else if (communicatorVO.getMethodEnum() == HttpMethodEnum.PUT) {
 			response = resource.put(ClientResponse.class,
 					communicatorVO.getRequestObject());
 		}

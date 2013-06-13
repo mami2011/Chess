@@ -5,14 +5,13 @@
   <parent>
 	<groupId>com.vendertool.parent</groupId>
 	<artifactId>parent</artifactId>
-	<version>1.0</version>
+	<version>${vendertool-version}</version>
 	<relativePath>../parent/pom.xml</relativePath>
   </parent>
   
   <groupId>com.vendertool.signin</groupId>
   <artifactId>signin</artifactId>
   <packaging>jar</packaging>
-
   <name>signin</name>
   <url>http://maven.apache.org</url>
 
@@ -24,13 +23,13 @@
     <dependency>
       <groupId>com.vendertool.sharedtypes</groupId>
       <artifactId>sharedtypes</artifactId>
-      <version>1.0</version>
+      <version>${vendertool-version}</version>
     </dependency>
     
     <dependency>
       <groupId>com.vendertool.common</groupId>
       <artifactId>common</artifactId>
-      <version>1.0</version>
+      <version>${vendertool-version}</version>
     </dependency>
   </dependencies>
 </project>

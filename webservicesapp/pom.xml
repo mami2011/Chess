@@ -5,7 +5,7 @@
   <parent>
 	<groupId>com.vendertool.parent</groupId>
 	<artifactId>parent</artifactId>
-	<version>1.0</version>
+	<version>${vendertool-version}</version>
 	<relativePath>../parent/pom.xml</relativePath>
   </parent>
   
@@ -19,61 +19,61 @@
       <dependency>
       <groupId>com.vendertool.sharedtypes</groupId>
       <artifactId>sharedtypes</artifactId>
-      <version>1.0</version>
+      <version>${vendertool-version}</version>
     </dependency>
     
     <dependency>
       <groupId>com.vendertool.common</groupId>
       <artifactId>common</artifactId>
-      <version>1.0</version>
+      <version>${vendertool-version}</version>
     </dependency>
     
     <dependency>
       <groupId>com.vendertool.metadata</groupId>
       <artifactId>metadata</artifactId>
-      <version>1.0</version>
+      <version>${vendertool-version}</version>
     </dependency>
     
     <dependency>
       <groupId>com.vendertool.signin</groupId>
       <artifactId>signin</artifactId>
-      <version>1.0</version>
+      <version>${vendertool-version}</version>
     </dependency>
     
     <dependency>
       <groupId>com.vendertool.registration</groupId>
       <artifactId>registration</artifactId>
-      <version>1.0</version>
+      <version>${vendertool-version}</version>
     </dependency>
     
     <dependency>
       <groupId>com.vendertool.rolemanagement</groupId>
       <artifactId>rolemanagement</artifactId>
-      <version>1.0</version>
+      <version>${vendertool-version}</version>
     </dependency>
     
     <dependency>
       <groupId>com.vendertool.inventory</groupId>
       <artifactId>inventory</artifactId>
-      <version>1.0</version>
+      <version>${vendertool-version}</version>
     </dependency>
 
     <dependency>
       <groupId>com.vendertool.listing</groupId>
       <artifactId>listing</artifactId>
-      <version>1.0</version>
+      <version>${vendertool-version}</version>
     </dependency>
         
     <dependency>
       <groupId>com.vendertool.mercadolibreadapter</groupId>
       <artifactId>mercadolibreadapter</artifactId>
-      <version>1.0</version>
+      <version>${vendertool-version}</version>
     </dependency>
     
     <dependency>
       <groupId>com.vendertool.fts</groupId>
       <artifactId>fts</artifactId>
-      <version>1.0</version>
+      <version>${vendertool-version}</version>
     </dependency>
    	
   </dependencies>

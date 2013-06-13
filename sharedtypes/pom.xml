@@ -5,14 +5,13 @@
   <parent>
 	<groupId>com.vendertool.parent</groupId>
 	<artifactId>parent</artifactId>
-	<version>1.0</version>
+	<version>${vendertool-version}</version>
 	<relativePath>../parent/pom.xml</relativePath>
   </parent>
   
   <groupId>com.vendertool.sharedtypes</groupId>
   <artifactId>sharedtypes</artifactId>
   <packaging>jar</packaging>
-
   <name>sharedtypes</name>
   <url>http://maven.apache.org</url>
 

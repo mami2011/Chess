@@ -3,7 +3,7 @@ package com.vendertool.sharedtypes.rnr;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vendertool.sharedtypes.core.VTError;
+import com.vendertool.sharedtypes.error.VTError;
 
 public class BaseResponse {
 	public enum ResponseAckStatusEnum{ SUCCESS, FAILURE, PARTIAL_SUCCESS_WITH_FAILURE; }

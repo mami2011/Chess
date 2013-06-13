@@ -9,11 +9,12 @@ import javax.ws.rs.ProduceMime;
 import javax.ws.rs.QueryParam;
 
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
-import com.vendertool.sharedtypes.core.InventoryErrorCode;
 import com.vendertool.sharedtypes.core.Product;
-import com.vendertool.sharedtypes.core.VTError;
-import com.vendertool.sharedtypes.core.VTErrorDomainEnum;
-import com.vendertool.sharedtypes.core.VTErrorSeverityEnum;
+import com.vendertool.sharedtypes.error.Errors;
+import com.vendertool.sharedtypes.error.InventoryErrorCode;
+import com.vendertool.sharedtypes.error.VTError;
+import com.vendertool.sharedtypes.error.VTErrorDomainEnum;
+import com.vendertool.sharedtypes.error.VTErrorSeverityEnum;
 import com.vendertool.sharedtypes.rnr.AddProductImageRequest;
 import com.vendertool.sharedtypes.rnr.AddProductImageResponse;
 import com.vendertool.sharedtypes.rnr.AddProductRequest;
@@ -48,10 +49,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 		}
 		product.setProductId(id);
 		response.setProduct(product);
-		response.addError(new VTError(
-				InventoryErrorCode.INSUFFICIENT_PRODUCT_INFORMATION,
-				"Insuffient product information", VTErrorSeverityEnum.WARNING,
-				VTErrorDomainEnum.INVENTORY));
+		response.addError(Errors.INVENTORY.INVALID_PRODUCT_CODE);
 		
 		return response;
 	}

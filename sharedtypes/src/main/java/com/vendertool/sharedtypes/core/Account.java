@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Account {
 	private String emailId;
+	private String password;
 	private ContactDetails contact;
 	private Date createDate;
 	private Date validTillDate;
@@ -44,5 +45,13 @@ public class Account {
 
 	public void setValidTillDate(Date validTillDate) {
 		this.validTillDate = validTillDate;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

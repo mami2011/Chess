@@ -9,9 +9,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.vendertool.mercadolibreadapter.add.Item;
-import com.vendertool.mercadolibreadapter.factory.MercadolibreCommunicatorVO.MethodEnum;
 import com.vendertool.sharedtypes.core.Classification;
 import com.vendertool.sharedtypes.core.Classification.ClassificationTypeEnum;
+import com.vendertool.sharedtypes.core.HttpMethodEnum;
 import com.vendertool.sharedtypes.core.Listing;
 import com.vendertool.sharedtypes.core.Listing.ListingFormatEnum;
 import com.vendertool.sharedtypes.core.PaymentMethod;
@@ -45,7 +45,7 @@ public class MercadolibreListingAdapter implements
 		//Call Verify
 		MercadolibreCommunicatorVO communicatorVO = new MercadolibreCommunicatorVO();
 		communicatorVO.setRequestObject(item);
-		communicatorVO.setMethodEnum(MethodEnum.POST);
+		communicatorVO.setMethodEnum(HttpMethodEnum.POST);
 		communicatorVO.setTargetURL(VERIFY_LISTING_URL);
 		MercadolibreCommunicator communicator = MercadolibreCommunicator.getInstance();
 		ClientResponse response = communicator.call(communicatorVO);

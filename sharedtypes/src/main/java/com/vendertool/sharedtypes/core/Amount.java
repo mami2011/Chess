@@ -10,6 +10,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.vendertool.sharedtypes.error.VTLocaleJXBAdapter;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Amount {
 	private static final Locale DEFAULT_LOCALE = Locale.US;

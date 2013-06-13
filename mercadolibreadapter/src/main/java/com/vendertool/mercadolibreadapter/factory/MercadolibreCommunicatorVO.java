@@ -2,15 +2,13 @@ package com.vendertool.mercadolibreadapter.factory;
 
 import javax.ws.rs.core.MediaType;
 
-public class MercadolibreCommunicatorVO {
+import com.vendertool.sharedtypes.core.HttpMethodEnum;
 
-	public enum MethodEnum {
-		GET, POST, PUT, DELETE;
-	}
+public class MercadolibreCommunicatorVO {
 
 	private String targetURL;
 	private MediaType mediaType;
-	private MethodEnum methodEnum;
+	private HttpMethodEnum methodEnum;
 	private Object requestObject;//It can be any object, this communicator don't need to understand any.
 
 	public Object getRequestObject() {
@@ -37,11 +35,11 @@ public class MercadolibreCommunicatorVO {
 		this.mediaType = mediaType;
 	}
 
-	public MethodEnum getMethodEnum() {
+	public HttpMethodEnum getMethodEnum() {
 		return methodEnum;
 	}
 
-	public void setMethodEnum(MethodEnum methodEnum) {
+	public void setMethodEnum(HttpMethodEnum methodEnum) {
 		this.methodEnum = methodEnum;
 	}
 }

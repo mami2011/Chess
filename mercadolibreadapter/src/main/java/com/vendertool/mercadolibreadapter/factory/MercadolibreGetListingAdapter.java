@@ -10,8 +10,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.vendertool.mercadolibreadapter.add.Item;
-import com.vendertool.mercadolibreadapter.factory.MercadolibreCommunicatorVO.MethodEnum;
 import com.vendertool.sharedtypes.core.Amount;
+import com.vendertool.sharedtypes.core.HttpMethodEnum;
 import com.vendertool.sharedtypes.core.Listing;
 import com.vendertool.sharedtypes.core.Product;
 import com.vendertool.sharedtypes.rnr.BaseRequest;
@@ -39,7 +39,7 @@ public class MercadolibreGetListingAdapter implements
 		GetListingRequest itemId = (GetListingRequest)request;
 		
 		MercadolibreCommunicatorVO communicatorVO = new MercadolibreCommunicatorVO();
-		communicatorVO.setMethodEnum(MethodEnum.GET);
+		communicatorVO.setMethodEnum(HttpMethodEnum.GET);
 		communicatorVO.setMediaType(MediaType.APPLICATION_JSON_TYPE);
 		communicatorVO.setTargetURL(GET_LISTING_URL+itemId.getListingId());
 		MercadolibreCommunicator communicator = MercadolibreCommunicator.getInstance();

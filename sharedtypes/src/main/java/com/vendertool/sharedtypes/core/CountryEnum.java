@@ -1,6 +1,7 @@
 package com.vendertool.sharedtypes.core;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlEnum;
@@ -256,6 +257,7 @@ public enum CountryEnum {
 	private static Map<String, String> ISO2_To_Iso3_Map;
 	private static Map<String, String> ISO3_To_Iso2_Map;
 	private static Map<Integer, String> ID_To_Iso2_Map;
+	private static Map<String, Locale> ISO3_To_Locale;
 	private static boolean IS_INITIALIZED;
 
 	private String displayName;
@@ -275,7 +277,7 @@ public enum CountryEnum {
 		mapISOCodes(iso2Code, iso3Code, id);
 	}
 	
-	private boolean isInitialized(){
+	private synchronized boolean isInitialized(){
 		return IS_INITIALIZED;
 	}
 	
@@ -283,6 +285,13 @@ public enum CountryEnum {
 		ISO2_To_Iso3_Map = new HashMap<String, String>();
 		ISO3_To_Iso2_Map = new HashMap<String, String>();
 		ID_To_Iso2_Map = new HashMap<Integer, String>();
+		ISO3_To_Locale = new HashMap<String, Locale>();
+		
+		Locale[] availableLocales = Locale.getAvailableLocales();
+		for ( Locale locale : availableLocales ) {
+			ISO3_To_Locale.put(locale.getISO3Country(), locale);
+        }
+		
 		IS_INITIALIZED = true;
 	}
 	
@@ -310,6 +319,10 @@ public enum CountryEnum {
 		return ID_To_Iso2_Map.get(new Integer(id));
 	}
 	
+	public static Locale getCountryLocale(String iso3Code) {
+		return ISO3_To_Locale.get(iso3Code);
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -335,5 +348,9 @@ public enum CountryEnum {
 	
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
+	}
+	
+	public Locale getLocale() {
+		return getCountryLocale(getIso3Code());
 	}
 }

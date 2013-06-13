@@ -1,3 +1,13 @@
+bin/
+target/
 /target/
 /*/target/
 /*/*/target/
+*.swp
+*.class
+.project
+/*/.project
+.classpath
+/*/.classpath
+*.tmp
+*~

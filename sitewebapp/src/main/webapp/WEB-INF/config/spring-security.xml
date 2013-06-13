@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+ 
+ <!-- 
+ The auto-config is shorthand for
+   <http>
+    <form-login />
+    <http-basic />
+    <logout />
+  </http>
+  The <http> element is responsible for creating a FilterChainProxy and the 
+  filter beans which it uses. Common problems like incorrect filter ordering 
+  are no longer an issue as the filter positions are predefined.
+  -->
+  
+  <!-- This is to bypass auth for login & css, else it will be an infinite loop -->
+    <http pattern="/favicon.ico" security="none"/>
+  	<http pattern="/apple-touch-icon.png" security="none"/>
+  	<http pattern="/index" security="none"/>
+  	<http pattern="/static/**" security="none"/>
+  	<http pattern="/signin" security="none"/>
+  	<http pattern="/register" security="none"/>
+  	<http pattern="/home" security="none"/>
+  
+	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/**" access="ROLE_USER" />
+		
+		<form-login login-page="/signin" 
+			default-target-url="/myhome"
+			authentication-failure-url="/signin" 
+			always-use-default-target='true'/>
+		<logout logout-success-url="/signin" 
+				invalidate-session="true"
+            	delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE" />
+        
+        <!-- REMEMBER-ME: Change this later to more secure & persistent 
+        implementation with a key attribute -->    	
+        <remember-me />
+        
+        <!-- 
+        This will prevent a user from logging in multiple times - a second login will cause the first to be invalidated.
+        The second login will then be rejected. By “rejected”, we mean that the user will be sent to the authentication-failure-url 
+        if form-based login is being used. If the second authentication takes place through another non-interactive mechanism, 
+        such as “remember-me”, an “unauthorized” (402) error will be sent to the client. If instead you want to use an error page, 
+        you can add the attribute session-authentication-error-url to the session-management element.
+         -->
+        <session-management invalid-session-url="/sessiontimeout">
+        	<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+    	</session-management>
+	</http>
+ 
+ 
+ <!-- 
+ The <authentication-provider> element creates a DaoAuthenticationProvider bean 
+ and the <user-service> element creates an InMemoryDaoImpl. All 
+ authentication-provider elements must be children of the <authentication-manager> 
+ element, which creates a ProviderManager and registers the authentication 
+ providers with it
+  -->
+	<authentication-manager>
+	  <authentication-provider>
+	  	<password-encoder hash="sha-256">
+    		<salt-source user-property="usersalt"/>
+  		</password-encoder>
+  		
+	    <user-service>
+		<user name="madhu" password="123456" authorities="ROLE_USER" />
+	    </user-service>
+	  </authentication-provider>
+	</authentication-manager>
+ 
+</beans:beans>

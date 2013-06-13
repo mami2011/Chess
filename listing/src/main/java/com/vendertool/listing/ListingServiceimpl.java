@@ -7,6 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.ProduceMime;
 import javax.ws.rs.QueryParam;
 
+import com.vendertool.common.MarketCountryKey;
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
 import com.vendertool.mercadolibreadapter.IMarketListingAdapter;
 import com.vendertool.sharedtypes.core.CountryEnum;
@@ -29,7 +30,7 @@ import com.vendertool.sharedtypes.rnr.UpdateListingResponse;
 import com.vendertool.sharedtypes.rnr.VerifyListingRequest;
 import com.vendertool.sharedtypes.rnr.VerifyListingResponse;
 
-@Path("/1.0/listing")
+@Path("/listing")
 public class ListingServiceimpl extends BaseVenderToolServiceImpl 
 	implements IListingService {
 	
@@ -41,7 +42,7 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 		CountryEnum countryId = CountryEnum.ALL;
 		MarketEnum marketId = MarketEnum.MERCADO_LIBRE;
 		
-		IMarketListingAdapter adapter = MarketListingRegistry.getInstance().getMarketListingAdapter(
+		IMarketListingAdapter adapter = ListingMarketAdapterRegistry.getInstance().getMarketListingAdapter(
 				new MarketCountryKey(countryId, marketId));
 		
 		return adapter.getListing(id);
@@ -53,7 +54,7 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 	@ProduceMime({ "application/xml", "application/json" })
 	public AddListingResponse addListing(AddListingRequest request) {
 		Listing listing = request.getListing();
-		IMarketListingAdapter adapter = MarketListingRegistry.getInstance().getMarketListingAdapter(
+		IMarketListingAdapter adapter = ListingMarketAdapterRegistry.getInstance().getMarketListingAdapter(
 				new MarketCountryKey(listing.getCountry(), listing.getMarket()));
 		adapter.addListing(request);
 				
