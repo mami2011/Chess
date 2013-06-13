@@ -91,8 +91,8 @@
 	</dependency>
 	<dependency>
 		<groupId>javax.servlet</groupId>
-		<artifactId>servlet-api</artifactId>
-		<version>3.0-alpha-1</version>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>3.0.1</version>
 		<scope>provided</scope>
 	</dependency>
 	<dependency>
@@ -115,6 +115,21 @@
 		<groupId>log4j</groupId>
 		<artifactId>log4j</artifactId>
 		<version>1.2.17</version>
+	</dependency>
+	<dependency>
+		<groupId>cglib</groupId>
+		<artifactId>cglib</artifactId>
+		<version>2.2.2</version>
+	</dependency>
+	<dependency>
+		<groupId>javax</groupId>
+		<artifactId>javaee-api</artifactId>
+		<version>6.0</version>
+	</dependency>
+	<dependency>
+		<groupId>javassist</groupId>
+		<artifactId>javassist</artifactId>
+		<version>3.4.GA</version>
 	</dependency>
   </dependencies>
   

@@ -1,0 +1,77 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<!-- <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"> -->
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+	<!-- <property name="dataSource" ref="dataSourceForJNDI"/> -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.bytecode.use_reflection_optimizer">false</prop>
+				<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+				<prop key="hibernate.connection.password">admin</prop>
+				<prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/accountdb</prop>
+				<prop key="hibernate.connection.username">root</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.search.autoregister_listeners">false</prop>
+				<prop key="hibernate.connection.autocommit">true</prop>
+			</props>
+		</property>
+		
+ 
+        
+		<property name="annotatedClasses">
+			<list>
+			
+				<!-- Inventory -->
+				<value>com.dal.dao.Image</value>
+				<value>com.dal.dao.MerchantProduct</value>
+				<value>com.dal.dao.ProductAttribute</value>
+				<value>com.dal.dao.ProductDescription</value>
+				<value>com.dal.dao.ProductSpecification</value>
+				<value>com.dal.dao.ProductVariation</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- Hibernate session factory -->
+
+	<bean id="imageDAO" class="com.dal.dao.ImageDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="merchantProductDAO" class="com.dal.dao.MerchantProductDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="productAttributeDAO" class="com.dal.dao.ProductAttributeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="productDescriptionDAO" class="com.dal.dao.ProductDescriptionDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="productSpecificationDAO" class="com.dal.dao.ProductSpecificationDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="productVariationDAO" class="com.dal.dao.ProductVariationDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	
+	
+	<!-- <bean id="dataSourceForJNDI" class="org.springframework.jndi.JndiObjectFactoryBean">  
+        <property name="jndiName" value="java:comp/env/jdbc/datasource1"/>  
+        <property name="resourceRef" value="true"/>  
+</bean> 
+
+<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    <property name="url" value="jdbc:mysql://localhost:3306/accountdb" />
+    <property name="username" value="root" />
+    <property name="password" value="admin" />
+</bean> -->
+        
+</beans>
