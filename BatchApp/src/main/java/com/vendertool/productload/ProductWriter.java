@@ -11,7 +11,7 @@ import com.vendertool.batch.ExampleItemWriter;
 /**
  * Dummy {@link ItemWriter} which only logs data it receives.
  */
-@Component("writer")
+@Component("productwriter")
 public class ProductWriter implements ItemWriter<Object> {
 
 private static final Log log = LogFactory.getLog(ExampleItemWriter.class);

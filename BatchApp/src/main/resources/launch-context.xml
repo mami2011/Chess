@@ -14,6 +14,7 @@
 
 	<context:component-scan base-package="com.vendertool.batch" />
 
+<context:component-scan base-package="com.vendertool.productload" />
 	<jdbc:initialize-database data-source="dataSource">
 		<jdbc:script location="${batch.schema.script}" />
 	</jdbc:initialize-database>

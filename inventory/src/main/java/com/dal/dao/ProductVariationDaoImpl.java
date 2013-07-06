@@ -68,4 +68,15 @@ public class ProductVariationDaoImpl extends BaseDaoImpl implements ProductVaria
 		return  results;
 	}
 
+	public List<ProductVariation> findByProductIdAndVariationName(long productId,
+			String variationName) {
+		String sql = "select * from Product_VariationDao where product_id = :product_id and variation_name= :variation_name";
+		SQLQuery query=getSession().createSQLQuery(sql);
+		query.setParameter("product_id", productId);
+		query.setParameter("variation_name", variationName);
+		query.addEntity(ProductVariation.class);
+		List<ProductVariation> results = query.list();
+		return  results;
+	}
+
 }

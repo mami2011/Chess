@@ -67,4 +67,16 @@ public class MerchantProductDaoImpl extends BaseDaoImpl implements MerchantProdu
 		List<MerchantProduct> results = query.list();
 		return  results;
 	}
+
+	public List<MerchantProduct> findByAccountIdAndSKU(long accountId,
+			String sku) {
+		String sql = "select * from merchant_product where account_id = :account_id and sku = :sku";
+		SQLQuery query=getSession().createSQLQuery(sql);
+		query.setParameter("account_id", accountId);
+		query.setParameter("sku", sku);
+		query.addEntity(MerchantProduct.class);
+		List<MerchantProduct> results = query.list();
+		return  results;
+	}
+	
 }

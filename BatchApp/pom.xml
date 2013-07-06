@@ -3,6 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
+	  <parent>
+	<groupId>com.vendertool.parent</groupId>
+	<artifactId>parent</artifactId>
+	<version>1.0</version>
+	<relativePath>../parent/pom.xml</relativePath>
+  </parent>
+  
 	<groupId>org.springframework.samples.batch</groupId>
 	<artifactId>spring-batch-simple</artifactId>
 	<version>2.0.0.CI-SNAPSHOT</version>
@@ -114,6 +121,23 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.14</version>
 		</dependency>
+		<dependency>
+       <groupId>net.sf.opencsv</groupId>
+       <artifactId>opencsv</artifactId>
+       <version>2.3</version>
+		</dependency>
+		
+		 <dependency>
+      <groupId>com.vendertool.sharedtypes</groupId>
+      <artifactId>sharedtypes</artifactId>
+      <version>1.0</version>
+    </dependency>
+    		 <dependency>
+      <groupId>com.vendertool.inventory</groupId>
+      <artifactId>inventory</artifactId>
+      <version>1.0</version>
+    </dependency>
+    
 	</dependencies>
 
 	<build>
