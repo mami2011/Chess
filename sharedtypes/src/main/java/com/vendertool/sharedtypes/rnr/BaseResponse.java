@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.vendertool.sharedtypes.error.VTError;
 
-public class BaseResponse {
+public class BaseResponse implements Response {
 	public enum ResponseAckStatusEnum{ SUCCESS, FAILURE, PARTIAL_SUCCESS_WITH_FAILURE; }
 	
 	private List<VTError> errors;
@@ -33,6 +33,14 @@ public class BaseResponse {
 		}
 		
 		return this.errors.add(error);
+	}
+	
+	public boolean addErrors(List<VTError> errors) {
+		if(errors == null) {
+			return false;
+		}
+		
+		return this.errors.addAll(errors);
 	}
 	
 	public void clearErrors() {

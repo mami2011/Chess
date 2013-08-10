@@ -3,6 +3,7 @@ package com.dal.dao;
 // Generated May 26, 2013 5:25:20 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -19,6 +20,8 @@ import javax.persistence.TemporalType;
 @Table(name = "batch_job", catalog = "PRODUCTDB")
 public class BatchJob implements java.io.Serializable {
 
+	private static final long serialVersionUID = 8435816300335855973L;
+	
 	private BatchJobId id;
 	private Long accountId;
 	private Integer siteId;

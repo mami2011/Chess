@@ -8,7 +8,6 @@
   	<servlet>
 		<servlet-name>vendertooldispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		
 		<load-on-startup>1</load-on-startup>
 	</servlet>
   
@@ -18,18 +17,36 @@
   </servlet-mapping>
   
   	<context-param>
+    	<param-name>log4jConfigLocation</param-name>
+    	<param-value>classpath:log4j.properties</param-value>
+	</context-param>
+
+	<context-param>
+    	<param-name>webAppRootKey</param-name>
+    	<param-value>webapp.root.two</param-value>
+	</context-param>
+	
+  	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/config/vendertooldispatcher-servlet.xml,
-			/WEB-INF/config/spring-security.xml
+			/WEB-INF/vendertooldispatcher-servlet.xml, 
+			/WEB-INF/spring-security.xml
 		</param-value>
 	</context-param>
  
+	<listener>
+    	<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
 	<listener>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>com.vendertool.sitewebapp.common.VendertoolWebappInitializationListener</listener-class>
 	</listener>
 </web-app>

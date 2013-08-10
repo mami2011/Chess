@@ -4,10 +4,10 @@ import javax.xml.bind.annotation.XmlEnum;
 
 @XmlEnum
 public enum AccountStatusEnum {
-	CREATED,
-	ACTIVE,
-	INACTIVE,
+	NOT_VERIFIED,
+	VERIFIED,
 	CLOSED,
 	SUSPENDED,
-	DELINQUENT;
+	DELINQUENT, 
+	PASSWORD_EXPIRED;
 }

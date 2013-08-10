@@ -68,14 +68,14 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 	@Path("/getListingPriceQuantity")
 	@ProduceMime({ "application/xml", "application/json" })
 	public GetListingPriceQuantityResponse getListingPriceQuantity(
-			String listingId) {
+			@QueryParam("listingId") String listingId) {
 		return null;
 	}
 
 	@GET
 	@Path("/endListing")
 	@ProduceMime({ "application/xml", "application/json" })
-	public EndListingResponse endListing(String listingId) {
+	public EndListingResponse endListing(@QueryParam("listingId") String listingId) {
 		return null;
 	}
 
@@ -108,21 +108,21 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 	@GET
 	@Path("/duplicateListing")
 	@ProduceMime({ "application/xml", "application/json" })
-	public DuplicateListingResponse duplicateListing(String listingId) {
+	public DuplicateListingResponse duplicateListing(@QueryParam("listingId") String listingId) {
 		return null;
 	}
 
 	@GET
 	@Path("/getAuctionBidCount")
 	@ProduceMime({ "application/xml", "application/json" })
-	public GetAuctionBidCountResponse getAuctionBidCount(String listingId) {
+	public GetAuctionBidCountResponse getAuctionBidCount(@QueryParam("listingId") String listingId) {
 		return null;
 	}
 
 	@GET
 	@Path("/getAuctionHighBidder")
 	@ProduceMime({ "application/xml", "application/json" })
-	public GetAuctionHighBidderResponse getAuctionHighBidder(String listingId) {
+	public GetAuctionHighBidderResponse getAuctionHighBidder(@QueryParam("listingId") String listingId) {
 		return null;
 	}
 

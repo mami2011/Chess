@@ -11,10 +11,6 @@ import javax.ws.rs.QueryParam;
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
 import com.vendertool.sharedtypes.core.Product;
 import com.vendertool.sharedtypes.error.Errors;
-import com.vendertool.sharedtypes.error.InventoryErrorCode;
-import com.vendertool.sharedtypes.error.VTError;
-import com.vendertool.sharedtypes.error.VTErrorDomainEnum;
-import com.vendertool.sharedtypes.error.VTErrorSeverityEnum;
 import com.vendertool.sharedtypes.rnr.AddProductImageRequest;
 import com.vendertool.sharedtypes.rnr.AddProductImageResponse;
 import com.vendertool.sharedtypes.rnr.AddProductRequest;
@@ -78,7 +74,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 	@DELETE
 	@Path("/removeProduct")
 	@ProduceMime({ "application/xml", "application/json" })
-	public RemoveProductResponse removeProduct(String productId) {
+	public RemoveProductResponse removeProduct(@QueryParam("productId") String productId) {
 		return null;
 	}
 

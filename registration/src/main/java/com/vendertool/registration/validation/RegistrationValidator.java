@@ -1,0 +1,108 @@
+package com.vendertool.registration.validation;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.vendertool.common.validation.EmailRegexValidator;
+import com.vendertool.common.validation.ValidationUtil;
+import com.vendertool.sharedtypes.core.Account;
+import com.vendertool.sharedtypes.error.Errors;
+import com.vendertool.sharedtypes.error.VTError;
+import com.vendertool.sharedtypes.rnr.RegisterAccountRequest;
+import com.vendertool.sharedtypes.rnr.Request;
+
+public class RegistrationValidator implements com.vendertool.common.validation.Validator {
+	
+	private static final Logger logger = Logger.getLogger(RegistrationValidator.class);
+	private static ValidationUtil validationUtil = ValidationUtil.getInstance();
+	private static int MIN_PASSWORD_LENGTH = 8;
+	private static int MAX_PASSWORD_LENGTH = 25;
+	private static String PASSWORD_REGEX = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
+	
+//	private Validator validator;
+	
+	public RegistrationValidator() {
+//		ValidatorFactory validatorFactory = Validation.byProvider( HibernateValidator.class )
+//		        .configure()
+//		        .messageInterpolator(
+//		        	new ResourceBundleMessageInterpolator(
+//                        new AggregateResourceBundleLocator(
+//                                Arrays.asList(
+//                                        "errors" //, //This is the properties file in the resources dir
+//                                        //"otherMessages"
+//                                )
+//                        )
+//		        	)
+//		        )
+//		        .buildValidatorFactory();
+//		validator = validatorFactory.getValidator();
+	}
+	
+	public List<VTError> validate(Request _request) {
+		RegisterAccountRequest request = (RegisterAccountRequest) _request;
+		
+		List<VTError> errors = new ArrayList<VTError>();
+		
+		if(validationUtil.isNull(request) || validationUtil.isNull(request.getAccount())) {
+			logger.debug("NULL value passed to register an account");
+			errors.add(Errors.COMMON.NULL_ARGUMENT_PASSED);
+			return errors;
+		}
+		
+		Account account = request.getAccount();
+		validateEmail(account.getEmailId(), errors);
+		validatePassword(account.getPassword(), account.getConfirmPassword(), errors);
+		
+//		//Validate using hibernate
+//		Set<ConstraintViolation<RegisterAccountRequest>> constraintViolations = validator.validate(request);
+//		for(ConstraintViolation<RegisterAccountRequest> cv : constraintViolations) {
+//			//TODO: figure out a way to add hibernate violations as VTErrors to the response
+//			cv.getMessage();
+//		}
+		
+		
+		
+		return errors;
+	}
+
+	private void validatePassword(String password, String confirmPassword, List<VTError> errors) {
+		//First validate password field & then the confirm password
+		if(validationUtil.isNull(password)) {
+			errors.add(Errors.REGISTRATION.MISSING_PASSWORD);
+			return;
+		}
+		
+		if(validationUtil.checkStringSize(password, MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH)) {
+			errors.add(Errors.REGISTRATION.PASSWORD_LENGTH_INCORRECT);
+			return;
+		}
+		
+		if(!validationUtil.matchesPattern(PASSWORD_REGEX, password)) {
+			errors.add(Errors.REGISTRATION.INVALID_PASSWORD);
+			return;
+		}
+		
+		//Now validate confirm password
+		if(validationUtil.isNull(confirmPassword)) {
+			errors.add(Errors.REGISTRATION.MISSING_CONFIRM_PASSWORD);
+			return;
+		}
+		
+		if(!password.equals(confirmPassword)) {
+			errors.add(Errors.REGISTRATION.PASSWORD_CONFIRM_PASSWORD_MISMATCH);
+			return;
+		}
+	}
+
+	private void validateEmail(String emailId, List<VTError> errors) {
+		if(validationUtil.isNull(emailId)) {
+			errors.add(Errors.REGISTRATION.EMAIL_MISSING);
+		}
+		
+		if(!validationUtil.matchesPattern(EmailRegexValidator.RFC_PATTERN, emailId)) {
+			errors.add(Errors.REGISTRATION.INVALID_EMAIL_ID);
+		}
+	}
+}

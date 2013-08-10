@@ -31,7 +31,7 @@ public class CachedRegistrationAccountDatasource {
 	}
 	
 	public Status addAccount(Account account) {
-		if((account == null) || (account.getEmailId() == null)) {
+		if((account == null) || (account.getEmailId() == null) || (account.getPassword() == null)) {
 			return Status.INVALID;
 		}
 		

@@ -9,9 +9,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class Account {
 	private String emailId;
 	private String password;
+	private String confirmPassword;
+	private String passwordSalt;
 	private ContactDetails contact;
 	private Date createDate;
 	private Date validTillDate;
+	private AccountRoleEnum role;
+	private AccountStatusEnum accountStatus;
 	
 	public Account(){}
 
@@ -53,5 +57,37 @@ public class Account {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getPasswordSalt() {
+		return passwordSalt;
+	}
+
+	public void setPasswordSalt(String passwordSalt) {
+		this.passwordSalt = passwordSalt;
+	}
+
+	public AccountRoleEnum getRole() {
+		return role;
+	}
+
+	public void setRole(AccountRoleEnum role) {
+		this.role = role;
+	}
+
+	public AccountStatusEnum getAccountStatus() {
+		return accountStatus;
+	}
+
+	public void setAccountStatus(AccountStatusEnum accountStatus) {
+		this.accountStatus = accountStatus;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 }

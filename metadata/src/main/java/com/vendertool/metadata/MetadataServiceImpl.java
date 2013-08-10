@@ -6,6 +6,7 @@ import java.util.Locale;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.ProduceMime;
+import javax.ws.rs.QueryParam;
 
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
 import com.vendertool.sharedtypes.core.MarketEnum;
@@ -30,7 +31,7 @@ public class MetadataServiceImpl extends BaseVenderToolServiceImpl implements
 	@GET
 	@Path("/getSupportedCountries")
 	@ProduceMime({ "application/xml", "application/json" })
-	public GetSupportedCountriesResponse getSupportedCountries(MarketEnum market) {
+	public GetSupportedCountriesResponse getSupportedCountries(@QueryParam("market") MarketEnum market) {
 		GetSupportedCountriesResponse response = new GetSupportedCountriesResponse();
 		
 		if(market == null) {

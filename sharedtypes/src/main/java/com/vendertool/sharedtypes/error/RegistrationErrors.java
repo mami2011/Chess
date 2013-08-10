@@ -14,6 +14,12 @@ public class RegistrationErrors {
 	private RegistrationErrors(){}
 	
 	//Define errors here
+	public VTError EMAIL_MISSING = new VTError(
+			RegistrationErrorCode.EMAIL_MISSING, 
+			"Email is required", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	
 	public VTError INVALID_EMAIL_ID = new VTError(
 			RegistrationErrorCode.INVALID_EMAIL_ID, 
 			"Email id is not in a valid format", 
@@ -59,6 +65,48 @@ public class RegistrationErrors {
 	public VTError INVALID_ADDRESS_CITY_PROVINCE = new VTError(
 			RegistrationErrorCode.INVALID_ADDRESS_CITY_PROVINCE, 
 			"Invalid address city or province", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	
+	public VTError EMAIL_ALREADY_REGISTERED = new VTError(
+			RegistrationErrorCode.EMAIL_ALREADY_REGISTERED, 
+			"Email address already exists", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	
+	public VTError MISSING_PASSWORD = new VTError(
+			RegistrationErrorCode.MISSING_PASSWORD, 
+			"Password is required", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	
+	public VTError PASSWORD_LENGTH_INCORRECT = new VTError(
+			RegistrationErrorCode.PASSWORD_LENGTH_INCORRECT, 
+			"Password length is incorrect", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	
+	public VTError MISSING_CONFIRM_PASSWORD = new VTError(
+			RegistrationErrorCode.MISSING_CONFIRM_PASSWORD, 
+			"Confirm password is required", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	
+	public VTError INVALID_PASSWORD = new VTError(
+			RegistrationErrorCode.INVALID_PASSWORD, 
+			"Invalid password", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	
+	public VTError PASSWORD_CONFIRM_PASSWORD_MISMATCH = new VTError(
+			RegistrationErrorCode.PASSWORD_CONFIRM_PASSWORD_MISMATCH, 
+			"Password Field and confirm password fields don't match", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	
+	public VTError ACCOUNT_NOT_FOUND = new VTError(
+			RegistrationErrorCode.ACCOUNT_NOT_FOUND, 
+			"Account not found", 
 			VTErrorSeverityEnum.ERROR, 
 			DOMAIN);
 }

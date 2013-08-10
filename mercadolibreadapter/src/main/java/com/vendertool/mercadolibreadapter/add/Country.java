@@ -1,7 +1,6 @@
 
 package com.vendertool.mercadolibreadapter.add;
 
-import java.util.List;
 
 public class Country{
    	private String id;

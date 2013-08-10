@@ -25,6 +25,8 @@ public class RegistrationErrorCode extends VTErrorCode implements Serializable{
 		return ALL_ERROR_CODES;
 	}
 
+	public static VTErrorCode EMAIL_MISSING = new RegistrationErrorCode(
+			"EMAIL_REQUIRED");
 	public static VTErrorCode INVALID_EMAIL_ID = new RegistrationErrorCode(
 			"INVALID_EMAIL_ID");
 	public static VTErrorCode INVALID_LASTNAME = new RegistrationErrorCode(
@@ -41,5 +43,18 @@ public class RegistrationErrorCode extends VTErrorCode implements Serializable{
 			"INVALID_ADDRESS_STATE_PROVINCE");
 	public static VTErrorCode INVALID_ADDRESS_CITY_PROVINCE = new RegistrationErrorCode(
 			"INVALID_ADDRESS_CITY_PROVINCE");
-	
+	public static VTErrorCode EMAIL_ALREADY_REGISTERED = new RegistrationErrorCode(
+			"EMAIL_ALREADY_REGISTERED");
+	public static VTErrorCode MISSING_PASSWORD = new RegistrationErrorCode(
+			"MISSING_PASSWORD");
+	public static VTErrorCode PASSWORD_LENGTH_INCORRECT = new RegistrationErrorCode(
+			"PASSWORD_LENGTH_INCORRECT");
+	public static VTErrorCode MISSING_CONFIRM_PASSWORD = new RegistrationErrorCode(
+			"MISSING_CONFIRM_PASSWORD");
+	public static VTErrorCode INVALID_PASSWORD = new RegistrationErrorCode(
+			"INVALID_PASSWORD");
+	public static VTErrorCode PASSWORD_CONFIRM_PASSWORD_MISMATCH = new RegistrationErrorCode(
+			"PASSWORD_CONFIRM_PASSWORD_MISMATCH");
+	public static VTErrorCode ACCOUNT_NOT_FOUND = new RegistrationErrorCode(
+			"ACCOUNT_NOT_FOUND");
 }

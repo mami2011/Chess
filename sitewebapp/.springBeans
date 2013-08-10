@@ -5,9 +5,10 @@
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
-	<enableImports><![CDATA[false]]></enableImports>
+	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
-		<config>src/main/webapp/WEB-INF/config/vendertooldispatcher-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/vendertooldispatcher-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/spring-security.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

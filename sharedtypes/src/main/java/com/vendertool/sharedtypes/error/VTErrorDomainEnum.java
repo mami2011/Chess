@@ -18,7 +18,8 @@ public enum VTErrorDomainEnum {
 	SHIPPING(11, "SHIPPING"),
 	TRACKING(12, "TRACKING"),
 	METADATA(13, "METADATA"),
-	FTS(14, "FTS");
+	FTS(14, "FTS"),
+	COMMON(15, "COMMON");
 	
 	
 	private int id;

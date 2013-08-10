@@ -5,6 +5,8 @@ import com.vendertool.sharedtypes.core.AccountClosureReasonCodeEnum;
 import com.vendertool.sharedtypes.rnr.AuthorizeMarketRequest;
 import com.vendertool.sharedtypes.rnr.AuthorizeMarketResponse;
 import com.vendertool.sharedtypes.rnr.CloseAccountResponse;
+import com.vendertool.sharedtypes.rnr.ConfirmRegistrationRequest;
+import com.vendertool.sharedtypes.rnr.ConfirmRegistrationResponse;
 import com.vendertool.sharedtypes.rnr.GetAccountResponse;
 import com.vendertool.sharedtypes.rnr.LinkOtherSiteRequest;
 import com.vendertool.sharedtypes.rnr.LinkOtherSiteResponse;
@@ -23,6 +25,14 @@ public interface IRegistrationService extends IVenderToolService {
 	 * @return
 	 */
 	public RegisterAccountResponse registerAccount(RegisterAccountRequest request);
+	
+	/**
+	 * HTTP POST call to confirm registration
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public ConfirmRegistrationResponse confirmRegistration(ConfirmRegistrationRequest request);
 	
 	/**
 	 * HTTP GET call to get the account details
