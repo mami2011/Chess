@@ -16,6 +16,7 @@ public class Account {
 	private Date validTillDate;
 	private AccountRoleEnum role;
 	private AccountStatusEnum accountStatus;
+	private AccountConfirmation accountConf;
 	
 	public Account(){}
 
@@ -89,5 +90,13 @@ public class Account {
 
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+
+	public AccountConfirmation getAccountConf() {
+		return accountConf;
+	}
+
+	public void setAccountConf(AccountConfirmation accountConf) {
+		this.accountConf = accountConf;
 	}
 }

@@ -11,10 +11,12 @@ import javax.ws.rs.QueryParam;
 
 import org.apache.log4j.Logger;
 
+import com.vendertool.common.SessionIdGenerator;
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
 import com.vendertool.registration.validation.RegistrationValidator;
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.core.AccountClosureReasonCodeEnum;
+import com.vendertool.sharedtypes.core.AccountConfirmation;
 import com.vendertool.sharedtypes.core.AccountStatusEnum;
 import com.vendertool.sharedtypes.error.Errors;
 import com.vendertool.sharedtypes.error.VTError;
@@ -37,6 +39,7 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 	
 	private static final Logger logger = Logger.getLogger(RegistrationServiceImpl.class);
 	private CachedRegistrationAccountDatasource cachedDS;
+	private static int RANDOM_CODE_DIGIT_COUNT = 5;
 
 	//Set up few things as part of the constructor
 	public RegistrationServiceImpl() {
@@ -66,11 +69,20 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		Account account = request.getAccount();
 		account.setAccountStatus(AccountStatusEnum.NOT_VERIFIED);
 		
+		AccountConfirmation ac = new AccountConfirmation();
+		SessionIdGenerator sidg = SessionIdGenerator.getInstance();
+		String sessionId = sidg.generateSessionId(true);
+		Integer code = sidg.getRandomNumber(RANDOM_CODE_DIGIT_COUNT);
+		ac.setConfirmCode(code);
+		ac.setConfirmSessionId(sessionId);
+		account.setAccountConf(ac);
+		
 		//replace this with real DB call & shield it with try/catch
 		CachedRegistrationAccountDatasource.Status status = 
 					cachedDS.addAccount(account);
 		if(status == CachedRegistrationAccountDatasource.Status.NEW) {
 			response.setSuccess(true);
+			response.setAccount(account);
 			return response;
 		}
 

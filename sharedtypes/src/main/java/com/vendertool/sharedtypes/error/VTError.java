@@ -63,5 +63,9 @@ public class VTError implements Serializable {
 		this.domain = domain;
 	}
 	
+	public String getDomainCodeKey() {
+		return getDomain() + "." + getErrorCode().getErrorCode();
+	}
+	
 	private static final long serialVersionUID = 4207311508169879885L;
 }

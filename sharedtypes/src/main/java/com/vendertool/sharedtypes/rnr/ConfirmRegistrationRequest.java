@@ -2,22 +2,24 @@ package com.vendertool.sharedtypes.rnr;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.vendertool.sharedtypes.core.AccountConfirmation;
+
 @XmlRootElement
 public class ConfirmRegistrationRequest extends BaseRequest {
-	private String confirmationCode;
-	private String token;
+	private String emailId;
+	private AccountConfirmation accountConf;
 	
-	public String getConfirmationCode() {
-		return confirmationCode;
+	public String getEmailId() {
+		return emailId;
 	}
-	public void setConfirmationCode(String confirmationCode) {
-		this.confirmationCode = confirmationCode;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
-	public String getToken() {
-		return token;
+	public AccountConfirmation getAccountConf() {
+		return accountConf;
 	}
-	public void setToken(String token) {
-		this.token = token;
+	public void setAccountConf(AccountConfirmation accountConf) {
+		this.accountConf = accountConf;
 	}
 	
 }
