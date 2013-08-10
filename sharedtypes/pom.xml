@@ -5,7 +5,7 @@
   <parent>
 	<groupId>com.vendertool.parent</groupId>
 	<artifactId>parent</artifactId>
-	<version>${vendertool-version}</version>
+	<version>1.0</version>
 	<relativePath>../parent/pom.xml</relativePath>
   </parent>
   
@@ -20,5 +20,9 @@
   </properties>
 
   <dependencies>
+  		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
   </dependencies>
 </project>
