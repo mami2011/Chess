@@ -12,6 +12,7 @@ public interface MerchantProductDao {
 	void delete(MerchantProduct merchantProduct);
 
 	List<MerchantProduct> findByAccountId(long accountId);
+	List<MerchantProduct> findByAccountIdAndSKU(long accountId,String sku);
 	
 	List<MerchantProduct> findByProductId(long productId);
 	

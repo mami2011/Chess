@@ -20,6 +20,8 @@ public class ProductVariation implements java.io.Serializable {
 
 	private long productVariationsId;
 	private String title;
+	private String variationName;
+	private String variationValue;
 	private Long productId;
 	private String sku;
 	private Integer availbleQuantity;
@@ -34,11 +36,13 @@ public class ProductVariation implements java.io.Serializable {
 		this.productVariationsId = productVariationsId;
 	}
 
-	public ProductVariation(long productVariationsId, String title,
+	public ProductVariation(long productVariationsId, String title,String variationName,String variationValue,
 			Long productId, String sku, Integer availbleQuantity,
 			BigDecimal price, Date lastModifiedDate, Date createDate) {
 		this.productVariationsId = productVariationsId;
 		this.title = title;
+		this.variationName = variationName;
+		this.variationValue = variationValue;
 		this.productId = productId;
 		this.sku = sku;
 		this.availbleQuantity = availbleQuantity;
@@ -64,6 +68,24 @@ public class ProductVariation implements java.io.Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	@Column(name = "VARIATION_NAME", length = 45)
+	public String getVariationName() {
+		return variationName;
+	}
+
+	public void setVariationName(String variationName) {
+		this.variationName = variationName;
+	}
+
+	@Column(name = "VARIATION_VALUE", length = 45)
+	public String getVariationValue() {
+		return variationValue;
+	}
+
+	public void setVariationValue(String variationValue) {
+		this.variationValue = variationValue;
 	}
 
 	@Column(name = "PRODUCT_ID")
