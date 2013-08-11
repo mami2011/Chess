@@ -23,7 +23,7 @@ import com.vendertool.sitewebapp.common.URLConstants;
 
 @Controller
 public class ConfirmAccountController {
-	private static final Logger logger = Logger.getLogger(RegisterController.class);
+	private static final Logger logger = Logger.getLogger(ConfirmAccountController.class);
 	
 	@RequestMapping(value="confirmaccount", method=RequestMethod.GET)
 	public String confirmRegistration(HttpServletRequest httprequest) {
