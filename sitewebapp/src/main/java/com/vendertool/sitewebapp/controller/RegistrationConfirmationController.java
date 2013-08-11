@@ -33,19 +33,27 @@ public class RegistrationConfirmationController {
 		AccountConfirmation acctConf = new AccountConfirmation();
 		confirmRegRequest.setAccountConf(acctConf);
 		
+		boolean emptyRequest = true;
 		String[] emails = reqMap.get("email");
 		if(emails != null) {
 			confirmRegRequest.setEmailId(emails[0]);
+			emptyRequest = false;
 		}
 		
 		String[] sessiontokens = reqMap.get("sessiontoken");
 		if(sessiontokens != null) {
 			acctConf.setConfirmSessionId(sessiontokens[0]);
+			emptyRequest = false;
 		}
 		
 		String[] codes = reqMap.get("confirmationcode");
 		if((codes != null) && (codes[0] != null)) {
 			acctConf.setConfirmCode(Integer.getInteger(codes[0]));
+			emptyRequest = false;
+		}
+		
+		if(emptyRequest) {
+			return "confirmaccount";
 		}
 		
 		String hostName = httprequest.getLocalName();
