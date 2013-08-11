@@ -18,9 +18,6 @@
             <div>
                 <input class="form-control" placeholder="Password" type="password" name="password"/>
             </div>
-            <div>
-                <input class="form-control" placeholder="Confirm password" type="text" name="confirmationcode"/>
-            </div>
             <div class="submit">
                 <input type="submit"class="btn lg" value="Submit"/>
             </div>

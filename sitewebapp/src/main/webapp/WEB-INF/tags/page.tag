@@ -23,7 +23,7 @@
 					</div>
 					<div class="ctls">
 						<div class="sign-in inline">
-							<a href="#">Sign In</a>
+							<a href="signin">Sign In</a>
 						</div>
 						<form class="lang inline">
 							<span>
