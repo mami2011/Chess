@@ -3,52 +3,28 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 
-<t:page stylesheet="signup.css">
-hello
-	<%-- 
-	<c:set var="email" value="${fields['email']}"/>
-	<c:set var="password" value="${fields['password']}"/>
-	<c:set var="passwordConf" value="${fields['passwordConf']}"/>
-		
-	<div class="su main input-group bx-rnd-shdw">
-		<h3 class="ttl">Sign up</h3>
-		
-		<c:if test="${email.hasError || password.hasError || passwordConf.hasError}">
-			<div class="alert alert-danger">
-				There were problems signing you up.
-			</div>
-		</c:if>
+<t:page stylesheet="register.css">
 
-		<form method="post" action="/listing-tool/signup/save">
 
-			<div class="${email.hasError ? 'err' : ''}">
-				<input class="form-control" placeholder="Email" name="email" type="email" value="${email.value}"/>
-				<div class="err-msg">
-					<c:forEach var="item" items="${email.errorMessages}">
-						${item}<br/>
-					</c:forEach>
-				</div>
+	<div class="reg main input-group bx-rnd-shdw">
+		<h3 class="ttl">Confirm account</h3>
+
+
+		<form method="get" action="">
+
+			<div>
+				<input class="form-control" placeholder="Email" name="email" type="email" value=""/>
 			</div>
-			<div class="${password.hasError ? 'err' : ''}">
-				<input class="form-control" placeholder="Password" type="password" name="password"/>
-				<div class="err-msg">
-					<c:forEach var="item" items="${password.errorMessages}">
-						${item}<br/>
-					</c:forEach>
-				</div>
+            <div>
+				<input class="form-control" placeholder="Session token" type="text" name="sessiontoken"/>
 			</div>
-			<div class="${passwordConf.hasError ? 'err' : ''}">
-				<input class="form-control" placeholder="Confirm password" type="password" name="passwordConf"/>
-				<div class="err-msg">
-					<c:forEach var="item" items="${passwordConf.errorMessages}">
-						${item}<br/>
-					</c:forEach>
-				</div>
+            <div>
+				<input class="form-control" placeholder="Confirmation code" type="text" name="confirmationcode"/>
 			</div>
 			<div class="submit">
 				<input type="submit"class="btn lg" value="Submit"/>
 			</div>
 		</form>
 	</div>
---%>
+
 </t:page>
