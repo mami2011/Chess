@@ -1,0 +1,90 @@
+#wrap {
+	background:url('/listing-tool/img/sf-cityscape.jpg') no-repeat -1100px -100px fixed;
+	
+	/*
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;*/
+}
+
+
+.su {
+	position:relative;
+	width:400px;
+	margin-top:50px;
+	padding-right:40px;
+	
+}
+.su.main {
+	min-height:250px;
+}
+.su .ttl, .su-cfm .ttl {
+	margin-top:15px;
+}
+.su form > div {
+	margin-bottom:10px;
+}
+.su .opt {
+	width:400px;
+	border-top:1px solid #999;
+	padding-top:5px;
+	margin:20px 0 10px 0;
+	font-size:14px;
+	color:#888;
+}
+.su .opt > div {
+	margin-bottom:10px;
+}
+.su .opt input {
+	height:30px;
+}
+
+.su .w-half {
+	width:198px;
+}
+.su .w-1quarter {
+	width:99px;
+}
+.su .w-3quarter {
+	width:297px;
+}
+
+.su .submit {
+	margin-top:15px;
+}
+.su .submit .btn {
+	margin-top:15px;
+}
+
+
+
+
+.su .remember {
+	color:#666;
+}
+.su .forgot {
+	display:inline-block;
+	position:relative;
+	top:10px;
+	margin-left:20px;
+}
+
+
+.su-cfm {
+	position:relative;
+	width:400px;
+	min-height:180px;
+	top:50px;
+}
+.su-cfm .msg {
+	margin:0;
+	font-size:16px;
+}
+
+
+
+
+
+
+

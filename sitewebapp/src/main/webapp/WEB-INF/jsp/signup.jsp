@@ -3,13 +3,12 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 
-<t:page stylesheet="signup.css">
-hello
-	<%-- 
+<t:page stylesheet="css/signup.css">
+	
 	<c:set var="email" value="${fields['email']}"/>
 	<c:set var="password" value="${fields['password']}"/>
 	<c:set var="passwordConf" value="${fields['passwordConf']}"/>
-		
+			
 	<div class="su main input-group bx-rnd-shdw">
 		<h3 class="ttl">Sign up</h3>
 		
@@ -50,5 +49,5 @@ hello
 			</div>
 		</form>
 	</div>
---%>
+
 </t:page>
