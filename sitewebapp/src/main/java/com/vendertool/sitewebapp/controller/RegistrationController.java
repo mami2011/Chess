@@ -16,6 +16,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.core.HttpMethodEnum;
 import com.vendertool.sharedtypes.exception.VTRuntimeException;
+import com.vendertool.sharedtypes.rnr.ErrorResponse;
 import com.vendertool.sharedtypes.rnr.RegisterAccountRequest;
 import com.vendertool.sharedtypes.rnr.RegisterAccountResponse;
 import com.vendertool.sitewebapp.common.RestServiceClientHelper;
@@ -26,14 +27,14 @@ public class RegistrationController {
 	private static final Logger logger = Logger.getLogger(RegistrationController.class);
 	
 	@RequestMapping(value="register", method=RequestMethod.GET)
-	public String getRegistrationView(Model model) {
+	public String getRegistrationView(ModelMap modelMap) {
 		logger.info("register GET controller invoked");
-		
-		RegisterAccountResponse registerAccountresponse = new RegisterAccountResponse();
+
 		Account account = new Account();
-		registerAccountresponse.setAccount(account);
+		ErrorResponse errorResponse = new ErrorResponse();
 		
-		model.addAttribute("registerAccountresponse", registerAccountresponse);
+		modelMap.addAttribute("account", account);
+		modelMap.addAttribute("errorResponse", errorResponse);
 		return "register";
 	}
 	
@@ -41,9 +42,9 @@ public class RegistrationController {
 	@RequestMapping(value="register", method=RequestMethod.POST)
 	public String register(ModelMap modelMap, HttpServletRequest request) {
 		logger.info("register POST controller invoked");
-		RegisterAccountRequest registerAccountRequest = (RegisterAccountRequest) modelMap.get("registrationRequest");
-		//RegisterAccountRequest registrationRequest = new RegisterAccountRequest();
-		//registrationRequest.setAccount(account);
+		Account account = (Account) modelMap.get("account");
+		RegisterAccountRequest registerAccountRequest = new RegisterAccountRequest();
+		registerAccountRequest.setAccount(account);
 		
 		String hostName = request.getLocalName();
 		String url = hostName + URLConstants.WEB_SERVICE_PATH + 
@@ -67,11 +68,15 @@ public class RegistrationController {
 		if(registerAccountresponse.hasErrors()) {
 			logger.error("Registration failed with errors: " + registerAccountresponse.getErrors());
 			
-			modelMap.addAttribute("registerAccountresponse", registerAccountresponse);
+			Account responseAccount = registerAccountresponse.getAccount();
+			ErrorResponse errorResponse = new ErrorResponse(registerAccountresponse);
+			modelMap.addAttribute("account", responseAccount);
+			modelMap.addAttribute("errorResponse", errorResponse);
+			
 			return "register";
 		}
 		
-		return "myhome";
+		return "accounthub";
 	}
 	
 }

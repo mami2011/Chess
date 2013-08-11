@@ -18,7 +18,8 @@ public class AppTest
     	emailModel.setToName("Kodaganti");
     	emailModel.setFromName("VTool Team");
     	emailModel.setSubject("Welcome to VTool!");
-    	emailModel.setConfirmationCode("1234");
+    	//TODO : generate the real URL
+ //   	emailModel.confirmationUrl("1234");
     	ApplicationContext context = 
                 new ClassPathXmlApplicationContext("Spring-Mail.xml");
     	

@@ -55,4 +55,19 @@ public class CachedRegistrationAccountDatasource {
 	public void clearAllAccounts() {
 		ACCOUNT_DIRECTORY.clear();
 	}
+	
+	public boolean updateAccount(Account account) {
+		if((account == null) || (account.getEmailId() == null)) {
+			return false;
+		}
+		
+		String username = account.getEmailId();
+		if(ACCOUNT_DIRECTORY.containsKey(username)){
+			removeAccount(username);
+			ACCOUNT_DIRECTORY.put(username, account);
+			return true;
+		}
+		
+		return false;
+	}
 }

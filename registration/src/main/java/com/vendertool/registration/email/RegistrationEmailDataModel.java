@@ -4,13 +4,13 @@ import com.vendertool.common.email.EmailDataModel;
 
 public class RegistrationEmailDataModel extends EmailDataModel{
 
-	private String confirmationCode;
+	private String confirmationUrl;
 
-	public String getConfirmationCode() {
-		return confirmationCode;
+	public String getConfirmationUrl() {
+		return confirmationUrl;
 	}
 
-	public void setConfirmationCode(String confirmationCode) {
-		this.confirmationCode = confirmationCode;
+	public void setConfirmationUrl(String confirmationUrl) {
+		this.confirmationUrl = confirmationUrl;
 	}
 }

@@ -109,4 +109,16 @@ public class RegistrationErrors {
 			"Account not found", 
 			VTErrorSeverityEnum.ERROR, 
 			DOMAIN);
+	
+	public VTError MAX_ACCOUNT_RECONFIRM_ATTEMPTS_REACHED = new VTError(
+			RegistrationErrorCode.MAX_ACCOUNT_RECONFIRM_ATTEMPTS_REACHED, 
+			"Max attempts reach to confirm the account", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	
+	public VTError UNAUTHORIZED_ACCOUNT_CONFIRMATION = new VTError(
+			RegistrationErrorCode.UNAUTHORIZED_ACCOUNT_CONFIRMATION, 
+			"Unauthorized account confirmation attempt", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
 }

@@ -8,11 +8,15 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.ProduceMime;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 
 import org.apache.log4j.Logger;
 
 import com.vendertool.common.SessionIdGenerator;
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
+import com.vendertool.common.validation.ValidationUtil;
+import com.vendertool.registration.email.RegistrationEmailHelper;
 import com.vendertool.registration.validation.RegistrationValidator;
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.core.AccountClosureReasonCodeEnum;
@@ -22,6 +26,7 @@ import com.vendertool.sharedtypes.error.Errors;
 import com.vendertool.sharedtypes.error.VTError;
 import com.vendertool.sharedtypes.rnr.AuthorizeMarketRequest;
 import com.vendertool.sharedtypes.rnr.AuthorizeMarketResponse;
+import com.vendertool.sharedtypes.rnr.BaseResponse.ResponseAckStatusEnum;
 import com.vendertool.sharedtypes.rnr.CloseAccountResponse;
 import com.vendertool.sharedtypes.rnr.ConfirmRegistrationRequest;
 import com.vendertool.sharedtypes.rnr.ConfirmRegistrationResponse;
@@ -37,9 +42,14 @@ import com.vendertool.sharedtypes.rnr.UpdateAccountResponse;
 public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		implements IRegistrationService {
 	
+	  @Context
+	  UriInfo uri;
+	
 	private static final Logger logger = Logger.getLogger(RegistrationServiceImpl.class);
 	private CachedRegistrationAccountDatasource cachedDS;
 	private static int RANDOM_CODE_DIGIT_COUNT = 5;
+	private static int MAX_ACCOUNT_RETRY_ATTEMPTS = 3;
+	private static ValidationUtil validationUtil = ValidationUtil.getInstance();
 
 	//Set up few things as part of the constructor
 	public RegistrationServiceImpl() {
@@ -54,6 +64,11 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 			RegisterAccountRequest request) {
 		
 		RegisterAccountResponse response = new RegisterAccountResponse();
+		if(request == null) {
+			response.setStatus(ResponseAckStatusEnum.FAILURE);
+			response.addError(Errors.COMMON.NULL_ARGUMENT_PASSED);
+			return response;
+		}
 		
 		RegistrationValidator rv = new RegistrationValidator();
 		List<VTError> errors = rv.validate(request);
@@ -83,6 +98,8 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		if(status == CachedRegistrationAccountDatasource.Status.NEW) {
 			response.setSuccess(true);
 			response.setAccount(account);
+			String baseurl = uri.getBaseUri().toString();
+			RegistrationEmailHelper.sendRegistrationEmail(account, baseurl);
 			return response;
 		}
 
@@ -91,10 +108,12 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		
 		if(status == CachedRegistrationAccountDatasource.Status.EXISTING) {
 			response.addError(Errors.REGISTRATION.EMAIL_ALREADY_REGISTERED);
+			response.setStatus(ResponseAckStatusEnum.FAILURE);
 			return response;
 		}
 		
 		response.addError(Errors.SYSTEM.INTERNAL_ERROR);
+		response.setStatus(ResponseAckStatusEnum.FAILURE);
 		return response;
 	}
 	
@@ -103,8 +122,53 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 	@ConsumeMime({ "application/xml", "application/json" })
 	@ProduceMime({ "application/xml", "application/json" })
 	public ConfirmRegistrationResponse confirmRegistration(ConfirmRegistrationRequest request) {
+		ConfirmRegistrationResponse response = new ConfirmRegistrationResponse();
+
+		if (validationUtil.isNull(request)
+				|| (validationUtil.isNull(request.getEmailId()) || (validationUtil
+						.isEmpty(request.getEmailId())))) {
+			response.setStatus(ResponseAckStatusEnum.FAILURE);
+			response.addError(Errors.COMMON.NULL_ARGUMENT_PASSED);
+			return response;
+		}
 		
-		return null;
+		String emailId = request.getEmailId();
+		Account account = cachedDS.getAccount(emailId);
+		if(validationUtil.isNull(account)) {
+			response.addError(Errors.REGISTRATION.ACCOUNT_NOT_FOUND);
+			response.setStatus(ResponseAckStatusEnum.FAILURE);
+			return response;
+		}
+		
+		AccountConfirmation accountConf = account.getAccountConf();
+		//Now increment the attempt count.
+		account.getAccountConf().incrementAttempts();
+		
+		if(accountConf.getConfirmationAttempts() > MAX_ACCOUNT_RETRY_ATTEMPTS) {
+			response.addError(Errors.REGISTRATION.MAX_ACCOUNT_RECONFIRM_ATTEMPTS_REACHED);
+			response.setStatus(ResponseAckStatusEnum.FAILURE);
+		}
+		
+		String sessionId = accountConf.getConfirmSessionId();
+		Integer code = accountConf.getConfirmCode();
+		if( (!sessionId.equals(request.getAccountConf().getConfirmSessionId())) || 
+				(!code.equals(accountConf.getConfirmCode())) ) {
+			
+			if(account.getAccountConf().getConfirmationAttempts() > MAX_ACCOUNT_RETRY_ATTEMPTS) {
+				account.setAccountStatus(AccountStatusEnum.SUSPENDED);
+			}
+			cachedDS.updateAccount(account);
+			
+			response.addError(Errors.REGISTRATION.UNAUTHORIZED_ACCOUNT_CONFIRMATION);
+			response.setStatus(ResponseAckStatusEnum.FAILURE);
+			return response;
+		}
+		
+		account.setAccountStatus(AccountStatusEnum.VERIFIED);
+		cachedDS.updateAccount(account);
+		response.setSuccess(true);
+		response.setStatus(ResponseAckStatusEnum.SUCCESS);
+		return response;
 	}
 	
 

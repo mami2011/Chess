@@ -57,4 +57,8 @@ public class RegistrationErrorCode extends VTErrorCode implements Serializable{
 			"PASSWORD_CONFIRM_PASSWORD_MISMATCH");
 	public static VTErrorCode ACCOUNT_NOT_FOUND = new RegistrationErrorCode(
 			"ACCOUNT_NOT_FOUND");
+	public static VTErrorCode MAX_ACCOUNT_RECONFIRM_ATTEMPTS_REACHED = new RegistrationErrorCode(
+			"MAX_ACCOUNT_RECONFIRM_ATTEMPTS_REACHED");
+	public static VTErrorCode UNAUTHORIZED_ACCOUNT_CONFIRMATION = new RegistrationErrorCode(
+			"UNAUTHORIZED_ACCOUNT_CONFIRMATION");
 }

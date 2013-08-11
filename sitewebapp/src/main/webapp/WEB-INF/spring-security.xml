@@ -19,23 +19,37 @@
   
   <!-- NOTE: IMPORTANT - Ordering of filter pattern is important -->
   <!-- This is to bypass auth for login & css, else it will be an infinite loop -->
-    <sec:http pattern="/img/favicon.ico" security="none"/>
-  	<sec:http pattern="/img/apple-touch-icon.png" security="none"/>
+    <sec:http pattern="/favicon.ico" security="none"/>
+  	<sec:http pattern="/apple-touch-icon.png" security="none"/>
   	<sec:http pattern="/index" security="none"/>
-  	<sec:http pattern="/static/**" security="none"/>
+  	<sec:http pattern="/resources/**" security="none"/>
   	<sec:http pattern="/signin" security="none"/>
+  	<sec:http pattern="/signout" security="none"/>
   	<sec:http pattern="/register" security="none"/>
+  	<sec:http pattern="/registersuccesspreconfirm" security="none"/>
   	<sec:http pattern="/home" security="none"/>
+  	<sec:http pattern="/confirmaccount" security="none"/>
+  	<sec:http pattern="/confirmaccountsuccess" security="none"/>
+  	<sec:http pattern="/confirmaccountfailed" security="none"/>
   	
   	<!-- NOTE: IMPORTANT - Ordering of filter pattern is important -->
 	<sec:http auto-config="true" use-expressions="true">
+		<sec:intercept-url pattern="/favicon.ico" access="permitAll"/>
+		<sec:intercept-url pattern="/apple-touch-icon.png" access="permitAll"/>
+		<sec:intercept-url pattern="/index" access="permitAll"/>
+		<sec:intercept-url pattern="/resources/**" access="permitAll"/>
 		<sec:intercept-url pattern="/home" access="permitAll"/>
-		<sec:intercept-url pattern="/login" access="permitAll"/>
+		<sec:intercept-url pattern="/signin" access="permitAll"/>
+		<sec:intercept-url pattern="/signout" access="permitAll"/>
 		<sec:intercept-url pattern="/register" access="permitAll"/>
+		<sec:intercept-url pattern="/registersuccesspreconfirm" access="permitAll"/>
+		<sec:intercept-url pattern="/confirmaccount" access="permitAll"/>
+		<sec:intercept-url pattern="/confirmaccountsuccess" access="permitAll"/>
+		<sec:intercept-url pattern="/confirmaccountfailed" access="permitAll"/>
 		<sec:intercept-url pattern="/site/**" access="hasRole('ROLE_USER')" />
 		
 		<sec:form-login login-page="/signin" 
-			default-target-url="/myhome"
+			default-target-url="/accounthub"
 			authentication-failure-url="/signin" 
 			always-use-default-target='true'/>
 		

@@ -17,7 +17,7 @@ public class RegistrationEmailService extends VenderToolEmailService {
 	private static final Logger logger = Logger.getLogger(RegistrationEmailService.class);
 
 	@Override
-	public void sendConfirmationEmail(EmailDataModel _dataModel) {
+	public void sendEmail(EmailDataModel _dataModel) {
 		if((_dataModel == null) || (!(_dataModel instanceof RegistrationEmailDataModel))) {
 			return;
 		}
@@ -29,14 +29,15 @@ public class RegistrationEmailService extends VenderToolEmailService {
 				message.setTo(dataModel.getToEmail());
 				message.setSubject(dataModel.getSubject());
 				Map<String, EmailDataModel> model = new HashMap<String, EmailDataModel>();
-				model.put("user", dataModel);
+				model.put("emailData", dataModel);
 				String text = VelocityEngineUtils.mergeTemplateIntoString(
-						getVelocityEngine(), "templates/Registration.vm",
+						getVelocityEngine(), "emailtemplates/Registration.vm",
 						model);
 				message.setText(text, true);
 			}
 		};
 		this.getMailSender().send(preparator);
+		logger.info("Registration email sent to '" + dataModel.getToEmail() + "'");
 	}
 
 }

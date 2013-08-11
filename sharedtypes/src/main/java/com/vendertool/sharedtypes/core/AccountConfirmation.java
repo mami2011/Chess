@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class AccountConfirmation {
 	private String confirmSessionId;
 	private Integer confirmCode;
+	private int confirmationAttempts;
 	
 	public String getConfirmSessionId() {
 		return confirmSessionId;
@@ -20,5 +21,11 @@ public class AccountConfirmation {
 	public void setConfirmCode(Integer confirmCode) {
 		this.confirmCode = confirmCode;
 	}
+	public int getConfirmationAttempts() {
+		return confirmationAttempts;
+	}
 	
+	public void incrementAttempts() {
+		confirmationAttempts++;
+	}
 }

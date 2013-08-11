@@ -24,9 +24,5 @@ public abstract class VenderToolEmailService {
 		this.velocityEngine = velocityEngine;
 	}
 
-	public void sendEmail(EmailDataModel dataModel) {
-		sendConfirmationEmail(dataModel);
-	}
-	
-	public abstract void sendConfirmationEmail(EmailDataModel dataModel);
+	public abstract void sendEmail(EmailDataModel dataModel);
 }
