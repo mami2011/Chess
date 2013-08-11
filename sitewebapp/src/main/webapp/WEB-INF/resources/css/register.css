@@ -1,5 +1,5 @@
 #wrap {
-	background:url('/listing-tool/img/sf-cityscape.jpg') no-repeat -1100px -100px fixed;
+	background:url('../img/sf-cityscape.jpg') no-repeat -1100px -100px fixed;
 	
 	/*
 	-webkit-background-size: cover;
