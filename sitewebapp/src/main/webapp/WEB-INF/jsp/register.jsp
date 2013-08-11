@@ -5,14 +5,14 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
-<t:page stylesheet="signup.css">
+<t:page stylesheet="register.css">
 	
 	<c:set var="email" value="${account.emailId}"/>
 	<%-- 
 	<c:set var="password" value="${fields['password']}"/>
 	<c:set var="passwordConf" value="${fields['passwordConf']}"/>
 	--%>
-	<div class="su main input-group bx-rnd-shdw">
+	<div class="reg main input-group bx-rnd-shdw">
 		<h3 class="ttl"><spring:message code="form.registration.signup"/></h3>
 		
 		<%--
