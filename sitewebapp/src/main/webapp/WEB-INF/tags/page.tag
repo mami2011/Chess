@@ -5,10 +5,10 @@
 <html>
 	<head>
 
-		<link rel="stylesheet" type="text/css" href="/resources/css/main.css"/>
-		<link rel="stylesheet" type="text/css" href="/resources/css/lib/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main.css"/>"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/lib/bootstrap.min.css"/>"/>
 		<c:if test="${!empty stylesheet}">
-			<link rel="stylesheet" type="text/css" href="/resources/css/${stylesheet}"/>
+			<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/"/>${stylesheet}"/>
 		</c:if>
 	</head>
 	<body>
@@ -51,8 +51,9 @@
 				</div>
 			</div>
 		</div>
-		<script src="/resources/js/lib/jquery-1.10.2.min.js"></script>
-		<script src="/resources/js/lib/bootstrap.min.js"></script>
+
+		<script src="<c:url value="/resources/js/lib/jquery-1.10.2.min.js"/>"></script>
+		<script src="<c:url value="/resources/js/lib/bootstrap.min.js"/>"></script>
 	</body>
 </html>
 
