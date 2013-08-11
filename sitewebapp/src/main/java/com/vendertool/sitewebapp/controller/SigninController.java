@@ -19,8 +19,8 @@ public class SigninController {
 	public String getSigninView(Model model){
 		logger.info("signin GET controller invoked");
 		
-		SigninRequest signinRequest = new SigninRequest();
-		model.addAttribute("signinRequest", signinRequest);
+//		SigninRequest signinRequest = new SigninRequest();
+//		model.addAttribute("signinRequest", signinRequest);
 		return "signin";
 	}
 	
@@ -28,7 +28,7 @@ public class SigninController {
 	public String signin(ModelMap modelMap, HttpServletRequest request) {
 		logger.info("signin POST controller invoked");
 		
-		return "myhome";
+		return "accounthub";
 	}
 
 	

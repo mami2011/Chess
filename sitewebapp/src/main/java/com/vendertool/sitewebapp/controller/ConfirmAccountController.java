@@ -22,8 +22,8 @@ import com.vendertool.sitewebapp.common.RestServiceClientHelper;
 import com.vendertool.sitewebapp.common.URLConstants;
 
 @Controller
-public class RegistrationConfirmationController {
-	private static final Logger logger = Logger.getLogger(RegistrationController.class);
+public class ConfirmAccountController {
+	private static final Logger logger = Logger.getLogger(RegisterController.class);
 	
 	@RequestMapping(value="confirmaccount", method=RequestMethod.GET)
 	public String confirmRegistration(HttpServletRequest httprequest) {

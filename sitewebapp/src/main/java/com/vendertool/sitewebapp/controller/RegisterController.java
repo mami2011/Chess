@@ -23,8 +23,8 @@ import com.vendertool.sitewebapp.common.RestServiceClientHelper;
 import com.vendertool.sitewebapp.common.URLConstants;
 
 @Controller
-public class RegistrationController {
-	private static final Logger logger = Logger.getLogger(RegistrationController.class);
+public class RegisterController {
+	private static final Logger logger = Logger.getLogger(RegisterController.class);
 	
 	@RequestMapping(value="register", method=RequestMethod.GET)
 	public String getRegistrationView(ModelMap modelMap) {
