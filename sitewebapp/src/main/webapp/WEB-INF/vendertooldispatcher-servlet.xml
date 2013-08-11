@@ -1,80 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xmlns:context="http://www.springframework.org/schema/context"
-		xmlns:mvc="http://www.springframework.org/schema/mvc" 
-		xmlns:p="http://www.springframework.org/schema/p"
-		xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-		<mvc:annotation-driven />
-		<context:component-scan base-package="com.vendertool.sitewebapp.controller" />
-		
-		<!-- This tag allows for mapping the DispatcherServlet to "/" (thus overriding the mapping of the container's default Servlet), 
-		while still allowing static resource requests to be handled by the container's default Servlet. It configures a 
-		DefaultServletHttpRequestHandler with a URL mapping of "/**" and the lowest priority relative to other URL mappings. -->
-		<mvc:default-servlet-handler/>
-		
-		<!-- For static html, css, js & img caching -->
-		<!--  <mvc:resources location="/WEB-INF/static/" mapping="/static/**"/> -->
-		<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
-		<mvc:resources location="/WEB-INF/favicon.ico" mapping="/favicon.ico" />
-		<mvc:resources location="/WEB-INF/apple-touch-icon.png" mapping="/apple-touch-icon.png" />
-		
-		 <bean id="viewResolver"
-		  	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		  	<property name="viewClass"
-		   		value="org.springframework.web.servlet.view.JstlView" />
-		  	<property name="prefix" value="/WEB-INF/jsp/" />
-		  	<property name="suffix" value=".jsp" />
-		 </bean>
-		
-		
-		<!--  
-		<bean id="viewResolver"
-			class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-			p:prefix="/WEB-INF/jsp/" 
-			p:suffix=".jsp" />
-		-->
-		
-		<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
-			p:order="0" />
-			
-		<bean id="messageSource"
-    		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-    		<property name="basenames">
-	    		<list>
-	    			<value>classpath:l10n/errors</value>
-	    			<value>classpath:l10n/form</value>
-	    		</list>
-    		</property>
-    		<property name="defaultEncoding" value="UTF-8"/>
+	<mvc:annotation-driven />
+	<context:component-scan base-package="com.vendertool.sitewebapp.controller" />
+
+	<!-- This tag allows for mapping the DispatcherServlet to "/" (thus overriding 
+		the mapping of the container's default Servlet), while still allowing static 
+		resource requests to be handled by the container's default Servlet. It configures 
+		a DefaultServletHttpRequestHandler with a URL mapping of "/**" and the lowest 
+		priority relative to other URL mappings. -->
+	<mvc:default-servlet-handler />
+
+	<!-- For static html, css, js & img caching -->
+	<!-- <mvc:resources location="/WEB-INF/static/" mapping="/static/**"/> -->
+	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
+	<mvc:resources location="/WEB-INF/favicon.ico" mapping="/favicon.ico" />
+	<mvc:resources location="/WEB-INF/apple-touch-icon.png"
+		mapping="/apple-touch-icon.png" />
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+
+	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" /> -->
+
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
+		p:order="0" />
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:l10n/errors</value>
+				<value>classpath:l10n/form</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="lang" />
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="es" />
+	</bean>
+
+	<bean id="handlerMapping"
+		class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+		<property name="interceptors">
+			<ref bean="localeChangeInterceptor" />
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">unexpectedException</prop>
+			</props>
+		</property>
+		<property name="defaultErrorView" value="unexpectedError" />
+	</bean>
+
+	<!-- Will help us to change locale for "lang" param, example: ?lang=ru -->
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang" />
 		</bean>
- 
-		<bean id="localeChangeInterceptor"
-		    class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-		    <property name="paramName" value="lang" />
-		</bean>
- 
-		<bean id="localeResolver"
-		    class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
-			    <property name="defaultLocale" value="en"/>
-		</bean>
- 
-		<bean id="handlerMapping" 
-			class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
-		    <property name="interceptors">
-		        <ref bean="localeChangeInterceptor" />
-		    </property>
-		</bean>
-		
-		<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		   <property name="exceptionMappings">
-		      <props>
-		         <prop key="java.lang.Exception">unexpectedException</prop>
-		      </props>
-		   </property>
-		   <property name="defaultErrorView" value="unexpectedError"/>
-		</bean>
+	</mvc:interceptors>
 </beans>

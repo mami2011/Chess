@@ -43,6 +43,10 @@
 </head>
     
 <body>
-	<h1>Welcome to Vender Tool Home Page</h1>
+<span style="float: right">
+    <a href="?lang=en">en</a> 
+    <a href="?lang=es">es</a>
+</span>
+	<h1><spring:message code="form.welcome.text"/></h1>
 </body>
 </html>

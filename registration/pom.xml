@@ -1,41 +1,51 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-	<groupId>com.vendertool.parent</groupId>
-	<artifactId>parent</artifactId>
-	<version>${vendertool-version}</version>
-	<relativePath>../parent/pom.xml</relativePath>
-  </parent>
-  
-  <groupId>com.vendertool.registration</groupId>
-  <artifactId>registration</artifactId>
-  <packaging>jar</packaging>
-  <name>registration</name>
-  <url>http://maven.apache.org</url>
+	<parent>
+		<groupId>com.vendertool.parent</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0</version>
+		<relativePath>../parent/pom.xml</relativePath>
+	</parent>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+	<groupId>com.vendertool.registration</groupId>
+	<artifactId>registration</artifactId>
+	<packaging>jar</packaging>
+	<name>registration</name>
+	<url>http://maven.apache.org</url>
 
-  <dependencies>
-	<dependency>
-      <groupId>com.vendertool.sharedtypes</groupId>
-      <artifactId>sharedtypes</artifactId>
-      <version>${vendertool-version}</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>com.vendertool.signin</groupId>
-      <artifactId>signin</artifactId>
-      <version>${vendertool-version}</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>com.vendertool.common</groupId>
-      <artifactId>common</artifactId>
-      <version>${vendertool-version}</version>
-    </dependency>
-  </dependencies>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.vendertool.sharedtypes</groupId>
+			<artifactId>sharedtypes</artifactId>
+			<version>${vendertool-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vendertool.signin</groupId>
+			<artifactId>signin</artifactId>
+			<version>${vendertool-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vendertool.common</groupId>
+			<artifactId>common</artifactId>
+			<version>${vendertool-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+	</dependencies>
 </project>
