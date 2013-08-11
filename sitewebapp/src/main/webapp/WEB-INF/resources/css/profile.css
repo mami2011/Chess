@@ -1,0 +1,102 @@
+#wrap {
+	background-color:#DFECFF;
+}
+.usr {
+	position:relative;
+	width:800px;
+	margin-top:30px;
+	
+}
+.usr.profile .list-group {
+	width:200px;
+	float:left;
+	
+}
+
+.usr .infoWrap {
+	position:relative;
+	float:left;
+	width:470px;
+	min-height:680px;
+	margin-left:20px;
+	
+	
+	overflow:hidden;
+
+	
+	
+}
+
+.usr.profile .info {
+	position:absolute;
+	top:0;
+	left:0;
+	background-color:#fff;
+	z-index:1;
+	width:465px;
+
+}
+
+.usr .info .col1  {
+	width:120px;
+}
+.usr .info .col1 label  {
+	color:#999; important!
+}
+.usr .info .col2  {
+	width:345px;
+}
+.usr .info .col2 .btn {
+	margin-top:15px;
+}
+
+.usr .info .readonly {
+	border:0;
+	background-color:#fff;
+	box-shadow:none;
+}
+.usr .info .form-control {
+	font-size:14px;
+	height:30px;
+	display:block;
+}
+.usr .info td  {
+	font-size:16px;
+	font-weight:normal;
+	line-height:20px;
+	padding-bottom:10px;
+	white-space:nowrap;
+	vertical-align:top;
+}
+
+.usr label {
+	font-size:14px;
+	font-weight:normal;
+	min-width:115px;
+	white-space:nowrap;
+	color:#666;
+	float:left;
+}
+.usr .info hr {
+	display:inline-block;
+	height:1px;
+    border:0;
+    border-bottom:1px dotted #ccc;
+    margin:0;
+    padding:0;
+    position:relative;
+    width:300px;
+}
+
+.usr.profile .edit.info {
+	z-index:2;
+	left:500px;
+	display:none;
+}
+.usr.profile .edit.email {
+	z-index:2;
+	left:500px;
+	display:none;
+}
+
+
