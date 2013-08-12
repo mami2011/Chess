@@ -5,19 +5,26 @@ import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 import com.vendertool.sharedtypes.exception.DuplicateException;
 
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({CommonErrorCode.class, RegistrationErrorCode.class, 
+	MetadataErrorCode.class, SigninErrorCode.class, InventoryErrorCode.class,
+	ListingErrorCode.class, FTSErrorCode.class, SystemErrorCode.class})
 public abstract class VTErrorCode implements Serializable{
+	
 	private String errorCode;
 
+	public VTErrorCode() {
+	}
 	public VTErrorCode(String code) {
 		setErrorCode(code);
 	}
 	
-	public abstract Set<String> getCachedErrorCodes();
-	
+	public abstract Set<String> getCachedErrorCodes() ;
+
 	public String getErrorCode() {
 		return errorCode;
 	}

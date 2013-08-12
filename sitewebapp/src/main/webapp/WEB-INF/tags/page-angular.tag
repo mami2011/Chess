@@ -1,3 +1,4 @@
+<%@ tag pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="stylesheet" required="false"%>
 <%@ attribute name="javascript" required="false"%>
@@ -6,6 +7,7 @@
 <!doctype html>
 <html ng-app="APP">
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" type="text/css" href="/listing-tool/css/main.css"/>
 		<link rel="stylesheet" type="text/css" href="/listing-tool/css/lib/bootstrap.min.css"/>
 		<c:if test="${!empty stylesheet}">

@@ -14,7 +14,7 @@ public class RegistrationErrorCode extends VTErrorCode implements Serializable{
 	
 	private static Set<String> ALL_ERROR_CODES = new HashSet<String>();
 	
-	public RegistrationErrorCode(){super("UNKNOWN");}
+	public RegistrationErrorCode(){}
 	
 	private RegistrationErrorCode(String errorCode) {
 		super(errorCode);

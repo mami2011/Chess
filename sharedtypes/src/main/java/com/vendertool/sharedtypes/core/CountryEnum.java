@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.xml.bind.annotation.XmlEnum;
 
+import org.apache.log4j.Logger;
+
 @XmlEnum
 public enum CountryEnum {
 	ALL								("ALL", 											"AA",		"AAA",	  1), 
@@ -254,12 +256,13 @@ public enum CountryEnum {
 
 	
 	
+	private static final Logger logger = Logger.getLogger(CountryEnum.class);
+
 	private static Map<String, String> ISO2_To_Iso3_Map;
 	private static Map<String, String> ISO3_To_Iso2_Map;
 	private static Map<Integer, String> ID_To_Iso2_Map;
 	private static Map<String, Locale> ISO3_To_Locale;
 	private static boolean IS_INITIALIZED;
-
 	private String displayName;
 	private String iso2Code;
 	private String iso3Code;
@@ -289,7 +292,11 @@ public enum CountryEnum {
 		
 		Locale[] availableLocales = Locale.getAvailableLocales();
 		for ( Locale locale : availableLocales ) {
-			ISO3_To_Locale.put(locale.getISO3Country(), locale);
+			try{
+				ISO3_To_Locale.put(locale.getISO3Country(), locale);
+			}catch(Exception ex){
+				System.err.println("CountryEnum init exception : "+ ex.getMessage());
+			}
         }
 		
 		IS_INITIALIZED = true;

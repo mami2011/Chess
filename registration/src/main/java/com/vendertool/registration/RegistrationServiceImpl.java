@@ -2,13 +2,14 @@ package com.vendertool.registration;
 
 import java.util.List;
 
-import javax.ws.rs.ConsumeMime;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.ProduceMime;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
 import org.apache.log4j.Logger;
@@ -58,8 +59,8 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 	
 	@POST
 	@Path("/register")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public RegisterAccountResponse registerAccount(
 			RegisterAccountRequest request) {
 		
@@ -119,8 +120,8 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 	
 	@POST
 	@Path("/confirmRegistration")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public ConfirmRegistrationResponse confirmRegistration(ConfirmRegistrationRequest request) {
 		ConfirmRegistrationResponse response = new ConfirmRegistrationResponse();
 
@@ -174,8 +175,8 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 
 	@GET
 	@Path("/getAccount")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public GetAccountResponse getAccount(@QueryParam(value="username") String username) {
 		CachedRegistrationAccountDatasource cachedDS = 
 				CachedRegistrationAccountDatasource.getInstance();
