@@ -74,7 +74,7 @@ public class RegistrationValidator implements com.vendertool.common.validation.V
 			return;
 		}
 		
-		if(validationUtil.checkStringSize(password, MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH)) {
+		if(!validationUtil.checkStringSize(password, MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH)) {
 			errors.add(Errors.REGISTRATION.PASSWORD_LENGTH_INCORRECT);
 			return;
 		}
@@ -101,7 +101,7 @@ public class RegistrationValidator implements com.vendertool.common.validation.V
 			errors.add(Errors.REGISTRATION.EMAIL_MISSING);
 		}
 		
-		if(!validationUtil.matchesPattern(EmailRegexValidator.RFC_PATTERN, emailId)) {
+		if(!validationUtil.matchesPattern(EmailRegexValidator.SIMPLE_EMAIL_PATTERN, emailId)) {
 			errors.add(Errors.REGISTRATION.INVALID_EMAIL_ID);
 		}
 	}

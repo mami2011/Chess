@@ -7,8 +7,8 @@ import javax.ws.rs.core.Response;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -40,18 +40,20 @@ public class RegisterController {
 	
 	
 	@RequestMapping(value="register", method=RequestMethod.POST)
-	public String register(ModelMap modelMap, HttpServletRequest request) {
+	public String register(ModelMap modelMap, HttpServletRequest request,
+			@ModelAttribute("account") Account account) {
 		logger.info("register POST controller invoked");
-		Account account = (Account) modelMap.get("account");
+//		Account account = (Account) modelMap.get("account");
 		RegisterAccountRequest registerAccountRequest = new RegisterAccountRequest();
 		registerAccountRequest.setAccount(account);
 		
-		String hostName = request.getLocalName();
+		String hostName = RestServiceClientHelper.getServerURL(request);
+		
 		String url = hostName + URLConstants.WEB_SERVICE_PATH + 
 				URLConstants.REGISTRATION_REGISTER_PATH;
 		
 		ClientResponse response = RestServiceClientHelper
-				.invokeRestService(url, registerAccountRequest, null, MediaType.APPLICATION_JSON_TYPE,
+				.invokeRestService(url, registerAccountRequest, null, MediaType.APPLICATION_XML_TYPE,
 						HttpMethodEnum.POST);
 		
 		int responseCode = response.getStatus();
@@ -59,8 +61,8 @@ public class RegisterController {
 				+ url + "' from '" + getClass().getName()
 				+ ".register' is '" + responseCode + "'.");
 		
-		//HTTP error code 201
-		if(response.getStatus() != Response.Status.CREATED.getStatusCode()) {
+		//HTTP error code 200
+		if(response.getStatus() != Response.Status.OK.getStatusCode()) {
 			throw new VTRuntimeException("Unable to register");
 		}
 		

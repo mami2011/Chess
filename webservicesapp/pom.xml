@@ -75,7 +75,10 @@
 			<artifactId>fts</artifactId>
 			<version>${vendertool-version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

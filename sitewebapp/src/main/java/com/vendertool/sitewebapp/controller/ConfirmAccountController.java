@@ -70,7 +70,7 @@ public class ConfirmAccountController {
 				+ ".confirmRegistration' is '" + responseCode + "'.");
 		
 		//HTTP error code 201
-		if(response.getStatus() != Response.Status.CREATED.getStatusCode()) {
+		if(response.getStatus() != Response.Status.OK.getStatusCode()) {
 			throw new VTRuntimeException("Unable to confirm registration");
 		}
 		
