@@ -2,6 +2,7 @@ package com.vendertool.metadata;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -64,8 +65,8 @@ public class MarketCountryConfig {
 		marketCountryMap.put(MarketEnum.MERCADO_LIBRE, countries);
 	}
 	
-	public List<Locale> getSupportedLocales(){
-		List<Locale> locales = new ArrayList<Locale>(marketCountryMap.size());
+	public Set<Locale> getSupportedLocales(){
+		Set<Locale> locales = new HashSet<Locale>();
 		
 		Set<MarketEnum> keys = marketCountryMap.keySet();
 		for(MarketEnum key : keys) {

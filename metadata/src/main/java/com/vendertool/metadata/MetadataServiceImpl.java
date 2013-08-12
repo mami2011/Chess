@@ -1,7 +1,7 @@
 package com.vendertool.metadata;
 
-import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -19,11 +19,11 @@ public class MetadataServiceImpl extends BaseVenderToolServiceImpl implements
 		IMetadataService {
 
 	@GET
-	@Path("/getSupportedCountries")
+	@Path("/getSupportedLocales")
 	@ProduceMime({ "application/xml", "application/json" })
 	public GetSupportedLocalesResponse getSupportedLocales() {
 		GetSupportedLocalesResponse response = new GetSupportedLocalesResponse();
-		List<Locale> locales = MarketCountryConfig.getInstance().getSupportedLocales();
+		Set<Locale> locales = MarketCountryConfig.getInstance().getSupportedLocales();
 		response.setLocales(locales);
 		return response;
 	}
