@@ -113,11 +113,29 @@ html, body {
 	width:15px;
 	height:8px;
 	display:inline-block;
-	background:url('/listing-tool/img/icons.png') no-repeat -40px 0; 
+	background:url('../img/icons.png') no-repeat -40px 0; 
 }
 
 
+.ctls .srch {
+	float:right;
+	margin-right:20px;
+	
+}
+.ctls .srch input {
+	width:250px;
+	font-size:14px;
+}
 
+.ctls .srch button {
+	width:23px;
+	height:20px;
+	background:url('../img/icons.png') no-repeat -19px 0;
+	border:0;
+	position:relative;
+	top:6px;
+	cursor:pointer;
+}
 
 
 .main {

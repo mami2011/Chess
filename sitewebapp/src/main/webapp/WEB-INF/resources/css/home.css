@@ -1,5 +1,19 @@
-h1
-{
-	color:#453D99;
-	text-align:center;
+#wrap {
+
 }
+
+
+.home {
+	position:relative;
+	width:400px;
+	margin-top:50px;
+	padding-right:40px;
+	
+}
+.home.main {
+	min-height:200px;
+}
+.home .ttl, .reg-cfm .ttl {
+	margin-top:15px;
+}
+
