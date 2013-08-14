@@ -1,0 +1,104 @@
+#wrap {
+	background-color:#DFECFF;
+}
+.acct {
+	position:relative;
+	width:800px;
+	margin-top:30px;
+	
+}
+.acct.contact .list-group {
+	width:200px;
+	float:left;
+	
+
+}
+
+.acct .info-wrp {
+	position:relative;
+	float:left;
+	width:470px;
+	min-height:680px;
+	margin-left:20px;
+	
+	
+	overflow:hidden;
+	
+
+	
+	
+}
+
+.acct.contact .info {
+	position:absolute;
+	top:0;
+	left:0;
+	background-color:#fff;
+	z-index:1;
+	width:465px;
+
+}
+
+.acct .info .col1  {
+	width:120px;
+}
+.acct .info .col1 label  {
+	color:#999; important!
+}
+.acct .info .col2  {
+	width:345px;
+}
+.acct .info .col2 .btn {
+	margin-top:15px;
+}
+
+.acct .info.readonly input {
+	border:0;
+	background-color:#fff;
+	box-shadow:none;
+}
+.acct .info .form-control {
+	font-size:14px;
+	height:30px;
+	display:block;
+}
+.acct .info td  {
+	font-size:16px;
+	font-weight:normal;
+	line-height:20px;
+	padding-bottom:10px;
+	white-space:nowrap;
+	vertical-align:top;
+}
+
+.acct label {
+	font-size:14px;
+	font-weight:normal;
+	min-width:115px;
+	white-space:nowrap;
+	color:#666;
+	float:left;
+}
+.acct .info hr {
+	display:inline-block;
+	height:1px;
+    border:0;
+    border-bottom:1px dotted #ccc;
+    margin:0;
+    padding:0;
+    position:relative;
+    width:300px;
+}
+
+.acct.contact .edit.info {
+	z-index:2;
+	left:500px;
+	display:none;
+}
+.acct.contact .edit.email {
+	z-index:2;
+	left:500px;
+	display:none;
+}
+
+

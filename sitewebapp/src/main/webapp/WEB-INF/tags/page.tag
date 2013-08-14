@@ -9,20 +9,22 @@ Page fragments
 <%@ attribute name="header"		fragment="true"%>
 <%@ attribute name="scripts"	fragment="true"%>
 <%@ attribute name="css"		fragment="true"%>
+<%@ attribute name="inlineJs"	fragment="true" %>
 
 <%--============
 Attributes
 ================--%>
 <%@ attribute name="title" required="false"%>
+<%@ attribute name="isAngularPage" required="false"%>
 
 <%--============
 Variables
 ================--%>
-<c:set var="htmlTitle" value="${empty htmlTitle ? 'Vendor Tool' : htmlTitle}"/>
+<c:set var="title" value="${empty title ? 'Vendor Tool' : title}"/>
 
 
 <!doctype html>
-<html>
+<html ng-app="APP">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>${title}</title>
@@ -59,9 +61,16 @@ Variables
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src='<c:url value="/resources/js/lib/bootstrap.min.js" />'></script>
+		<c:if test="${isAngularPage}">
+			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+		</c:if>
 		
 		<%-- Page specific javascript tags --%>
 		<jsp:invoke fragment="scripts"/>
+		
+		<%-- Inline JS --%>
+		<jsp:invoke fragment="inlineJs"/>
+
 	</body>
 </html>
 
