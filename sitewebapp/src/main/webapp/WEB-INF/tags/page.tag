@@ -72,6 +72,7 @@ Variables
 		<c:if test="${!empty angularAppName}">
 			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 		</c:if>
+		<script src='<c:url value="/resources/js/header.js" />'></script>
 		
 		<%-- Page specific javascript tags --%>
 		<jsp:invoke fragment="scripts"/>

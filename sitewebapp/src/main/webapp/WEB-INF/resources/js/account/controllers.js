@@ -15,13 +15,34 @@ accountApp.controller('AccountCtrl', ['$scope', '$http', '$routeParams', '$locat
 		$('#info').removeClass('readonly');
 	}**/
 	
-	
+	$scope.saveContact = function() {
+		
+		//alert(JSON.stringify($scope.fieldMap));
+		
+		//$http.post('profile/save', {"email":{"name":"email", "value":"opopo", "errors":["err1","err2"]}})
+		//$http.post('profile/save', {"email":{"name":"email", "value":"opopo", "errors":["err1", "err2"]}})
+		$http.post('account/save', $scope.account).
+			success(function (account) {
+				$scope.account = account;
+			});
+		
+	};
 
-	
 	$scope.reset = function() {
     	$scope.editAccount = angular.copy($scope.account);
     	$location.path('account'); // path not hash
   	};
+  	
+  	$scope.getClass = function(path) {
+  		
+  		//alert($location.path().substr(0, path.length));
+  		if ($location.path() == path)  {
+		//if ($location.path().substr(0, path.length) == path) {
+			return 'curr';
+		} else {
+			return '';
+		}
+	};
   
 }]);
 	

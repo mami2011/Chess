@@ -1,5 +1,3 @@
-
-<div>
 <table id="info" class="info" cellspacing="0" cellpadding="0">
 	<tr>
 		<td class="col1"><label>Email:</label></td>
@@ -53,7 +51,7 @@
 	<tr>
 		<td colspan="2" class="actns">
 			<div class="sub-cncl">
-				<input  type="submit" class="btn lg" value="Submit"/>
+				<input type="submit" class="btn lg" value="Submit"/>
 				<a ng-click="reset()" class="cncl lg" href="javascript:;">Cancel</a>
 			</div>
 		</td>

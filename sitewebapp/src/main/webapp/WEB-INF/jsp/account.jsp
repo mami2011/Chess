@@ -33,33 +33,12 @@
 	<jsp:body>
 		<div ng-controller="AccountCtrl" class="acct contact main input-group bx-rnd-shdw">
 			<h3 class="ttl">Account</h3>
-			<style>
-			.acct.profile .list-group {
-				width:150px;
-			}
-			.list-group .list-group-item {
-				border:0;
-				border-bottom:1px solid #ddd;
-				border-top:1px solid #ddd;
-				border-top-right-radius: 0;
-				border-top-left-radius: 0;
-				white-space:nowrap;
-				padding-right:0px;
-			}
 			
-			.info {
-				
-			}
-			.info .col1 {
-				padding-left:30px;
-			}
-			
-			</style>
 			<div class="list-group">
-				<a href="#/contact" class="list-group-item">Contact info</a>
-				<a edit-profile href="#/contact/:edit"  class="list-group-item">Change contact info</a>
-				<a edit-email href="javascript:;" class="list-group-item">Change email</a>
-				<a href="password-edit" class="list-group-item">Change password</a>
+				<a href="#/contact" 			ng-class="getClass('/contact')" class="list-group-item">Contact info</a>
+				<a href="#/contact/:change"		ng-class="getClass('/contact/:change')" class="list-group-item">Change contact info</a>
+				<a href="#/email/:change"		ng-class="getClass('/email/:change')" class="list-group-item">Change email</a>
+				<a href="#/password/:change"	ng-class="getClass('/password/:change')" class="list-group-item">Change password</a>
 			</div>
 			
 			<div ng-view class="info-wrp">

@@ -10,7 +10,7 @@
 	
 }
 .acct.contact .list-group {
-	width:200px;
+	width:170px;
 	float:left;
 	
 
@@ -21,14 +21,11 @@
 	float:left;
 	width:470px;
 	min-height:680px;
-	margin-left:20px;
+	margin-left:40px;
 	
 	
 	overflow:hidden;
-	
 
-	
-	
 }
 
 .acct.contact .info {
@@ -42,12 +39,24 @@
 }
 
 .acct .info .col1  {
-	width:120px;
+	width:130px;
 	padding-right:10px;
 }
 .acct .info .col1 label  {
 	color:#999; important!
 }
+.list-group .list-group-item {
+	border:0;
+	border-bottom:1px solid #ddd;
+	border-top:1px solid #ddd;
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+	white-space:nowrap;
+	padding-right:0px;
+}
+
+		
+			
 .acct .info .col2  {
 	width:345px;
 }
@@ -56,12 +65,12 @@
 }
 
 .acct .info.readonly input {
-	border:0;
+	border:1px solid #fff;
 	background-color:#fff;
 	box-shadow:none;
 }
 .acct input.readonly  {
-	border:0;
+	border:1px solid #fff;
 	background-color:#fff;
 	box-shadow:none;
 }
@@ -78,7 +87,7 @@
 	white-space:nowrap;
 }
 .acct .info .sep  {
-	margin:15px 10px 10px 30px;
+	margin:15px 10px 10px 0;
 	border:0;
 	border-top:1px solid #999;
 	width:100%;
@@ -114,7 +123,7 @@
 }
 
 .sub-cncl {
-	margin:15px 0 0 30px;
+	margin:15px 0 0 0;
 }
 
 
