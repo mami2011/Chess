@@ -13,7 +13,7 @@ Attributes
 	<div class="hdr">
 
 		<div class="topnav inline">
-			<a href="#"><spring:message code="form.header.logo"/></a>
+			<a href="home"><spring:message code="form.header.logo"/></a>
 			
 			<%-- 
 			<a href="#"><spring:message code="form.header.platform"/></a>

@@ -15,7 +15,7 @@ Page fragments
 Attributes
 ================--%>
 <%@ attribute name="title" required="false"%>
-<%@ attribute name="isAngularPage" required="false"%>
+<%@ attribute name="angularAppName" required="false"%>
 
 <%--============
 Variables
@@ -24,7 +24,15 @@ Variables
 
 
 <!doctype html>
-<html ng-app="APP">
+<c:choose>
+	<c:when test="${!empty angularAppName}">
+		<html ng-app="${angularAppName}">
+	</c:when>
+	<c:otherwise>
+		<html>
+	</c:otherwise>
+</c:choose>
+
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>${title}</title>
@@ -61,7 +69,7 @@ Variables
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src='<c:url value="/resources/js/lib/bootstrap.min.js" />'></script>
-		<c:if test="${isAngularPage}">
+		<c:if test="${!empty angularAppName}">
 			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 		</c:if>
 		

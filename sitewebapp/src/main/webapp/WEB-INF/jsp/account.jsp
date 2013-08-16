@@ -7,19 +7,20 @@
 
 
 
-<t:page title="VendorTool" isAngularPage="true">
+<t:page title="VendorTool" angularAppName="accountApp">
 
 	<jsp:attribute name="header">
 		<t:header email="${account.emailId}" currentPage="account"/>
 	</jsp:attribute>
 	
 	<jsp:attribute name="scripts">
-		<script src="<c:url value='/resources/js/controller/account-ctrl.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/resources/js/account/app.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/resources/js/account/controllers.js' />" type="text/javascript"></script>
 	</jsp:attribute>
 	
 	<jsp:attribute name="inlineJs">
 		<script type="text/javascript">
-			module.factory('Data', function() {
+			accountApp.factory('Data', function() {
 				return ${accountJson};
 			});
 		</script>
@@ -55,18 +56,17 @@
 			
 			</style>
 			<div class="list-group">
-				<a href="profile" class="list-group-item">Contact info</a>
-				<a edit-profile href="#/edit"  class="list-group-item">Change contact info</a>
+				<a href="#/contact" class="list-group-item">Contact info</a>
+				<a edit-profile href="#/contact/:edit"  class="list-group-item">Change contact info</a>
 				<a edit-email href="javascript:;" class="list-group-item">Change email</a>
 				<a href="password-edit" class="list-group-item">Change password</a>
 			</div>
 			
 			<div ng-view class="info-wrp">
 				
+	
+				<%-- 
 				
-				<!--===================================
-				Profile
-				=======================================-->
 				<table id="info" class="info readonly" cellspacing="0" cellpadding="0">
 					<tr>
 						<td class="col1"><label>Email:</label></td>
@@ -110,7 +110,7 @@
 					</tr>
 					
 				</table>
-
+				--%>
 				
 				<%-- 
 				<!--===================================

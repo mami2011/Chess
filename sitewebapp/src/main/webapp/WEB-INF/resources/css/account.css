@@ -43,6 +43,7 @@
 
 .acct .info .col1  {
 	width:120px;
+	padding-right:10px;
 }
 .acct .info .col1 label  {
 	color:#999; important!
@@ -59,6 +60,11 @@
 	background-color:#fff;
 	box-shadow:none;
 }
+.acct input.readonly  {
+	border:0;
+	background-color:#fff;
+	box-shadow:none;
+}
 .acct .info .form-control {
 	font-size:14px;
 	height:30px;
@@ -70,9 +76,13 @@
 	line-height:20px;
 	padding-bottom:10px;
 	white-space:nowrap;
-	vertical-align:top;
 }
-
+.acct .info .sep  {
+	margin:15px 10px 10px 30px;
+	border:0;
+	border-top:1px solid #999;
+	width:100%;
+}
 .acct label {
 	font-size:14px;
 	font-weight:normal;
@@ -102,5 +112,14 @@
 	left:500px;
 	display:none;
 }
+
+.sub-cncl {
+	margin:15px 0 0 30px;
+}
+
+
+
+
+
 
 
