@@ -25,7 +25,11 @@
 	</tr>
 	<tr>
 		<td class="col1"><label>Country:</label></td>
-		<td class="col2"><input ng-model="acctFieldSetEdit.country.value" class="form-control" /></td>
+		<td class="col2">
+			<select ng-model="acctFieldSetEdit.country.value">
+				<option ng-repeat="opt in acctFieldSetEdit.country.options" value="{{opt.value}}">{{opt.label}}</option>
+    		</select>
+		</td>
 	</tr>
 	<tr>
 		<td class="col1"><label>Phone (work):</label></td>

@@ -43,7 +43,7 @@ public class AccountController {
 		
 
 		System.err.println("Address1: " + acctFieldSet.getAddressLine1().getValue());
-		
+		System.err.println("Country: " + acctFieldSet.getCountry().getValue());
 		
 		return acctFieldSet;
 	}

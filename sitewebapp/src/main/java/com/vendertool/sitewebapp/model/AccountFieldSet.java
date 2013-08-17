@@ -1,5 +1,8 @@
 package com.vendertool.sitewebapp.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.core.Address;
 import com.vendertool.sharedtypes.core.ContactDetails;
@@ -21,7 +24,14 @@ public class AccountFieldSet {
 	private Field phoneMobile = new Field().setType(FieldEnum.PHONE_MOBILE);
 	private Field phoneHome = new Field().setType(FieldEnum.PHONE_HOME);
 	
+
 	public AccountFieldSet() {
+		for (CountryEnum c : CountryEnum.values()) {
+			FieldOption opt = new FieldOption();
+			opt.setLabel(c.getDisplayName());
+			opt.setValue(c.getId() + "");
+			country.addOption(opt);
+		}
 	}
 	
 	public void setAccount(Account account) {
