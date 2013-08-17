@@ -35,10 +35,10 @@
 			<h3 class="ttl">Account</h3>
 			
 			<div class="list-group">
-				<a href="#/contact" 			ng-class="getClass('/contact')" class="list-group-item">Contact info</a>
-				<a href="#/contact/:change"		ng-class="getClass('/contact/:change')" class="list-group-item">Change contact info</a>
-				<a href="#/email/:change"		ng-class="getClass('/email/:change')" class="list-group-item">Change email</a>
-				<a href="#/password/:change"	ng-class="getClass('/password/:change')" class="list-group-item">Change password</a>
+				<a href="#/contact" 			ng-class="getClass('/contact')" 			class="list-group-item">Contact info</a>
+				<a href="#/contact/:change"		ng-class="getClass('/contact/:change')" 	class="list-group-item">Change contact info</a>
+				<a href="#/email/:change"		ng-class="getClass('/email/:change')" 		class="list-group-item">Change email</a>
+				<a href="#/password/:change"	ng-class="getClass('/password/:change')"	class="list-group-item">Change password</a>
 			</div>
 			
 			<div ng-view class="info-wrp">

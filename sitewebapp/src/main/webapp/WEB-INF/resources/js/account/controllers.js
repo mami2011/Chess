@@ -15,7 +15,7 @@ accountApp.controller('AccountCtrl', ['$scope', '$http', '$routeParams', '$locat
 		$('#info').removeClass('readonly');
 	}**/
 	
-	$scope.saveContact = function() {
+	$scope.save = function() {
 		
 		//alert(JSON.stringify($scope.fieldMap));
 		

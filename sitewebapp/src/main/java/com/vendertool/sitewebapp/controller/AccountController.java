@@ -4,8 +4,10 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.core.Address;
@@ -53,6 +55,16 @@ public class AccountController {
 		
 		return "account";
 	}
+	
+	@RequestMapping(value="account/save", method=RequestMethod.POST)
+	public @ResponseBody Account saveAccount(@RequestBody Account acct) {
+		
+		System.err.println(acct.getEmailId());
+		System.err.println(acct.getContact().getAddress().getAddressLine1());
+		
+		return acct;
+	}
+	
 	
 	
 	
