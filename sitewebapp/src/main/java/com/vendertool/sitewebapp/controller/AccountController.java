@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vendertool.sharedtypes.core.Account;
-import com.vendertool.sharedtypes.core.Address;
-import com.vendertool.sharedtypes.core.ContactDetails;
-import com.vendertool.sharedtypes.core.CountryEnum;
+import com.vendertool.sitewebapp.model.AccountFields;
+import com.vendertool.sitewebapp.test.util.MockDataUtil;
 
 @Controller
 public class AccountController {
@@ -23,31 +22,15 @@ public class AccountController {
 	public String getAccount(ModelMap modelMap) {
 		logger.info("account GET controller invoked");
 		
-		// Mock models
-		Address address = new Address();
-		address.setAddressLine1("123 Main St");
-		address.setAddressLine2("Apt. B");
-		address.setCity("San Jose");
-		address.setState("CA");
-		address.setZip("95125");
-		address.setCountry(CountryEnum.UNITED_STATES);
-		
-		ContactDetails contact = new ContactDetails();
-		contact.setAddress(address);
-		contact.setFirstName("Ted");
-		contact.setLastName("Szeto");
-		
-		Account acct = new Account();
-		acct.setEmailId("ted@gmail.com");
-		acct.setContact(contact);
-		
-		modelMap.put("account", acct);
+		AccountFields accountFields = MockDataUtil.getAccountFields();
+
+		modelMap.put("accountFields", accountFields);
 		
 		// Add JSON for Angular
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			String acctJson= mapper.writeValueAsString(acct);
-			modelMap.put("accountJson", acctJson);
+			String accountFieldsJson= mapper.writeValueAsString(accountFields);
+			modelMap.put("accountFieldsJson", accountFieldsJson);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -57,15 +40,14 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="account/save", method=RequestMethod.POST)
-	public @ResponseBody Account saveAccount(@RequestBody Account acct) {
+	public @ResponseBody String saveAccount(@RequestBody String accountFields) {
+		ObjectMapper mapper = new ObjectMapper();
+		AccountFields acctFlds = mapper.convertValue(accountFields, AccountFields.class);
+		System.err.println(acctFlds.getAddressLine1());
 		
-		System.err.println(acct.getEmailId());
-		System.err.println(acct.getContact().getAddress().getAddressLine1());
-		
-		return acct;
+		return accountFields;
 	}
-	
-	
+		
 	
 	
 	

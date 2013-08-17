@@ -10,7 +10,7 @@
 <t:page title="VendorTool" angularAppName="accountApp">
 
 	<jsp:attribute name="header">
-		<t:header email="${account.emailId}" currentPage="account"/>
+		<t:header email="${accountFields.email.value}" currentPage="account"/>
 	</jsp:attribute>
 	
 	<jsp:attribute name="scripts">
@@ -21,7 +21,7 @@
 	<jsp:attribute name="inlineJs">
 		<script type="text/javascript">
 			accountApp.factory('Data', function() {
-				return ${accountJson};
+				return ${accountFieldsJson};
 			});
 		</script>
 	</jsp:attribute>

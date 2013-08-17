@@ -4,18 +4,29 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+import com.vendertool.sitewebapp.common.FieldEnum;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Field {
 
-	private String name;
+	private FieldEnum type;
 	private String value;
 	private boolean hasError;
 	private List<String> errorMessages = Collections.EMPTY_LIST;
 	
-	public Field(String name) {
-		this.name = name;
+	public Field() {
 	}
+	
+	public Field setType(FieldEnum type) {
+		this.type = type;
+		return this;
+	}
+
 	public String getName() {
-		return name;
+		return type.getName();
 	}
 	public String getValue() {
 		return value;
