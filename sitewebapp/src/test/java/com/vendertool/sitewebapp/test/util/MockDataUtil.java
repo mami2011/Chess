@@ -1,15 +1,17 @@
 package com.vendertool.sitewebapp.test.util;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.core.Address;
 import com.vendertool.sharedtypes.core.ContactDetails;
 import com.vendertool.sharedtypes.core.CountryEnum;
-import com.vendertool.sitewebapp.model.AccountFields;
+import com.vendertool.sitewebapp.model.AccountFieldSet;
 
 
 public class MockDataUtil {
 
-	public static AccountFields getAccountFields() {
+	public static AccountFieldSet getAccountFieldSet() {
 		
 		
 		Address address = new Address();
@@ -30,10 +32,38 @@ public class MockDataUtil {
 		acct.setContact(contact);
 		
 		
-		AccountFields fields = new AccountFields();
-		fields.setAccount(acct);
+		AccountFieldSet fieldSet = new AccountFieldSet();
+		fieldSet.setAccount(acct);
 
 		
-		return fields;
+		return fieldSet;
+	}
+	
+	public static void main(String[] args) {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		String json = "{\"email\":{\"value\":\"ted@gmail.com\",\"hasError\":false,\"errorMessages\":[],\"name\":\"email\"},\"addressLine1\":{\"value\":\"123 Main St\",\"hasError\":false,\"errorMessages\":[],\"name\":\"addressLine1\"},\"addressLine2\":{\"value\":\"Apt. B\",\"hasError\":false,\"errorMessages\":[],\"name\":\"addressLine2\"},\"city\":{\"value\":\"San Jose\",\"hasError\":false,\"errorMessages\":[],\"name\":\"city\"},\"state\":{\"value\":\"CA\",\"hasError\":false,\"errorMessages\":[],\"name\":\"state\"},\"zip\":{\"value\":\"95125\",\"hasError\":false,\"errorMessages\":[],\"name\":\"zip\"},\"phoneWork\":{\"value\":null,\"hasError\":false,\"errorMessages\":[],\"name\":\"phoneWork\"},\"phoneMobile\":{\"value\":null,\"hasError\":false,\"errorMessages\":[],\"name\":\"phoneMobile\"},\"phoneHome\":{\"value\":null,\"hasError\":false,\"errorMessages\":[],\"name\":\"phoneHome\"}}";
+		
+		AccountFieldSet set = getAccountFieldSet();
+		try {
+			//json = mapper.writeValueAsString(set);
+			System.err.println(json);
+			
+			AccountFieldSet acct = mapper.readValue(json, AccountFieldSet.class);
+			
+			System.err.println(acct.getEmail());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		//System.out.println(acct.getEmail());
+		
+		
 	}
 }

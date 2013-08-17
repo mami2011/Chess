@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.vendertool.sharedtypes.core.Account;
-import com.vendertool.sitewebapp.model.AccountFields;
+import com.vendertool.sitewebapp.model.AccountFieldSet;
 import com.vendertool.sitewebapp.test.util.MockDataUtil;
 
 @Controller
@@ -22,15 +21,15 @@ public class AccountController {
 	public String getAccount(ModelMap modelMap) {
 		logger.info("account GET controller invoked");
 		
-		AccountFields accountFields = MockDataUtil.getAccountFields();
+		AccountFieldSet acctFieldSet = MockDataUtil.getAccountFieldSet();
 
-		modelMap.put("accountFields", accountFields);
+		modelMap.put("acctFieldSet", acctFieldSet);
 		
 		// Add JSON for Angular
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			String accountFieldsJson= mapper.writeValueAsString(accountFields);
-			modelMap.put("accountFieldsJson", accountFieldsJson);
+			String acctFieldSetJson= mapper.writeValueAsString(acctFieldSet);
+			modelMap.put("acctFieldSetJson", acctFieldSetJson);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -40,13 +39,15 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="account/save", method=RequestMethod.POST)
-	public @ResponseBody String saveAccount(@RequestBody String accountFields) {
-		ObjectMapper mapper = new ObjectMapper();
-		AccountFields acctFlds = mapper.convertValue(accountFields, AccountFields.class);
-		System.err.println(acctFlds.getAddressLine1());
+	public @ResponseBody AccountFieldSet saveAccount(@RequestBody AccountFieldSet acctFieldSet) {
 		
-		return accountFields;
+
+		System.err.println("Address1: " + acctFieldSet.getAddressLine1().getValue());
+		
+		
+		return acctFieldSet;
 	}
+	
 		
 	
 	

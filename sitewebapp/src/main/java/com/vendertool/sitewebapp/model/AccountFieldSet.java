@@ -1,19 +1,14 @@
 package com.vendertool.sitewebapp.model;
 
-import java.util.List;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.core.Address;
 import com.vendertool.sharedtypes.core.ContactDetails;
+import com.vendertool.sharedtypes.core.CountryEnum;
 import com.vendertool.sitewebapp.common.FieldEnum;
 
-@XmlAccessorType(XmlAccessType.FIELD)
-public class AccountFields {
+public class AccountFieldSet {
 
-	private Field email = new Field().setType(FieldEnum.EMAIL);;
+	private Field email = new Field().setType(FieldEnum.EMAIL);
 	private Field password = new Field().setType(FieldEnum.PASSWORD);
 	private Field passwordConfirm = new Field().setType(FieldEnum.PASSWORD_CONFIRM);
 	private Field addressLine1 = new Field().setType(FieldEnum.ADDRESS_LINE_1);
@@ -21,12 +16,12 @@ public class AccountFields {
 	private Field city = new Field().setType(FieldEnum.CITY);
 	private Field state = new Field().setType(FieldEnum.STATE);
 	private Field zip = new Field().setType(FieldEnum.ZIP);
-	//private Field country = new Field().setType(FieldEnum.COUNTRY);
+	private Field country = new Field().setType(FieldEnum.COUNTRY);
 	private Field phoneWork = new Field().setType(FieldEnum.PHONE_WORK);
 	private Field phoneMobile = new Field().setType(FieldEnum.PHONE_MOBILE);
 	private Field phoneHome = new Field().setType(FieldEnum.PHONE_HOME);
 	
-	public AccountFields() {
+	public AccountFieldSet() {
 	}
 	
 	public void setAccount(Account account) {
@@ -42,7 +37,11 @@ public class AccountFields {
 				city.setValue(address.getCity());
 				state.setValue(address.getState());
 				zip.setValue(address.getZip());
-				//country.setValue(address.getCountry().getId() + "");
+				
+				CountryEnum countryEnum = address.getCountry();
+				if (countryEnum != null) {
+					country.setValue(countryEnum.getId() + "");
+				}
 			}
 		}
 	}
@@ -82,13 +81,13 @@ public class AccountFields {
 	}
 	public void setZip(Field zip) {
 		this.zip = zip;
-	}/**
+	}
 	public Field getCountry() {
 		return country;
 	}
 	public void setCountry(Field country) {
 		this.country = country;
-	}**/
+	}
 	public Field getPhoneWork() {
 		return phoneWork;
 	}
@@ -110,7 +109,7 @@ public class AccountFields {
 	
 	
 
-	
+
 	
 		
 }

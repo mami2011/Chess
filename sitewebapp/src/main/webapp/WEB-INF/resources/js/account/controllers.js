@@ -7,8 +7,8 @@ all the function params as strings in same order.
 ********************/
 accountApp.controller('AccountCtrl', ['$scope', '$http', '$routeParams', '$location', 'Data', function($scope, $http, $routeParams, $location, Data) {
 	
-	$scope.accountFields = Data;
-	$scope.accountFieldsEdit = angular.copy($scope.accountFields);
+	$scope.acctFieldSet = Data;
+	$scope.acctFieldSetEdit = angular.copy($scope.acctFieldSet);
 	
 	/** Do something when param is 'edit'
 	if ($routeParams.edit) {
@@ -21,15 +21,15 @@ accountApp.controller('AccountCtrl', ['$scope', '$http', '$routeParams', '$locat
 		
 		//$http.post('profile/save', {"email":{"name":"email", "value":"opopo", "errors":["err1","err2"]}})
 		//$http.post('profile/save', {"email":{"name":"email", "value":"opopo", "errors":["err1", "err2"]}})
-		$http.post('account/save', $scope.accountFieldsEdit).
-			success(function (accountFieldsEdit) {
-				$scope.accountFields = accountFieldsEdit;
+		$http.post('account/save', $scope.acctFieldSetEdit).
+			success(function (acctFieldSetEdit) {
+				$scope.acctFieldSet = acctFieldSetEdit;
 			});
 		
 	};
 
 	$scope.reset = function() {
-    	$scope.accountFieldsEdit = angular.copy($scope.accountFields);
+    	$scope.acctFieldSetEdit = angular.copy($scope.acctFieldSet);
     	$location.path('account'); // path not hash
   	};
   	
