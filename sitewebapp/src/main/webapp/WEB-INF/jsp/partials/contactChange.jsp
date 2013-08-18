@@ -25,10 +25,12 @@
 	</tr>
 	<tr>
 		<td class="col1"><label>Country:</label></td>
-		<td class="col2">
+		<td class="col2"><%--
+			 <select ng-model="acctFieldSetEdit.country.value" ng-options="c.value for c in acctFieldSetEdit.country.options"></select>
+      		--%>
 			<select ng-model="acctFieldSetEdit.country.value">
 				<option ng-repeat="opt in acctFieldSetEdit.country.options" value="{{opt.value}}">{{opt.label}}</option>
-    		</select>
+    		</select> 
 		</td>
 	</tr>
 	<tr>

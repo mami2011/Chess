@@ -69,11 +69,16 @@
 	border:1px solid #fff;
 	background-color:#fff;
 	box-shadow:none;
+	
+	cursor:default;
 }
+
 .acct input.readonly  {
+	/** for email field on edit page **/
 	border:1px solid #fff;
 	background-color:#fff;
 	box-shadow:none;
+	cursor:default;
 }
 .acct .info .form-control {
 	font-size:14px;

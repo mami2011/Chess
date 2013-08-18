@@ -17,16 +17,44 @@ accountApp.controller('AccountCtrl', ['$scope', '$http', '$routeParams', '$locat
 	
 	$scope.save = function() {
 		
-		//alert(JSON.stringify($scope.fieldMap));
+		//alert($scope.acctFieldSetEdit.email.value);
 		
 		//$http.post('profile/save', {"email":{"name":"email", "value":"opopo", "errors":["err1","err2"]}})
 		//$http.post('profile/save', {"email":{"name":"email", "value":"opopo", "errors":["err1", "err2"]}})
 		$http.post('account/save', $scope.acctFieldSetEdit).
-			success(function (acctFieldSetEdit) {
-				$scope.acctFieldSet = acctFieldSetEdit;
+			success(function (errors) {
+				
+				
+				$scope.updateModel();
+				//$scope.acctFieldSet = $scope.acctFieldSetEdit;
+				
+				//$scope.acctFieldSet.addressLine1 = $scope.acctFieldSetEdit.addressLine1;
+				
+				//$scope.acctFieldSet = $scope.acctFieldSetEdit;
+				
+				//acctFieldSet = angular.copy($scope.acctFieldSetEdit);
+				
+				//acctFieldSet.addressLine1.value = "xxxxxxx";
+				
+				//alert('xx' + $scope.acctFieldSet.addressLine1.value);
 			});
 		
+		
+		//$scope.acctFieldSet = angular.copy(acctFieldSet);
 	};
+	
+	$scope.updateModel = function() {
+		
+		for(var key in $scope.acctFieldSetEdit) {
+	        if ($scope.acctFieldSetEdit.hasOwnProperty(key)) {
+	            $scope.acctFieldSet[key] = $scope.acctFieldSetEdit[key];
+	        }
+	    }
+		//$scope.acctFieldSet.addressLine1 = angular.copy(acctFieldSetEdit.addressLine1);
+		
+    	//$scope.acctFieldSet = angular.copy(acctFieldSetEdit);
+    	$location.path('account'); // path not hash
+  	};
 
 	$scope.reset = function() {
     	$scope.acctFieldSetEdit = angular.copy($scope.acctFieldSet);
