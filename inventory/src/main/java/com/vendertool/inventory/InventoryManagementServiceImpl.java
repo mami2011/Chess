@@ -1,12 +1,13 @@
 package com.vendertool.inventory;
 
-import javax.ws.rs.ConsumeMime;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.ProduceMime;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
 import com.vendertool.sharedtypes.core.Product;
@@ -35,7 +36,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 	
 	@GET
 	@Path("/getProduct")
-	@ProduceMime({ "application/xml", "application/json" })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public GetProductResponse getProduct(@QueryParam("productId") String id) {
 		GetProductResponse response = new GetProductResponse();
 		Product product = new Product("iPhone 5");
@@ -52,8 +53,8 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 
 	@POST
 	@Path("/addProduct")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public AddProductResponse addProduct(AddProductRequest request) {
 		Product product = request.getProduct();
 		System.out.println("/inventory/addproduct/ call. Adding product ... " + product.toString());
@@ -65,23 +66,23 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 
 	@POST
 	@Path("/updateProduct")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public UpdateProductResponse updateProduct(UpdateProductRequest request) {
 		return null;
 	}
 
 	@DELETE
 	@Path("/removeProduct")
-	@ProduceMime({ "application/xml", "application/json" })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public RemoveProductResponse removeProduct(@QueryParam("productId") String productId) {
 		return null;
 	}
 
 	@POST
 	@Path("/updateProductPriceQuantity")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public UpdateProductPriceQuanityResponse updateProductPriceQuantity(
 			UpdateProductPriceQuantityRequest request) {
 		return null;
@@ -89,8 +90,8 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 
 	@POST
 	@Path("/adjustQuantity")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public AdjustProductQuantityResponse adjustQuantity(
 			AdjustProductQuantityRequest request) {
 		return null;
@@ -98,15 +99,15 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 
 	@POST
 	@Path("/duplicateProduct")
-	@ProduceMime({ "application/xml", "application/json" })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public DuplicateProductResponse duplicateProduct(String productId) {
 		return null;
 	}
 
 	@POST
 	@Path("/addProductVariation")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public AddProductVariationResponse addProductVariation(
 			AddProductVariationRequest request) {
 		return null;
@@ -114,15 +115,16 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 
 	@DELETE
 	@Path("/removeProductVariation")
-	@ProduceMime({ "application/xml", "application/json" })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public RemoveProductVariationResponse removeProductVariation(
-			String productId, String variationId) {
+			@QueryParam(value="productId") String productId, 
+			@QueryParam(value="variationId") String variationId) {
 		return null;
 	}
 
 	@GET
 	@Path("/getProductVariation")
-	@ProduceMime({ "application/xml", "application/json" })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public GetProductVariationResponse getProductVariation(@QueryParam("productId")String productId,
 			@QueryParam("variationId")String variationId) {
 		return null;
@@ -130,8 +132,8 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 
 	@POST
 	@Path("/addProductImage")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public AddProductImageResponse addProductImage(
 			AddProductImageRequest request) {
 		return null;

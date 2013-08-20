@@ -13,14 +13,16 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<vendertool-version>1.0</vendertool-version>
-		<spring-version>3.0.7.RELEASE</spring-version>
+		<spring-version>3.2.4.RELEASE</spring-version>
 		<spring-security-version>3.1.4.RELEASE</spring-security-version>
+		<jersey-version>1.17.1</jersey-version>
+		<jackson-version>1.9.13</jackson-version>
 	</properties>
 
 	<!-- <build> <resources> <resource> <directory>${basedir}/src/main/resource</directory> 
 		<filtering>false</filtering> <includes> <include>VenderToolVersion.prop</include> 
 		</includes> </resource> </resources> </build> -->
-	<dependencyManagement>
+<!-- 	<dependencyManagement> -->
 
 		<dependencies>
 			<dependency>
@@ -29,50 +31,249 @@
 				<version>4.8.1</version>
 				<scope>test</scope>
 			</dependency>
+			
+			<!-- START - THIS IS THE WHOLE JERSEY -->
+			<dependency>
+				<groupId>org.glassfish.hk2.external</groupId>
+				<artifactId>asm-all-repackaged</artifactId>
+				<version>2.2.0-b14</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.hk2.external</groupId>
+				<artifactId>cglib</artifactId>
+				<version>2.2.0-b14</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>14.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.hk2</groupId>
+				<artifactId>hk2-api</artifactId>
+				<version>2.2.0-b14</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.hk2</groupId>
+				<artifactId>hk2-locator</artifactId>
+				<version>2.2.0-b14</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.hk2</groupId>
+				<artifactId>hk2-utils</artifactId>
+				<version>2.2.0-b14</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.annotation</groupId>
+				<artifactId>javax.annotation-api</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.hk2.external</groupId>
+				<artifactId>javax.inject</artifactId>
+				<version>2.2.0-b14</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.0.1</version>
+			</dependency>
+			<!-- *********** -->
+			
+			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>2.2.7</version>
+			</dependency>
+					<!-- start - Actual jersey from jersey.net uses 2.2.0 version, which is not available in maven -->
+			<dependency>
+				<groupId>org.glassfish.jersey.core</groupId>
+				<artifactId>jersey-client</artifactId>
+				<version>2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.jersey.core</groupId>
+				<artifactId>jersey-common</artifactId>
+				<version>2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.jersey.containers</groupId>
+				<artifactId>jersey-container-servlet</artifactId>
+				<version>2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.jersey.containers</groupId>
+				<artifactId>jersey-container-servlet-core</artifactId>
+				<version>2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.jersey.core</groupId>
+				<artifactId>jersey-server</artifactId>
+				<version>2.1</version>
+			</dependency>
+					<!-- end - Actual jersey from jersey.net uses 2.2.0 version, which is not available in maven -->
+			<dependency>
+				<groupId>org.osgi</groupId>
+				<artifactId>org.osgi.core</artifactId>
+				<version>4.2.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.hk2</groupId>
+				<artifactId>osgi-resource-locator</artifactId>
+				<version>1.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.persistence</groupId>
+				<artifactId>persistence-api</artifactId>
+				<version>1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>1.1.0.Final</version>
+			</dependency>			
+			<!-- END - THIS IS THE WHOLE JERSEY -->
+			
+			<!--
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>7.0</version>
+			</dependency>
+			-->
+			
+			<!--
 			<dependency>
 				<groupId>com.sun.jersey</groupId>
 				<artifactId>jersey</artifactId>
 				<version>0.8-ea</version>
 			</dependency>
+			-->
+			<!--
+			<dependency>
+				<groupId>com.sun.jersey.contribs</groupId>
+				<artifactId>jersey-spring</artifactId>
+				<version>${jersey-version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-bundle</artifactId>
+				<version>${jersey-version}</version>
+			</dependency>
+			
+			<dependency>
+                  <groupId>com.sun.jersey</groupId>
+                  <artifactId>jersey-core</artifactId>
+                  <version>${jersey-version}</version>
+            </dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-server</artifactId>
+				<version>${jersey-version}</version>
+			</dependency>
+
+			<dependency>
+                <groupId>com.sun.jersey.contribs</groupId>
+                <artifactId>jersey-multipart</artifactId>
+                <version>${jersey-version}</version>
+           </dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-core</artifactId>
+				<version>${jersey-version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-servlet</artifactId>
+				<version>${jersey-version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-json</artifactId>
+				<version>${jersey-version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>jersey-core</artifactId>
+						<groupId>com.sun.jersey</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			-->
+			<!--
+			<dependency>
+			 	<groupId>com.sun.jersey</groupId>
+			 	<artifactId>jersey-client</artifactId>
+			 	<version>${jersey-version}</version>
+			 	<exclusions>
+			 		<exclusion>
+			 			<artifactId>jersey-core</artifactId>
+			 			<groupId>com.sun.jersey</groupId>
+			 		</exclusion>
+			 	</exclusions>
+			</dependency>
+			-->
+			<!-- Google's JSON-POJO automatic mapping -->
+			<dependency>
+				<groupId>com.owlike</groupId>
+				<artifactId>genson</artifactId>
+				<version>0.98</version>
+			</dependency>
+			<!--
+			<dependency>
+			    <groupId>javax.ws.rs</groupId>
+			    <artifactId>javax.ws.rs-api</artifactId>
+			    <version>2.0</version>
+			    <scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.ws.rs</groupId>
+				<artifactId>jsr311-api</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+			-->
 			<dependency>
 				<groupId>commons-logging</groupId>
 				<artifactId>commons-logging</artifactId>
-				<version>1.1.1</version>
+				<version>1.1.3</version>
 			</dependency>
 			<dependency>
 				<groupId>javassist</groupId>
 				<artifactId>javassist</artifactId>
-				<version>3.8.0.GA</version>
+				<version>3.3</version>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.5.8</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-context</artifactId>
-				<version>${spring-version}</version>
+				<version>1.7.5</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-orm</artifactId>
 				<version>${spring-version}</version>
 			</dependency>
+			
+			
+			<!-- HIBERNATE - START  -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-core</artifactId>
-				<version>3.6.8.Final</version>
+				<version>4.2.4.Final</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-validator</artifactId>
-				<version>5.0.0.Final</version>
+				<version>5.0.1.Final</version>
 			</dependency>
+			<!-- HIBERNATE - END -->
+			
+			
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
-				<version>5.1.24</version>
+				<version>5.1.26</version>
 			</dependency>
 
 			<!-- Spring AOP dependency -->
@@ -81,9 +282,28 @@
 				<artifactId>cglib</artifactId>
 				<version>2.2</version>
 			</dependency> -->
+			
+			
+			
+			<!-- ************ SPRING START ************ -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
 				<version>${spring-version}</version>
 			</dependency>
 			<dependency>
@@ -93,15 +313,138 @@
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
 				<artifactId>spring-webmvc</artifactId>
 				<version>${spring-version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${spring-version}</version>
+			</dependency>
+						<!--
+						<dependency>
+							<groupId>org.springframework</groupId>
+							<artifactId>spring</artifactId>
+							<version>2.5.6.SEC03</version>
+						</dependency>
+						-->
+			<!-- ************ SPRING END ************ -->
+			
+			
+			<!-- ************ SPRING-SECURITY START ************ -->
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-core</artifactId>
+				<version>${spring-security-version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>spring-beans</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-aop</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-context</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-expression</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-web</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-core</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+	 
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>${spring-security-version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>spring-beans</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-aop</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-context</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-expression</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-web</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-core</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+	 
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${spring-security-version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>spring-beans</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-aop</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-context</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-expression</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-web</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>spring-core</artifactId>
+						<groupId>org.springframework</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- ************ SPRING-SECURITY END ************ -->
+			
+			
+			
+			
+			<!--
+			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
-				<version>3.0.1</version>
+				<version>3.1.0</version>
 				<scope>provided</scope>
 			</dependency>
+			-->
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>jstl</artifactId>
@@ -111,30 +454,33 @@
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-asl</artifactId>
-				<version>1.9.12</version>
+				<version>${jackson-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-xc</artifactId>
-				<version>1.9.12</version>
+				<version>${jackson-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-jaxrs</artifactId>
+				<version>${jackson-version}</version>
 			</dependency>
 			<dependency>
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
 				<version>1.2.17</version>
 			</dependency>
+			<!--
 			<dependency>
 				<groupId>cglib</groupId>
 				<artifactId>cglib</artifactId>
-				<version>2.2.2</version>
+				<version>3.0</version>
 			</dependency>
-			<dependency>
-				<groupId>javax</groupId>
-				<artifactId>javaee-api</artifactId>
-				<version>6.0</version>
-				<scope>provided</scope>
-			</dependency>
-<!-- 			<dependency>
+			-->
+			
+			<!--
+ 			<dependency>
 				<groupId>javassist</groupId>
 				<artifactId>javassist</artifactId>
 				<version>3.4.GA</version>
@@ -142,7 +488,7 @@
 			<dependency>
 				<groupId>javax.mail</groupId>
 				<artifactId>mail</artifactId>
-				<version>1.4.3</version>
+				<version>1.4.7</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.activation</groupId>
@@ -154,44 +500,33 @@
 				<artifactId>velocity</artifactId>
 				<version>1.5</version>
 			</dependency>
+			
 			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring</artifactId>
-				<version>2.5.6</version>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
 			</dependency>
 			
-			    <dependency>
-     	<groupId>com.sun.jersey</groupId>
-     	<artifactId>jersey-client</artifactId>
-     	<version>1.17.1</version>
-     </dependency>
-     
-     		<!-- Spring Security -->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>${spring-security-version}</version>
-		</dependency>
- 
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>${spring-security-version}</version>
-		</dependency>
- 
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>${spring-security-version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
+			<dependency>
+				<groupId>taglibs</groupId>
+				<artifactId>standard</artifactId>
+				<version>1.1.2</version>
+			</dependency>
+			
+			<!-- Added for DAL compile issue, just pulling in ejb & not j2ee -->
+			<dependency>
+				<groupId>javax.ejb</groupId>
+				<artifactId>ejb-api</artifactId>
+				<version>3.0</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.amazonaws</groupId>
+				<artifactId>aws-java-sdk</artifactId>
+				<version>1.5.4</version>
+			</dependency>
 		</dependencies>
-	</dependencyManagement>
+	<!--  </dependencyManagement> -->
 
 	<modules>
 		<module>../sharedtypes</module>
@@ -235,5 +570,4 @@
 
 		</plugins>
 	</build>
-
 </project>

@@ -1,30 +1,36 @@
 package com.vendertool.sitewebapp.common;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.glassfish.jersey.client.ClientConfig;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
 import com.vendertool.sharedtypes.core.HttpMethodEnum;
+import com.vendertool.sharedtypes.rnr.BaseRequest;
 
 public class RestServiceClientHelper {
 	
 	private static final Logger logger = Logger.getLogger(RestServiceClientHelper.class);
 	
-	public static ClientResponse invokeRestService(
+	public static Response invokeRestService(
 			String url,
-			Object obj, 
-			MultivaluedMap<String, String> queryParams, //name-value pair
+			BaseRequest obj, 
+			Map<String, String[]> queryParams, //name-value pair
 			MediaType mediaType, 
 			HttpMethodEnum httpMethod) {
 		
@@ -39,62 +45,59 @@ public class RestServiceClientHelper {
 					+ ": " + url + "\n\t Payload: \n\t" + obj);
 		}
 		
+		ClientConfig clientConfig = new ClientConfig();
+		clientConfig.register(JacksonJsonProvider.class);
+		Client client = ClientBuilder.newClient(clientConfig);
+		Entity<BaseRequest> entity = null;
+		WebTarget webtarget = client.target(url);
+				
 		try {
-			Client client = Client.create();
-			WebResource webResource = client.resource(url);
-			
-			if((queryParams != null) && (!queryParams.isEmpty())){
-				webResource.queryParams(queryParams);
-			}
-			
-			ClientResponse response = null;
-			
 			switch(httpMethod) {
 				case GET: 
-					response = webResource
+					if(queryParams != null) {
+						addQueryParams(webtarget, queryParams);
+					}
+					return webtarget.request(mediaType)
 									.accept(mediaType)
-									.type(mediaType)
-									.get(ClientResponse.class);
-					break;
+									.get();
+					
 				case POST: 
 					if(obj == null) {
 						logger.log(Level.ERROR, "Object to " + httpMethod + " to the service URI '" + 
 												url + "' is null");
+						break;
 					}
+				
+					entity = Entity.entity(obj, mediaType);
+					return webtarget.request(mediaType)
+							.accept(mediaType)
+							.post(entity, Response.class);
 					
-					response = webResource
-									.accept(mediaType)
-									.type(mediaType)
-									.post(ClientResponse.class, obj);
-					
-					break;
 				case PUT:
 					if(obj == null) {
 						logger.log(Level.ERROR, "Object to " + httpMethod + " to the service URI '" + 
 												url + "' is null");
+						break;
 					}
 					
-					response = webResource
-									.accept(mediaType)
-									.type(mediaType)
-									.put(ClientResponse.class, obj);
-					break;
+					entity = Entity.entity(obj, mediaType);
+					return webtarget.request(mediaType)
+							.accept(mediaType)
+							.put(entity, Response.class);
+					
 				case DELETE:
-					if(obj == null) {
-						logger.log(Level.ERROR, "Object to " + httpMethod + " to the service URI '" + 
-												url + "' is null");
+					if(queryParams != null) {
+						addQueryParams(webtarget, queryParams);
 					}
-					
-					response = webResource
-									.accept(mediaType)
-									.type(mediaType)
-									.delete(ClientResponse.class, obj);
-					break;
+					entity = Entity.entity(obj, mediaType);
+					return webtarget.request(mediaType)
+							.accept(mediaType)
+							.delete(Response.class);
 				default:
 					break;
 			}
 	 
-			return response;
+			return null;
 	 
 		  } catch (Exception e) {
 			  logger.log(Level.ERROR, e.getMessage(), e);
@@ -102,6 +105,16 @@ public class RestServiceClientHelper {
 		  }
 	}
 	
+	private static void addQueryParams(WebTarget webtarget,
+			Map<String, String[]> queryParams) {
+		Set<String> keys = queryParams.keySet();
+		for(String key : keys) {
+			Object[] values = (Object[]) queryParams.get(key);
+			webtarget.queryParam(key, values);
+		}
+		
+	}
+
 	public static String convertObjectToJson(Object obj) {
 		if(obj == null) {
 			return null;

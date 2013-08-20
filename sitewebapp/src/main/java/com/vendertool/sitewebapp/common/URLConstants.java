@@ -6,9 +6,7 @@ public interface URLConstants {
 	public static final String PORT_SEPERATOR = ":";
 	
 	public static final String WEB_SERVICE_PATH = "/services";
-	public static final String REGISTRATION_GET_ACCOUNT_PATH = "/getAccount";
-	public static final String REGISTRATION_REGISTER_PATH = "/registration/register";
-	public static final String REGISTRATION_CONFIRM_PATH = "/confirmaccount";
-	public static final String REGISTRATION_CONFIRM_SUCCESS_PATH = "/confirmaccountsuccess";
-	public static final String REGISTRATION_CONFIRM__FAILED_PATH = "/confirmaccountfailed";
+	public static final String WS_REGISTRATION_GET_ACCOUNT_PATH = "/registration/getAccount";
+	public static final String WS_REGISTRATION_REGISTER_PATH = "/registration/register";
+	public static final String WS_REGISTRATION_CONFIRM_PATH = "/registration/confirmRegistration";
 }

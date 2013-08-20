@@ -6,15 +6,25 @@
   <display-name>Vendertool Web Services Application</display-name>
   <servlet>
     <servlet-name>VendertoolServices</servlet-name>
-    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    <!-- <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class> -->
+    <!-- <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class> -->
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    
+    <!--
     <init-param>
       <param-name>com.sun.jersey.config.property.resourceConfigClass</param-name>
       <param-value>com.sun.jersey.api.core.PackagesResourceConfig</param-value>
     </init-param>
     <init-param>
       <param-name>com.sun.jersey.config.property.packages</param-name>
-      <param-value>com.vendertool.registration</param-value>
+      <param-value>com.vendertool;org.codehaus.jackson.jaxrs</param-value>
     </init-param>
+    -->
+    <init-param>
+      <param-name>jersey.config.server.provider.packages</param-name>
+      <param-value>com.vendertool;org.codehaus.jackson.jaxrs</param-value>
+    </init-param>
+    
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
@@ -46,14 +56,4 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
-	<!-- <listener>
-		<listener-class>com.vendertool.sitewebapp.common.VendertoolWebservicesInitializationListener</listener-class>
-	</listener> -->
-	
-<!-- 
-	<listener>
-		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-	</listener>
--->
 </web-app>

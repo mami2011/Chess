@@ -3,12 +3,12 @@ package com.vendertool.mercadolibreadapter.factory;
 import java.io.IOException;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.sun.jersey.api.client.ClientResponse;
 import com.vendertool.mercadolibreadapter.add.Item;
 import com.vendertool.sharedtypes.core.Amount;
 import com.vendertool.sharedtypes.core.HttpMethodEnum;
@@ -43,14 +43,14 @@ public class MercadolibreGetListingAdapter implements
 		communicatorVO.setMediaType(MediaType.APPLICATION_JSON_TYPE);
 		communicatorVO.setTargetURL(GET_LISTING_URL+itemId.getListingId());
 		MercadolibreCommunicator communicator = MercadolibreCommunicator.getInstance();
-		ClientResponse response = communicator.call(communicatorVO);
+		Response response = communicator.call(communicatorVO);
 		
 		if (response.getStatus() != 200) {
 			throw new RuntimeException("Failed : HTTP error code : "
 					+ response.getStatus());
 		}
 		
-		String output = (String) response.getEntity(String.class);
+		String output = response.readEntity(String.class);
 		Item responseItem = readItem(output);
 		
 		GetListingResponse getListingResponse = adaptToGetListingResponse(responseItem);

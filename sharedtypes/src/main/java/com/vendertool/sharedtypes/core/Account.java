@@ -99,4 +99,17 @@ public class Account {
 	public void setAccountConf(AccountConfirmation accountConf) {
 		this.accountConf = accountConf;
 	}
+	
+	/**
+	 * Use this with caution, do this only on the transient entity
+	 */
+	public void clearPassword() {
+		setPassword(null);
+		setConfirmPassword(null);
+		setPasswordSalt(null);
+	}
+	
+	public void clearAccountConfirmation() {
+		setAccountConf(null);
+	}
 }

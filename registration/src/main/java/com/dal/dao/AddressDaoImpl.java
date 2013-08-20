@@ -4,11 +4,7 @@
 package com.dal.dao;
 import java.util.List;
 
-import javax.jms.Session;
-
-import org.hibernate.FlushMode;
 import org.hibernate.SQLQuery;
-import org.hibernate.Transaction;
 
 import com.vendertool.common.dal.BaseDaoImpl;
 

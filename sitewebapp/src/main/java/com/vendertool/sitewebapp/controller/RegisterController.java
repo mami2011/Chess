@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sun.jersey.api.client.ClientResponse;
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.core.HttpMethodEnum;
 import com.vendertool.sharedtypes.exception.VTRuntimeException;
@@ -42,18 +41,22 @@ public class RegisterController {
 	@RequestMapping(value="register", method=RequestMethod.POST)
 	public String register(ModelMap modelMap, HttpServletRequest request,
 			@ModelAttribute("account") Account account) {
+		
 		logger.info("register POST controller invoked");
-//		Account account = (Account) modelMap.get("account");
+		if(account == null) {
+			throw new VTRuntimeException("Cannot register null account");
+		}
+		
 		RegisterAccountRequest registerAccountRequest = new RegisterAccountRequest();
 		registerAccountRequest.setAccount(account);
 		
 		String hostName = RestServiceClientHelper.getServerURL(request);
 		
 		String url = hostName + URLConstants.WEB_SERVICE_PATH + 
-				URLConstants.REGISTRATION_REGISTER_PATH;
+				URLConstants.WS_REGISTRATION_REGISTER_PATH;
 		
-		ClientResponse response = RestServiceClientHelper
-				.invokeRestService(url, registerAccountRequest, null, MediaType.APPLICATION_XML_TYPE,
+		Response response = RestServiceClientHelper
+				.invokeRestService(url, registerAccountRequest, null, MediaType.APPLICATION_JSON_TYPE,
 						HttpMethodEnum.POST);
 		
 		int responseCode = response.getStatus();
@@ -66,7 +69,7 @@ public class RegisterController {
 			throw new VTRuntimeException("Unable to register");
 		}
 		
-		RegisterAccountResponse registerAccountresponse = response.getEntity(RegisterAccountResponse.class);
+		RegisterAccountResponse registerAccountresponse = response.readEntity(RegisterAccountResponse.class);
 		if(registerAccountresponse.hasErrors()) {
 			logger.error("Registration failed with errors: " + registerAccountresponse.getErrors());
 			

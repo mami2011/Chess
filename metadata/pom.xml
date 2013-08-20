@@ -31,10 +31,21 @@
 			<artifactId>common</artifactId>
 			<version>${vendertool-version}</version>
 		</dependency>
+		<!--
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+     		<groupId>com.sun.jersey</groupId>
+       		<artifactId>jersey</artifactId>
+    	</dependency>
+    	<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+		</dependency>
+		-->
 	</dependencies>
 </project>

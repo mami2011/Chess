@@ -1,10 +1,14 @@
 package com.vendertool.common.email;
 
+import java.util.Locale;
+
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.mail.javamail.JavaMailSender;
 
 public abstract class VenderToolEmailService {
 
+	public static final boolean IS_HTML = true;
+	
 	private JavaMailSender mailSender;
 	private VelocityEngine velocityEngine;
 
@@ -24,5 +28,5 @@ public abstract class VenderToolEmailService {
 		this.velocityEngine = velocityEngine;
 	}
 
-	public abstract void sendEmail(EmailDataModel dataModel);
+	public abstract void sendEmail(EmailDataModel dataModel, Locale locale);
 }

@@ -9,6 +9,9 @@ target/
 /*/.project
 .classpath
 /*/.classpath
+*/.classpath
 *.classpath
+*/.settings/**
+.settings
 *.tmp
 *~

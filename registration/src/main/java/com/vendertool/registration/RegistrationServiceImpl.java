@@ -1,7 +1,10 @@
 package com.vendertool.registration;
 
 import java.util.List;
+import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -13,8 +16,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.vendertool.common.SessionIdGenerator;
+import com.vendertool.common.URLConstants;
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
 import com.vendertool.common.validation.ValidationUtil;
 import com.vendertool.registration.email.RegistrationEmailHelper;
@@ -43,8 +50,12 @@ import com.vendertool.sharedtypes.rnr.UpdateAccountResponse;
 public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		implements IRegistrationService {
 	
-	  @Context
-	  UriInfo uri;
+	@Context
+	UriInfo uri;
+	@Context
+    HttpServletRequest httpServletRequest;
+	@Context
+    HttpServletResponse httpServletResponse;
 	
 	private static final Logger logger = Logger.getLogger(RegistrationServiceImpl.class);
 	private CachedRegistrationAccountDatasource cachedDS;
@@ -64,18 +75,16 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 	public RegisterAccountResponse registerAccount(
 			RegisterAccountRequest request) {
 		
+		//check for nulls in the validator
 		RegisterAccountResponse response = new RegisterAccountResponse();
-		if(request == null) {
-			response.setStatus(ResponseAckStatusEnum.FAILURE);
-			response.addError(Errors.COMMON.NULL_ARGUMENT_PASSED);
-			return response;
-		}
-		
 		RegistrationValidator rv = new RegistrationValidator();
 		List<VTError> errors = rv.validate(request);
 		if(!errors.isEmpty()){
 			response.addErrors(errors);
 			if(request != null) {
+				if(request.getAccount() != null) {
+					request.getAccount().clearPassword();
+				}
 				response.setAccount(request.getAccount());
 			}
 			response.setSuccess(false);
@@ -83,39 +92,102 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		}
 		
 		Account account = request.getAccount();
-		account.setAccountStatus(AccountStatusEnum.NOT_VERIFIED);
+		setupAccountForRegistration(account);
 		
-		AccountConfirmation ac = new AccountConfirmation();
-		SessionIdGenerator sidg = SessionIdGenerator.getInstance();
-		String sessionId = sidg.generateSessionId(true);
-		Integer code = sidg.getRandomNumber(RANDOM_CODE_DIGIT_COUNT);
-		ac.setConfirmCode(code);
-		ac.setConfirmSessionId(sessionId);
-		account.setAccountConf(ac);
-		
-		//replace this with real DB call & shield it with try/catch
 		CachedRegistrationAccountDatasource.Status status = 
-					cachedDS.addAccount(account);
-		if(status == CachedRegistrationAccountDatasource.Status.NEW) {
-			response.setSuccess(true);
-			response.setAccount(account);
-			String baseurl = uri.getBaseUri().toString();
-			RegistrationEmailHelper.sendRegistrationEmail(account, baseurl);
-			return response;
+				CachedRegistrationAccountDatasource.Status.INVALID;
+		try {
+			String hashedPassword = saltHashPassword(account);
+			account.setPassword(hashedPassword);
+			account.setConfirmPassword(hashedPassword);
+			
+			//replace this with real DB call & shield it with try/catch
+			status = cachedDS.addAccount(account);
+			if(status == CachedRegistrationAccountDatasource.Status.NEW) {
+				response.setSuccess(true);
+				response.setAccount(account);
+				
+				Locale locale = getLocale();
+				String baseurl = getBaseUrl();
+		    	
+				RegistrationEmailHelper.getInstance().sendConfirmRegistrationEmail(
+						account, baseurl, locale);
+//				account.clearPassword();
+//				account.clearAccountConfirmation();
+				return response;
+			}
+		} catch (Exception ex) {
+			logger.debug(ex.getMessage(), ex);
+			cachedDS.removeAccount(account.getEmailId());
+//			account.clearPassword();
+//			account.clearAccountConfirmation();
 		}
 
 		response.setSuccess(false);
 		response.setAccount(account);
+		//Since we know it's going to be an error, clear the password
+//		account.clearPassword();
+//		account.clearAccountConfirmation();
 		
 		if(status == CachedRegistrationAccountDatasource.Status.EXISTING) {
+			logger.debug("Username: '" + account.getEmailId() + "' already exists");
 			response.addError(Errors.REGISTRATION.EMAIL_ALREADY_REGISTERED);
 			response.setStatus(ResponseAckStatusEnum.FAILURE);
 			return response;
 		}
 		
+		logger.debug("System internal error during registration of account '" + account.getEmailId() + "'.");
 		response.addError(Errors.SYSTEM.INTERNAL_ERROR);
 		response.setStatus(ResponseAckStatusEnum.FAILURE);
 		return response;
+	}
+
+	//Use this for new registration, email change & password change functionality
+	private void setupAccountForRegistration(Account account) {
+		account.setAccountStatus(AccountStatusEnum.NOT_VERIFIED);
+		
+		AccountConfirmation ac = new AccountConfirmation();
+		SessionIdGenerator sidg = SessionIdGenerator.getInstance();
+		
+		String passwordSalt = sidg.generateSessionId(false);
+		account.setPasswordSalt(passwordSalt);
+		
+		String sessionId = sidg.generateSessionId(true);
+		Integer code = sidg.getRandomNumber(RANDOM_CODE_DIGIT_COUNT);
+		ac.setConfirmCode(code);
+		ac.setConfirmSessionId(sessionId);
+		account.setAccountConf(ac);
+	}
+
+	private String saltHashPassword(Account account) {
+		WebApplicationContext webAppContext = ContextLoader.getCurrentWebApplicationContext();
+		MessageDigestPasswordEncoder encoder = (MessageDigestPasswordEncoder) webAppContext
+				.getBean("passwordEncoder");
+		
+		String salt = account.getPasswordSalt();
+		String rawpwd = account.getPassword();
+		
+		String hashedPwd = encoder.encodePassword(rawpwd, salt);
+		return hashedPwd;
+	}
+
+	private String getBaseUrl() {
+		String url = uri.getBaseUri().getHost();
+		int port = uri.getBaseUri().getPort();
+		String baseurl = URLConstants.HTTP + url + ((port > 0) ? (URLConstants.PORT_SEPARATOR + port) : "");
+		//clean up trailing '/'
+//		if(baseurl.charAt(baseurl.length()-1) == '/') {
+//			baseurl = baseurl.substring(0, baseurl.length()-1);
+//		}
+		return baseurl;
+	}
+
+	private Locale getLocale() {
+		Locale locale = httpServletRequest.getLocale();
+		if(locale == null) {
+			locale = Locale.US;
+		}
+		return locale;
 	}
 	
 	@POST
@@ -126,8 +198,8 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		ConfirmRegistrationResponse response = new ConfirmRegistrationResponse();
 
 		if (validationUtil.isNull(request)
-				|| (validationUtil.isNull(request.getEmailId()) || (validationUtil
-						.isEmpty(request.getEmailId())))) {
+				|| (validationUtil.isNull(request.getEmailId()) || 
+						(validationUtil.isEmpty(request.getEmailId())))) {
 			response.setStatus(ResponseAckStatusEnum.FAILURE);
 			response.addError(Errors.COMMON.NULL_ARGUMENT_PASSED);
 			return response;
@@ -143,7 +215,7 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		
 		AccountConfirmation accountConf = account.getAccountConf();
 		//Now increment the attempt count.
-		account.getAccountConf().incrementAttempts();
+		accountConf.incrementAttempts();
 		
 		if(accountConf.getConfirmationAttempts() > MAX_ACCOUNT_RETRY_ATTEMPTS) {
 			response.addError(Errors.REGISTRATION.MAX_ACCOUNT_RECONFIRM_ATTEMPTS_REACHED);
@@ -155,11 +227,12 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		if( (!sessionId.equals(request.getAccountConf().getConfirmSessionId())) || 
 				(!code.equals(accountConf.getConfirmCode())) ) {
 			
-			if(account.getAccountConf().getConfirmationAttempts() > MAX_ACCOUNT_RETRY_ATTEMPTS) {
+			if(accountConf.getConfirmationAttempts() > MAX_ACCOUNT_RETRY_ATTEMPTS) {
 				account.setAccountStatus(AccountStatusEnum.SUSPENDED);
 			}
 			cachedDS.updateAccount(account);
 			
+			//don't set the account to the response
 			response.addError(Errors.REGISTRATION.UNAUTHORIZED_ACCOUNT_CONFIRMATION);
 			response.setStatus(ResponseAckStatusEnum.FAILURE);
 			return response;
@@ -169,6 +242,13 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		cachedDS.updateAccount(account);
 		response.setSuccess(true);
 		response.setStatus(ResponseAckStatusEnum.SUCCESS);
+		
+		Locale locale = getLocale();
+		String baseurl = getBaseUrl();
+    	
+		RegistrationEmailHelper.getInstance().sendRegistrationCompleteEmail(
+				account, baseurl, locale);
+		
 		return response;
 	}
 	
@@ -183,27 +263,49 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		
 		Account account = cachedDS.getAccount(username);
 		GetAccountResponse response = new GetAccountResponse();
-		if(account != null) {
+		if(account == null) {
 			response.addError(Errors.REGISTRATION.ACCOUNT_NOT_FOUND);
+			return response;
 		}
 		
+//		account.clearPassword();
+//		account.clearAccountConfirmation();
+		response.setAccount(account);
+		response.setStatus(ResponseAckStatusEnum.SUCCESS);
 		return response;
 	}
 
+	@POST
+	@Path("/updateAccount")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public UpdateAccountResponse updateAccount(UpdateAccountRequest request) {
 		return null;
 	}
 
-	public CloseAccountResponse closeAccount(String username,
-			AccountClosureReasonCodeEnum reasonCode, String reasonMessage) {
+	@GET
+	@Path("/closeAccount")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public CloseAccountResponse closeAccount(@QueryParam(value="username") String username,
+			@QueryParam(value="reason") AccountClosureReasonCodeEnum reasonCode, 
+			@QueryParam(value="reasonmsg") String reasonMessage) {
 		return null;
 	}
 
+	@POST
+	@Path("/authorizeMarket")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public AuthorizeMarketResponse authorizeMarket(
 			AuthorizeMarketRequest request) {
 		return null;
 	}
 
+	@POST
+	@Path("/linkOtherSite")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public LinkOtherSiteResponse linkOtherSite(LinkOtherSiteRequest request) {
 		return null;
 	}

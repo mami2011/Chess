@@ -1,9 +1,10 @@
 package com.vendertool.signin;
 
-import javax.ws.rs.ConsumeMime;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.ProduceMime;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
 import com.vendertool.sharedtypes.rnr.SigninRequest;
@@ -17,16 +18,16 @@ public class SigninServiceImpl extends BaseVenderToolServiceImpl implements
 
 	@POST
 	@Path("/signin")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public SigninResponse signin(SigninRequest request) {
 		return null;
 	}
 
 	@POST
 	@Path("/signout")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public SignoutResponse signout(SignoutRequest request) {
 		return null;
 	}

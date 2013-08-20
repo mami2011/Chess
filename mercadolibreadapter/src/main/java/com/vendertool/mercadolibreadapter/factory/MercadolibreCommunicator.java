@@ -1,11 +1,17 @@
 package com.vendertool.mercadolibreadapter.factory;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.glassfish.jersey.client.ClientConfig;
+
 import com.vendertool.sharedtypes.core.HttpMethodEnum;
+import com.vendertool.sharedtypes.rnr.BaseRequest;
 
 public class MercadolibreCommunicator {
 	private static MercadolibreCommunicator uniqInstance;
@@ -20,25 +26,40 @@ public class MercadolibreCommunicator {
 		return uniqInstance;
 	}
 	
-	public ClientResponse call(MercadolibreCommunicatorVO communicatorVO){
-		WebResource resource = Client.create().resource(
-				communicatorVO.getTargetURL());
-		MediaType mediaType[] = new MediaType[1];
-		mediaType[0] = communicatorVO.getMediaType();
+	public Response call(MercadolibreCommunicatorVO communicatorVO){
+		ClientConfig clientConfig = new ClientConfig();
+		clientConfig.getClasses().add(JacksonJsonProvider.class);
+		Client client = ClientBuilder.newClient(clientConfig);
+		Entity<BaseRequest> entity = null;
+		
+		String url = communicatorVO.getTargetURL();
+		WebTarget resource = client.target(url);
+		MediaType mediaType = communicatorVO.getMediaType();
+		BaseRequest request = (BaseRequest) communicatorVO.getRequestObject();
 
-		ClientResponse response = null;
+		Response response = null;
 		if (communicatorVO.getMethodEnum() == HttpMethodEnum.GET) {
-			response = (ClientResponse) resource.accept(mediaType).get(
-					ClientResponse.class);
+			response = (Response) resource.request(mediaType).accept(mediaType).get();
 		} else if (communicatorVO.getMethodEnum() == HttpMethodEnum.POST) {
-			response = resource.post(ClientResponse.class,
-					communicatorVO.getRequestObject());
+			if(request == null) {
+				return null;
+			}
+			entity = Entity.entity(request, mediaType);
+			response = client.target(url)
+					.request(mediaType)
+					.accept(mediaType)
+					.post(entity, Response.class);
 		} else if (communicatorVO.getMethodEnum() == HttpMethodEnum.DELETE) {
-			response = resource.delete(ClientResponse.class,
-					communicatorVO.getRequestObject());
+			response = (Response) resource.request(mediaType).accept(mediaType).delete(Response.class);
 		} else if (communicatorVO.getMethodEnum() == HttpMethodEnum.PUT) {
-			response = resource.put(ClientResponse.class,
-					communicatorVO.getRequestObject());
+			if(request == null) {
+				return null;
+			}
+			entity = Entity.entity(request, mediaType);
+			response = client.target(url)
+					.request(mediaType)
+					.accept(mediaType)
+					.put(entity, Response.class);
 		}
 
 		return response;

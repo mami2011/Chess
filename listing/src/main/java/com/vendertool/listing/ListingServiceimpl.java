@@ -1,11 +1,12 @@
 package com.vendertool.listing;
 
-import javax.ws.rs.ConsumeMime;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.ProduceMime;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import com.vendertool.common.MarketCountryKey;
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
@@ -37,7 +38,7 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 
 	@GET
 	@Path("/getListing")
-	@ProduceMime({ "application/xml", "application/json" })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public GetListingResponse getListing(@QueryParam("listingId") String id) {
 		CountryEnum countryId = CountryEnum.ALL;
 		MarketEnum marketId = MarketEnum.MERCADO_LIBRE;
@@ -50,8 +51,8 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 	
 	@POST
 	@Path("/addListing")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public AddListingResponse addListing(AddListingRequest request) {
 		Listing listing = request.getListing();
 		IMarketListingAdapter adapter = ListingMarketAdapterRegistry.getInstance().getMarketListingAdapter(
@@ -66,7 +67,7 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 
 	@GET
 	@Path("/getListingPriceQuantity")
-	@ProduceMime({ "application/xml", "application/json" })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public GetListingPriceQuantityResponse getListingPriceQuantity(
 			@QueryParam("listingId") String listingId) {
 		return null;
@@ -74,23 +75,23 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 
 	@GET
 	@Path("/endListing")
-	@ProduceMime({ "application/xml", "application/json" })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public EndListingResponse endListing(@QueryParam("listingId") String listingId) {
 		return null;
 	}
 
 	@POST
 	@Path("/updateListing")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public UpdateListingResponse updateListing(UpdateListingRequest request) {
 		return null;
 	}
 
 	@POST
 	@Path("/updateListingPriceQuantity")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public UpdateListingPriceQuanityResponse updateListingPriceQuantity(
 			UpdateListingPriceQuantityRequest request) {
 		return null;
@@ -98,8 +99,8 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 
 	@POST
 	@Path("/adjustListingQuantity")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public AdjustListingQuantityResponse adjustListingQuantity(
 			AdjustListingQuantityRequest request) {
 		return null;
@@ -107,29 +108,29 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 
 	@GET
 	@Path("/duplicateListing")
-	@ProduceMime({ "application/xml", "application/json" })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public DuplicateListingResponse duplicateListing(@QueryParam("listingId") String listingId) {
 		return null;
 	}
 
 	@GET
 	@Path("/getAuctionBidCount")
-	@ProduceMime({ "application/xml", "application/json" })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public GetAuctionBidCountResponse getAuctionBidCount(@QueryParam("listingId") String listingId) {
 		return null;
 	}
 
 	@GET
 	@Path("/getAuctionHighBidder")
-	@ProduceMime({ "application/xml", "application/json" })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public GetAuctionHighBidderResponse getAuctionHighBidder(@QueryParam("listingId") String listingId) {
 		return null;
 	}
 
 	@POST
 	@Path("/verifyListing")
-	@ConsumeMime({ "application/xml", "application/json" })
-	@ProduceMime({ "application/xml", "application/json" })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public VerifyListingResponse verifyListing(VerifyListingRequest request) {
 		return null;
 	}

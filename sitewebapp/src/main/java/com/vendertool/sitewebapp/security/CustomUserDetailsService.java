@@ -1,8 +1,10 @@
 package com.vendertool.sitewebapp.security;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Level;
@@ -13,8 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.core.HttpMethodEnum;
 import com.vendertool.sharedtypes.rnr.GetAccountResponse;
@@ -34,20 +34,23 @@ public class CustomUserDetailsService implements UserDetailsService {
 			throws UsernameNotFoundException {
 		
 		if((username == null) || (username.trim().isEmpty())) {
-			throw new UsernameNotFoundException("Username cannot be empty");
+			UsernameNotFoundException ex =  new UsernameNotFoundException("Username cannot be empty");
+			logger.log(Level.DEBUG, "Username cannot be empty", ex);
+			throw ex;
 		}
 		
 		logger.log(Level.INFO, "Security's '" + getClass().getName() + "'invoked for username: '" + username + "'");
 		
 		HttpServletRequest request = ContainerBootstrapContext.getHttpServletRequest();
-		String hostName = request.getLocalName();
+		String hostName = RestServiceClientHelper.getServerURL(request);
+		
 		String url = hostName + URLConstants.WEB_SERVICE_PATH + 
-				URLConstants.REGISTRATION_GET_ACCOUNT_PATH;
+				URLConstants.WS_REGISTRATION_GET_ACCOUNT_PATH;
 		
-		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
-		queryParams.add(USERNAME_KEY, username);
+		Map<String, String[]> queryParams = new HashMap<String, String[]>();
+		queryParams.put(USERNAME_KEY, new String[]{username});
 		
-		ClientResponse response = RestServiceClientHelper
+		Response response = RestServiceClientHelper
 				.invokeRestService(url, null, queryParams, MediaType.APPLICATION_JSON_TYPE,
 						HttpMethodEnum.GET);
 		
@@ -59,10 +62,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		//HTTP error code 200
 		if(response.getStatus() != Response.Status.OK.getStatusCode()) {
-			throw new UsernameNotFoundException("Unable to fetch user details, web service HTTP response code not okay.");
+			UsernameNotFoundException ex = new UsernameNotFoundException("Unable to fetch user details, web service HTTP response code not okay.");
+			logger.log(Level.DEBUG, "Unable to fetch user details, web service HTTP response code not okay.", ex);
+			throw ex;
 		}
 		
-		GetAccountResponse getAccountresponse = response.getEntity(GetAccountResponse.class);
+		GetAccountResponse getAccountresponse = response.readEntity(GetAccountResponse.class);
 		if(getAccountresponse.hasErrors()) {
 			throw new UsernameNotFoundException(
 					"Web service response has errors, unable to fetch user details: "
@@ -71,7 +76,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		Account account = getAccountresponse.getAccount();
 		if(account == null) {
-			throw new UsernameNotFoundException("Unable to locate user");			
+			UsernameNotFoundException ex = new UsernameNotFoundException("Unable to locate user");
+			logger.log(Level.DEBUG, "Unable to locate user", ex);
+			throw ex;
 		}
 		
 		UserDetails userDetails = new CustomUserDetails(account);

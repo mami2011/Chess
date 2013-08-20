@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sun.jersey.api.client.ClientResponse;
 import com.vendertool.sharedtypes.core.AccountConfirmation;
 import com.vendertool.sharedtypes.core.HttpMethodEnum;
 import com.vendertool.sharedtypes.exception.VTRuntimeException;
@@ -56,11 +55,11 @@ public class ConfirmAccountController {
 			return "confirmaccount";
 		}
 		
-		String hostName = httprequest.getLocalName();
+		String hostName = RestServiceClientHelper.getServerURL(httprequest);
 		String url = hostName + URLConstants.WEB_SERVICE_PATH + 
-				URLConstants.REGISTRATION_CONFIRM_PATH;
+				URLConstants.WS_REGISTRATION_CONFIRM_PATH;
 		
-		ClientResponse response = RestServiceClientHelper
+		Response response = RestServiceClientHelper
 				.invokeRestService(url, confirmRegRequest, null, MediaType.APPLICATION_JSON_TYPE,
 						HttpMethodEnum.POST);
 		
@@ -74,11 +73,12 @@ public class ConfirmAccountController {
 			throw new VTRuntimeException("Unable to confirm registration");
 		}
 		
-		ConfirmRegistrationResponse confirmAccountresponse = response.getEntity(ConfirmRegistrationResponse.class);
+		
+		ConfirmRegistrationResponse confirmAccountresponse = response.readEntity(ConfirmRegistrationResponse.class);
 		if(confirmAccountresponse.hasErrors()) {
 			return "confirmaccountfailed";
 		}
 		
-		return "confirmaccountsuccess";
+		return "accounthub";
 	}
 }

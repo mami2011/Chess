@@ -5,14 +5,15 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.ProduceMime;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 public class BaseVenderToolServiceImpl implements IVenderToolService {
 
 	public static final String VERSION_RESOURCE = "../parent/VenderToolVersion.properties";
 	
 	@GET
-	@ProduceMime({ "application/xml", "application/json" })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public String getVersion() {
 		String path = "../parent/VenderToolVersion.properties";
 		InputStream stream = getClass().getResourceAsStream(path);

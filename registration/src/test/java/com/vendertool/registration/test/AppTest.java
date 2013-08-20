@@ -1,10 +1,12 @@
 package com.vendertool.registration.test;
 
+import java.util.Locale;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.vendertool.common.email.VenderToolEmailService;
-import com.vendertool.registration.email.RegistrationEmailDataModel;
+import com.vendertool.registration.email.ConfirmRegistrationEmailDataModel;
 
 
 /**
@@ -13,7 +15,7 @@ import com.vendertool.registration.email.RegistrationEmailDataModel;
 public class AppTest 
 {
     public static void main(String args[]){
-    	RegistrationEmailDataModel emailModel = new RegistrationEmailDataModel();
+    	ConfirmRegistrationEmailDataModel emailModel = new ConfirmRegistrationEmailDataModel();
     	emailModel.setToEmail("Girish.Kodaganti@gmail.com");
     	emailModel.setToName("Kodaganti");
     	emailModel.setFromName("VTool Team");
@@ -24,7 +26,7 @@ public class AppTest
                 new ClassPathXmlApplicationContext("Spring-Mail.xml");
     	
     	VenderToolEmailService emailService = (VenderToolEmailService) context.getBean("registrationService");
-    	emailService.sendEmail(emailModel);
+    	emailService.sendEmail(emailModel, Locale.US);
     	System.out.println("Done");
     }
 }

@@ -5,8 +5,9 @@ import java.util.Set;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.ProduceMime;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
 import com.vendertool.sharedtypes.core.MarketEnum;
@@ -20,7 +21,7 @@ public class MetadataServiceImpl extends BaseVenderToolServiceImpl implements
 
 	@GET
 	@Path("/getSupportedLocales")
-	@ProduceMime({ "application/xml", "application/json" })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public GetSupportedLocalesResponse getSupportedLocales() {
 		GetSupportedLocalesResponse response = new GetSupportedLocalesResponse();
 		Set<Locale> locales = MarketCountryConfig.getInstance().getSupportedLocales();
@@ -30,7 +31,7 @@ public class MetadataServiceImpl extends BaseVenderToolServiceImpl implements
 
 	@GET
 	@Path("/getSupportedCountries")
-	@ProduceMime({ "application/xml", "application/json" })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public GetSupportedCountriesResponse getSupportedCountries(@QueryParam("market") MarketEnum market) {
 		GetSupportedCountriesResponse response = new GetSupportedCountriesResponse();
 		

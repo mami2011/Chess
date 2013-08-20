@@ -19,25 +19,13 @@ public class RegistrationValidator implements com.vendertool.common.validation.V
 	private static ValidationUtil validationUtil = ValidationUtil.getInstance();
 	private static int MIN_PASSWORD_LENGTH = 8;
 	private static int MAX_PASSWORD_LENGTH = 25;
-	private static String PASSWORD_REGEX = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
+//	private static String PASSWORD_REGEX = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
 	
-//	private Validator validator;
+	//keep it simple for now (1 upper, 1 lower & a digit)
+	private static String PASSWORD_REGEX = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,24}$";
+	
 	
 	public RegistrationValidator() {
-//		ValidatorFactory validatorFactory = Validation.byProvider( HibernateValidator.class )
-//		        .configure()
-//		        .messageInterpolator(
-//		        	new ResourceBundleMessageInterpolator(
-//                        new AggregateResourceBundleLocator(
-//                                Arrays.asList(
-//                                        "errors" //, //This is the properties file in the resources dir
-//                                        //"otherMessages"
-//                                )
-//                        )
-//		        	)
-//		        )
-//		        .buildValidatorFactory();
-//		validator = validatorFactory.getValidator();
 	}
 	
 	public List<VTError> validate(Request _request) {
@@ -54,16 +42,6 @@ public class RegistrationValidator implements com.vendertool.common.validation.V
 		Account account = request.getAccount();
 		validateEmail(account.getEmailId(), errors);
 		validatePassword(account.getPassword(), account.getConfirmPassword(), errors);
-		
-//		//Validate using hibernate
-//		Set<ConstraintViolation<RegisterAccountRequest>> constraintViolations = validator.validate(request);
-//		for(ConstraintViolation<RegisterAccountRequest> cv : constraintViolations) {
-//			//TODO: figure out a way to add hibernate violations as VTErrors to the response
-//			cv.getMessage();
-//		}
-		
-		
-		
 		return errors;
 	}
 
