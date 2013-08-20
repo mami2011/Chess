@@ -1,0 +1,148 @@
+#wrap {
+	/*
+	background-color:#DFECFF;*/
+	background-color:#eee;
+}
+table.acct {
+	position:relative;
+	min-width:810px;
+	margin-top:30px;
+}
+
+
+table.acct td {
+	vertical-align:top;
+}
+table.acct td.c1 {
+	min-width:160px;
+}
+table.acct td.c2 {
+	padding-left:35px;
+	width:100%;
+}
+.c2 .msg {
+	min-height:67px;
+	border:1px solid #fff;
+}
+
+.acct .info-wrp {
+	min-height:600px;
+}
+
+.acct.contact .info {
+	background-color:#fff;
+	width:100%;
+}
+
+.acct .info .col1  {
+	min-width:140px;
+	padding-right:5px;
+}
+.acct .col1 label  {
+	color:#999;
+}
+.acct .info .col2  {
+	width:385px;
+}
+
+
+
+
+.list-group .list-group-item {
+	border:0;
+	border-bottom:1px solid #ddd;
+	border-top:1px solid #ddd;
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+	white-space:nowrap;
+	padding-right:0px;
+}
+
+		
+			
+
+.acct .info .col2 .btn {
+	margin-top:15px;
+}
+
+.acct .info.readonly input {
+	border:1px solid #fff;
+	background-color:#fff;
+	box-shadow:none;
+	
+	cursor:default;
+}
+
+.acct input.readonly  {
+	/** for email field on edit page **/
+	border:1px solid #fff;
+	background-color:#fff;
+	box-shadow:none;
+	cursor:default;
+}
+.acct .info .form-control {
+	font-size:14px;
+	height:30px;
+	display:block;
+}
+.acct .info .cntryMenu {
+	width:385px;
+	height:30px;
+	border:1px solid #ccc;
+}
+.acct .info td  {
+	font-size:16px;
+	font-weight:normal;
+	line-height:20px;
+	padding-bottom:10px;
+	white-space:nowrap;
+}
+.acct .info .col1  {
+	padding-top:5px;
+}
+.acct .info .sep  {
+	margin:15px 10px 10px 0;
+	border:0;
+	border-top:1px solid #999;
+	width:100%;
+}
+.acct label {
+	font-size:14px;
+	font-weight:normal;
+	min-width:115px;
+	white-space:nowrap;
+	color:#666;
+	float:left;
+}
+.acct .info hr {
+	display:inline-block;
+	height:1px;
+    border:0;
+    border-bottom:1px dotted #ccc;
+    margin:0;
+    padding:0;
+    position:relative;
+    width:300px;
+}
+
+.acct.contact .edit.info {
+	z-index:2;
+	left:500px;
+	display:none;
+}
+.acct.contact .edit.email {
+	z-index:2;
+	left:500px;
+	display:none;
+}
+
+.sub-cncl {
+	margin:15px 0 0 0;
+}
+
+
+
+
+
+
+
