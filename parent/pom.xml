@@ -215,6 +215,7 @@
 			 	</exclusions>
 			</dependency>
 			-->
+			
 			<!-- Google's JSON-POJO automatic mapping -->
 			<dependency>
 				<groupId>com.owlike</groupId>
