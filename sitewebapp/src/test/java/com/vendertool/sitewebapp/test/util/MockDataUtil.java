@@ -34,7 +34,7 @@ public class MockDataUtil {
 		
 		Account acct = new Account();
 		acct.setEmailId("ted@gmail.com");
-		acct.setContact(contact);
+		acct.setContactDetails(contact);
 		
 		
 		Map<FieldEnum, Field> fieldMap = AccountFieldBuilder.getFieldMap();

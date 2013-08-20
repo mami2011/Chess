@@ -11,7 +11,7 @@ public class Account {
 	private String password;
 	private String confirmPassword;
 	private String passwordSalt;
-	private ContactDetails contact;
+	private ContactDetails contactDetails;
 	private Date createDate;
 	private Date validTillDate;
 	private AccountRoleEnum role;
@@ -28,12 +28,12 @@ public class Account {
 		this.emailId = emailId;
 	}
 
-	public ContactDetails getContact() {
-		return contact;
+	public ContactDetails getContactDetails() {
+		return contactDetails;
 	}
 
-	public void setContact(ContactDetails contact) {
-		this.contact = contact;
+	public void setContactDetails(ContactDetails contact) {
+		this.contactDetails = contact;
 	}
 
 	public Date getCreateDate() {

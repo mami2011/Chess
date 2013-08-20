@@ -55,7 +55,7 @@ public class AccountFieldBuilder {
 		email.setValue(account.getEmailId());
 		password.setValue(account.getPassword());
 	
-		ContactDetails contact = account.getContact();
+		ContactDetails contact = account.getContactDetails();
 		if (contact != null) {
 			Address address = contact.getAddress();
 			if (address != null) {

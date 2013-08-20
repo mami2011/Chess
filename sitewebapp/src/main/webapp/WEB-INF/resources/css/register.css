@@ -79,7 +79,17 @@
 	font-size:16px;
 }
 
+#email-info {
+	display:none;
+}
 
+#pwd-info {
+	display:none;
+}
+
+#conf-pwd-info {
+	display:none;
+}
 
 
 

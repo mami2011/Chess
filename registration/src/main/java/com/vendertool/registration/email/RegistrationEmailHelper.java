@@ -45,9 +45,9 @@ public class RegistrationEmailHelper {
 		
     	ConfirmRegistrationEmailDataModel emailModel = new ConfirmRegistrationEmailDataModel();
     	emailModel.setToEmail(account.getEmailId());
-		if (validationUtil.isNotNull(account.getContact())
-				&& (validationUtil.isNotNull(account.getContact().getFirstName()))) {
-			emailModel.setToName(account.getContact().getFirstName());
+		if (validationUtil.isNotNull(account.getContactDetails())
+				&& (validationUtil.isNotNull(account.getContactDetails().getFirstName()))) {
+			emailModel.setToName(account.getContactDetails().getFirstName());
 		} else {
 			emailModel.setToName(account.getEmailId());
 		}
@@ -101,9 +101,9 @@ public class RegistrationEmailHelper {
 		
 		EmailDataModel emailModel = new EmailDataModel();
     	emailModel.setToEmail(account.getEmailId());
-		if (validationUtil.isNotNull(account.getContact())
-				&& (validationUtil.isNotNull(account.getContact().getFirstName()))) {
-			emailModel.setToName(account.getContact().getFirstName());
+		if (validationUtil.isNotNull(account.getContactDetails())
+				&& (validationUtil.isNotNull(account.getContactDetails().getFirstName()))) {
+			emailModel.setToName(account.getContactDetails().getFirstName());
 		} else {
 			emailModel.setToName(account.getEmailId());
 		}
