@@ -12,9 +12,9 @@ public class AccountHubController {
 	@RequestMapping(value="accounthub", method=RequestMethod.GET)
 	public String getAccountHub(ModelMap modelMap) {
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String name = auth.getName();
-	    modelMap.addAttribute("username", name);
+		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = "ted@gmail.com";//auth.getName();
+	    modelMap.addAttribute("email", name);
 
 		return "accounthub";
 	}

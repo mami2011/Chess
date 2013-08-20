@@ -19,9 +19,6 @@
 .reg.main {
 	min-height:200px;
 }
-.reg .ttl, .reg-cfm .ttl {
-	margin-top:15px;
-}
 .reg form > div {
 	margin-bottom:10px;
 }
