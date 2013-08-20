@@ -10,7 +10,7 @@
 <t:page title="VendorTool" angularAppName="accountApp">
 
 	<jsp:attribute name="header">
-		<t:header email="${accFieldSet.email.value}" currentPage="account"/>
+		<t:header email="${page.username}" currentPage="account"/>
 	</jsp:attribute>
 	
 	<jsp:attribute name="scripts">
@@ -21,7 +21,7 @@
 	<jsp:attribute name="inlineJs">
 		<script type="text/javascript">
 			accountApp.factory('Data', function() {
-				return ${acctFieldSetJson};
+				return ${pageJson};
 			});
 		</script>
 	</jsp:attribute>
@@ -31,65 +31,31 @@
 	</jsp:attribute>
 	
 	<jsp:body>
-		<div ng-controller="AccountCtrl" class="acct contact main input-group bx-rnd-shdw">
-			<h3 class="ttl">Account</h3>
-			
-			<div class="list-group">
-				<a href="#/contact" 			ng-class="getClass('/contact')" 			class="list-group-item">Contact info</a>
-				<a href="#/contact/:change"		ng-class="getClass('/contact/:change')" 	class="list-group-item">Change contact info</a>
-				<a href="#/email/:change"		ng-class="getClass('/email/:change')" 		class="list-group-item">Change email</a>
-				<a href="#/password/:change"	ng-class="getClass('/password/:change')"	class="list-group-item">Change password</a>
-			</div>
-			
-			<div ng-view class="info-wrp">
+		<table ng-controller="AccountCtrl" class="main acct contact input-group bx-rnd-shdw" cellpadding="0" cellspacing="0">
+			<tr>
+				<td class="c1">
+					<h3 class="ttl">Account</h3>
+					<div class="list-group">
+						<a href="#/contact" 		ng-class="getClass('/contact')" 		class="list-group-item">Contact info</a>
+						<a href="#/contact/:edit"	ng-class="getClass('/contact/:edit')" 	class="list-group-item">Change contact info</a>
+						<a href="#/email/:edit"		ng-class="getClass('/email/:edit')" 	class="list-group-item">Change email</a>
+						<a href="#/password/:edit"	ng-class="getClass('/password/:edit')"	class="list-group-item">Change password</a>
+					</div>
+				</td>
+				<td class="c2">
+					<div class="msg">
+						<div class="alert alert-success" style="display:none;">Contact information updated.</div>
+						
+					
+						<div class="alert alert-danger"  style="display:none;">Sorry, there's been an error.</div>
+					
+						
+					</div>
+					
+					<div ng-view class="info-wrp">
 				
 	
-				<%-- 
-				
-				<table id="info" class="info readonly" cellspacing="0" cellpadding="0">
-					<tr>
-						<td class="col1"><label>Email:</label></td>
-						<td class="col2"><input ng-model="account.emailId" class="form-control" readonly /></td>
-					</tr>
-					<tr>
-						<td class="col1"><label>Address 1:</label></td>
-						<td class="col2"><input ng-model="account.contact.address.addressLine1" class="form-control" readonly /></td>
-					</tr>
-					<tr>
-						<td class="col1"><label>Address 2:</label></td>
-						<td class="col2"><input ng-model="account.contact.address.addressLine2" class="form-control" readonly /></td>
-					</tr>
-					<tr>
-						<td class="col1"><label>City:</label></td>
-						<td class="col2"><input ng-model="account.contact.address.city" class="form-control" readonly /></td>
-					</tr>
-					<tr>
-						<td class="col1"><label>State:</label></td>
-						<td class="col2"><input ng-model="account.contact.address.state" class="form-control" readonly /></td>
-					</tr>
-					<tr>
-						<td class="col1"><label>Zip:</label></td>
-						<td class="col2"><input ng-model="account.contact.address.zip" class="form-control" readonly /></td>
-					</tr>
-					<tr>
-						<td class="col1"><label>Country:</label></td>
-						<td class="col2"><input ng-model="account.contact.address.country" class="form-control" readonly /></td>
-					</tr>
-					<tr>
-						<td class="col1"><label>Phone (work):</label></td>
-						<td class="col2"><input ng-model="account.contact.address.phones[0]" class="form-control" readonly /></td>
-					</tr>
-					<tr>
-						<td class="col1"><label>Phone (mobile):</label></td>
-						<td class="col2"><input ng-model="account.contact.address.phones[1]" class="form-control" readonly /></td>
-					</tr>
-					<tr>
-						<td class="col1"><label>Phone (home):</label></td>
-						<td class="col2"><input ng-model="account.contact.address.phones[2]" class="form-control" readonly /></td>
-					</tr>
-					
-				</table>
-				--%>
+			
 				
 				<%-- 
 				<!--===================================
@@ -161,11 +127,10 @@
 				
 				
 				--%>
-			</div><!-- end of class="info-wrp" -->
-			  
-			
-			
-		</div><!-- end of ng-controller="ProfileCtrl" -->
+				</div><!-- end of class="info-wrp" -->
+			  </td>
+			</tr>
+		</table><!-- end of ng-controller="ProfileCtrl" -->
 	</jsp:body>
 
 </t:page>

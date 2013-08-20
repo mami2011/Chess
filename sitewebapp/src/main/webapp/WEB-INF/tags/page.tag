@@ -26,7 +26,7 @@ Variables
 <!doctype html>
 <c:choose>
 	<c:when test="${!empty angularAppName}">
-		<html ng-app="${angularAppName}">
+		<html ng-app="${angularAppName}" ng-cloak>
 	</c:when>
 	<c:otherwise>
 		<html>

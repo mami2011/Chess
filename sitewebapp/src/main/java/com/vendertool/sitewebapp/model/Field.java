@@ -10,9 +10,8 @@ public class Field {
 	private FieldEnum type;
 	private String name;
 	private String value;
-	private List<FieldOption> options = new ArrayList<FieldOption>();
-	private boolean hasError;
-	private List<String> errorMessages = new ArrayList<String>();
+	private List<FieldOption> options;
+	private List<Error> errors;
 	
 	public Field() {
 	}
@@ -43,27 +42,29 @@ public class Field {
 		this.options = options;
 	}
 	public void addOption(FieldOption option) {
+		if (this.options == null) {
+			this.options = new ArrayList<FieldOption>();
+		}
 		this.options.add(option);
 	}
-	
-	public boolean isHasError() {
-		return hasError;
+
+	public List<Error> getErrors() {
+		return errors;
 	}
-	public void setHasError(boolean hasError) {
-		this.hasError = hasError;
+
+	public void setErrors(List<Error> errors) {
+		this.errors = errors;
 	}
-	public List<String> getErrorMessages() {
-		return errorMessages;
-	}
-	public Field setErrorMessages(List<String> errorMessages) {
-		this.errorMessages = errorMessages;
-		return this;
-	}
-	public Field addErrorMessage(String errorMessage) {
-		this.errorMessages.add(errorMessage);
-		return this;
+	public void addError(Error error) {
+		if (this.errors == null) {
+			this.errors = new ArrayList<Error>();
+		}
+		this.errors.add(error);
 	}
 	
+	
+	
+
 	
 }
 

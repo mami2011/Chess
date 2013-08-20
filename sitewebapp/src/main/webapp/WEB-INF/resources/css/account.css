@@ -3,49 +3,51 @@
 	background-color:#DFECFF;*/
 	background-color:#eee;
 }
-.acct {
+table.acct {
 	position:relative;
 	min-width:810px;
 	margin-top:30px;
-	
 }
-.acct.contact .list-group {
-	width:170px;
-	float:left;
-	
 
+
+table.acct td {
+	vertical-align:top;
+}
+table.acct td.c1 {
+	min-width:160px;
+}
+table.acct td.c2 {
+	padding-left:35px;
+	width:100%;
+}
+.c2 .msg {
+	min-height:67px;
+	border:1px solid #fff;
 }
 
 .acct .info-wrp {
-	position:relative;
-	float:left;
-	min-width:500px;
-	min-height:680px;
-	margin-left:40px;
-	
-	/*
-	overflow:hidden;
-	*/
-
+	min-height:600px;
 }
 
 .acct.contact .info {
-	position:absolute;
-	top:0;
-	left:0;
 	background-color:#fff;
-	z-index:1;
-	width:465px;
-
+	width:100%;
 }
 
 .acct .info .col1  {
-	width:130px;
-	padding-right:10px;
+	min-width:140px;
+	padding-right:5px;
 }
-.acct .info .col1 label  {
-	color:#999; important!
+.acct .col1 label  {
+	color:#999;
 }
+.acct .info .col2  {
+	width:385px;
+}
+
+
+
+
 .list-group .list-group-item {
 	border:0;
 	border-bottom:1px solid #ddd;
@@ -58,9 +60,7 @@
 
 		
 			
-.acct .info .col2  {
-	width:345px;
-}
+
 .acct .info .col2 .btn {
 	margin-top:15px;
 }
@@ -85,12 +85,20 @@
 	height:30px;
 	display:block;
 }
+.acct .info .cntryMenu {
+	width:385px;
+	height:30px;
+	border:1px solid #ccc;
+}
 .acct .info td  {
 	font-size:16px;
 	font-weight:normal;
 	line-height:20px;
 	padding-bottom:10px;
 	white-space:nowrap;
+}
+.acct .info .col1  {
+	padding-top:5px;
 }
 .acct .info .sep  {
 	margin:15px 10px 10px 0;

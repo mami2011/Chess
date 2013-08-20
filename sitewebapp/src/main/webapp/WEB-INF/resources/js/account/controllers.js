@@ -7,57 +7,72 @@ all the function params as strings in same order.
 ********************/
 accountApp.controller('AccountCtrl', ['$scope', '$http', '$routeParams', '$location', 'Data', function($scope, $http, $routeParams, $location, Data) {
 	
-	$scope.acctFieldSet = Data;
-	$scope.acctFieldSetEdit = angular.copy($scope.acctFieldSet);
-	
+	$scope.page = Data;
+	$scope.pageEdit = angular.copy($scope.page);
+
 	/** Do something when param is 'edit'
 	if ($routeParams.edit) {
-		$('#info').removeClass('readonly');
+		//$('#info').removeClass('readonly');
+		
+		// remove page messages
+		$scope.$parent.success = false;
+		$scope.$parent.error = false;
 	}**/
 	
 	$scope.save = function() {
 		
-		//alert($scope.acctFieldSetEdit.email.value);
-		
-		//$http.post('profile/save', {"email":{"name":"email", "value":"opopo", "errors":["err1","err2"]}})
-		//$http.post('profile/save', {"email":{"name":"email", "value":"opopo", "errors":["err1", "err2"]}})
-		$http.post('account/save', $scope.acctFieldSetEdit).
-			success(function (errors) {
+		$http.post('account/save', $scope.pageEdit).
+			success(function (data, status, headers, config) {
+				$scope.updateModel(data);
+			}).
+			error(function(data, status, headers, config) {
 				
-				
-				$scope.updateModel();
-				//$scope.acctFieldSet = $scope.acctFieldSetEdit;
-				
-				//$scope.acctFieldSet.addressLine1 = $scope.acctFieldSetEdit.addressLine1;
-				
-				//$scope.acctFieldSet = $scope.acctFieldSetEdit;
-				
-				//acctFieldSet = angular.copy($scope.acctFieldSetEdit);
-				
-				//acctFieldSet.addressLine1.value = "xxxxxxx";
-				
-				//alert('xx' + $scope.acctFieldSet.addressLine1.value);
 			});
 		
-		
-		//$scope.acctFieldSet = angular.copy(acctFieldSet);
+
 	};
 	
-	$scope.updateModel = function() {
-		
-		for(var key in $scope.acctFieldSetEdit) {
-	        if ($scope.acctFieldSetEdit.hasOwnProperty(key)) {
-	            $scope.acctFieldSet[key] = $scope.acctFieldSetEdit[key];
+	$scope.updateModel = function(pageEdit) {
+
+		// Update the model
+		for(var key in pageEdit) {
+	        if (pageEdit.hasOwnProperty(key)) {
+	            $scope.page[key] = pageEdit[key];
 	        }
 	    }
-		//$scope.acctFieldSet.addressLine1 = angular.copy(acctFieldSetEdit.addressLine1);
+	
 		
-    	//$scope.acctFieldSet = angular.copy(acctFieldSetEdit);
-    	$location.path('account'); // path not hash
+		//alert("xxxx:" + pageEdit.fieldMap.ADDRESS_LINE_1.errors[0].message);
+		
+		/*
+		// Check for field errors
+		var hasFieldError = false;
+		for (var key in pageEdit.fieldMap) {
+			var field = pageEdit.fieldMap[key];
+			if (field.errors) {
+				//alert('there is an error');
+			}
+			else {
+				//alert(field.errors);
+			}
+		}*/
+		
+		
+		/*
+		// Take user to contact info page if no errors
+		if (!data.errors) {
+			$location.path('account'); // path not hash
+			
+			// Show success message on contact info page
+	    	$('.alert-success').show().delay(1500).fadeOut(300);
+		}
+		else {
+			$('.alert-danger').show();
+		}*/
   	};
 
 	$scope.reset = function() {
-    	$scope.acctFieldSetEdit = angular.copy($scope.acctFieldSet);
+    	$scope.pageEdit = angular.copy($scope.page);
     	$location.path('account'); // path not hash
   	};
   	

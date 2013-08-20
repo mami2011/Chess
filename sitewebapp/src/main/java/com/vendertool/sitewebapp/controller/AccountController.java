@@ -1,5 +1,7 @@
 package com.vendertool.sitewebapp.controller;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -9,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.vendertool.sitewebapp.model.AccountFieldSet;
+import com.vendertool.sitewebapp.common.FieldEnum;
+import com.vendertool.sitewebapp.model.Error;
+import com.vendertool.sitewebapp.model.Field;
+import com.vendertool.sitewebapp.model.Page;
 import com.vendertool.sitewebapp.test.util.MockDataUtil;
 
 @Controller
@@ -18,18 +23,18 @@ public class AccountController {
 	
 
 	@RequestMapping(value = "account", method = RequestMethod.GET)
-	public String getAccount(ModelMap modelMap) {
+	public String getAccountPage(ModelMap modelMap) {
 		logger.info("account GET controller invoked");
 		
-		AccountFieldSet acctFieldSet = MockDataUtil.getAccountFieldSet();
+		Page page = MockDataUtil.getAccountPage();
 
-		modelMap.put("acctFieldSet", acctFieldSet);
+		modelMap.put("page", page);
 		
 		// Add JSON for Angular
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			String acctFieldSetJson= mapper.writeValueAsString(acctFieldSet);
-			modelMap.put("acctFieldSetJson", acctFieldSetJson);
+			String pageJson= mapper.writeValueAsString(page);
+			modelMap.put("pageJson", pageJson);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -38,17 +43,26 @@ public class AccountController {
 		return "account";
 	}
 	
-	@RequestMapping(value="account/save", method=RequestMethod.POST)
-	public @ResponseBody AccountFieldSet saveAccount(@RequestBody AccountFieldSet acctFieldSet) {
-		
 
-		System.err.println("Address1: " + acctFieldSet.getAddressLine1().getValue());
-		System.err.println("Country: " + acctFieldSet.getCountry().getValue());
+	@RequestMapping(value="account/save", method=RequestMethod.POST)
+	public @ResponseBody Page saveAccount(@RequestBody Page page) {
 		
-		return acctFieldSet;
+		System.err.println(page.getFieldMap().get(FieldEnum.ADDRESS_LINE_1).getValue());
+		
+		Error error = new Error();
+		error.setMessage("Please enter a valid address");
+		page.getFieldMap().get(FieldEnum.ADDRESS_LINE_1).addError(error);
+		
+		Field f = page.getFieldMap().get(FieldEnum.ADDRESS_LINE_1);
+		List<Error> errors = f.getErrors();
+		
+		System.err.println("===" + page.getFieldMap().get(FieldEnum.ADDRESS_LINE_1).getErrors().size());
+		System.err.println(errors.get(0).getMessage());
+
+		
+		return page;
 	}
-	
-		
+
 	
 	
 	

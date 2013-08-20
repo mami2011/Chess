@@ -138,6 +138,7 @@ html, body {
 }
 
 
+
 .main {
 	max-width:840px;
 	min-height:400px;
@@ -146,7 +147,7 @@ html, body {
 }
 .main .ttl {
 	padding:0;
-	margin:0 0 15px 0;
+	margin:0 0 40px 0;
 	font-weight:normal;
 	font-size:26px;
 	color:#FF8C19
@@ -176,16 +177,22 @@ html, body {
 	padding:20px 40px 45px 40px;
 }
 
+.err label {
+	color:red !important;
+}
 .err input {
 	border:1px solid red;
 }
 .err .err-msg {
-	display:inline-block;
+	display:block;
 	visibility:visible;
+	/**
 	background-color:#FFF391;
-	color:#000;
+	color:#000;**/
+	color:red;
+	font-size:13px;
 	white-space:nowrap;
-	padding:3px 5px;
+	padding:2px 5px;
 }
 
 /**
@@ -241,6 +248,7 @@ Buttons
 	margin-left:20px;
 	display:inline-block;
 }
+
 
 
 			

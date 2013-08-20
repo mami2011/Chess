@@ -1,7 +1,9 @@
 package com.vendertool.sitewebapp.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.core.Address;
@@ -10,7 +12,7 @@ import com.vendertool.sharedtypes.core.CountryEnum;
 import com.vendertool.sitewebapp.common.FieldEnum;
 
 public class AccountFieldSet {
-
+	
 	private Field email = new Field().setType(FieldEnum.EMAIL);
 	private Field password = new Field().setType(FieldEnum.PASSWORD);
 	private Field passwordConfirm = new Field().setType(FieldEnum.PASSWORD_CONFIRM);
@@ -23,7 +25,22 @@ public class AccountFieldSet {
 	private Field phoneWork = new Field().setType(FieldEnum.PHONE_WORK);
 	private Field phoneMobile = new Field().setType(FieldEnum.PHONE_MOBILE);
 	private Field phoneHome = new Field().setType(FieldEnum.PHONE_HOME);
+	private boolean isErrors;
 	
+	private List<Field> allFields = new ArrayList<Field>() {{
+		this.add(email);
+		this.add(password);
+		this.add(passwordConfirm);
+		this.add(addressLine1);
+		this.add(addressLine2);
+		this.add(city);
+		this.add(state);
+		this.add(zip);
+		this.add(country);
+		this.add(country);
+		this.add(phoneMobile);
+		this.add(phoneHome);
+	}};
 
 	public AccountFieldSet() {
 		for (CountryEnum c : CountryEnum.values()) {
@@ -116,10 +133,17 @@ public class AccountFieldSet {
 	public void setPhoneHome(Field phoneHome) {
 		this.phoneHome = phoneHome;
 	}
+
+	public boolean isErrors() {
+		return isErrors;
+	}
+
+	public void setErrors(boolean isErrors) {
+		this.isErrors = isErrors;
+	}
+
 	
 	
-
-
 	
 		
 }
