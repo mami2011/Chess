@@ -45,11 +45,7 @@
 				<td class="c2">
 					<div class="msg">
 						<div class="alert alert-success" style="display:none;">Contact information updated.</div>
-						
-					
 						<div class="alert alert-danger"  style="display:none;">Sorry, there's been an error.</div>
-					
-						
 					</div>
 					
 					<div ng-view class="info-wrp">

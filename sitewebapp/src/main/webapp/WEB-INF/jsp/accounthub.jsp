@@ -18,10 +18,9 @@
 		<div class="reg main input-group bx-rnd-shdw">
 	        <h3 class="ttl">Account Hub</h3>
 	        <div class="msg">
-	            Hello ${email}!
+	            Hello ${username}!
 	        </div>
 	    </div>
 	</jsp:body>
 </t:page>
-
 

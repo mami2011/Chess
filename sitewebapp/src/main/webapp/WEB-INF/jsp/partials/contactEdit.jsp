@@ -13,8 +13,8 @@
 		<td class="col2">
 			<input ng-model="pageEdit.fieldMap.ADDRESS_LINE_1.value" class="form-control" />
 			<div class="err-msg">
-				<span ng-repeat="msg in pageEdit.fieldMap.ADDRESS_LINE_1.errorMessages">
-					{{msg}}<br/>
+				<span ng-repeat="error in page.fieldMap.ADDRESS_LINE_1.errors">
+					{{error.message}}<br/>
 				</span>
 			</div>				
 		</td>
