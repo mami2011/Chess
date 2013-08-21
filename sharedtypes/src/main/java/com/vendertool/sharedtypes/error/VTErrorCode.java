@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
@@ -40,8 +41,10 @@ public abstract class VTErrorCode implements Serializable{
 		addErrorCode(code);
 	}
 	
+	@JsonIgnore
 	public abstract Set<String> getCachedErrorCodes() ;
 
+//	@JsonValue
 	public String getErrorCode() {
 		return errorCode;
 	}

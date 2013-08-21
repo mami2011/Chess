@@ -56,6 +56,16 @@ public class ValidationUtil {
 	}
 	
 	/**
+	 * Return if the string is null or empty
+	 * 
+	 * @param value
+	 * @return
+	 */
+	public boolean isNullOrEmpty(String value) {
+		return (isNull(value) || (isEmpty(value)));
+	}
+	
+	/**
 	 * Checks if the Decimal 'value' is greater or equal to the 'min-value'
 	 * 
 	 * Use this for all Number types by converting all Number types like Integer, Long, Double, Float, etc to BigDecimal

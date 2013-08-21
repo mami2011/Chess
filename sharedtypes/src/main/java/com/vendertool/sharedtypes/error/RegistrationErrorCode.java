@@ -55,6 +55,10 @@ public class RegistrationErrorCode extends VTErrorCode implements Serializable{
 			"INVALID_PASSWORD");
 	public static VTErrorCode PASSWORD_CONFIRM_PASSWORD_MISMATCH = new RegistrationErrorCode(
 			"PASSWORD_CONFIRM_PASSWORD_MISMATCH");
+	public static VTErrorCode MISSING_FIRSTNAME = new RegistrationErrorCode(
+			"MISSING_FIRSTNAME");
+	public static VTErrorCode MISSING_LASTNAME = new RegistrationErrorCode(
+			"MISSING_LASTNAME");
 	public static VTErrorCode ACCOUNT_NOT_FOUND = new RegistrationErrorCode(
 			"ACCOUNT_NOT_FOUND");
 	public static VTErrorCode MAX_ACCOUNT_RECONFIRM_ATTEMPTS_REACHED = new RegistrationErrorCode(

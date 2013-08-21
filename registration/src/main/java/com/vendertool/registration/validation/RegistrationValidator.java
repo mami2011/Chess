@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import com.vendertool.common.validation.EmailRegexValidator;
 import com.vendertool.common.validation.ValidationUtil;
 import com.vendertool.sharedtypes.core.Account;
+import com.vendertool.sharedtypes.core.ContactDetails;
 import com.vendertool.sharedtypes.error.Errors;
 import com.vendertool.sharedtypes.error.VTError;
 import com.vendertool.sharedtypes.rnr.RegisterAccountRequest;
@@ -33,16 +34,34 @@ public class RegistrationValidator implements com.vendertool.common.validation.V
 		
 		List<VTError> errors = new ArrayList<VTError>();
 		
-		if(validationUtil.isNull(request) || validationUtil.isNull(request.getAccount())) {
+		if (validationUtil.isNull(request)
+				|| validationUtil.isNull(request.getAccount())
+				|| validationUtil.isNull(request.getAccount()
+						.getContactDetails())) {
 			logger.debug("NULL value passed to register an account");
 			errors.add(Errors.COMMON.NULL_ARGUMENT_PASSED);
 			return errors;
 		}
 		
 		Account account = request.getAccount();
+		ContactDetails cd = account.getContactDetails();
+		validateName(cd.getFirstName(), cd.getLastName(), errors);
 		validateEmail(account.getEmailId(), errors);
 		validatePassword(account.getPassword(), account.getConfirmPassword(), errors);
 		return errors;
+	}
+
+	private void validateName(String firstName, String lastName, List<VTError> errors) {
+		//combine both errors together before returning
+		if(validationUtil.isNullOrEmpty(firstName)) {
+			errors.add(Errors.REGISTRATION.MISSING_FIRSTNAME);
+		}
+		
+		if(validationUtil.isNullOrEmpty(lastName)) {
+			errors.add(Errors.REGISTRATION.MISSING_LASTNAME);
+		}
+		
+		return;
 	}
 
 	private void validatePassword(String password, String confirmPassword, List<VTError> errors) {

@@ -121,4 +121,16 @@ public class RegistrationErrors {
 			"Unauthorized account confirmation attempt", 
 			VTErrorSeverityEnum.ERROR, 
 			DOMAIN);
+	
+	public VTError MISSING_FIRSTNAME = new VTError(
+			RegistrationErrorCode.MISSING_FIRSTNAME, 
+			"First name is required", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	
+	public VTError MISSING_LASTNAME = new VTError(
+			RegistrationErrorCode.MISSING_LASTNAME, 
+			"Last name is required", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
 }
