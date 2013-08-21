@@ -76,7 +76,7 @@ public class ProfileController {
 		
 		// If errorMap is null, then update is successful
 		Map<String, VTError> errorMap = updateAccount(acct);
-		//profile.put("error", errorMap);
+		profile.put("error", errorMap);
 		
 		return profile;
 	}
