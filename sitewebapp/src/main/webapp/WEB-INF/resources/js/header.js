@@ -11,11 +11,11 @@
 	}
 })();
 
-// Account dropdown menu
+// Profile dropdown menu
 (function() {
-	var _menu = $('#accountMenu');
+	var _menu = $('#profileMenu');
 	
-	$('#accountBtn').bind('click', function(evt) {
+	$('#profileBtn').bind('click', function(evt) {
 		if (_menu.is(':visible')) {
 			_menu.hide();
 		}
@@ -26,7 +26,7 @@
 	});
 
 	$('body').bind('click', function(evt) {
-		if (_menu.is(':visible') && evt.target.id!=='accountMenu') {
+		if (_menu.is(':visible') && evt.target.id!=='profileMenu') {
 			_menu.hide();
 		}
 	});

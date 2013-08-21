@@ -46,10 +46,10 @@ Attributes
 				</c:when>
 				<c:otherwise>
 					<div class="user inline">
-						<a id="accountBtn" href="javascript:;">${email} <b class="arw"></b></a>
+						<a id="profileBtn" href="javascript:;">${email} <b class="arw"></b></a>
 						
-						<ul id="accountMenu" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-						  <li><a tabindex="-1" href="account">Account</a></li>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+						  <li><a tabindex="-1" href="profile">Profile</a></li>
 						  <li class="divider"></li>
 						  <li><a tabindex="-1" href="signout">Sign-out</a></li>
 						</ul>
