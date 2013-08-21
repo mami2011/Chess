@@ -136,15 +136,24 @@ public class ProfileController {
 	}
 	
 	private Map<String, VTError> updateAccount(Account account) {
-		VTError error1 = new VTError();
-		error1.setErrorCode(CommonErrorCode.NULL_ARGUMENT_PASSED);
-		error1.setErrorMessage("Error is NULL_ARGUMENT_PASSED");
-		VTError error2 = new VTError();
-		error2.setErrorCode(SystemErrorCode.INTERNAL_DATABASE_DOWN);
-		error2.setErrorMessage("Error is INTERNAL_DATABASE_DOWN");
-		Map<String, VTError> errorMap = new HashMap<String, VTError>();
-		errorMap.put(error1.getErrorCode().getErrorCode(), error1);
-		errorMap.put(error2.getErrorCode().getErrorCode(), error2);
+		
+		Map<String, VTError> errorMap = null;
+		
+		String addressLine1 = account.getContactDetails().getAddress().getAddressLine1();
+		
+		if (addressLine1 == null || addressLine1.length() == 0) {
+			VTError error1 = new VTError();
+			error1.setErrorCode(CommonErrorCode.NULL_ARGUMENT_PASSED);
+			error1.setErrorMessage("Error is NULL_ARGUMENT_PASSED");
+			//VTError error2 = new VTError();
+			//error2.setErrorCode(SystemErrorCode.INTERNAL_DATABASE_DOWN);
+			//error2.setErrorMessage("Error is INTERNAL_DATABASE_DOWN");
+			
+			errorMap = new HashMap<String, VTError>();
+			errorMap.put(error1.getErrorCode().getErrorCode(), error1);
+			//errorMap.put(error2.getErrorCode().getErrorCode(), error2);
+		}
+		
 		
 		return errorMap;
 	}

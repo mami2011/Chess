@@ -23,10 +23,9 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 		
 	//}
 	
+	/** Do something when page is 'profile'**/
 	if ($location.path() === '/profile') {
-		// If user goes back to main profile page,
-		// clear errors if any.
-		$scope.profile.error = null;
+		$('.alert-danger').hide();
 	}
 	
 
@@ -38,7 +37,6 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 
 				//alert(data.error.NULL_ARGUMENT_PASSED.errorMessage);
 				
-				// If errors, only the error object is updated.
 				$scope.updateModel(data);
 			}).
 			error(function(data, status, headers, config) {
@@ -48,26 +46,41 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 
 	};
 	
-	$scope.updateModel = function(profileEdit) {
+	$scope.updateModel = function(data) {
 		
-		if (profileEdit.error) {
-			// Only update the error object
-			$scope.profile.error = profileEdit.error;
-			 
+		var hasChanged = false, key;
+		
+		$scope.profileEdit = data;
+		
+		if (data.error) {
 			// Show error message at the top of page
 			$('.alert-danger').show();
 		}
 		else {
-			// Update the entire model
-			for(var key in profileEdit) {
-		        if (profileEdit.hasOwnProperty(key)) {
-		            $scope.profile[key] = profileEdit[key];
-		        }
-		    }
-			
+			// Update the profile model
+			for (key in data) {
+				
+				if (key !== 'error') {
+					if (data.hasOwnProperty(key)) {
+
+						// Only flip flag if not already flipped
+						if ($scope.profile[key] !== data[key] && hasChanged === false) {
+							hasChanged = true;
+						}
+
+						// Do the update
+						$scope.profile[key] = data[key];
+					}
+				}
+			}
+
 			// Show success message on contact info page
 			$location.path('/profile'); // path not hash
-			$('.alert-success').show().delay(1500).fadeOut(300);
+			
+			if (hasChanged) {
+				$('.alert-success').show().delay(1500).fadeOut(300);
+			}
+			
 		}
   	};
   	
