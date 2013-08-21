@@ -1,5 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<div class="msg">
+	<div class="alert alert-danger" style="display:none;">Sorry, there's been an error.</div>
+</div>
 <table id="info" class="info" cellspacing="0" cellpadding="0">
 	<tr>
 		<td class="col1"><label>Email:</label></td>

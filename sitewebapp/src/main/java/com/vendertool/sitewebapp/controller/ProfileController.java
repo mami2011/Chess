@@ -42,27 +42,10 @@ public class ProfileController {
 	 */
 	@RequestMapping(value = "profile", method = RequestMethod.GET)
 	public String getProfilePage(ModelMap modelMap) {
-		logger.info("account GET controller invoked");
+		logger.info("profile GET controller invoked");
 		
-		//========================
-		// Mock address object
-		//========================
-		Address address = new Address();
-		address.setAddressLine1("123 Main St");
-		address.setAddressLine2("Apt. B");
-		address.setCity("San Jose");
-		address.setState("CA");
-		address.setZip("95125");
-		address.setCountry(CountryEnum.UNITED_STATES);
-		ContactDetails contact = new ContactDetails();
-		contact.setAddress(address);
-		contact.setFirstName("Ted");
-		contact.setLastName("Szeto");
-		Account acct = new Account();
-		acct.setEmailId("ted@gmail.com");
-		acct.setContactDetails(contact);
+		Account acct = getAccount();
 
-		
 		Map<String, String> profile = ProfileBuilder.getProfile(acct);
 		modelMap.put("profile", profile);
 		
@@ -88,23 +71,12 @@ public class ProfileController {
 	@RequestMapping(value="profile/save", method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> saveProfile(@RequestBody Map<String, Object> profile) {
 		
-		//========================
-		// Mock error objects
-		//========================
-		VTError error1 = new VTError();
-		error1.setErrorCode(CommonErrorCode.NULL_ARGUMENT_PASSED);
-		error1.setErrorMessage("Error is NULL_ARGUMENT_PASSED");
-		VTError error2 = new VTError();
-		error2.setErrorCode(SystemErrorCode.INTERNAL_DATABASE_DOWN);
-		error2.setErrorMessage("Error is INTERNAL_DATABASE_DOWN");
-		Map<String, VTError> errorMap = new HashMap<String, VTError>();
-		errorMap.put(error1.getErrorCode().getErrorCode(), error1);
-		errorMap.put(error2.getErrorCode().getErrorCode(), error2);
+		Account acct = getAccount();
+		acct = ProfileBuilder.updateAccountWithProfile(acct, profile);
 		
-		System.err.println("error1 code: " + error1.getErrorCode().getErrorCode());
-		System.err.println("error2 code: " + error2.getErrorCode().getErrorCode());
-		
-		profile.put("error", errorMap);
+		// If errorMap is null, then update is successful
+		Map<String, VTError> errorMap = updateAccount(acct);
+		//profile.put("error", errorMap);
 		
 		return profile;
 	}
@@ -144,7 +116,38 @@ public class ProfileController {
 	}
 	
 	
+	private Account getAccount() {
+		Address address = new Address();
+		address.setAddressLine1("123 Main St");
+		address.setAddressLine2("Apt. B");
+		address.setCity("San Jose");
+		address.setState("CA");
+		address.setZip("95125");
+		address.setCountry(CountryEnum.UNITED_STATES);
+		ContactDetails contact = new ContactDetails();
+		contact.setAddress(address);
+		contact.setFirstName("Ted");
+		contact.setLastName("Szeto");
+		Account acct = new Account();
+		acct.setEmailId("ted@gmail.com");
+		acct.setContactDetails(contact);
+		
+		return acct;
+	}
 	
+	private Map<String, VTError> updateAccount(Account account) {
+		VTError error1 = new VTError();
+		error1.setErrorCode(CommonErrorCode.NULL_ARGUMENT_PASSED);
+		error1.setErrorMessage("Error is NULL_ARGUMENT_PASSED");
+		VTError error2 = new VTError();
+		error2.setErrorCode(SystemErrorCode.INTERNAL_DATABASE_DOWN);
+		error2.setErrorMessage("Error is INTERNAL_DATABASE_DOWN");
+		Map<String, VTError> errorMap = new HashMap<String, VTError>();
+		errorMap.put(error1.getErrorCode().getErrorCode(), error1);
+		errorMap.put(error2.getErrorCode().getErrorCode(), error2);
+		
+		return errorMap;
+	}
 	
 	
 

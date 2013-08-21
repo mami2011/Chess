@@ -23,16 +23,22 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 		
 	//}
 	
+	if ($location.path() === '/profile') {
+		// If user goes back to main profile page,
+		// clear errors if any.
+		$scope.profile.error = null;
+	}
+	
 
 	
 	$scope.save = function() {
 		
 		$http.post('profile/save', $scope.profileEdit).
 			success(function (data, status, headers, config) {
-				
+
 				//alert(data.error.NULL_ARGUMENT_PASSED.errorMessage);
 				
-				
+				// If errors, only the error object is updated.
 				$scope.updateModel(data);
 			}).
 			error(function(data, status, headers, config) {
@@ -43,32 +49,32 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 	};
 	
 	$scope.updateModel = function(profileEdit) {
-
-		// Update the model
-		for(var key in profileEdit) {
-	        if (profileEdit.hasOwnProperty(key)) {
-	            $scope.profile[key] = profileEdit[key];
-	        }
-	    }
-	
 		
-		//alert("xxxx:" + pageEdit.fieldMap.ADDRESS_LINE_1.errors[0].message);
-		
-
-		/*
-		
-		if (hasFieldError) {
+		if (profileEdit.error) {
+			// Only update the error object
+			$scope.profile.error = profileEdit.error;
+			 
+			// Show error message at the top of page
 			$('.alert-danger').show();
 		}
 		else {
+			// Update the entire model
+			for(var key in profileEdit) {
+		        if (profileEdit.hasOwnProperty(key)) {
+		            $scope.profile[key] = profileEdit[key];
+		        }
+		    }
+			
 			// Show success message on contact info page
-			$location.path('profile'); // path not hash
-	    	$('.alert-success').show().delay(1500).fadeOut(300);
-		}*/
+			$location.path('/profile'); // path not hash
+			$('.alert-success').show().delay(1500).fadeOut(300);
+		}
   	};
+  	
+  	
 
 	$scope.reset = function() {
-    	$scope.pageEdit = angular.copy($scope.page);
+    	$scope.profileEdit = angular.copy($scope.profile);
     	$location.path('profile'); // path not hash
   	};
   	

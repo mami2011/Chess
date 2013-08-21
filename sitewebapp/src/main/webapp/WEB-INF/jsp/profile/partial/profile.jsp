@@ -1,3 +1,7 @@
+
+<div class="msg">
+	<div class="alert alert-success" style="display:none;">Profile information updated.</div>
+</div>
 <table id="info" class="info readonly" cellspacing="0" cellpadding="0">
 	<tr>
 		<td class="col1"><label>Email:</label></td>
