@@ -7,44 +7,45 @@
 
 
 
-<t:page title="VendorTool" angularAppName="accountApp">
+<t:page title="VendorTool" angularAppName="profileApp">
 
 	<jsp:attribute name="header">
-		<t:header email="${page.username}" currentPage="account"/>
+		<t:header email="${profile.username}" currentPage="profile"/>
 	</jsp:attribute>
 	
 	<jsp:attribute name="scripts">
-		<script src="<c:url value='/resources/js/account/app.js' />" type="text/javascript"></script>
-		<script src="<c:url value='/resources/js/account/controllers.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/resources/js/profile/app.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/resources/js/profile/controllers.js' />" type="text/javascript"></script>
 	</jsp:attribute>
 	
 	<jsp:attribute name="inlineJs">
 		<script type="text/javascript">
-			accountApp.factory('Data', function() {
-				return ${pageJson};
+			profileApp.factory('Data', function() {
+				return ${profileJson};
 			});
 		</script>
 	</jsp:attribute>
 
 	<jsp:attribute name="css">
-		<link href="<c:url value='/resources/css/account.css' />" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/resources/css/profile.css' />" rel="stylesheet" type="text/css" />
 	</jsp:attribute>
 	
 	<jsp:body>
-		<table ng-controller="AccountCtrl" class="main acct contact input-group bx-rnd-shdw" cellpadding="0" cellspacing="0">
+		<table ng-controller="ProfileCtrl" class="main acct contact input-group bx-rnd-shdw" cellpadding="0" cellspacing="0">
 			<tr>
 				<td class="c1">
-					<h3 class="ttl">Account</h3>
+					<h3 class="ttl">Profile</h3>
 					<div class="list-group">
-						<a href="#/contact" 		ng-class="getClass('/contact')" 		class="list-group-item">Contact info</a>
-						<a href="#/contact/:edit"	ng-class="getClass('/contact/:edit')" 	class="list-group-item">Change contact info</a>
+						<a href="#/profile" 		ng-class="getClass('/profile')" 		class="list-group-item">Profile info</a>
+						<a href="#/profile/:edit"	ng-class="getClass('/profile/:edit')" 	class="list-group-item">Change profile info</a>
 						<a href="#/email/:edit"		ng-class="getClass('/email/:edit')" 	class="list-group-item">Change email</a>
 						<a href="#/password/:edit"	ng-class="getClass('/password/:edit')"	class="list-group-item">Change password</a>
 					</div>
 				</td>
 				<td class="c2">
+					 
 					<div class="msg">
-						<div class="alert alert-success" style="display:none;">Contact information updated.</div>
+						<div class="alert alert-success" style="display:none;">Profile information updated.</div>
 						<div class="alert alert-danger"  style="display:none;">Sorry, there's been an error.</div>
 					</div>
 					
