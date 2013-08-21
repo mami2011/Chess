@@ -48,7 +48,7 @@ Attributes
 					<div class="user inline">
 						<a id="profileBtn" href="javascript:;">${email} <b class="arw"></b></a>
 						
-						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+						<ul id="profileMenu" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 						  <li><a tabindex="-1" href="profile">Profile</a></li>
 						  <li class="divider"></li>
 						  <li><a tabindex="-1" href="signout">Sign-out</a></li>
