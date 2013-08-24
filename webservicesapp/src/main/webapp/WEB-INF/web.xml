@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	version="2.5">
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
   <display-name>Vendertool Web Services Application</display-name>
   <servlet>
     <servlet-name>VendertoolServices</servlet-name>
@@ -22,7 +22,7 @@
     -->
     <init-param>
       <param-name>jersey.config.server.provider.packages</param-name>
-      <param-value>com.vendertool;org.codehaus.jackson.jaxrs</param-value>
+      <param-value>com.vendertool;org.codehaus.jackson.jaxrs;com.vendertool.fps.fileupload</param-value>
     </init-param>
     
     <load-on-startup>1</load-on-startup>
@@ -76,4 +76,5 @@
         <filter-name>encoding-filter</filter-name>
         <url-pattern>/</url-pattern>
     </filter-mapping>
+
 </web-app>

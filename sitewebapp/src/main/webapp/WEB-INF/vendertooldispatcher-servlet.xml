@@ -75,7 +75,18 @@
 		</property>
 		<property name="defaultErrorView" value="unexpectedError" />
 	</bean>
-
+	<!--  This is required to accept files from client -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">unexpectedException</prop>
+			</props>
+		</property>
+		<property name="defaultErrorView" value="unexpectedError" />
+	</bean>
 	<!-- Will help us to change locale for "lang" param, example: ?lang=ru -->
 	<mvc:interceptors>
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">

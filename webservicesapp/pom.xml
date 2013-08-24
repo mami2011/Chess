@@ -69,7 +69,11 @@
 			<artifactId>mercadolibreadapter</artifactId>
 			<version>${vendertool-version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.vendertool.fps</groupId>
+			<artifactId>fps</artifactId>
+			<version>${vendertool-version}</version>
+		</dependency>
 		<!--
 		<dependency>
 			<groupId>com.vendertool.fts</groupId>
@@ -144,6 +148,12 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>tomcat-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<wtpversion>2.0</wtpversion>
+				</configuration>
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -182,4 +192,55 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>qa</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>test</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<tasks>
+										<!-- <delete
+											file="${project.build.outputDirectory}/environment.properties" /> -->
+										<copy file="../fps/src/main/resources/config/qa/aws-credentials/AwsCredentials.properties"
+											tofile="${project.build.outputDirectory}/AwsCredentials.properties" />
+										<copy file="../common/src/main/resources/config/qa/dal/BeanLocations.xml"
+											tofile="${project.build.outputDirectory}/dal/BeanLocations.xml" />
+									</tasks>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</plugin>
+					<!-- <plugin>
+						<artifactId>maven-jar-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+								<configuration>
+									<classifier>test</classifier>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin> -->
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
