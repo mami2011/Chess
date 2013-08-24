@@ -1,12 +1,13 @@
 /**
  * 
  */
-package com.dal.dao;
+package com.vendertool.registration.dal.address;
 import java.util.List;
 
 import org.hibernate.SQLQuery;
 
-import com.vendertool.common.dal.BaseDaoImpl;
+import com.vendertool.registration.dal.BaseDaoImpl;
+
 
 
 /**

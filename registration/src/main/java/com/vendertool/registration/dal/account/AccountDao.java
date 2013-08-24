@@ -1,4 +1,4 @@
-package com.dal.dao;
+package com.vendertool.registration.dal.account;
 
 import java.util.List;
 

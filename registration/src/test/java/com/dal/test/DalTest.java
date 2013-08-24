@@ -7,10 +7,10 @@ import org.hibernate.FlushMode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.dal.dao.Account;
-import com.dal.dao.AccountDao;
-import com.dal.dao.Address;
-import com.dal.dao.AddressDao;
+import com.vendertool.registration.dal.account.Account;
+import com.vendertool.registration.dal.account.AccountDao;
+import com.vendertool.registration.dal.address.Address;
+import com.vendertool.registration.dal.address.AddressDao;
 
 
 public class DalTest {
