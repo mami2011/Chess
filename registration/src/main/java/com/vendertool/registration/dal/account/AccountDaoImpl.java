@@ -1,13 +1,17 @@
 /**
  * 
  */
-package com.dal.dao;
+package com.vendertool.registration.dal.account;
 import java.util.List;
 
 import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.springframework.context.ApplicationContext;
+
+import com.vendertool.registration.dal.BaseDaoImpl;
 
 
-import com.vendertool.common.dal.BaseDaoImpl;
 
 /**
  * @author murali
@@ -16,15 +20,27 @@ import com.vendertool.common.dal.BaseDaoImpl;
 
 public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 
+	static private AccountDao accountDao;
+	public static AccountDao getInstance() {
+		if (accountDao == null) {
+			ApplicationContext appContext = getAppContext();
+			accountDao = (AccountDao) appContext
+					.getBean("accountDao");
+		}
+		return accountDao;
+	}
+	
+	
+	
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#save(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
 	public void insert (Account account) {
 		// TODO Auto-generated method stub
-		
-		getHibernateTemplate().save(account);
-		
-		
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.save(account);
+		trans.commit();
 	}
 
 	/* (non-Javadoc)

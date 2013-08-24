@@ -1,4 +1,4 @@
-package com.dal.dao;
+package com.vendertool.registration.dal.address;
 
 // Generated May 17, 2013 11:29:19 AM by Hibernate Tools 3.4.0.CR1
 
