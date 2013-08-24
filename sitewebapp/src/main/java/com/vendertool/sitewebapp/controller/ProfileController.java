@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,15 +18,7 @@ import com.vendertool.sharedtypes.core.Address;
 import com.vendertool.sharedtypes.core.ContactDetails;
 import com.vendertool.sharedtypes.core.CountryEnum;
 import com.vendertool.sharedtypes.error.CommonErrorCode;
-import com.vendertool.sharedtypes.error.FTSErrorCode;
-import com.vendertool.sharedtypes.error.InventoryErrorCode;
-import com.vendertool.sharedtypes.error.ListingErrorCode;
-import com.vendertool.sharedtypes.error.MetadataErrorCode;
-import com.vendertool.sharedtypes.error.RegistrationErrorCode;
-import com.vendertool.sharedtypes.error.SigninErrorCode;
-import com.vendertool.sharedtypes.error.SystemErrorCode;
 import com.vendertool.sharedtypes.error.VTError;
-import com.vendertool.sharedtypes.error.VTErrorCode;
 import com.vendertool.sitewebapp.builder.ProfileBuilder;
 
 @Controller
@@ -144,7 +135,7 @@ public class ProfileController {
 		if (addressLine1 == null || addressLine1.length() == 0) {
 			VTError error1 = new VTError();
 			error1.setErrorCode(CommonErrorCode.NULL_ARGUMENT_PASSED);
-			error1.setErrorMessage("Error is NULL_ARGUMENT_PASSED");
+			error1.setMessage("Error is NULL_ARGUMENT_PASSED");
 			//VTError error2 = new VTError();
 			//error2.setErrorCode(SystemErrorCode.INTERNAL_DATABASE_DOWN);
 			//error2.setErrorMessage("Error is INTERNAL_DATABASE_DOWN");

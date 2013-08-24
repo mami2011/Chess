@@ -28,34 +28,126 @@
 			<spring:message code='form.registration.email' var="emailId"/>
 			<spring:message code='form.registration.password' var="password"/>
 			<spring:message code='form.registration.confirmpassword' var="confirmpassword"/>
-			<spring:message code='form.registration.submit' var="submit"/>
+			<spring:message code='form.submit' var="submit"/>
 			
 			<spring:message code='form.registration.email.info' var="emailInfo"/>
 			<spring:message code='form.registration.password.info' var="pwdInfo"/>
 			<spring:message code='form.registration.confirmpassword.info' var="confPwdInfo"/>
 	
 			<form:form method="post" commandName="account">
+				<c:if test="${errorResponse.hasErrors()}">
+					<div class="errorblock">
+						<c:forEach items="${errorResponse.getVTErrors()}" var="vterror">
+							<span class="errorfont">
+								<c:out value="${vterror.getMessage()}" />
+							</span>
+							<br />
+						</c:forEach>
+					</div>
+				</c:if>
+				
 				<div>
-					<form:input class="form-control" placeholder="${firstname}"  path="contactDetails.firstName"/>
+					<c:set var="firstname_rootpath" value="contactDetails.firstName" />
+					<c:set var="firstnamepath" value="firstName" />
+					<form:input class="form-control" placeholder="${firstname}"  path="${firstname_rootpath}"/>
+					<c:if test="${errorResponse.hasFieldError(account.getContactDetails().getClass().getName(), firstnamepath)}">
+						<div>
+							<c:forEach
+								items="${errorResponse.getFieldErrors(account.getContactDetails().getClass().getName(), firstnamepath)}"
+								var="vterror">
+								<span class="errorfont">
+									<c:out value="${vterror.getMessage()}" />
+								</span>
+								<br />
+							</c:forEach>
+						</div>
+					</c:if>
 				</div>
 				<div>
-					<form:input class="form-control" placeholder="${lastname}"  path="contactDetails.lastName"/>
+					<c:set var="lastname_rootpath" value="contactDetails.lastName" />
+					<c:set var="lastnamepath" value="lastName" />
+					<form:input class="form-control" placeholder="${lastname}"  path="${lastname_rootpath}"/>
+					<c:if test="${errorResponse.hasFieldError(account.getContactDetails().getClass().getName(), lastnamepath)}">
+						<div>
+							<c:forEach
+								items="${errorResponse.getFieldErrors(account.getContactDetails().getClass().getName(), lastnamepath)}"
+								var="vterror">
+								<span class="errorfont">
+									<c:out value="${vterror.getMessage()}" />
+								</span>
+								<br />
+							</c:forEach>
+						</div>
+					</c:if>
 				</div>
 				<div>
-					<form:input id="emailId" class="form-control info-msg-available" placeholder="${emailId}"  path="emailId"/>
+					<c:set var="emailIdpath" value="emailId" />
+					<form:input id="emailId" class="form-control info-msg-available" placeholder="${emailId}"  path="${emailIdpath}"/>
+					<c:if test="${errorResponse.hasFieldError(account.getClass().getName(), emailIdpath)}">
+						<div>
+							<c:forEach
+								items="${errorResponse.getFieldErrors(account.getClass().getName(), emailIdpath)}"
+								var="vterror">
+								<span class="errorfont">
+									<c:out value="${vterror.getMessage()}" />
+								</span>
+								<br />
+							</c:forEach>
+						</div>
+					</c:if>
 					<span id="email-info">${emailInfo}</span>
 				</div>
 				<div>
-					<form:password id="password" class="form-control info-msg-available" placeholder="${password}"  path="password"/>
+					<c:set var="passwordpath" value="password" />
+					<form:password id="password" class="form-control info-msg-available" placeholder="${password}"  path="${passwordpath}"/>
+					<c:if test="${errorResponse.hasFieldError(account.getClass().getName(), passwordpath)}">
+						<div>
+							<c:forEach
+								items="${errorResponse.getFieldErrors(account.getClass().getName(), passwordpath)}"
+								var="vterror">
+								<span class="errorfont">
+									<c:out value="${vterror.getMessage()}" />
+								</span>
+								<br />
+							</c:forEach>
+						</div>
+					</c:if>
 					<span id="pwd-info">${pwdInfo}</span>
 				</div>
 				<div>
-					<form:password id="confirmpassword" class="form-control info-msg-available" placeholder="${confirmpassword}" path="confirmPassword"/>
+					<c:set var="confirmPasswordPath" value="confirmPassword" />
+					<form:password id="confirmpassword" class="form-control info-msg-available" placeholder="${confirmpassword}" path="${confirmPasswordPath}"/>
+					<c:if test="${errorResponse.hasFieldError(account.getClass().getName(), confirmPasswordPath)}">
+						<div>
+							<c:forEach
+								items="${errorResponse.getFieldErrors(account.getClass().getName(), confirmPasswordPath)}"
+								var="vterror">
+								<span class="errorfont">
+									<c:out value="${vterror.getMessage()}" />
+								</span>
+								<br />
+							</c:forEach>
+						</div>
+					</c:if>
 					<span id="conf-pwd-info">${confPwdInfo}</span>
 				</div>
+
 				<div class="submit">
-					<input type="submit"class="btn lg" value="${submit}" />
+					<input type="submit" class="btn lg" value="${submit}" />
 				</div>
+				
+				<c:if test="${errorResponse.hasErrors()}">
+					<div>
+						<div>
+							<label for="jsonAccountOutput">JSON Account Output: </label>	
+							<textarea id="jsonAccountOutput" readonly rows="8" cols="55"><c:out value="${json_account_output}" /></textarea>
+						</div>
+						<div>
+							<label for="jsonErrorResponseOutput">JSON Error Response Output: </label>	
+							<textarea id="jsonErrorResponseOutput" readonly rows="8" cols="55"><c:out value="${json_err_res_output}"/></textarea>
+						</div>
+					</div>
+				</c:if>
 			</form:form>
 		</div>
 	</jsp:body>

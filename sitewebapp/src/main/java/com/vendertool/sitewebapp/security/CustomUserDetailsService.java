@@ -71,7 +71,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		if(getAccountresponse.hasErrors()) {
 			throw new UsernameNotFoundException(
 					"Web service response has errors, unable to fetch user details: "
-							+ getAccountresponse.getErrors().toString());
+							+ getAccountresponse.getFieldBindingErrors().toString());
 		}
 		
 		Account account = getAccountresponse.getAccount();

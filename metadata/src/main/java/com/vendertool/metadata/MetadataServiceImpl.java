@@ -36,7 +36,7 @@ public class MetadataServiceImpl extends BaseVenderToolServiceImpl implements
 		GetSupportedCountriesResponse response = new GetSupportedCountriesResponse();
 		
 		if(market == null) {
-			response.addError(Errors.METADATA.MARKET_DATA_MISSING);
+			response.addFieldBindingError(Errors.METADATA.MARKET_DATA_MISSING, null, (String[])null);
 			return response;
 		}
 		

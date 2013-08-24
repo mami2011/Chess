@@ -1,10 +1,9 @@
 package com.vendertool.common.validation;
 
-import java.util.List;
+import com.vendertool.sharedtypes.rnr.BaseRequest;
+import com.vendertool.sharedtypes.rnr.BaseResponse;
 
-import com.vendertool.sharedtypes.error.VTError;
-import com.vendertool.sharedtypes.rnr.Request;
 
 public interface Validator {
-	public List<VTError> validate(Request request);
+	public void validate(BaseRequest request, BaseResponse response);
 }

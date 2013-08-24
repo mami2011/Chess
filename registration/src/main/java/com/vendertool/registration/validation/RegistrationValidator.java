@@ -1,18 +1,15 @@
 package com.vendertool.registration.validation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 
 import com.vendertool.common.validation.EmailRegexValidator;
 import com.vendertool.common.validation.ValidationUtil;
 import com.vendertool.sharedtypes.core.Account;
-import com.vendertool.sharedtypes.core.ContactDetails;
 import com.vendertool.sharedtypes.error.Errors;
-import com.vendertool.sharedtypes.error.VTError;
+import com.vendertool.sharedtypes.exception.VTRuntimeException;
+import com.vendertool.sharedtypes.rnr.BaseRequest;
+import com.vendertool.sharedtypes.rnr.BaseResponse;
 import com.vendertool.sharedtypes.rnr.RegisterAccountRequest;
-import com.vendertool.sharedtypes.rnr.Request;
 
 public class RegistrationValidator implements com.vendertool.common.validation.Validator {
 	
@@ -29,77 +26,85 @@ public class RegistrationValidator implements com.vendertool.common.validation.V
 	public RegistrationValidator() {
 	}
 	
-	public List<VTError> validate(Request _request) {
+	public void validate(BaseRequest _request, BaseResponse response) {
 		RegisterAccountRequest request = (RegisterAccountRequest) _request;
 		
-		List<VTError> errors = new ArrayList<VTError>();
-		
 		if (validationUtil.isNull(request)
+				|| validationUtil.isNull(response)
 				|| validationUtil.isNull(request.getAccount())
 				|| validationUtil.isNull(request.getAccount()
 						.getContactDetails())) {
-			logger.debug("NULL value passed to register an account");
-			errors.add(Errors.COMMON.NULL_ARGUMENT_PASSED);
-			return errors;
+			VTRuntimeException ex = new VTRuntimeException("NULL value passed to register an account");
+			logger.debug("NULL value passed to register an account", ex);
+			throw ex;
 		}
+		
 		
 		Account account = request.getAccount();
-		ContactDetails cd = account.getContactDetails();
-		validateName(cd.getFirstName(), cd.getLastName(), errors);
-		validateEmail(account.getEmailId(), errors);
-		validatePassword(account.getPassword(), account.getConfirmPassword(), errors);
-		return errors;
+		validateName(account, response);
+		validateEmail(account, response);
+		validatePassword(account, response);
 	}
 
-	private void validateName(String firstName, String lastName, List<VTError> errors) {
+	private void validateName(Account account, BaseResponse response) {
 		//combine both errors together before returning
-		if(validationUtil.isNullOrEmpty(firstName)) {
-			errors.add(Errors.REGISTRATION.MISSING_FIRSTNAME);
+		if(validationUtil.isNullOrEmpty(account.getContactDetails().getFirstName())) {
+			response.addFieldBindingError(
+					Errors.REGISTRATION.MISSING_FIRSTNAME, 
+					account.getContactDetails().getClass().getName(),
+					"firstName");
 		}
 		
-		if(validationUtil.isNullOrEmpty(lastName)) {
-			errors.add(Errors.REGISTRATION.MISSING_LASTNAME);
+		if(validationUtil.isNullOrEmpty(account.getContactDetails().getLastName())) {
+			response.addFieldBindingError(
+					Errors.REGISTRATION.MISSING_LASTNAME,
+					account.getContactDetails().getClass().getName(),
+					"lastName");
 		}
 		
 		return;
 	}
 
-	private void validatePassword(String password, String confirmPassword, List<VTError> errors) {
+	private void validatePassword(Account account, BaseResponse response) {
+		String password = account.getPassword();
+		String confirmPassword = account.getConfirmPassword();
+		
 		//First validate password field & then the confirm password
-		if(validationUtil.isNull(password)) {
-			errors.add(Errors.REGISTRATION.MISSING_PASSWORD);
+		if(validationUtil.isNullOrEmpty(password)) {
+			response.addFieldBindingError(Errors.REGISTRATION.MISSING_PASSWORD, account.getClass().getName(), "password");
 			return;
 		}
 		
 		if(!validationUtil.checkStringSize(password, MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH)) {
-			errors.add(Errors.REGISTRATION.PASSWORD_LENGTH_INCORRECT);
+			response.addFieldBindingError(Errors.REGISTRATION.PASSWORD_LENGTH_INCORRECT, account.getClass().getName(), "password");
 			return;
 		}
 		
 		if(!validationUtil.matchesPattern(PASSWORD_REGEX, password)) {
-			errors.add(Errors.REGISTRATION.INVALID_PASSWORD);
+			response.addFieldBindingError(Errors.REGISTRATION.INVALID_PASSWORD, account.getClass().getName(), "password");
 			return;
 		}
 		
 		//Now validate confirm password
-		if(validationUtil.isNull(confirmPassword)) {
-			errors.add(Errors.REGISTRATION.MISSING_CONFIRM_PASSWORD);
+		if(validationUtil.isNullOrEmpty(confirmPassword)) {
+			response.addFieldBindingError(Errors.REGISTRATION.MISSING_CONFIRM_PASSWORD, account.getClass().getName(), "confirmPassword");
 			return;
 		}
 		
 		if(!password.equals(confirmPassword)) {
-			errors.add(Errors.REGISTRATION.PASSWORD_CONFIRM_PASSWORD_MISMATCH);
+			response.addFieldBindingError(Errors.REGISTRATION.PASSWORD_CONFIRM_PASSWORD_MISMATCH, account.getClass().getName(), "confirmPassword");
 			return;
 		}
 	}
 
-	private void validateEmail(String emailId, List<VTError> errors) {
-		if(validationUtil.isNull(emailId)) {
-			errors.add(Errors.REGISTRATION.EMAIL_MISSING);
+	private void validateEmail(Account account, BaseResponse response) {
+		if(validationUtil.isNullOrEmpty(account.getEmailId())) {
+			response.addFieldBindingError(Errors.REGISTRATION.EMAIL_MISSING, account.getClass().getName(), "emailId");
+			return;
 		}
 		
-		if(!validationUtil.matchesPattern(EmailRegexValidator.SIMPLE_EMAIL_PATTERN, emailId)) {
-			errors.add(Errors.REGISTRATION.INVALID_EMAIL_ID);
+		if(!validationUtil.matchesPattern(EmailRegexValidator.SIMPLE_EMAIL_PATTERN, account.getEmailId())) {
+			response.addFieldBindingError(Errors.REGISTRATION.INVALID_EMAIL_ID, account.getClass().getName(), "emailId");
 		}
 	}
 }

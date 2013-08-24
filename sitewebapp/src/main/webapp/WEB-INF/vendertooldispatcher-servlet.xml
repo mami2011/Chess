@@ -82,4 +82,6 @@
 			<property name="paramName" value="lang" />
 		</bean>
 	</mvc:interceptors>
+	
+	<bean class="com.vendertool.sitewebapp.common.LoggingHandlerExceptionResolver" />
 </beans>

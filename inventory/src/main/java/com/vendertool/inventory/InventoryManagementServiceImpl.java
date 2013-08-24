@@ -46,7 +46,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 		}
 		product.setProductId(id);
 		response.setProduct(product);
-		response.addError(Errors.INVENTORY.INVALID_PRODUCT_CODE);
+		response.addFieldBindingError(Errors.INVENTORY.INVALID_PRODUCT_CODE, product.getClass().getName(), "productCode");
 		
 		return response;
 	}

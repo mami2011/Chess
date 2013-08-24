@@ -9,7 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.vendertool.sharedtypes.rnr.SigninRequest;
+import com.vendertool.sharedtypes.core.Signin;
 
 @Controller
 public class SigninController {
@@ -19,8 +19,8 @@ public class SigninController {
 	public String getSigninView(Model model){
 		logger.info("signin GET controller invoked");
 		
-//		SigninRequest signinRequest = new SigninRequest();
-//		model.addAttribute("signinRequest", signinRequest);
+		Signin signin = new Signin();
+		model.addAttribute("signin", signin);
 		return "signin";
 	}
 	

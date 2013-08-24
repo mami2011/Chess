@@ -11,10 +11,11 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class VTError implements Serializable {
 	private VTErrorCode errorCode;
-	private String errorMessage;
+	private String message;
 	private VTErrorSeverityEnum severity;
 	private VTErrorDomainEnum domain;
-
+	private Object[] arguments;
+	
 	public VTError() {}
 	
 	public VTError(VTErrorCode errorCode, VTErrorDomainEnum domain) {
@@ -25,10 +26,10 @@ public class VTError implements Serializable {
 		this(errorCode, errorMessage, VTErrorSeverityEnum.ERROR, domain);
 	}
 	
-	public VTError(VTErrorCode errorCode, String errorMessage,
+	public VTError(VTErrorCode errorCode, String message,
 			VTErrorSeverityEnum severity, VTErrorDomainEnum domain) {
 		this.errorCode = errorCode;
-		this.errorMessage = errorMessage;
+		this.message = message;
 		this.domain = domain;
 		this.severity = severity;
 	}
@@ -41,20 +42,20 @@ public class VTError implements Serializable {
 		this.errorCode = errorCode;
 	}
 
-	public String getErrorMessage() {
-		return errorMessage;
-	}
-
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
-	}
-
 	public VTErrorSeverityEnum getSeverity() {
 		return severity;
 	}
 
 	public void setSeverity(VTErrorSeverityEnum severity) {
 		this.severity = severity;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public VTErrorDomainEnum getDomain() {
@@ -69,6 +70,19 @@ public class VTError implements Serializable {
 	public String getDomainCodeKey() {
 		return getDomain() + "." + getErrorCode().getErrorCode();
 	}
-	
+
+	public Object[] getArguments() {
+		return arguments;
+	}
+
+	public void setArguments(Object[] arguments) {
+		this.arguments = arguments;
+	}
+
+	@JsonIgnore
+	public String getErrorCodeAsString() {
+		return getErrorCode().getErrorCode();
+	}
+
 	private static final long serialVersionUID = 4207311508169879885L;
 }

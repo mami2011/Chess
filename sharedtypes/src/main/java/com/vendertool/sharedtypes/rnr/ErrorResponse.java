@@ -6,11 +6,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ErrorResponse extends BaseResponse {
 	
 	public ErrorResponse() {
+		super();
 	}
 	
 	public ErrorResponse(BaseResponse baseResponse) {
 		if(baseResponse != null) {
-			this.addErrors(baseResponse.getErrors());
+			this.addFieldBindingErrors(baseResponse.getFieldBindingErrors());
 		}
 	}
 }

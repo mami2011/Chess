@@ -30,7 +30,7 @@ Attributes
 								<spring:message code="form.signin.signin"/>
 							</c:when>
 							<c:otherwise>
-								<a href="signin"><spring:message code="form.signin.signin"/></a>
+								<a href="/signin"><spring:message code="form.signin.signin"/></a>
 							</c:otherwise>
 						</c:choose>
 						|

@@ -1,6 +1,5 @@
 package com.vendertool.registration;
 
-import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +30,6 @@ import com.vendertool.sharedtypes.core.AccountClosureReasonCodeEnum;
 import com.vendertool.sharedtypes.core.AccountConfirmation;
 import com.vendertool.sharedtypes.core.AccountStatusEnum;
 import com.vendertool.sharedtypes.error.Errors;
-import com.vendertool.sharedtypes.error.VTError;
 import com.vendertool.sharedtypes.rnr.AuthorizeMarketRequest;
 import com.vendertool.sharedtypes.rnr.AuthorizeMarketResponse;
 import com.vendertool.sharedtypes.rnr.BaseResponse.ResponseAckStatusEnum;
@@ -78,9 +76,8 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		//check for nulls in the validator
 		RegisterAccountResponse response = new RegisterAccountResponse();
 		RegistrationValidator rv = new RegistrationValidator();
-		List<VTError> errors = rv.validate(request);
-		if(!errors.isEmpty()){
-			response.addErrors(errors);
+		rv.validate(request, response);
+		if(response.hasErrors()){
 			if(request != null) {
 				if(request.getAccount() != null) {
 					request.getAccount().clearPassword();
@@ -131,13 +128,13 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		
 		if(status == CachedRegistrationAccountDatasource.Status.EXISTING) {
 			logger.debug("Username: '" + account.getEmailId() + "' already exists");
-			response.addError(Errors.REGISTRATION.EMAIL_ALREADY_REGISTERED);
+			response.addFieldBindingError(Errors.REGISTRATION.EMAIL_ALREADY_REGISTERED, account.getClass().getName(), "emailId");
 			response.setStatus(ResponseAckStatusEnum.FAILURE);
 			return response;
 		}
 		
 		logger.debug("System internal error during registration of account '" + account.getEmailId() + "'.");
-		response.addError(Errors.SYSTEM.INTERNAL_ERROR);
+		response.addFieldBindingError(Errors.SYSTEM.INTERNAL_ERROR, null, (String[])null);
 		response.setStatus(ResponseAckStatusEnum.FAILURE);
 		return response;
 	}
@@ -201,14 +198,14 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 				|| (validationUtil.isNull(request.getEmailId()) || 
 						(validationUtil.isEmpty(request.getEmailId())))) {
 			response.setStatus(ResponseAckStatusEnum.FAILURE);
-			response.addError(Errors.COMMON.NULL_ARGUMENT_PASSED);
+			response.addFieldBindingError(Errors.COMMON.NULL_ARGUMENT_PASSED, null, (String[])null);
 			return response;
 		}
 		
 		String emailId = request.getEmailId();
 		Account account = cachedDS.getAccount(emailId);
 		if(validationUtil.isNull(account)) {
-			response.addError(Errors.REGISTRATION.ACCOUNT_NOT_FOUND);
+			response.addFieldBindingError(Errors.REGISTRATION.ACCOUNT_NOT_FOUND, null, (String[])null);
 			response.setStatus(ResponseAckStatusEnum.FAILURE);
 			return response;
 		}
@@ -218,7 +215,7 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		accountConf.incrementAttempts();
 		
 		if(accountConf.getConfirmationAttempts() > MAX_ACCOUNT_RETRY_ATTEMPTS) {
-			response.addError(Errors.REGISTRATION.MAX_ACCOUNT_RECONFIRM_ATTEMPTS_REACHED);
+			response.addFieldBindingError(Errors.REGISTRATION.MAX_ACCOUNT_RECONFIRM_ATTEMPTS_REACHED, null, (String[])null);
 			response.setStatus(ResponseAckStatusEnum.FAILURE);
 		}
 		
@@ -233,7 +230,7 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 			cachedDS.updateAccount(account);
 			
 			//don't set the account to the response
-			response.addError(Errors.REGISTRATION.UNAUTHORIZED_ACCOUNT_CONFIRMATION);
+			response.addFieldBindingError(Errors.REGISTRATION.UNAUTHORIZED_ACCOUNT_CONFIRMATION, null, (String[])null);
 			response.setStatus(ResponseAckStatusEnum.FAILURE);
 			return response;
 		}
@@ -264,7 +261,7 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		Account account = cachedDS.getAccount(username);
 		GetAccountResponse response = new GetAccountResponse();
 		if(account == null) {
-			response.addError(Errors.REGISTRATION.ACCOUNT_NOT_FOUND);
+			response.addFieldBindingError(Errors.REGISTRATION.ACCOUNT_NOT_FOUND, null, (String[])null);
 			return response;
 		}
 		

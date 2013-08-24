@@ -1,9 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
-<t:page title="Session timeout">
+<t:page title="${sessiontimeout}">
 	<jsp:attribute name="header">
 		<t:header email="${email}" currentPage="sessiontimeout"/>
 	</jsp:attribute>
@@ -14,12 +16,12 @@
 	
 	<jsp:body>
 		<div class="reg main input-group bx-rnd-shdw">
-	        <h3 class="ttl">Session timeout</h3>
+			<spring:message code="form.sessiontimeout.title" var="sessiontimeout"/>
+			
+	        <h3 class="ttl"><c:out value="${sessiontimeout}" /></h3>
 	        <div class="msg">
-	            Sorry, your session has timeout.
-	            <p>
-	                <a href="signin">Please click here to sign-in again.</a>
-	            </p>
+	        	<h5 class="ttl"><spring:message code="form.sessiontimeout.msg"/></h5>
+	    		<span><a href="/signin"><spring:message code="form.signin.signin"/></a></span>
 	        </div>
 	    </div>
 	</jsp:body>

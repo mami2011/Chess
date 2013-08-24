@@ -1,16 +1,22 @@
 package com.vendertool.sitewebapp.controller;
 
+import java.nio.charset.Charset;
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.core.HttpMethodEnum;
@@ -20,6 +26,7 @@ import com.vendertool.sharedtypes.rnr.RegisterAccountRequest;
 import com.vendertool.sharedtypes.rnr.RegisterAccountResponse;
 import com.vendertool.sitewebapp.common.RestServiceClientHelper;
 import com.vendertool.sitewebapp.common.URLConstants;
+import com.vendertool.sitewebapp.common.VTErrorUtil;
 
 @Controller
 public class RegisterController {
@@ -39,8 +46,11 @@ public class RegisterController {
 	
 	
 	@RequestMapping(value="register", method=RequestMethod.POST)
-	public String register(ModelMap modelMap, HttpServletRequest request,
-			@ModelAttribute("account") Account account) {
+	public String register(
+			ModelMap modelMap, 
+			HttpServletRequest request,
+			@ModelAttribute("account") Account account, 
+			BindingResult result) {
 		
 		logger.info("register POST controller invoked");
 		if(account == null) {
@@ -71,17 +81,53 @@ public class RegisterController {
 		
 		RegisterAccountResponse registerAccountresponse = response.readEntity(RegisterAccountResponse.class);
 		if(registerAccountresponse.hasErrors()) {
-			logger.error("Registration failed with errors: " + registerAccountresponse.getErrors());
+			logger.error("Registration failed with errors: " + registerAccountresponse.getFieldBindingErrors());
 			
 			Account responseAccount = registerAccountresponse.getAccount();
+			responseAccount.clearPassword();
 			ErrorResponse errorResponse = new ErrorResponse(registerAccountresponse);
+			
+			Locale locale = RequestContextUtils.getLocale(request);
+			VTErrorUtil.updateErrorsWithLocalizedMessages(errorResponse.getVTErrors(), locale);
+			System.out.println("**** Default charset is: " + Charset.defaultCharset());
+
 			modelMap.addAttribute("account", responseAccount);
 			modelMap.addAttribute("errorResponse", errorResponse);
+			
+			//Added for debugging purpose, need to remove this
+			addJsonOutput(responseAccount, errorResponse, modelMap);
 			
 			return "register";
 		}
 		
 		return "accounthub";
+	}
+	
+	private void addJsonOutput(Account account, ErrorResponse errorResponse, ModelMap modelMap) {
+		/*****************************************************************************/
+		/* THIS IS A TEST, NEED TO REMOVE THIS CODE AFTER THE UI DESIGN IS FINALIZED */
+		/*****************************************************************************/
+		
+		// Add JSON for Angular
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			//Do this only if you want to pretty print the output to the html <textarea> or <pre>
+			String jsonAccountString = mapper
+					.writerWithDefaultPrettyPrinter().writeValueAsString(
+							account);
+			
+			//Do this only if you want to pretty print the output to the html <textarea> or <pre>
+			String jsonErrorResponse = mapper
+					.writerWithDefaultPrettyPrinter().writeValueAsString(
+							errorResponse);
+			
+			modelMap.put("json_account_output", jsonAccountString);
+			modelMap.put("json_err_res_output", jsonErrorResponse);
+		}
+		catch (Exception e) {
+			logger.debug("JSON marshalling exception", e);
+			e.printStackTrace();
+		}
 	}
 	
 }

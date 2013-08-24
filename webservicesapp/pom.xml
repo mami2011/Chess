@@ -164,6 +164,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
+							<encoding>UTF-8</encoding>
 							<outputDirectory>${project.build.directory}/src/resources/emailtemplates</outputDirectory>
 							<overwrite>true</overwrite>
 							<resources>
