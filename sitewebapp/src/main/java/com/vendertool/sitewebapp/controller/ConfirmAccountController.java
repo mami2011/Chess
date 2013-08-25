@@ -79,6 +79,6 @@ public class ConfirmAccountController {
 			return "confirmaccountfailed";
 		}
 		
-		return "accounthub";
+		return "redirect:signin?justConfAccount=true";
 	}
 }

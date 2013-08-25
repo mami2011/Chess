@@ -23,7 +23,6 @@ import com.vendertool.common.SessionIdGenerator;
 import com.vendertool.common.URLConstants;
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
 import com.vendertool.common.validation.ValidationUtil;
-import com.vendertool.registration.dal.account.AccountDao;
 import com.vendertool.registration.dal.account.AccountDaoImpl;
 import com.vendertool.registration.email.RegistrationEmailHelper;
 import com.vendertool.registration.validation.RegistrationValidator;
@@ -104,16 +103,22 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 			status = cachedDS.addAccount(account);
 			if(status == CachedRegistrationAccountDatasource.Status.NEW) {
 				
-				com.vendertool.registration.dal.account.Account accountDo = new com.vendertool.registration.dal.account.Account();
-				//Set Do
-				accountDo.setEmailAddr(account.getEmailId());
-				accountDo.setFirstName(account.getContactDetails().getFirstName());
-				accountDo.setLastName(account.getContactDetails().getLastName());
-				accountDo.setPassword(account.getPassword());
-				accountDo.setSalt(account.getPasswordSalt());
-				//Insert into DB
-				AccountDaoImpl.getInstance().insert(accountDo);
-				
+				try {
+					com.vendertool.registration.dal.account.Account accountDo = 
+							new com.vendertool.registration.dal.account.Account();
+					//Set Do
+					accountDo.setEmailAddr(account.getEmailId());
+					accountDo.setFirstName(account.getContactDetails().getFirstName());
+					accountDo.setLastName(account.getContactDetails().getLastName());
+					accountDo.setPassword(account.getPassword());
+					accountDo.setSalt(account.getPasswordSalt());
+					//Insert into DB
+					AccountDaoImpl.getInstance().insert(accountDo);
+				} catch (Exception anyex) {
+					//ignore for now, have to re-implement the whole method after propoer DB support
+					logger.debug(anyex.getMessage(), anyex);
+					System.err.println(anyex.getMessage());
+				}
 				response.setSuccess(true);
 				response.setAccount(account);
 				

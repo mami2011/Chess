@@ -4,8 +4,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<t:page title="VendorTool registration">
-
+<t:page title="${title}">
+	
 	<jsp:attribute name="header">
 		<t:header email="${email}" currentPage="register"/>
 	</jsp:attribute>
@@ -20,6 +20,7 @@
 	</jsp:attribute>
 	
 	<jsp:body>
+		<spring:message code="form.registration.title" var="title"/>
 		<c:set var="email" value="${account.emailId}"/>
 		<div class="reg main input-group bx-rnd-shdw">
 			<h3 class="ttl"><spring:message code="form.registration.signup"/></h3>

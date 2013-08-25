@@ -1,12 +1,7 @@
 package com.vendertool.fps.fileupload;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -30,7 +25,7 @@ import com.vendertool.common.service.BaseVenderToolServiceImpl;
 import com.vendertool.sharedtypes.core.FileInformation;
 import com.vendertool.sharedtypes.rnr.FileUploadRequest;
 
-@Path("/file")
+@Path("/fps")
 public class FPSService extends BaseVenderToolServiceImpl {
 
 	@POST

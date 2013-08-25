@@ -1,8 +1,5 @@
 package com.vendertool.sitewebapp.security;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -22,7 +19,7 @@ import com.vendertool.sitewebapp.common.ContainerBootstrapContext;
 import com.vendertool.sitewebapp.common.RestServiceClientHelper;
 import com.vendertool.sitewebapp.common.URLConstants;
 
-@Service
+@Service("customUserDetailsService")
 @Transactional(readOnly=true)
 public class CustomUserDetailsService implements UserDetailsService {
 	
@@ -45,13 +42,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 		String hostName = RestServiceClientHelper.getServerURL(request);
 		
 		String url = hostName + URLConstants.WEB_SERVICE_PATH + 
-				URLConstants.WS_REGISTRATION_GET_ACCOUNT_PATH;
+				URLConstants.WS_REGISTRATION_GET_ACCOUNT_PATH + URLConstants.QUERY_START + 
+				USERNAME_KEY + URLConstants.PARAM_KEY_VALUE_SEPARATOR + username;
 		
-		Map<String, String[]> queryParams = new HashMap<String, String[]>();
-		queryParams.put(USERNAME_KEY, new String[]{username});
+//		Map<String, String[]> queryParams = new HashMap<String, String[]>();
+//		queryParams.put(USERNAME_KEY, new String[]{username});
 		
 		Response response = RestServiceClientHelper
-				.invokeRestService(url, null, queryParams, MediaType.APPLICATION_JSON_TYPE,
+				.invokeRestService(url, null, null, MediaType.APPLICATION_JSON_TYPE,
 						HttpMethodEnum.GET);
 		
 		int responseCode = response.getStatus();
@@ -82,6 +80,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 		}
 		
 		UserDetails userDetails = new CustomUserDetails(account);
+//	    return new User(
+//	    		userDetails.getUsername(),
+//	    		userDetails.getPassword().toLowerCase(),
+//	    		userDetails.isEnabled(),
+//	    		userDetails.isAccountNonExpired(),
+//	    		userDetails.isCredentialsNonExpired(),
+//	    		userDetails.isAccountNonLocked(),
+//	    		userDetails.getAuthorities());
 		
 		return userDetails;
 	}

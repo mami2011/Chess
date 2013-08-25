@@ -24,12 +24,12 @@ public class SigninController {
 		return "signin";
 	}
 	
-	@RequestMapping(value = "signin", method = RequestMethod.POST)
-	public String signin(ModelMap modelMap, HttpServletRequest request) {
-		logger.info("signin POST controller invoked");
-		
-		return "accounthub";
-	}
+//	@RequestMapping(value = "signin", method = RequestMethod.POST)
+//	public String signin(ModelMap modelMap, HttpServletRequest request) {
+//		logger.info("signin POST controller invoked");
+//		
+//		return "accounthub";
+//	}
 
 	
 	
