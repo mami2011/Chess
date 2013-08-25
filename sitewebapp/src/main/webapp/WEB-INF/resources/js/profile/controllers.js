@@ -7,8 +7,9 @@ all the function params as strings in same order.
 ********************/
 profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$location', 'Data', function($scope, $http, $routeParams, $location, Data) {
 	
-	$scope.account = Data.account;
-	$scope.accountEdit = angular.copy($scope.account);
+	$scope.accountOrig = angular.copy(Data.account);
+	$scope.accountEdit = angular.copy(Data.account);
+	$scope.errorResponse = angular.copy(Data.errorResponse);
 	
 	
 	
@@ -38,9 +39,35 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 		$http.post('profile/save', $scope.accountEdit).
 			success(function (data, status, headers, config) {
 
-				//alert(data.error.NULL_ARGUMENT_PASSED.errorMessage);
+				$scope.accountOrig = angular.copy(data.account);
+				$scope.accountEdit = angular.copy(data.account);
+				$scope.errorResponse = angular.copy(data.errorResponse);
+				$scope.errorMap = angular.copy(data.errorMap);
 				
-				$scope.updateModel(data);
+				//if ($scope.errorResponse) {
+				if ($scope.errorMap) {
+					// Show error message at the top of page
+					$('.alert-danger').show();
+					
+					
+					
+
+					
+					//$scope.errorResp = errorResp;
+					
+					
+					
+				}
+				else {
+					
+					// Show success message on contact info page
+					$location.path('/profile'); // path not hash
+					
+					
+					$('.alert-success').show().delay(1500).fadeOut(300);
+				}
+				
+				
 			}).
 			error(function(data, status, headers, config) {
 				
@@ -53,29 +80,39 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 		
 		var hasChanged = false, key;
 		
-		$scope.accountEdit = data;
+		$scope.account = angular.copy(data.account);
+    	
+		alert($scope.account.contactDetails.address.addressLine1);
 		
-		if (data.error) {
+		//$scope.errorResponse = data.errorResponse;
+		
+		/*
+		//if (data.errorResponse) {
 			// Show error message at the top of page
-			$('.alert-danger').show();
-		}
-		else {
-			// Update the profile model
-			for (key in data) {
+		//	$('.alert-danger').show();
+		//}
+		//else {
+			// Update the account model
+			for (key in data.account) {
 				
-				if (key !== 'error') {
-					if (data.hasOwnProperty(key)) {
+				
+				if (data.account.hasOwnProperty(key)) {
 
-						// Only flip flag if not already flipped
-						if ($scope.account[key] !== data[key] && hasChanged === false) {
-							hasChanged = true;
-						}
-
-						// Do the update
-						$scope.account[key] = data[key];
+					// Only flip flag if not already flipped
+					if ($scope.account[key] !== data.account[key] && hasChanged === false) {
+						hasChanged = true;
 					}
+
+					// Do the update
+					$scope.account[key] = data[key];
+					$scope.accountEdit[key] = data[key];
+					
+
 				}
+				
 			}
+			
+			
 
 			// Show success message on contact info page
 			$location.path('/profile'); // path not hash
@@ -84,13 +121,13 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 				$('.alert-success').show().delay(1500).fadeOut(300);
 			}
 			
-		}
+		//}*/
   	};
   	
   	
 
 	$scope.reset = function() {
-    	$scope.accountEdit = angular.copy($scope.account);
+    	$scope.accountEdit = angular.copy($scope.accountOrig);
     	$location.path('profile'); // path not hash
   	};
   	

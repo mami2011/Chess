@@ -36,8 +36,7 @@
 				<td class="c1">
 					<h3 class="ttl">Profile</h3>
 					<div class="list-group">
-						<a href="#/profile" 		ng-class="getClass('/profile')" 		class="list-group-item">Profile info</a>
-						<a href="#/profile/:edit"	ng-class="getClass('/profile/:edit')" 	class="list-group-item">Change profile info</a>
+						<a href="profile" 			ng-class="getClass('/profile')" 		class="list-group-item">Change info</a>
 						<a href="#/email/:edit"		ng-class="getClass('/email/:edit')" 	class="list-group-item">Change email</a>
 						<a href="#/password/:edit"	ng-class="getClass('/password/:edit')"	class="list-group-item">Change password</a>
 					</div>
