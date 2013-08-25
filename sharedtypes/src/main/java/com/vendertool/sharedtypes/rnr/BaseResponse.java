@@ -3,6 +3,8 @@ package com.vendertool.sharedtypes.rnr;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.vendertool.sharedtypes.error.VTError;
 import com.vendertool.sharedtypes.error.VTErrorCode;
 import com.vendertool.sharedtypes.error.VTErrorFieldBindingMap;
@@ -94,6 +96,7 @@ public class BaseResponse implements Response {
 		return false;
 	}
 	
+	@JsonIgnore
 	public VTErrorFieldBindingMap getFieldBindingErrorMap(VTErrorCode code) {
 		if(code == null) {
 			return null;
@@ -109,6 +112,7 @@ public class BaseResponse implements Response {
 		return null;
 	}
 	
+	@JsonIgnore
 	public List<VTError> getVTErrors() {
 		List<VTError> vterrors = new ArrayList<VTError>();
 		if(!hasErrors()) {
@@ -140,6 +144,7 @@ public class BaseResponse implements Response {
 		return false;
 	}
 	
+	@JsonIgnore
 	public List<VTError> getFieldErrors(String rootClassName, String fieldName) {
 		List<VTError> vterrors = new ArrayList<VTError>();
 		List<VTErrorFieldBindingMap> bindErrors = getFieldBindingErrors();
