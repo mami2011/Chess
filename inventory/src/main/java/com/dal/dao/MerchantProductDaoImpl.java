@@ -7,14 +7,14 @@ import java.util.List;
 import org.hibernate.SQLQuery;
 
 
-import com.vendertool.common.dal.BaseDaoImpl;
+import com.vendertool.common.dal.BaseDAO;
 
 /**
  * @author murali
  *HibernateDaoSupport
  */
 
-public class MerchantProductDaoImpl extends BaseDaoImpl implements MerchantProductDao {
+public class MerchantProductDaoImpl extends BaseDAO implements MerchantProductDao {
 
 	/* (non-Javadoc)
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#save(com.vendertool.inventory.DBL.BO.MerchantProduct)

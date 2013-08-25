@@ -5,42 +5,24 @@ package com.vendertool.registration.dal.address;
 import java.util.List;
 
 import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import com.vendertool.registration.dal.BaseDaoImpl;
-
-
+import com.vendertool.common.dal.BaseDAO;
 
 /**
  * @author murali
  *HibernateDaoSupport
  */
-public class AddressDaoImpl extends BaseDaoImpl implements AddressDao {
+public class AddressDaoImpl extends BaseDAO implements AddressDao {
 
-	/* (non-Javadoc)
-	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#save(com.vendertool.inventory.DBL.BO.MerchantProduct)
-	 */
-/*	public void insert (Address address) {
-		// TODO Auto-generated method stub
-		org.hibernate.Session session = super.getSession();
-		session.setFlushMode(FlushMode.MANUAL );
-		session.save(address);
-		session.flush();
-	}
-	
-	public void insert (Address address,FlushMode flushMode ) {
-		// TODO Auto-generated method stub
-		org.hibernate.Session session = super.getSession();
-		session.setFlushMode(flushMode);
-		
-		session.save(address);
-		session.flush();
-	
-	}*/
 
 	public void insert(Address address) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().save(address);
-
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.save(address);
+		trans.commit();
 	}
 	
 	/* (non-Javadoc)
@@ -73,5 +55,4 @@ public class AddressDaoImpl extends BaseDaoImpl implements AddressDao {
 		List<Address> results = query.list();
 		return results;
 	}
-
 }

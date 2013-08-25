@@ -209,8 +209,11 @@
 											file="${project.build.outputDirectory}/environment.properties" /> -->
 										<copy file="../fps/src/main/resources/config/qa/aws-credentials/AwsCredentials.properties"
 											tofile="${project.build.outputDirectory}/AwsCredentials.properties" />
-										<copy file="../common/src/main/resources/config/qa/dal/BeanLocations.xml"
-											tofile="${project.build.outputDirectory}/dal/BeanLocations.xml" />
+										<copy file="../common/src/main/resources/config/qa/dal/DBConnectionConfig.xml"
+											tofile="${project.build.outputDirectory}/dal/DBConnectionConfig.xml" />
+										<copy file="../registration/src/main/resources/config/qa/dal/Registration.xml"
+											tofile="${project.build.outputDirectory}/dal/Registration.xml" />	
+											
 									</tasks>
 								</configuration>
 							</execution>
