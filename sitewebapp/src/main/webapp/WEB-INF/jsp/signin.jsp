@@ -24,6 +24,9 @@
 	    	<spring:message code='form.submit' var="submit"/>
 	    	
 	        <h3 class="ttl"><c:out value="${signintitle}" /></h3>
+	        <c:if test="${param.justConfAccount}" >
+	        	<spring:message code='form.registration.welcome'/> <br/>
+	        </c:if>
 
 			<form action="<c:url value="/j_spring_security_check" />" method="POST">
 	       <!-- <form:form method="post" commandName="signin"> -->

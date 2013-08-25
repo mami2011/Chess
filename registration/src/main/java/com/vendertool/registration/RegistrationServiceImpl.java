@@ -29,6 +29,7 @@ import com.vendertool.registration.validation.RegistrationValidator;
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.core.AccountClosureReasonCodeEnum;
 import com.vendertool.sharedtypes.core.AccountConfirmation;
+import com.vendertool.sharedtypes.core.AccountRoleEnum;
 import com.vendertool.sharedtypes.core.AccountStatusEnum;
 import com.vendertool.sharedtypes.error.Errors;
 import com.vendertool.sharedtypes.rnr.AuthorizeMarketRequest;
@@ -172,6 +173,7 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		ac.setConfirmCode(code);
 		ac.setConfirmSessionId(sessionId);
 		account.setAccountConf(ac);
+		account.setRole(AccountRoleEnum.ROLE_USER);
 	}
 
 	private String saltHashPassword(Account account) {
@@ -285,6 +287,9 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		
 //		account.clearPassword();
 //		account.clearAccountConfirmation();
+		if(account.getRole() == null) {
+			account.setRole(AccountRoleEnum.ROLE_USER);
+		}
 		response.setAccount(account);
 		response.setStatus(ResponseAckStatusEnum.SUCCESS);
 		return response;
