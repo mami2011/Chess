@@ -19,10 +19,9 @@
   
   <!-- NOTE: IMPORTANT - Ordering of filter pattern is important -->
   <!-- This is to bypass auth for login & css, else it will be an infinite loop -->
-  <!--
     <sec:http pattern="/favicon.ico" security="none"/>
   	<sec:http pattern="/apple-touch-icon.png" security="none"/>
-  	<sec:http pattern="/index" security="none"/>
+  	<sec:http pattern="/index.jsp" security="none"/>
   	<sec:http pattern="/resources/**" security="none"/>
   	<sec:http pattern="/signin" security="none"/>
   	<sec:http pattern="/signout" security="none"/>
@@ -32,7 +31,6 @@
   	<sec:http pattern="/confirmaccount" security="none"/>
   	<sec:http pattern="/confirmaccountsuccess" security="none"/>
   	<sec:http pattern="/confirmaccountfailed" security="none"/>
-  	-->
   	
   	<!-- NOTE: IMPORTANT - Ordering of filter pattern is important -->
   	<!-- 
@@ -52,7 +50,7 @@
   	 
   	 <!--  access="hasRole('ROLE_USER') -->
 	<sec:http auto-config="true" use-expressions="true">
-		<sec:intercept-url pattern="/**" access="isAuthenticated()" />
+		<sec:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 		
 		<!-- default-target-url="/accounthub" -->
 		<sec:form-login login-page="/signin" 

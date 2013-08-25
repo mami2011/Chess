@@ -100,7 +100,7 @@ public class RegisterController {
 			return "register";
 		}
 		
-		return "accounthub";
+		return "registersuccesspreconfirm";
 	}
 	
 	private void addJsonOutput(Account account, ErrorResponse errorResponse, ModelMap modelMap) {

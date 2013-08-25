@@ -10,5 +10,5 @@ public interface Errors {
 	public static MetadataErrors METADATA = MetadataErrors.getInstance();
 	public static RegistrationErrors REGISTRATION = RegistrationErrors.getInstance();
 	public static SigninErrors SIGNIN = SigninErrors.getInstance();
-	public static FTSErrors FTS = FTSErrors.getInstance();
+	public static FPSErrors FPS = FPSErrors.getInstance();
 }

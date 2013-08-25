@@ -158,6 +158,7 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		ac.setConfirmCode(code);
 		ac.setConfirmSessionId(sessionId);
 		account.setAccountConf(ac);
+		account.setRole(AccountRoleEnum.ROLE_USER);
 	}
 
 	private String saltHashPassword(Account account) {
@@ -271,6 +272,9 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		
 //		account.clearPassword();
 //		account.clearAccountConfirmation();
+		if(account.getRole() == null) {
+			account.setRole(AccountRoleEnum.ROLE_USER);
+		}
 		response.setAccount(account);
 		response.setStatus(ResponseAckStatusEnum.SUCCESS);
 		return response;

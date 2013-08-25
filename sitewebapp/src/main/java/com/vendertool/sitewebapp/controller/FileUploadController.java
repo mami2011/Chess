@@ -1,6 +1,7 @@
 package com.vendertool.sitewebapp.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.vendertool.sharedtypes.core.FileInformation;
+import com.vendertool.sharedtypes.core.FileUploadDataModel;
 import com.vendertool.sharedtypes.core.HttpMethodEnum;
 import com.vendertool.sharedtypes.rnr.FileUploadRequest;
 import com.vendertool.sitewebapp.common.RestServiceClientHelper;
 import com.vendertool.sitewebapp.common.URLConstants;
-import com.vendertool.sitewebapp.model.FileUploadDataModel;
 
 @Controller
 public class FileUploadController {
@@ -33,12 +34,14 @@ public class FileUploadController {
 //	private static ValidationUtil validationUtil = ValidationUtil.getInstance();
 
 	@RequestMapping(value = "fileUpload", method = RequestMethod.GET)
-	public String getFileUploadPage(ModelMap modelMap) {
+	public String getFileUploadPage(ModelMap modelMap, Principal principal) {
 		// TODO validate session
 		logger.info("fileUpload GET controller invoked");
 		FileUploadDataModel uploadForm = new FileUploadDataModel();
-
+		
+		modelMap.addAttribute("email", principal.getName());
 		modelMap.addAttribute("uploadFile", uploadForm);
+		
 		return "fileupload";
 	}
 

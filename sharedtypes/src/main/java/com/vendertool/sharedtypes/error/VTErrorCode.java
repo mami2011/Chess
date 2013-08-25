@@ -16,16 +16,16 @@ import com.vendertool.sharedtypes.exception.DuplicateException;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso({CommonErrorCode.class, RegistrationErrorCode.class, 
 	MetadataErrorCode.class, SigninErrorCode.class, InventoryErrorCode.class,
-	ListingErrorCode.class, FTSErrorCode.class, SystemErrorCode.class})
+	ListingErrorCode.class, FPSErrorCode.class, SystemErrorCode.class})
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
         property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CommonErrorCode.class),
-        @JsonSubTypes.Type(value = FTSErrorCode.class),
+        @JsonSubTypes.Type(value = FPSErrorCode.class),
         @JsonSubTypes.Type(value = InventoryErrorCode.class),
-        @JsonSubTypes.Type(value = FTSErrorCode.class),
+        @JsonSubTypes.Type(value = FPSErrorCode.class),
         @JsonSubTypes.Type(value = ListingErrorCode.class),
         @JsonSubTypes.Type(value = MetadataErrorCode.class),
         @JsonSubTypes.Type(value = RegistrationErrorCode.class),

@@ -1,9 +1,11 @@
 package com.vendertool.sharedtypes.core;
 
-import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+
+import com.vendertool.sharedtypes.core.Phone.PhoneType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ContactDetails {
@@ -13,7 +15,7 @@ public class ContactDetails {
 	private String emailId;
 	private String alternateEmailId;
 	private Address address;
-	private List<Phone> phones;
+	private Map<PhoneType, Phone> phones;
 	
 	public ContactDetails(){}
 
@@ -65,47 +67,15 @@ public class ContactDetails {
 		this.address = address;
 	}
 
-	public List<Phone> getPhones() {
+	public Map<PhoneType, Phone> getPhones() {
 		return phones;
 	}
 
-	public void setPhones(List<Phone> phones) {
+	public void setPhones(Map<PhoneType, Phone> phones) {
 		this.phones = phones;
 	}
+
 	
-	static class Phone {
-		public enum PhoneType {
-			MOBILE, HOME, WORK, PUBLIC, FAX;
-		}
-		
-		private int countryCode;
-		private int areaCode;
-		private int number;
-		
-		public Phone(){}
-
-		public int getCountryCode() {
-			return countryCode;
-		}
-
-		public void setCountryCode(int countryCode) {
-			this.countryCode = countryCode;
-		}
-
-		public int getAreaCode() {
-			return areaCode;
-		}
-
-		public void setAreaCode(int areaCode) {
-			this.areaCode = areaCode;
-		}
-
-		public int getNumber() {
-			return number;
-		}
-
-		public void setNumber(int number) {
-			this.number = number;
-		}
-	}
+	
+	
 }

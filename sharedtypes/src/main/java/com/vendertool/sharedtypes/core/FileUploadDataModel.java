@@ -1,7 +1,11 @@
-package com.vendertool.sitewebapp.model;
+package com.vendertool.sharedtypes.core;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 import org.springframework.web.multipart.MultipartFile;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class FileUploadDataModel {
 	private MultipartFile file;
 

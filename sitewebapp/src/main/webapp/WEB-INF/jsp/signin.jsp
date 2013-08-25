@@ -24,8 +24,12 @@
 	    	<spring:message code='form.submit' var="submit"/>
 	    	
 	        <h3 class="ttl"><c:out value="${signintitle}" /></h3>
+	        <c:if test="${param.justConfAccount}" >
+	        	<spring:message code='form.registration.welcome'/> <br/>
+	        </c:if>
 
-	        <form:form method="post" commandName="signin">
+			<form action="<c:url value="/j_spring_security_check" />" method="POST">
+	       <!-- <form:form method="post" commandName="signin"> -->
 				<c:if test="${errorResponse.hasErrors()}">
 					<div class="errorblock">
 						<c:forEach items="${errorResponse.getVTErrors()}" var="vterror">
@@ -40,7 +44,9 @@
 	            <div>
 	            	<spring:message code='form.signin.username' var="emaillabel"/>
 	            	<c:set var="username_path" value="username" />
-	                <form:input class="form-control" placeholder="${emaillabel}"  path="${username_path}"/>
+	                <!-- <form:input class="form-control" placeholder="${emaillabel}"  path="${username_path}"/> -->
+	                <input id="username" class="form-control" name="j_username" type="text" placeholder="${emaillabel}"/>
+	                <!--
 					<c:if test="${errorResponse.hasFieldError(signin.getClass().getName(), username_path)}">
 						<div>
 							<c:forEach
@@ -52,12 +58,16 @@
 								<br />
 							</c:forEach>
 						</div>
-					</c:if>	                
+					</c:if>
+					-->
 	            </div>
 	            <div>
 	            	<spring:message code='form.signin.password' var="passwordlabel"/>
 	            	<c:set var="password_path" value="password" />
-	                <form:password class="form-control" placeholder="${passwordlabel}" path="${password_path}"/>
+	                <!-- <form:password class="form-control" placeholder="${passwordlabel}" path="${password_path}"/> -->
+	                <!-- For spring login page we have to use the below -->
+	                <input id="password" class="form-control" name="j_password" type="password" placeholder="${passwordlabel}"/>
+	                <!--
 					<c:if test="${errorResponse.hasFieldError(signin.getClass().getName(), password_path)}">
 						<div>
 							<c:forEach
@@ -69,12 +79,14 @@
 								<br />
 							</c:forEach>
 						</div>
-					</c:if>	                
+					</c:if>
+					-->
 	            </div>
 	            <div class="submit">
 	                <input type="submit" class="btn lg" value="${submit}"/>
 	            </div>
-	        </form:form>
+	        <!-- </form:form> -->
+	        </form>
 	    </div>
 	</jsp:body>
 </t:page>
