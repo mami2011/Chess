@@ -7,8 +7,11 @@ all the function params as strings in same order.
 ********************/
 profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$location', 'Data', function($scope, $http, $routeParams, $location, Data) {
 	
-	$scope.profile = Data;
-	$scope.profileEdit = angular.copy($scope.profile);
+	$scope.account = Data.account;
+	$scope.accountEdit = angular.copy($scope.account);
+	
+	
+	
 
 	/** Do something when param is 'edit'**/
 	//if ($routeParams.edit) {
@@ -32,7 +35,7 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 	
 	$scope.save = function() {
 		
-		$http.post('profile/save', $scope.profileEdit).
+		$http.post('profile/save', $scope.accountEdit).
 			success(function (data, status, headers, config) {
 
 				//alert(data.error.NULL_ARGUMENT_PASSED.errorMessage);
@@ -50,7 +53,7 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 		
 		var hasChanged = false, key;
 		
-		$scope.profileEdit = data;
+		$scope.accountEdit = data;
 		
 		if (data.error) {
 			// Show error message at the top of page
@@ -64,12 +67,12 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 					if (data.hasOwnProperty(key)) {
 
 						// Only flip flag if not already flipped
-						if ($scope.profile[key] !== data[key] && hasChanged === false) {
+						if ($scope.account[key] !== data[key] && hasChanged === false) {
 							hasChanged = true;
 						}
 
 						// Do the update
-						$scope.profile[key] = data[key];
+						$scope.account[key] = data[key];
 					}
 				}
 			}
@@ -87,7 +90,7 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
   	
 
 	$scope.reset = function() {
-    	$scope.profileEdit = angular.copy($scope.profile);
+    	$scope.accountEdit = angular.copy($scope.account);
     	$location.path('profile'); // path not hash
   	};
   	

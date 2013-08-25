@@ -10,7 +10,7 @@
 <t:page title="VendorTool" angularAppName="profileApp">
 
 	<jsp:attribute name="header">
-		<t:header email="${profile.username}" currentPage="profile"/>
+		<t:header email="${account.emailId}" currentPage="profile"/>
 	</jsp:attribute>
 	
 	<jsp:attribute name="scripts">
@@ -21,7 +21,7 @@
 	<jsp:attribute name="inlineJs">
 		<script type="text/javascript">
 			profileApp.factory('Data', function() {
-				return ${profileJson};
+				return ${modelMapJson};
 			});
 		</script>
 	</jsp:attribute>

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -19,18 +20,46 @@ import com.vendertool.sharedtypes.core.ContactDetails;
 import com.vendertool.sharedtypes.core.CountryEnum;
 import com.vendertool.sharedtypes.error.CommonErrorCode;
 import com.vendertool.sharedtypes.error.VTError;
+import com.vendertool.sharedtypes.exception.VTRuntimeException;
+import com.vendertool.sharedtypes.rnr.ErrorResponse;
 import com.vendertool.sitewebapp.builder.ProfileBuilder;
 
 @Controller
 public class ProfileController {
 	private static final Logger logger = Logger.getLogger(ProfileController.class);
 	
+	
+	@RequestMapping(value="profile", method=RequestMethod.GET)
+	public String getProfileView(ModelMap modelMap) {
+		logger.info("profile GET controller invoked");
+
+		Account account = getAccount();
+		ErrorResponse errorResponse = new ErrorResponse();
+
+		modelMap.addAttribute("account", account);
+		modelMap.addAttribute("errorResponse", errorResponse);
+		
+		// Add JSON for Angular
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			String modelMapJson= mapper.writeValueAsString(modelMap);
+			modelMap.put("modelMapJson", modelMapJson);
+		}
+		catch (Exception e) {
+			logger.log(Level.ERROR, e.getMessage(), e);
+			e.printStackTrace();
+			throw new VTRuntimeException("Cannot convert modelMap to json");
+		}
+		
+		return "profile/main";
+	}
+	
 	/**
 	 * Main profile page. Displays current profile info.
 	 * 
 	 * @param modelMap
 	 * @return
-	 */
+	 
 	@RequestMapping(value = "profile", method = RequestMethod.GET)
 	public String getProfilePage(ModelMap modelMap) {
 		logger.info("profile GET controller invoked");
@@ -51,7 +80,7 @@ public class ProfileController {
 		}
 		
 		return "profile/main";
-	}
+	}*/
 	
 	/**
 	 * Save edited profile.
@@ -122,6 +151,9 @@ public class ProfileController {
 		Account acct = new Account();
 		acct.setEmailId("ted@gmail.com");
 		acct.setContactDetails(contact);
+		
+		
+	
 		
 		return acct;
 	}
