@@ -8,4 +8,5 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean id="accountDao" class="com.vendertool.registration.dal.account.AccountDaoImpl">
 		<property name="sessionFactory" ref="invdbSessionFactory"></property>
 	</bean>
+
 </beans>

@@ -1,12 +1,9 @@
 package com.vendertool.sitewebapp.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,17 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vendertool.sharedtypes.core.Account;
-import com.vendertool.sharedtypes.core.Address;
 import com.vendertool.sharedtypes.core.ContactDetails;
 import com.vendertool.sharedtypes.core.CountryEnum;
-import com.vendertool.sharedtypes.core.Phone;
-import com.vendertool.sharedtypes.core.Phone.PhoneType;
-import com.vendertool.sharedtypes.error.CommonErrorCode;
 import com.vendertool.sharedtypes.error.VTError;
-import com.vendertool.sharedtypes.error.VTErrorFieldBindingMap;
 import com.vendertool.sharedtypes.exception.VTRuntimeException;
 import com.vendertool.sharedtypes.rnr.ErrorResponse;
 import com.vendertool.sharedtypes.rnr.UpdateAccountRequest;
+import com.vendertool.sitewebapp.util.MockDataUtil;
 
 @Controller
 public class ProfileController {
@@ -44,7 +37,7 @@ public class ProfileController {
 		/***
 		 * TODO: Getting the real data needs to be implemented.
 		 */
-		Account account = getAccount();
+		Account account = MockDataUtil.getAccount();
 		
 		ErrorResponse errorResponse = new ErrorResponse();
 
@@ -151,12 +144,14 @@ public class ProfileController {
 		 * TODO: Getting the real data needs to be implemented.
 		 */
 		Account responseAccount = account;
-		ErrorResponse errorResponse = getUpdateAccountErrors();
+		ErrorResponse errorResponse = MockDataUtil.getUpdateAccountErrors(account);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("account", responseAccount);
-		Map<String, List<VTError>> errorMap = buildErrorMap(errorResponse);
-		map.put("errorMap", errorMap);
+		map.put("errorResponse", errorResponse);
+		
+		//Map<String, List<VTError>> errorMap = buildErrorMap(errorResponse);
+		//map.put("errorMap", errorMap);
 		
 		return map;
 	}
@@ -195,50 +190,6 @@ public class ProfileController {
 		return "profile/partial/profileEdit";
 	}
 	
-	private static Account getAccount() {
-		Address address = new Address();
-		address.setAddressLine1("123 Main St");
-		address.setAddressLine2("Apt. B");
-		address.setCity("San Jose");
-		address.setState("CA");
-		address.setZip("95125");
-		address.setCountry(CountryEnum.UNITED_STATES);
-		ContactDetails contact = new ContactDetails();
-		contact.setAddress(address);
-		contact.setFirstName("Ted");
-		contact.setLastName("Szeto");
-		Account acct = new Account();
-		acct.setEmailId("ted@gmail.com");
-		acct.setContactDetails(contact);
-		
-		Phone workPhone = new Phone();
-		workPhone.setAreaCode(408);
-		workPhone.setCountryCode(011);
-		workPhone.setNumber(5555555);
-		workPhone.setType(PhoneType.WORK);
-		Map<PhoneType, Phone> phones = new HashMap<PhoneType, Phone>();
-		phones.put(workPhone.getType(), workPhone);
-		contact.setPhones(phones);
-		
-		return acct;
-	}
-	
-	private static ErrorResponse getUpdateAccountErrors() {
-		
-		ErrorResponse res = new ErrorResponse();
-
-		VTError vtError = new VTError();
-		vtError.setMessage("First name cannot be empty");
-		
-		VTErrorFieldBindingMap errorMap = new VTErrorFieldBindingMap(vtError, ContactDetails.class.getName(), "firstName");
-		
-		
-		List<VTErrorFieldBindingMap> errors = new ArrayList<VTErrorFieldBindingMap>();
-		errors.add(errorMap);
-		res.setFieldBindingErrors(errors);
-
-		return res;
-	}
 	
 	private static Map<String, List<VTError>> buildErrorMap(ErrorResponse errorResponse) {
 		Map<String, List<VTError>> errorMap = new HashMap<String, List<VTError>>();

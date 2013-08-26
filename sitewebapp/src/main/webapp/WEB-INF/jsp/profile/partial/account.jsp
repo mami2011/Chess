@@ -1,87 +1,69 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%-- 
-<div class="msg">
-	<div class="alert alert-danger" style="display:none;">Sorry, there's been an error.</div>
-</div>--%>
+<script>
+    var $element = $('table[ng-controller="ProfileCtrl"]');
+    var scope = angular.element($element).scope();
+   	alert(scope.accountOrig.emailId);
+</script>
+--%>
+
+
 <table id="info" class="info" cellspacing="0" cellpadding="0">
 	<tr>
 		<td class="col1"><label>Email:</label></td>
 		<td class="col2"><input ng-model="accountEdit.emailId" class="form-control readonly" readonly/></td>
 	</tr>
-	
-	<%-- 
-	<tr class="ng-class:{'err': errorResp.fieldBindingErrors.firstName != null};">--%>
-	
-	<tr class="ng-class:{'err': errorMap.firstName != null};">
+	<tr class="fldWrp">
 		<td class="col1"><label>First name:</label></td>
 		<td class="col2">
 			<input ng-model="accountEdit.contactDetails.firstName" class="form-control"/>
-			<div class="err-msg">
-				<div ng-repeat="error in errorMap.firstName">
-					{{error.message}}
-				</div>
-				
-			</div>
+			<div error field="firstName" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
 		</td>
 	</tr>
-	<tr>
+	<tr class="fldWrp">
 		<td class="col1"><label>Last name:</label></td>
-		<td class="col2"><input ng-model="accountEdit.contactDetails.lastName" class="form-control"/></td>
+		<td class="col2">
+			<input ng-model="accountEdit.contactDetails.lastName" class="form-control"/>
+			<div error field="lastName" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
+		</td>
 	</tr>
-
-	 
-	 <%--
-	 {{errorResponse.fieldBindingErrors[0].bindingFieldMap.firstName[0]}}
-	 
-	 <c:if test="${errorResponse.hasFieldError(account.getContactDetails().getClass().getName(), firstnamepath)}">
-						<div>
-							<c:forEach
-								items="${errorResponse.getFieldErrors(account.getContactDetails().getClass().getName(), firstnamepath)}"
-								var="vterror">
-								<span class="errorfont">
-									<c:out value="${vterror.getMessage()}" />
-								</span>
-								<br />
-							</c:forEach>
-						</div>
-					</c:if>
-					
-	 
-	 
-	  --%>
-	  
-	 
-	<tr class="ng-class:{'err': profileEdit.error.NULL_ARGUMENT_PASSED != null};">
-	<%--
-	<tr ng-class="{err: pageEdit.fieldMap.ADDRESS_LINE_1.errors != null}; err">
-	--%>
+	<tr class="fldWrp">
 		<td class="col1"><label>Address 1:</label></td>
 		<td class="col2">
 			<input ng-model="accountEdit.contactDetails.address.addressLine1" class="form-control" />
-			<div class="err-msg">{{profileEdit.error.NULL_ARGUMENT_PASSED.errorMessage}}</div>		
+			<div error field="addressLine1" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
 		</td>
 	</tr>
-	<tr>
+	<tr class="fldWrp">
 		<td class="col1"><label>Address 2:</label></td>
-		<td class="col2"><input ng-model="accountEdit.contactDetails.address.addressLine2" class="form-control" /></td>
+		<td class="col2">
+			<input ng-model="accountEdit.contactDetails.address.addressLine2" class="form-control" />
+			<div error field="addressLine2" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
+		</td>
 	</tr>
-	<tr class="ng-class:{'err': profileEdit.error.INTERNAL_DATABASE_DOWN != null};">
+	<tr class="fldWrp">
 		<td class="col1"><label>City:</label></td>
 		<td class="col2">
 			<input ng-model="accountEdit.contactDetails.address.city" class="form-control" />
-			<div class="err-msg">{{profileEdit.error.INTERNAL_DATABASE_DOWN.errorMessage}}</div>		
+			<div error field="city" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
 		</td>
 	</tr>
-	<tr>
+	<tr class="fldWrp">
 		<td class="col1"><label>State:</label></td>
-		<td class="col2"><input ng-model="accountEdit.contactDetails.address.state" class="form-control" /></td>
+		<td class="col2">
+			<input ng-model="accountEdit.contactDetails.address.state" class="form-control" />
+			<div error field="state" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
+		</td>
 	</tr>
-	<tr>
+	<tr class="fldWrp">
 		<td class="col1"><label>Zip:</label></td>
-		<td class="col2"><input ng-model="accountEdit.contactDetails.address.zip" class="form-control" /></td>
+		<td class="col2">
+			<input ng-model="accountEdit.contactDetails.address.zip" class="form-control" />
+			<div error field="zip" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
+		</td>
 	</tr>
-	<tr>
+	<tr class="fldWrp">
 		<td class="col1"><label>Country:</label></td>
 		<td class="col2"><%--
 			 <select ng-model="acctFieldSetEdit.country.value" ng-options="c.value for c in acctFieldSetEdit.country.options"></select>
@@ -95,6 +77,8 @@
 					<option value="${entry.key}">${entry.value}</option>
 				</c:forEach>
     		</select> --%>
+    		
+    		<div error field="country" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
 		</td>
 	</tr>
 	<tr>
