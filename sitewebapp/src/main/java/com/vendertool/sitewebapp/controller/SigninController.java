@@ -1,26 +1,36 @@
 package com.vendertool.sitewebapp.controller;
 
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.vendertool.sharedtypes.core.Signin;
+import com.vendertool.sitewebapp.util.MenuBuilder;
 
 @Controller
 public class SigninController {
 	private static final Logger logger = Logger.getLogger(SigninController.class);
 	
 	@RequestMapping(value="signin", method=RequestMethod.GET)
-	public String getSigninView(Model model){
+	public String getSigninView(Model model, HttpServletRequest request){
 		logger.info("signin GET controller invoked");
 		
+		Locale locale = RequestContextUtils.getLocale(request);
+
 		Signin signin = new Signin();
 		model.addAttribute("signin", signin);
+		model.addAttribute("langOptions", MenuBuilder.getLanguageOptions(locale));
+		model.addAttribute("selectedLang", request.getParameter("lang"));
+		
 		return "signin";
 	}
 	

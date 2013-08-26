@@ -9,18 +9,17 @@
 	<tr class="fldWrp">
 		<td class="col1"><label>New password:</label></td>
 		<td class="col2">
-			<input ng-model="accountEdit.password" class="form-control"/>
+			<input ng-model="accountEdit.password" class="form-control" type="password"/>
 			<div error field="password" cname="com.vendertool.registration.dal.account.Account"></div>
 		</td>
 	</tr>
 	<tr class="fldWrp">
 		<td class="col1"><label>Confirm new password:</label></td>
 		<td class="col2">
-			<input ng-model="accountEdit.password" class="form-control"/>
+			<input ng-model="accountEdit.password" class="form-control" type="password"/>
 			<div error field="password" cname="com.vendertool.registration.dal.account.Account"></div>
 		</td>
 	</tr>
-
 	<tr>
 		<td colspan="2">
 			<hr class="sep"/>

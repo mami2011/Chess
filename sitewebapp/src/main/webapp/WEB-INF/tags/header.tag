@@ -30,7 +30,7 @@ Attributes
 								<spring:message code="form.signin.signin"/>
 							</c:when>
 							<c:otherwise>
-								<a href="/signin"><spring:message code="form.signin.signin"/></a>
+								<a href="signin"><spring:message code="form.signin.signin"/></a>
 							</c:otherwise>
 						</c:choose>
 						|
@@ -53,7 +53,6 @@ Attributes
 						  <li class="divider"></li>
 						  <li><a tabindex="-1" href="<c:url value="j_spring_security_logout" />">Sign-out</a></li>
 						</ul>
-
 					</div>
 					<form class="srch inline">
 						<input placeholder="Search"/>
@@ -68,9 +67,12 @@ Attributes
 					<span>
 						<spring:message code="form.registration.lang"/>
 					</span>
+
 					<select id="languageMenu" name="lang">
-						<option value="en">English</option>
-						<option value="es">español</option>
+						<c:forEach var="entry" items="${langOptions}">
+							<c:set var="selected" value="${entry.val == selectedLang ? 'selected' : ''}"/>
+							<option value="${entry.val}" ${selected}>${entry.txt}</option>
+						</c:forEach>
 					</select>
 				</form>
 			</c:if>

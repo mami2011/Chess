@@ -27,20 +27,25 @@ import com.vendertool.sharedtypes.rnr.RegisterAccountResponse;
 import com.vendertool.sitewebapp.common.RestServiceClientHelper;
 import com.vendertool.sitewebapp.common.URLConstants;
 import com.vendertool.sitewebapp.common.VTErrorUtil;
+import com.vendertool.sitewebapp.util.MenuBuilder;
 
 @Controller
 public class RegisterController {
 	private static final Logger logger = Logger.getLogger(RegisterController.class);
 	
 	@RequestMapping(value="register", method=RequestMethod.GET)
-	public String getRegistrationView(ModelMap modelMap) {
+	public String getRegistrationView(ModelMap modelMap, HttpServletRequest request) {
 		logger.info("register GET controller invoked");
 
 		Account account = new Account();
 		ErrorResponse errorResponse = new ErrorResponse();
+		Locale locale = RequestContextUtils.getLocale(request);
 		
 		modelMap.addAttribute("account", account);
 		modelMap.addAttribute("errorResponse", errorResponse);
+		modelMap.addAttribute("langOptions", MenuBuilder.getLanguageOptions(locale));
+		modelMap.addAttribute("selectedLang", request.getParameter("lang"));
+		
 		return "register";
 	}
 	

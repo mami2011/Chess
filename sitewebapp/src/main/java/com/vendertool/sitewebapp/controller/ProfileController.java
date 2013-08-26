@@ -1,9 +1,6 @@
 package com.vendertool.sitewebapp.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,21 +14,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.vendertool.sharedtypes.core.Account;
-import com.vendertool.sharedtypes.core.CountryEnum;
 import com.vendertool.sharedtypes.exception.VTRuntimeException;
 import com.vendertool.sharedtypes.rnr.ErrorResponse;
 import com.vendertool.sharedtypes.rnr.UpdateAccountRequest;
-import com.vendertool.sitewebapp.common.MsgSource;
+import com.vendertool.sitewebapp.util.MenuBuilder;
 import com.vendertool.sitewebapp.util.MockDataUtil;
 
 @Controller
 public class ProfileController {
 	private static final Logger logger = Logger.getLogger(ProfileController.class);
-	private static final MsgSource MSG_SOURCE = new MsgSource();
-	
+
 	/**
 	 * Main profile page. Displays account info.
 	 * 
@@ -51,7 +45,7 @@ public class ProfileController {
 
 		modelMap.addAttribute("account", account);
 		modelMap.addAttribute("errorResponse", errorResponse);
-		modelMap.addAttribute("countryOptions", getCountryOptions(request));
+		modelMap.addAttribute("countryOptions", MenuBuilder.getCountryOptions(request));
 		
 		// Add JSON for Angular
 		try {
@@ -91,7 +85,7 @@ public class ProfileController {
 		updateAccountReq.setAccount(account);
 		
 		/********* This needs to be implemented ***********
-		Response response = RestServiceUtil.post(
+		Response response = RestServiceClientHelper.post(
 				updateAccountReq,
 				"NEED_THIS_SERVICE_PATH",
 				request);
@@ -175,31 +169,7 @@ public class ProfileController {
 		return "profile/partial/password";
 	}
 	
-	/**
-	 * Gets a list of countries for the country select menu on the profile page.
-	 * List includes the translated country name and its menu value.
-	 * 
-	 * @param request
-	 * @return
-	 */
-	private static List<Map<String, String>> getCountryOptions(HttpServletRequest request) {
-		
-		List<Map<String, String>> countryOptions = new ArrayList<Map<String, String>>();
-		Locale locale = RequestContextUtils.getLocale(request);
 
-		CountryEnum[] countryEnums = CountryEnum.values();
-		for (CountryEnum c : countryEnums) {
-			String txt = MSG_SOURCE.getMessage(c.name(), null, locale);
-			if (txt != null && txt.length() > 0) {
-				Map<String, String> country = new HashMap<String, String>();
-				country.put("val", c.name());
-				country.put("txt", txt);
-				countryOptions.add(country);
-			}
-		}
-
-		return countryOptions;
-	}
 
 	
 }
