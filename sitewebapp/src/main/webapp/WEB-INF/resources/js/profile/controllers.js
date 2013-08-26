@@ -11,8 +11,6 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 	$scope.accountEdit = angular.copy(Data.account);
 	$scope.errorResponse = angular.copy(Data.errorResponse);
 	
-	
-	
 
 	/** Do something when param is 'edit'**/
 	//if ($routeParams.edit) {
@@ -29,7 +27,7 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 	
 	/** Do something when page is 'profile'**/
 	if ($location.path() === '/profile') {
-		$('.alert-danger').hide();
+		//$('.alert-danger').hide();
 	}
 	
 
@@ -38,32 +36,37 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 		
 		$http.post('profile/save', $scope.accountEdit).
 			success(function (data, status, headers, config) {
-
+				
 				$scope.accountOrig = angular.copy(data.account);
 				$scope.accountEdit = angular.copy(data.account);
 				$scope.errorResponse = angular.copy(data.errorResponse);
-				$scope.errorMap = angular.copy(data.errorMap);
 				
-				//if ($scope.errorResponse) {
-				if ($scope.errorMap) {
+				
+				if ($scope.errorResponse.fieldBindingErrors.length > 0) {
 					// Show error message at the top of page
 					$('.alert-danger').show();
 					
+					var className = 'com.vendertool.sharedtypes.core.ContactDetails';
+					var fieldNames = [
+						'firstName',
+						'lastName',
+						'addressLine1',
+						'addressLine2',
+						'city',
+						'state',
+						'zip',
+						'country'
+					];
 					
-					
+					$scope.errorMap = ErrorUtil.getErrorMap(className, fieldNames, $scope.errorResponse);
 
-					
-					//$scope.errorResp = errorResp;
-					
-					
-					
 				}
 				else {
+					$scope.errorMap = null;
 					
-					// Show success message on contact info page
-					$location.path('/profile'); // path not hash
-					
-					
+					// Take user to profile page
+					//$location.path('/profile'); // path not hash
+					$('.alert-danger').hide();
 					$('.alert-success').show().delay(1500).fadeOut(300);
 				}
 				
@@ -75,6 +78,7 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 		
 
 	};
+	
 	
 	$scope.updateModel = function(data) {
 		

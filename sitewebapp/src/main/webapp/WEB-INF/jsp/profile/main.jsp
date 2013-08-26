@@ -14,6 +14,7 @@
 	</jsp:attribute>
 	
 	<jsp:attribute name="scripts">
+		<script src="<c:url value='/resources/js/shared/errorUtil.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/resources/js/profile/app.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/resources/js/profile/controllers.js' />" type="text/javascript"></script>
 	</jsp:attribute>
@@ -127,6 +128,8 @@
 			  </td>
 			</tr>
 		</table><!-- end of ng-controller="ProfileCtrl" -->
+		
+
 	</jsp:body>
 
 </t:page>
