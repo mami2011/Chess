@@ -10,7 +10,7 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 	$scope.accountOrig = angular.copy(Data.account);
 	$scope.accountEdit = angular.copy(Data.account);
 	$scope.errorResponse = angular.copy(Data.errorResponse);
-
+	$scope.countryOptions = angular.copy(Data.countryOptions);
 	
 	/** Do something when param is 'edit'**/
 	//if ($routeParams.edit) {

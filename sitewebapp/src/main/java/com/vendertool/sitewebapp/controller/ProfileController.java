@@ -1,8 +1,9 @@
 package com.vendertool.sitewebapp.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,22 +17,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.vendertool.sharedtypes.core.Account;
-import com.vendertool.sharedtypes.core.ContactDetails;
 import com.vendertool.sharedtypes.core.CountryEnum;
-import com.vendertool.sharedtypes.error.VTError;
 import com.vendertool.sharedtypes.exception.VTRuntimeException;
 import com.vendertool.sharedtypes.rnr.ErrorResponse;
 import com.vendertool.sharedtypes.rnr.UpdateAccountRequest;
+import com.vendertool.sitewebapp.common.MsgSource;
 import com.vendertool.sitewebapp.util.MockDataUtil;
 
 @Controller
 public class ProfileController {
 	private static final Logger logger = Logger.getLogger(ProfileController.class);
-
+	private static final MsgSource MSG_SOURCE = new MsgSource();
+	
+	/**
+	 * Main profile page. Displays account info.
+	 * 
+	 * @param modelMap
+	 * @return
+	 */
 	@RequestMapping(value="profile", method=RequestMethod.GET)
-	public String getProfileView(ModelMap modelMap) {
+	public String getProfileView(ModelMap modelMap, HttpServletRequest request) {
 		logger.info("getProfileView controller invoked");
 
 		/***
@@ -43,6 +51,7 @@ public class ProfileController {
 
 		modelMap.addAttribute("account", account);
 		modelMap.addAttribute("errorResponse", errorResponse);
+		modelMap.addAttribute("countryOptions", getCountryOptions(request));
 		
 		// Add JSON for Angular
 		try {
@@ -58,45 +67,13 @@ public class ProfileController {
 		
 		return "profile/main";
 	}
-	
-	/**
-	 * Main profile page. Displays current profile info.
-	 * 
-	 * @param modelMap
-	 * @return
-	 
-	@RequestMapping(value = "profile", method = RequestMethod.GET)
-	public String getProfilePage(ModelMap modelMap) {
-		logger.info("profile GET controller invoked");
-		
-		Account acct = getAccount();
 
-		Map<String, String> profile = ProfileBuilder.getProfile(acct);
-		modelMap.put("profile", profile);
-		
-		// Add JSON for Angular
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			String profileJson= mapper.writeValueAsString(profile);
-			modelMap.put("profileJson", profileJson);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return "profile/main";
-	}*/
 	
 	/**
-	 * Save edited profile.
-	 * 
-	 * @RequestMapping(value="profile/save", method=RequestMethod.POST)
-	public @ResponseBody ModelMap saveProfile(
-			@RequestBody Account account, 
-			HttpServletRequest request,
-			ModelMap modelMap) {
-			
-	 * @param profile
+	 * Save edited account.
+	 *  
+	 * @param account
+	 * @param request
 	 * @return
 	 */
 	@RequestMapping(value="profile/save", method=RequestMethod.POST)
@@ -109,7 +86,7 @@ public class ProfileController {
 		if (account == null) {
 			throw new VTRuntimeException("Cannot update account. Account is null.");
 		}
-		
+
 		UpdateAccountRequest updateAccountReq = new UpdateAccountRequest();
 		updateAccountReq.setAccount(account);
 		
@@ -163,49 +140,37 @@ public class ProfileController {
 	 * @return
 	 */
 	@RequestMapping(value = "profile/partial/account", method = RequestMethod.GET)
-	public String getAccountPartial(ModelMap modelMap) {
+	public String getAccountPartial(ModelMap modelMap, HttpServletRequest request) {
 		logger.info("getAccountPartial controller invoked");
-
+		
+		//Map<String, String> countryMap = getCountryMap(request);
+		//modelMap.put("countryMap", countryMap);
+		
 		return "profile/partial/account";
 	}
 	
-	/**
-	 * Angular partial pageEdit.jsp has been requested via ajax.
-	 * 
-	 * @param modelMap
-	 * @return
-	 */
-	@RequestMapping(value = "profile/partial/profileEdit", method = RequestMethod.GET)
-	public String getProfileEditPartial(ModelMap modelMap) {
+	
+	
+	private static List<Map<String, String>> getCountryOptions(HttpServletRequest request) {
 		
-		Map<String, String> countryMap = new LinkedHashMap<String, String>();
+		List<Map<String, String>> countryOptions = new ArrayList<Map<String, String>>();
+		Locale locale = RequestContextUtils.getLocale(request);
 
 		CountryEnum[] countryEnums = CountryEnum.values();
-		for (CountryEnum ce : countryEnums) {
-			countryMap.put(ce.getId() + "", ce.getDisplayName());
+		for (CountryEnum c : countryEnums) {
+			String txt = MSG_SOURCE.getMessage(c.name(), null, locale);
+			if (txt != null && txt.length() > 0) {
+				Map<String, String> country = new HashMap<String, String>();
+				country.put("val", c.name());
+				country.put("txt", txt);
+				countryOptions.add(country);
+			}
 		}
-		
-		modelMap.put("countryMap", countryMap);
 
-		return "profile/partial/profileEdit";
+		return countryOptions;
 	}
 	
-	
-	private static Map<String, List<VTError>> buildErrorMap(ErrorResponse errorResponse) {
-		Map<String, List<VTError>> errorMap = new HashMap<String, List<VTError>>();
-		
 
-		List<VTError> firstNameErrors = errorResponse.getFieldErrors(ContactDetails.class.getName(), "firstName");
-		List<VTError> lastNameErrors = errorResponse.getFieldErrors(ContactDetails.class.getName(), "lastName");
-		
-		
-		errorMap.put("firstName", firstNameErrors);
-		errorMap.put("lastName", lastNameErrors);
-		
-		
-		return errorMap;
-	}
-	
 
 	
 
