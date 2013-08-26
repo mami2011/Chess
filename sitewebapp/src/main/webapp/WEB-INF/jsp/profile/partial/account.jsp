@@ -8,61 +8,62 @@
 </script>
 --%>
 
+
 <table id="info" class="info" cellspacing="0" cellpadding="0">
 	<tr>
 		<td class="col1"><label>Email:</label></td>
 		<td class="col2"><input ng-model="accountEdit.emailId" class="form-control readonly" readonly/></td>
 	</tr>
-	<tr class="ng-class:{'err': errorMap.firstName};">
+	<tr class="fldWrp">
 		<td class="col1"><label>First name:</label></td>
 		<td class="col2">
 			<input ng-model="accountEdit.contactDetails.firstName" class="form-control"/>
-			<div class="err-msg" ng-repeat="errorMsg in errorMap.firstName">{{errorMsg}}</div>
+			<div error field="firstName" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
 		</td>
 	</tr>
-	<tr class="ng-class:{'err': errorMap.lastName};">
+	<tr class="fldWrp">
 		<td class="col1"><label>Last name:</label></td>
 		<td class="col2">
 			<input ng-model="accountEdit.contactDetails.lastName" class="form-control"/>
-			<div class="err-msg" ng-repeat="errorMsg in errorMap.lastName">{{errorMsg}}</div>
+			<div error field="lastName" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
 		</td>
 	</tr>
-	<tr class="ng-class:{'err': errorMap.addressLine1};">
+	<tr class="fldWrp">
 		<td class="col1"><label>Address 1:</label></td>
 		<td class="col2">
 			<input ng-model="accountEdit.contactDetails.address.addressLine1" class="form-control" />
-			<div class="err-msg" ng-repeat="errorMsg in errorMap.addressLine1">{{errorMsg}}</div>
+			<div error field="addressLine1" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
 		</td>
 	</tr>
-	<tr class="ng-class:{'err': errorMap.addressLine2};">
+	<tr class="fldWrp">
 		<td class="col1"><label>Address 2:</label></td>
 		<td class="col2">
 			<input ng-model="accountEdit.contactDetails.address.addressLine2" class="form-control" />
-			<div class="err-msg" ng-repeat="errorMsg in errorMap.addressLine2">{{errorMsg}}</div>
+			<div error field="addressLine2" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
 		</td>
 	</tr>
-	<tr class="ng-class:{'err': errorMap.city};">
+	<tr class="fldWrp">
 		<td class="col1"><label>City:</label></td>
 		<td class="col2">
 			<input ng-model="accountEdit.contactDetails.address.city" class="form-control" />
-			<div class="err-msg" ng-repeat="errorMsg in errorMap.city">{{errorMsg}}</div>
+			<div error field="city" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
 		</td>
 	</tr>
-	<tr class="ng-class:{'err': errorMap.state};">
+	<tr class="fldWrp">
 		<td class="col1"><label>State:</label></td>
 		<td class="col2">
 			<input ng-model="accountEdit.contactDetails.address.state" class="form-control" />
-			<div class="err-msg" ng-repeat="errorMsg in errorMap.state">{{errorMsg}}</div>
+			<div error field="state" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
 		</td>
 	</tr>
-	<tr class="ng-class:{'err': errorMap.zip};">
+	<tr class="fldWrp">
 		<td class="col1"><label>Zip:</label></td>
 		<td class="col2">
 			<input ng-model="accountEdit.contactDetails.address.zip" class="form-control" />
-			<div class="err-msg" ng-repeat="errorMsg in errorMap.zip">{{errorMsg}}</div>
+			<div error field="zip" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
 		</td>
 	</tr>
-	<tr class="ng-class:{'err': errorMap.country};">
+	<tr class="fldWrp">
 		<td class="col1"><label>Country:</label></td>
 		<td class="col2"><%--
 			 <select ng-model="acctFieldSetEdit.country.value" ng-options="c.value for c in acctFieldSetEdit.country.options"></select>
@@ -77,7 +78,7 @@
 				</c:forEach>
     		</select> --%>
     		
-    		<div class="err-msg" ng-repeat="errorMsg in errorMap.country">{{errorMsg}}</div>
+    		<div error field="country" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
 		</td>
 	</tr>
 	<tr>
