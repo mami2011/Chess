@@ -8,8 +8,6 @@ import java.util.List;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.ContextLoader;
 
 import com.vendertool.common.dal.BaseDAO;
 
@@ -18,18 +16,7 @@ import com.vendertool.common.dal.BaseDAO;
  */
 
 public class AccountDaoImpl extends BaseDAO implements AccountDao {
-
-	static private AccountDao accountDao;
-
-	public static AccountDao getInstance() {
-		if (accountDao == null) {
-			ApplicationContext ctx = ContextLoader
-					.getCurrentWebApplicationContext();
-			accountDao = (AccountDao) ctx.getBean("accountDao");
-		}
-		return accountDao;
-	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -87,5 +74,12 @@ public class AccountDaoImpl extends BaseDAO implements AccountDao {
 		List<Account> results = query.list();
 		return results;
 	}
-
+	
+	public long getNextValue(){
+		Session session = getDalSession();
+		 SQLQuery query = session.createSQLQuery("VALUES NEXTVAL FOR <sequence_name>");
+		 query.addEntity(Long.class);
+		 List<Long> nextValue = query.list();
+		 return nextValue.get(0);
+	}
 }
