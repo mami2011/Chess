@@ -12,6 +12,9 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 	$scope.errorResponse = angular.copy(Data.errorResponse);
 	$scope.countryOptions = angular.copy(Data.countryOptions);
 	
+	// Remove email to let user enter new email
+	$scope.accountEdit.emailId = '';
+
 	/** Do something when param is 'edit'**/
 	//if ($routeParams.edit) {
 		//$('#info').removeClass('readonly');
@@ -84,6 +87,10 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 
 	$scope.reset = function() {
     	$scope.accountEdit = angular.copy($scope.accountOrig);
+    	
+    	// Remove email to let user enter new email
+    	$scope.accountEdit.emailId = '';
+    	
     	$scope.errorResponse = undefined;
     	$('.alert-danger').hide();
     	

@@ -149,8 +149,39 @@ public class ProfileController {
 		return "profile/partial/account";
 	}
 	
+	/**
+	 * Angular partial email.jsp has been requested via ajax.
+	 * 
+	 * @param modelMap
+	 * @return
+	 */
+	@RequestMapping(value = "profile/partial/email", method = RequestMethod.GET)
+	public String getEmailPartial(ModelMap modelMap, HttpServletRequest request) {
+		logger.info("getEmailPartial controller invoked");
+		
+		return "profile/partial/email";
+	}
 	
+	/**
+	 * Angular partial password.jsp has been requested via ajax.
+	 * 
+	 * @param modelMap
+	 * @return
+	 */
+	@RequestMapping(value = "profile/partial/password", method = RequestMethod.GET)
+	public String getPasswordPartial(ModelMap modelMap, HttpServletRequest request) {
+		logger.info("getPasswordPartial controller invoked");
+		
+		return "profile/partial/password";
+	}
 	
+	/**
+	 * Gets a list of countries for the country select menu on the profile page.
+	 * List includes the translated country name and its menu value.
+	 * 
+	 * @param request
+	 * @return
+	 */
 	private static List<Map<String, String>> getCountryOptions(HttpServletRequest request) {
 		
 		List<Map<String, String>> countryOptions = new ArrayList<Map<String, String>>();
@@ -169,13 +200,6 @@ public class ProfileController {
 
 		return countryOptions;
 	}
-	
 
-
-	
-
-	
-	
-	
 	
 }

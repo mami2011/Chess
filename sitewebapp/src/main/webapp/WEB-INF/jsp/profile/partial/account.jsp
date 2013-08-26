@@ -12,7 +12,7 @@
 <table id="info" class="info" cellspacing="0" cellpadding="0">
 	<tr>
 		<td class="col1"><label>Email:</label></td>
-		<td class="col2"><input ng-model="accountEdit.emailId" class="form-control readonly" readonly/></td>
+		<td class="col2"><input ng-model="accountOrig.emailId" class="form-control readonly" readonly/></td>
 	</tr>
 	<tr class="fldWrp">
 		<td class="col1"><label>First name:</label></td>
@@ -80,25 +80,40 @@
     		<div error field="country" cname="com.vendertool.sharedtypes.core.ContactDetails"></div>
 		</td>
 	</tr>
-	<tr>
+	<tr class="fldWrp">
 		<td class="col1"><label>Phone (work):</label></td>
-		<td class="col2"><input ng-model="accountEdit.contactDetails.phones['WORK'].number" class="form-control" /></td>
+		<td class="col2">
+			<input ng-model="accountEdit.contactDetails.phones['WORK'].number" class="form-control" />
+			<div error field="number" cname="com.vendertool.sharedtypes.core.Phone"></div>
+		</td>
 	</tr>
-	<tr>
+	<tr class="fldWrp">
 		<td class="col1"><label>Phone (mobile):</label></td>
-		<td class="col2"><input ng-model="accountEdit.contactDetails.phones['MOBILE'].number" class="form-control" /></td>
+		<td class="col2">
+			<input ng-model="accountEdit.contactDetails.phones['MOBILE'].number" class="form-control" />
+			<div error field="number" cname="com.vendertool.sharedtypes.core.Phone"></div>
+		</td>
 	</tr>
-	<tr>
+	<tr class="fldWrp">
 		<td class="col1"><label>Phone (company):</label></td>
-		<td class="col2"><input ng-model="accountEdit.contactDetails.phones['PUBLIC'].number" class="form-control" /></td>
+		<td class="col2">
+			<input ng-model="accountEdit.contactDetails.phones['PUBLIC'].number" class="form-control" />
+			<div error field="number" cname="com.vendertool.sharedtypes.core.Phone"></div>
+		</td>
 	</tr>
-	<tr>
+	<tr class="fldWrp">
 		<td class="col1"><label>Phone (fax):</label></td>
-		<td class="col2"><input ng-model="accountEdit.contactDetails.phones['FAX'].number" class="form-control" /></td>
+		<td class="col2">
+			<input ng-model="accountEdit.contactDetails.phones['FAX'].number" class="form-control" />
+			<div error field="number" cname="com.vendertool.sharedtypes.core.Phone"></div>
+		</td>
 	</tr>
-	<tr>
+	<tr class="fldWrp">
 		<td class="col1"><label>Phone (home):</label></td>
-		<td class="col2"><input ng-model="accountEdit.contactDetails.phones['HOME'].number" class="form-control" /></td>
+		<td class="col2">
+			<input ng-model="accountEdit.contactDetails.phones['HOME'].number" class="form-control" />
+			<div error field="number" cname="com.vendertool.sharedtypes.core.Phone"></div>
+		</td>
 	</tr>
 	
 	<tr>
@@ -108,7 +123,7 @@
 	</tr>
 	<tr>
 		<td class="col1"><label>Current Password:</label></td>
-		<td class="col2"><input ng-model="profileEdit.password" class="form-control" type="password"/></td>
+		<td class="col2"><input ng-model="accountOrig.password" class="form-control" type="password"/></td>
 	</tr>
 	<tr>
 		<td colspan="2" class="actns">
