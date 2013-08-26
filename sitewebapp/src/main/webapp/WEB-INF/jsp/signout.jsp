@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<t:page title="<c:out value="${signouttitle}" />">
+<t:page title="${signouttitle}" >
 	
 	<jsp:attribute name="header">
 		<t:header email="${email}" currentPage="signin"/>

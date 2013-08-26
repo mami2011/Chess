@@ -51,7 +51,7 @@ Attributes
 						<ul id="profileMenu" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 						  <li><a tabindex="-1" href="profile">Profile</a></li>
 						  <li class="divider"></li>
-						  <li><a tabindex="-1" href="signout">Sign-out</a></li>
+						  <li><a tabindex="-1" href="<c:url value="j_spring_security_logout" />">Sign-out</a></li>
 						</ul>
 
 					</div>
