@@ -65,11 +65,11 @@ public class AccountDaoImpl extends BaseDAO implements AccountDao {
 	 * com.vendertool.inventory.DBL.BO.MerchantProductDao#findByStockCode(com
 	 * .vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public List<Account> findByAccountId(Account account) {
+	public List<Account> findByAccountId(Long accountId) {
 		// TODO Auto-generated method stub
-		String sql = "select * from account where account_id = :account_id";
+		String sql = "select * from account where account_id = :accountId";
 		SQLQuery query = getSession().createSQLQuery(sql);
-		query.setParameter("account_id", account.getAccountId());
+		query.setParameter("accountId", accountId);
 		query.addEntity(Account.class);
 		List<Account> results = query.list();
 		return results;
@@ -81,5 +81,14 @@ public class AccountDaoImpl extends BaseDAO implements AccountDao {
 		 query.addEntity(Long.class);
 		 List<Long> nextValue = query.list();
 		 return nextValue.get(0);
+	}
+
+	public List<Account> findByEmailId(String emailId) {
+		String sql = "select * from account where email_addr = :emailId";
+		SQLQuery query = getSession().createSQLQuery(sql);
+		query.setParameter("emailId", emailId);
+		query.addEntity(Account.class);
+		List<Account> results = query.list();
+		return results;
 	}
 }

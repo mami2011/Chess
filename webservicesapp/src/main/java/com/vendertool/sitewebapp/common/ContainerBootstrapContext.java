@@ -7,6 +7,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.vendertool.registration.dal.account.AccountDAOFactory;
+import com.vendertool.registration.dal.accountConfirmation.AccountConfirmationDAOFactory;
+import com.vendertool.registration.dal.address.AddressDAOFactory;
 
 public class ContainerBootstrapContext {
 	   
@@ -40,6 +42,8 @@ public class ContainerBootstrapContext {
 		    	}
 		    	//DO DAL Init
 		    	AccountDAOFactory.getInstance().init();
+		    	AccountConfirmationDAOFactory.getInstance().init();
+		    	AddressDAOFactory.getInstance().init();
 	    	} finally {
 	    		CTX.set(this);
 	    	}

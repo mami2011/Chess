@@ -2,72 +2,69 @@ package com.dal.test;
 
 import java.util.List;
 
-
-import org.hibernate.FlushMode;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.vendertool.registration.dal.account.Account;
 import com.vendertool.registration.dal.account.AccountDao;
+import com.vendertool.registration.dal.account.AccountDaoImpl;
+import com.vendertool.registration.dal.accountConfirmation.AccountConfirmation;
+import com.vendertool.registration.dal.accountConfirmation.AccountConfirmationDaoImpl;
 import com.vendertool.registration.dal.address.Address;
 import com.vendertool.registration.dal.address.AddressDao;
+import com.vendertool.registration.dal.address.AddressDaoImpl;
 
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:config/dev/dal/Registration.xml","classpath:config/dev/dal/DBConnectionConfig.xml" })
 public class DalTest {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-
-		ApplicationContext appContext = 
-				new ClassPathXmlApplicationContext("com/dal/resources/BeanLocations.xml");
+	
+	@Autowired
+	private AccountDaoImpl accountDao;
+	@Test
+	public void addAccountTest() {
+		Account account = new Account();
 		
-		try{
-			System.out.println("Address dal Test Began !!!");
-			Address address = new Address();
-			AddressDao addressDao = (AddressDao) appContext.getBean("addressDAO"); 
-			
-			//Insert address object 
-			/*address.setAddressId((long) 29);
-			address.setContactFirstName("Murali123");
-			addressDao.insert(address,FlushMode.COMMIT);
-			addressDao.insert(address,FlushMode.AUTO);*/
-			
-			Address address2 = new Address();
-			address2.setAddressId((long) 26);
-			List<Address> address1 =  addressDao.findByAddressId(address2);
-			System.out.println(address1.get(0).getContactFirstName());
-		} finally {
-
-		}
+		//account.setAccountId((long) 101);
+		account.setEmailAddr("tesst1@gmail.com");
+		account.setFirstName("test");
+		account.setPassword("test");
+		account.setSalt("salt");
+		accountDao.insert(account);
 		
-		try{
-			System.out.println("Account dal Test Began !!!");
-			Account account = new Account();
-			AccountDao accountDao = (AccountDao) appContext.getBean("accountDAO"); 
-			
-			//Inser Account object
-			/*account.setAccountId((long) 29);
-			account.setFirstName("Murali");
-			account.setLastName("Beedala");
-			account.setBillingAddrId(1);
-			account.setRegistrationAddrId(1);
-			accountDao.insert(account);*/
-			
-			account.setAccountId((long) 1);
-			List<Account> account1 =  accountDao.findByAccountId(account);
-			System.out.println(account1.get(0).getFirstName());
-			//System.out.println(account1.get(0).getLastName());
-		} finally {
-
-		}
+	}
+	
+	//AccountConfirmationTest
+	@Autowired
+	private AccountConfirmationDaoImpl accountConfirmationDao;
+	@Test
+	public void addAccountConfirmationTest() {
+		AccountConfirmation accountConfirmation = new AccountConfirmation();
 		
+		accountConfirmation.setAccountId((long) 101);
+		accountConfirmation.setNumberOfAttempts((byte) 2);
+		accountConfirmationDao.insert(accountConfirmation);
 		
+	}
+	
+	//Address 
+	@Autowired
+	private AddressDaoImpl addressDao;
+	@Test
+	public void addAddressTest() {
+		Address address = new Address();
 		
-
+		address.setAddrLn1("test ln1");
+		address.setAddrLn2("test ln2");
+		address.setCity("test city");
+		address.setState("test state");
+		
+		addressDao.insert(address);
+		
 	}
 
 }

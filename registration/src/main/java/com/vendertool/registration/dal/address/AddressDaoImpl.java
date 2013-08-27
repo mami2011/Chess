@@ -16,10 +16,6 @@ import com.vendertool.common.dal.BaseDAO;
  */
 public class AddressDaoImpl extends BaseDAO implements AddressDao {
 
-	public AddressDaoImpl() {
-		super();
-		init(null);
-	}
 
 	public void insert(Address address) {
 		// TODO Auto-generated method stub

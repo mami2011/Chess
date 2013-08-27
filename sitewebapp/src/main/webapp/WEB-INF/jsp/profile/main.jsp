@@ -17,6 +17,7 @@
 		<script src="<c:url value='/resources/js/shared/errorUtil.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/resources/js/profile/app.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/resources/js/profile/controllers.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/resources/js/shared/errorResponse.module.js' />" type="text/javascript"></script>
 	</jsp:attribute>
 	
 	<jsp:attribute name="inlineJs">
@@ -37,9 +38,9 @@
 				<td class="c1">
 					<h3 class="ttl">Profile</h3>
 					<div class="list-group">
-						<a href="profile" 			ng-class="getClass('/profile')" 		class="list-group-item">Change info</a>
-						<a href="#/email/:edit"		ng-class="getClass('/email/:edit')" 	class="list-group-item">Change email</a>
-						<a href="#/password/:edit"	ng-class="getClass('/password/:edit')"	class="list-group-item">Change password</a>
+						<a href="profile" 		ng-class="getClass('/profile')" 	class="list-group-item">Change info</a>
+						<a href="#/email"		ng-class="getClass('/email')" 		class="list-group-item">Change email</a>
+						<a href="#/password"	ng-class="getClass('/password')"	class="list-group-item">Change password</a>
 					</div>
 				</td>
 				<td class="c2">

@@ -12,7 +12,6 @@ import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,21 +27,25 @@ import com.vendertool.sharedtypes.rnr.RegisterAccountResponse;
 import com.vendertool.sitewebapp.common.RestServiceClientHelper;
 import com.vendertool.sitewebapp.common.URLConstants;
 import com.vendertool.sitewebapp.common.VTErrorUtil;
+import com.vendertool.sitewebapp.util.MenuBuilder;
 
 @Controller
 public class RegisterController {
 	private static final Logger logger = Logger.getLogger(RegisterController.class);
 	
 	@RequestMapping(value="register", method=RequestMethod.GET)
-	public String getRegistrationView(ModelMap modelMap) {
+	public String getRegistrationView(ModelMap modelMap, HttpServletRequest request) {
 		logger.info("register GET controller invoked");
 
 		Account account = new Account();
 		ErrorResponse errorResponse = new ErrorResponse();
+		Locale locale = RequestContextUtils.getLocale(request);
 		
 		modelMap.addAttribute("account", account);
 		modelMap.addAttribute("errorResponse", errorResponse);
 		modelMap.addAttribute("languages", Language.getLanguages());
+		modelMap.addAttribute("langOptions", MenuBuilder.getLanguageOptions(locale));
+		modelMap.addAttribute("selectedLang", request.getParameter("lang"));
 		return "register";
 	}
 	
@@ -96,6 +99,8 @@ public class RegisterController {
 			modelMap.addAttribute("errorResponse", errorResponse);
 			modelMap.addAttribute("languages", Language.getLanguages());
 			
+			modelMap.addAttribute("langOptions", MenuBuilder.getLanguageOptions(locale));
+			modelMap.addAttribute("selectedLang", request.getParameter("lang"));
 			//Added for debugging purpose, need to remove this
 			addJsonOutput(responseAccount, errorResponse, modelMap);
 			
