@@ -11,12 +11,11 @@ Attributes
 
 <div id="header">
 	<div class="hdr">
-
 		<div class="topnav inline">
-			<a href="home"><spring:message code="form.header.logo"/></a>
-			<a href="accounthub" class="curr">Account Hub</a>
-			<a href="#">Inventory</a>
-			<a href="#">Selling</a>
+			<a href="home" class="home"><spring:message code="form.header.logo"/></a>
+			<a href="accounthub" class="accounthub">Account Hub</a>
+			<a href="settings" class="settings">Settings</a>
+			
 			<%-- 
 			<a href="#"><spring:message code="form.header.platform"/></a>
 			<a href="#"><spring:message code="form.header.tools"/></a>
