@@ -26,12 +26,6 @@ import com.vendertool.sitewebapp.util.MockDataUtil;
 public class ProfileController {
 	private static final Logger logger = Logger.getLogger(ProfileController.class);
 
-	/**
-	 * Main profile page. Displays account info.
-	 * 
-	 * @param modelMap
-	 * @return
-	 */
 	@RequestMapping(value="profile", method=RequestMethod.GET)
 	public String getProfileView(ModelMap modelMap, HttpServletRequest request) {
 		logger.info("getProfileView controller invoked");
@@ -62,19 +56,8 @@ public class ProfileController {
 		return "profile/main";
 	}
 
-	
-	/**
-	 * Save edited account.
-	 *  
-	 * @param account
-	 * @param request
-	 * @return
-	 */
 	@RequestMapping(value="profile/save", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> saveProfile(
-			@RequestBody Account account, 
-			HttpServletRequest request) {
-		
+	public @ResponseBody Map<String, Object> saveProfile(@RequestBody Account account, HttpServletRequest request) {
 		logger.info("saveProfile controller invoked");
 		
 		if (account == null) {
@@ -127,45 +110,22 @@ public class ProfileController {
 		return map;
 	}
 	
-	/**
-	 * Angular partial account.jsp has been requested via ajax.
-	 * 
-	 * @param modelMap
-	 * @return
-	 */
+
 	@RequestMapping(value = "profile/partial/account", method = RequestMethod.GET)
-	public String getAccountPartial(ModelMap modelMap, HttpServletRequest request) {
+	public String getAccountPartial() {
 		logger.info("getAccountPartial controller invoked");
-		
-		//Map<String, String> countryMap = getCountryMap(request);
-		//modelMap.put("countryMap", countryMap);
-		
 		return "profile/partial/account";
 	}
 	
-	/**
-	 * Angular partial email.jsp has been requested via ajax.
-	 * 
-	 * @param modelMap
-	 * @return
-	 */
 	@RequestMapping(value = "profile/partial/email", method = RequestMethod.GET)
-	public String getEmailPartial(ModelMap modelMap, HttpServletRequest request) {
+	public String getEmailPartial() {
 		logger.info("getEmailPartial controller invoked");
-		
 		return "profile/partial/email";
 	}
-	
-	/**
-	 * Angular partial password.jsp has been requested via ajax.
-	 * 
-	 * @param modelMap
-	 * @return
-	 */
+
 	@RequestMapping(value = "profile/partial/password", method = RequestMethod.GET)
-	public String getPasswordPartial(ModelMap modelMap, HttpServletRequest request) {
+	public String getPasswordPartial() {
 		logger.info("getPasswordPartial controller invoked");
-		
 		return "profile/partial/password";
 	}
 	
