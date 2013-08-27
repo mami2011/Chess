@@ -40,6 +40,8 @@ public class ContainerBootstrapContext {
 		    	}
 		    	//DO DAL Init
 		    	AccountDAOFactory.getInstance().init();
+		    	AccountConfirmationDAOFactory.getInstance().init();
+		    	AddressDAOFactory.getInstance().init();
 	    	} finally {
 	    		CTX.set(this);
 	    	}

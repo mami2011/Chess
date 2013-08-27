@@ -45,6 +45,7 @@ public class AccountBOF extends BaseBOF {
 		accountDo.setLastName(accountBO.getContactDetails().getLastName());
 		accountDo.setPassword(accountBO.getPassword());
 		accountDo.setSalt(accountBO.getPasswordSalt());
+		accountDo.setRoles(accountBO.getRole().getValue());
 		// Insert into DB
 		logger.info(" Call AccountDaoImpl to insert : "
 				+ accountBO.getEmailId());

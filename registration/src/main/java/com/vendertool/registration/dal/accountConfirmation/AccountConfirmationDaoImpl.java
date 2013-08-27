@@ -1,13 +1,15 @@
 /**
  * 
  */
-package com.vendertool.registration.dal.account;
+package com.vendertool.registration.dal.accountConfirmation;
 
 import java.util.List;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.ContextLoader;
 
 import com.vendertool.common.dal.BaseDAO;
 
@@ -15,8 +17,8 @@ import com.vendertool.common.dal.BaseDAO;
  * @author murali HibernateDaoSupport
  */
 
-public class AccountDaoImpl extends BaseDAO implements AccountDao {
-	
+public class AccountConfirmationDaoImpl extends BaseDAO implements AccountConfirmationDao {
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -24,11 +26,11 @@ public class AccountDaoImpl extends BaseDAO implements AccountDao {
 	 * com.vendertool.inventory.DBL.BO.MerchantProductDao#save(com.vendertool
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
-	public void insert(Account account) {
+	public void insert(AccountConfirmation accountConfirmation) {
 		// TODO Auto-generated method stub
 		Session session = getDalSession();
 		Transaction trans = session.beginTransaction();
-		session.save(account);
+		session.save(accountConfirmation);
 		trans.commit();
 	}
 
@@ -39,9 +41,9 @@ public class AccountDaoImpl extends BaseDAO implements AccountDao {
 	 * com.vendertool.inventory.DBL.BO.MerchantProductDao#update(com.vendertool
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
-	public void update(Account account) {
+	public void update(AccountConfirmation accountConfirmation) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().update(account);
+		getHibernateTemplate().update(accountConfirmation);
 
 	}
 
@@ -52,9 +54,9 @@ public class AccountDaoImpl extends BaseDAO implements AccountDao {
 	 * com.vendertool.inventory.DBL.BO.MerchantProductDao#delete(com.vendertool
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
-	public void delete(Account account) {
+	public void delete(AccountConfirmation accountConfirmation) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(account);
+		getHibernateTemplate().delete(accountConfirmation);
 
 	}
 
@@ -65,30 +67,14 @@ public class AccountDaoImpl extends BaseDAO implements AccountDao {
 	 * com.vendertool.inventory.DBL.BO.MerchantProductDao#findByStockCode(com
 	 * .vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public List<Account> findByAccountId(Long accountId) {
+	public List<AccountConfirmation> findByAccountId(Long accountId) {
 		// TODO Auto-generated method stub
-		String sql = "select * from account where account_id = :accountId";
+		String sql = "select * from account_confirmation where account_id = :accountId";
 		SQLQuery query = getSession().createSQLQuery(sql);
 		query.setParameter("accountId", accountId);
-		query.addEntity(Account.class);
-		List<Account> results = query.list();
+		query.addEntity(AccountConfirmation.class);
+		List<AccountConfirmation> results = query.list();
 		return results;
-	}
-	
-	public long getNextValue(){
-		Session session = getDalSession();
-		 SQLQuery query = session.createSQLQuery("VALUES NEXTVAL FOR <sequence_name>");
-		 query.addEntity(Long.class);
-		 List<Long> nextValue = query.list();
-		 return nextValue.get(0);
 	}
 
-	public List<Account> findByEmailId(String emailId) {
-		String sql = "select * from account where email_addr = :emailId";
-		SQLQuery query = getSession().createSQLQuery(sql);
-		query.setParameter("emailId", emailId);
-		query.addEntity(Account.class);
-		List<Account> results = query.list();
-		return results;
-	}
 }
