@@ -25,6 +25,10 @@ Attributes
 			<c:choose>
 				<c:when test="${empty email}">
 					<div class="sign-in inline">
+					
+						<%--=================
+						Sign In 
+						=====================--%>
 						<c:choose>
 							<c:when test="${currentPage == 'signin'}">
 								<spring:message code="form.signin.signin"/>
@@ -34,6 +38,10 @@ Attributes
 							</c:otherwise>
 						</c:choose>
 						|
+						
+						<%--=================
+						Sign Up
+						=====================--%>
 						<c:choose>
 							<c:when test="${currentPage == 'register'}">
 								<spring:message code="form.registration.signup"/>
@@ -45,6 +53,9 @@ Attributes
 					</div>
 				</c:when>
 				<c:otherwise>
+					<%--=================
+					User Menu
+					=====================--%>
 					<div class="user inline">
 						<a id="profileBtn" href="javascript:;">${email} <b class="arw"></b></a>
 						
@@ -54,27 +65,33 @@ Attributes
 						  <li><a tabindex="-1" href="<c:url value="j_spring_security_logout" />">Sign-out</a></li>
 						</ul>
 					</div>
+					<%--=================
+					Search Box
+					=====================--%>
 					<form class="srch inline">
 						<input placeholder="Search"/>
 						<button title="Search"></button>
 					</form>
 				</c:otherwise>
 			</c:choose>
-
+			
+			<%--=================
+			Language Menu
+			=====================--%>
 			<c:if test="${empty email && !empty langOptions}">
-				<%-- form submits to current page --%>
-				<form href="" class="lang inline">
-					<span>
-						<spring:message code="form.registration.lang"/>
-					</span>
+				<div class="lang inline">
+					<c:forEach var="entry" items="${langOptions}">
+						<c:if test="${entry.val == selectedLang}"><c:set var="selectedLangText" value="${entry.txt}"/></c:if>
+					</c:forEach>
+					<a id="langBtn" href="javascript:;"><span class="lbl"><spring:message code="form.registration.lang"/>:</span> ${selectedLangText} <b class="arw"></b></a>
 					
-					<select id="languageMenu" name="lang">
+					<ul id="languageMenu" name="lang" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 						<c:forEach var="entry" items="${langOptions}">
 							<c:set var="selected" value="${entry.val == selectedLang ? 'selected' : ''}"/>
-							<option value="${entry.val}" ${selected}>${entry.txt}</option>
+							<li><a tabindex="-1" href="?lang=${entry.val}">${entry.txt}</a></li>
 						</c:forEach>
-					</select>
-				</form>
+					</ul>
+				</div>
 			</c:if>
 			
 		</div>
