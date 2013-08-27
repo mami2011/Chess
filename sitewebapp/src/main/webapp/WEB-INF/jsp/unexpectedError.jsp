@@ -15,7 +15,7 @@
 	
 	<jsp:body>
 		<div class="reg main input-group bx-rnd-shdw">
-	        <h3 class="ttl">Unexpected Exception</h3>
+	        <h3 class="ttl">Unexpected Error</h3>
 	        <div class="msg">
 	            Sorry, an error has occurred, please report the problem.
 	        </div>

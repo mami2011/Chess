@@ -98,7 +98,9 @@ public class RegisterController {
 
 			modelMap.addAttribute("account", responseAccount);
 			modelMap.addAttribute("errorResponse", errorResponse);
-			
+			modelMap.addAttribute("langOptions", MenuBuilder.getLanguageOptions(locale));
+			modelMap.addAttribute("selectedLang", request.getParameter("lang"));
+
 			//Added for debugging purpose, need to remove this
 			addJsonOutput(responseAccount, errorResponse, modelMap);
 			

@@ -61,13 +61,13 @@ Attributes
 				</c:otherwise>
 			</c:choose>
 
-			<c:if test="${empty email}">
+			<c:if test="${empty email && !empty langOptions}">
 				<%-- form submits to current page --%>
 				<form href="" class="lang inline">
 					<span>
 						<spring:message code="form.registration.lang"/>
 					</span>
-
+					
 					<select id="languageMenu" name="lang">
 						<c:forEach var="entry" items="${langOptions}">
 							<c:set var="selected" value="${entry.val == selectedLang ? 'selected' : ''}"/>
