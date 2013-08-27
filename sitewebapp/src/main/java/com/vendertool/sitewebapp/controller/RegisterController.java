@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.core.HttpMethodEnum;
+import com.vendertool.sharedtypes.core.Language;
 import com.vendertool.sharedtypes.exception.VTRuntimeException;
 import com.vendertool.sharedtypes.rnr.ErrorResponse;
 import com.vendertool.sharedtypes.rnr.RegisterAccountRequest;
@@ -41,6 +42,7 @@ public class RegisterController {
 		
 		modelMap.addAttribute("account", account);
 		modelMap.addAttribute("errorResponse", errorResponse);
+		modelMap.addAttribute("languages", Language.getLanguages());
 		return "register";
 	}
 	
@@ -49,8 +51,7 @@ public class RegisterController {
 	public String register(
 			ModelMap modelMap, 
 			HttpServletRequest request,
-			@ModelAttribute("account") Account account, 
-			BindingResult result) {
+			@ModelAttribute("account") Account account) {
 		
 		logger.info("register POST controller invoked");
 		if(account == null) {
@@ -93,6 +94,7 @@ public class RegisterController {
 
 			modelMap.addAttribute("account", responseAccount);
 			modelMap.addAttribute("errorResponse", errorResponse);
+			modelMap.addAttribute("languages", Language.getLanguages());
 			
 			//Added for debugging purpose, need to remove this
 			addJsonOutput(responseAccount, errorResponse, modelMap);

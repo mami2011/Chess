@@ -54,7 +54,7 @@
 		
 		<!-- default-target-url="/accounthub" -->
 		<sec:form-login login-page="/signin" 
-			authentication-failure-url="/signin" 
+			authentication-failure-url="/signin?error=true" 
 			always-use-default-target='true'
 			default-target-url="/accounthub" />
 		

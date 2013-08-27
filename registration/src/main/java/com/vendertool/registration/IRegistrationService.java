@@ -1,9 +1,13 @@
 package com.vendertool.registration;
 
 import com.vendertool.common.service.IVenderToolService;
-import com.vendertool.sharedtypes.core.AccountClosureReasonCodeEnum;
 import com.vendertool.sharedtypes.rnr.AuthorizeMarketRequest;
 import com.vendertool.sharedtypes.rnr.AuthorizeMarketResponse;
+import com.vendertool.sharedtypes.rnr.ChangeEmailRequest;
+import com.vendertool.sharedtypes.rnr.ChangeEmailResponse;
+import com.vendertool.sharedtypes.rnr.ChangePasswordRequest;
+import com.vendertool.sharedtypes.rnr.ChangePasswordResponse;
+import com.vendertool.sharedtypes.rnr.CloseAccountRequest;
 import com.vendertool.sharedtypes.rnr.CloseAccountResponse;
 import com.vendertool.sharedtypes.rnr.ConfirmRegistrationRequest;
 import com.vendertool.sharedtypes.rnr.ConfirmRegistrationResponse;
@@ -51,13 +55,28 @@ public interface IRegistrationService extends IVenderToolService {
 	public UpdateAccountResponse updateAccount(UpdateAccountRequest request);
 	
 	/**
-	 * HTTP GET call to close the account
+	 * HTTP POST to change the password
 	 * 
 	 * @param request
 	 * @return
 	 */
-	public CloseAccountResponse closeAccount(String username,
-			AccountClosureReasonCodeEnum reasonCode, String reasonMessage);
+	public ChangePasswordResponse changePassword(ChangePasswordRequest request);
+	
+	/**
+	 * HTTP POST to change the email / username
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public ChangeEmailResponse changeEmail(ChangeEmailRequest request);
+	
+	/**
+	 * HTTP POST call to close the account
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public CloseAccountResponse closeAccount(CloseAccountRequest request);
 	
 	/**
 	 * HTTP POST to authorize market resources

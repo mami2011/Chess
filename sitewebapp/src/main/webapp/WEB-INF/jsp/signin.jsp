@@ -25,9 +25,16 @@
 	    	
 	        <h3 class="ttl"><c:out value="${signintitle}" /></h3>
 	        <c:if test="${param.justConfAccount}" >
-	        	<spring:message code='form.registration.welcome'/> <br/>
+	        	<spring:message code="form.registration.welcome"/>
 	        </c:if>
 
+			<c:if test="${param.error}">
+			    <div class="errorblock">
+			    	<span><c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" /></span>
+			    	<c:remove var = "SPRING_SECURITY_LAST_EXCEPTION" scope = "session" />
+			    </div>
+			</c:if>
+			
 			<form action="<c:url value="/j_spring_security_check" />" method="POST">
 	       <!-- <form:form method="post" commandName="signin"> -->
 				<c:if test="${errorResponse.hasErrors()}">

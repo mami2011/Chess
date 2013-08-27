@@ -2,7 +2,8 @@ package com.vendertool.sitewebapp.util;
 
 import com.vendertool.sharedtypes.core.CountryEnum;
 
-public class CountryUtil {
+public class MetadataUtil {
+//	private static final Logger logger = Logger.getLogger(MetadataUtil.class);
 
 	public static final CountryEnum getCountryEnum(int countryId) {
 		

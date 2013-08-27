@@ -27,7 +27,6 @@ import com.vendertool.registration.bof.AccountBOF;
 import com.vendertool.registration.email.RegistrationEmailHelper;
 import com.vendertool.registration.validation.RegistrationValidator;
 import com.vendertool.sharedtypes.core.Account;
-import com.vendertool.sharedtypes.core.AccountClosureReasonCodeEnum;
 import com.vendertool.sharedtypes.core.AccountConfirmation;
 import com.vendertool.sharedtypes.core.AccountRoleEnum;
 import com.vendertool.sharedtypes.core.AccountStatusEnum;
@@ -35,6 +34,11 @@ import com.vendertool.sharedtypes.error.Errors;
 import com.vendertool.sharedtypes.rnr.AuthorizeMarketRequest;
 import com.vendertool.sharedtypes.rnr.AuthorizeMarketResponse;
 import com.vendertool.sharedtypes.rnr.BaseResponse.ResponseAckStatusEnum;
+import com.vendertool.sharedtypes.rnr.ChangeEmailRequest;
+import com.vendertool.sharedtypes.rnr.ChangeEmailResponse;
+import com.vendertool.sharedtypes.rnr.ChangePasswordRequest;
+import com.vendertool.sharedtypes.rnr.ChangePasswordResponse;
+import com.vendertool.sharedtypes.rnr.CloseAccountRequest;
 import com.vendertool.sharedtypes.rnr.CloseAccountResponse;
 import com.vendertool.sharedtypes.rnr.ConfirmRegistrationRequest;
 import com.vendertool.sharedtypes.rnr.ConfirmRegistrationResponse;
@@ -289,13 +293,27 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		return null;
 	}
 
-	@GET
+	@POST
+	@Path("/changePassword")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public ChangePasswordResponse changePassword(ChangePasswordRequest request) {
+		return null;
+	}
+	
+	@POST
+	@Path("/changeEmail")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public ChangeEmailResponse changeEmail(ChangeEmailRequest request) {
+		return null;
+	}
+	
+	@POST
 	@Path("/closeAccount")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public CloseAccountResponse closeAccount(@QueryParam(value="username") String username,
-			@QueryParam(value="reason") AccountClosureReasonCodeEnum reasonCode, 
-			@QueryParam(value="reasonmsg") String reasonMessage) {
+	public CloseAccountResponse closeAccount(CloseAccountRequest request) {
 		return null;
 	}
 

@@ -1,12 +1,18 @@
-package com.vendertool.metadata;
+package com.vendertool.sharedtypes.core;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 public class Language {
 	private String isoLangCode;
 	private String englishName;
 	private String nativeName;
+	
+	@JsonIgnore
 	private static Map<String, Language> langCode2LangMap = new HashMap<String, Language>();
 	
 	private Language(String isoLangCode, 
@@ -218,5 +224,10 @@ public class Language {
 	    new Language("za", "Zhuang, Chuang", "Saɯ cueŋƅ, Saw cuengh");
 	}
 	
-	
+	@JsonIgnore
+	public static Set<Language> getLanguages() {
+		Set<Language> languages = new HashSet<Language>();
+		languages.addAll(langCode2LangMap.values());
+		return languages;
+	}
 }
