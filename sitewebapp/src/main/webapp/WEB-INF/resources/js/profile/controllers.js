@@ -10,9 +10,10 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 	$scope.accountOrig = angular.copy(Data.account);
 	$scope.accountEdit = angular.copy(Data.account);
 	$scope.errorResponse = angular.copy(Data.errorResponse);
+	$scope.countryOptions = angular.copy(Data.countryOptions);
 	
-	
-	
+	// Remove email to let user enter new email
+	$scope.accountEdit.emailId = '';
 
 	/** Do something when param is 'edit'**/
 	//if ($routeParams.edit) {
@@ -29,9 +30,8 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 	
 	/** Do something when page is 'profile'**/
 	if ($location.path() === '/profile') {
-		$('.alert-danger').hide();
+		//$('.alert-danger').hide();
 	}
-	
 
 	
 	$scope.save = function() {
@@ -39,31 +39,40 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 		$http.post('profile/save', $scope.accountEdit).
 			success(function (data, status, headers, config) {
 
-				$scope.accountOrig = angular.copy(data.account);
 				$scope.accountEdit = angular.copy(data.account);
 				$scope.errorResponse = angular.copy(data.errorResponse);
-				$scope.errorMap = angular.copy(data.errorMap);
-				
-				//if ($scope.errorResponse) {
-				if ($scope.errorMap) {
+
+				if ($scope.errorResponse.fieldBindingErrors.length > 0) {
 					// Show error message at the top of page
 					$('.alert-danger').show();
 					
+					/***
+					var className = 'com.vendertool.sharedtypes.core.ContactDetails';
+					var fieldNames = [
+						'firstName',
+						'lastName',
+						'addressLine1',
+						'addressLine2',
+						'city',
+						'state',
+						'zip',
+						'country'
+					];
 					
-					
-
-					
-					//$scope.errorResp = errorResp;
-					
-					
-					
+					$scope.errorMap = ErrorUtil.getErrorMap(className, fieldNames, $scope.errorResponse);
+					**/
 				}
 				else {
+					//$scope.errorMap = null;
 					
-					// Show success message on contact info page
-					$location.path('/profile'); // path not hash
+					// Only update this if no errors
+					$scope.accountOrig = angular.copy(data.account);
+
+					$scope.errorResponse = undefined;
 					
-					
+					// Take user to profile page
+					//$location.path('/profile'); // path not hash
+					$('.alert-danger').hide();
 					$('.alert-success').show().delay(1500).fadeOut(300);
 				}
 				
@@ -75,60 +84,19 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 		
 
 	};
-	
-	$scope.updateModel = function(data) {
-		
-		var hasChanged = false, key;
-		
-		$scope.account = angular.copy(data.account);
-    	
-		alert($scope.account.contactDetails.address.addressLine1);
-		
-		//$scope.errorResponse = data.errorResponse;
-		
-		/*
-		//if (data.errorResponse) {
-			// Show error message at the top of page
-		//	$('.alert-danger').show();
-		//}
-		//else {
-			// Update the account model
-			for (key in data.account) {
-				
-				
-				if (data.account.hasOwnProperty(key)) {
-
-					// Only flip flag if not already flipped
-					if ($scope.account[key] !== data.account[key] && hasChanged === false) {
-						hasChanged = true;
-					}
-
-					// Do the update
-					$scope.account[key] = data[key];
-					$scope.accountEdit[key] = data[key];
-					
-
-				}
-				
-			}
-			
-			
-
-			// Show success message on contact info page
-			$location.path('/profile'); // path not hash
-			
-			if (hasChanged) {
-				$('.alert-success').show().delay(1500).fadeOut(300);
-			}
-			
-		//}*/
-  	};
-  	
-  	
 
 	$scope.reset = function() {
     	$scope.accountEdit = angular.copy($scope.accountOrig);
-    	$location.path('profile'); // path not hash
+    	
+    	// Remove email to let user enter new email
+    	$scope.accountEdit.emailId = '';
+    	
+    	$scope.errorResponse = undefined;
+    	$('.alert-danger').hide();
+    	
+    	
+    	/** TODO: Should we change path to make another request to get the account values from server?? **/
+    	//$location.path('/'); // path not hash
   	};
   	
   	$scope.getClass = function(path) {

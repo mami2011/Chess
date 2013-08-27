@@ -8,7 +8,6 @@ html, body {
    background-color:#fff;
 }
 
-
 #wrap {
    min-height:100%;
    position:relative;
@@ -44,6 +43,11 @@ html, body {
 	font-weight:normal;
 }
 
+
+
+/**************************************
+Page Header
+***************************************/
 .hdr {
 	position:relative;
 	min-width:500px;
@@ -60,7 +64,6 @@ html, body {
 .hdr .topnav  {
 	float:left;
 }
-
 .hdr .topnav a {
 	margin:0;
 	padding:7px 30px;
@@ -71,63 +74,68 @@ html, body {
 	right:0;
 	top:3px;
 }
-.ctls .lang {
+.hdr .ctls .lang {
 	float:right;
-	margin:3px 15px 0 0;
+	margin:5px 15px 0 0;
 	color:#333;
 	font-size:12px;
 }
-.ctls .sign-in {
-	float:right;
-	font-size:12px;
-}
-.ctls .sign-in i {
-	margin:0 7px 0 0;
+.hdr .ctls .lang .lbl {
 	color:#ccc;
-	font-style: normal;
-
 }
-.ctls .sign-in a {
-	padding:7px 5px;
-	font-size:12px;
-}
-.ctls.sign-in .join {
-	background-color:#ccc;
-	padding:2px 15px;
-	border-radius:3px;
-	color:#333;
-}
-.ctls .user {
-	float:right;
-	padding:7px 5px;
-	position:relative;
-}
-.ctls .user a {
-	font-size:12px;
-}
-.ctls .user .arw {
+.hdr .ctls .lang .arw {
 	width:15px;
 	height:8px;
 	display:inline-block;
 	background:url('../img/icons.png') no-repeat -40px 0; 
 }
-.ctls .user .dropdown-menu {
-
-	
+#languageMenu {
+	max-height:400px;
+	overflow-x: hidden;
+	overflow-y: scroll;
 }
-
-
-.ctls .srch {
+.hdr .ctls .sign-in {
+	float:right;
+	font-size:12px;
+}
+.hdr .ctls .sign-in i {
+	margin:0 7px 0 0;
+	color:#ccc;
+	font-style: normal;
+}
+.hdr .ctls .sign-in a {
+	padding:7px 5px;
+	font-size:12px;
+}
+.hdr .ctls.sign-in .join {
+	background-color:#ccc;
+	padding:2px 15px;
+	border-radius:3px;
+	color:#333;
+}
+.hdr .ctls .user {
+	float:right;
+	padding:7px 5px;
+	position:relative;
+}
+.hdr .ctls .user a {
+	font-size:12px;
+}
+.hdr .ctls .user .arw {
+	width:15px;
+	height:8px;
+	display:inline-block;
+	background:url('../img/icons.png') no-repeat -40px 0; 
+}
+.hdr .ctls .srch {
 	float:right;
 	margin-right:20px;
-	
 }
-.ctls .srch input {
+.hdr .ctls .srch input {
 	width:250px;
 	font-size:14px;
 }
-
-.ctls .srch button {
+.hdr .ctls .srch button {
 	width:23px;
 	height:20px;
 	background:url('../img/icons.png') no-repeat -19px 0;
@@ -139,6 +147,9 @@ html, body {
 
 
 
+/**************************************
+Page Main Body
+***************************************/
 .main {
 	max-width:840px;
 	min-height:400px;
@@ -153,7 +164,9 @@ html, body {
 	color:#FF8C19
 }
 
-
+/**************************************
+Page Footer
+***************************************/
 .ftr {
 	max-width:840px;
 	margin:15px auto;
@@ -209,9 +222,9 @@ html, body {
 	background-color:#eee;
 }
 
-/**********************
+/**************************************
 Buttons
-***********************/
+***************************************/
 .btn {
 	border:1px solid #2865ba;
 	background: #3081d3;

@@ -25,15 +25,23 @@ Attributes
 			<c:choose>
 				<c:when test="${empty email}">
 					<div class="sign-in inline">
+					
+						<%--=================
+						Sign In 
+						=====================--%>
 						<c:choose>
 							<c:when test="${currentPage == 'signin'}">
 								<spring:message code="form.signin.signin"/>
 							</c:when>
 							<c:otherwise>
-								<a href="/signin"><spring:message code="form.signin.signin"/></a>
+								<a href="signin"><spring:message code="form.signin.signin"/></a>
 							</c:otherwise>
 						</c:choose>
 						|
+						
+						<%--=================
+						Sign Up
+						=====================--%>
 						<c:choose>
 							<c:when test="${currentPage == 'register'}">
 								<spring:message code="form.registration.signup"/>
@@ -45,34 +53,45 @@ Attributes
 					</div>
 				</c:when>
 				<c:otherwise>
+					<%--=================
+					User Menu
+					=====================--%>
 					<div class="user inline">
 						<a id="profileBtn" href="javascript:;">${email} <b class="arw"></b></a>
 						
 						<ul id="profileMenu" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
 						  <li><a tabindex="-1" href="profile">Profile</a></li>
 						  <li class="divider"></li>
-						  <li><a tabindex="-1" href="signout">Sign-out</a></li>
+						  <li><a tabindex="-1" href="<c:url value="j_spring_security_logout" />">Sign-out</a></li>
 						</ul>
-
 					</div>
+					<%--=================
+					Search Box
+					=====================--%>
 					<form class="srch inline">
 						<input placeholder="Search"/>
 						<button title="Search"></button>
 					</form>
 				</c:otherwise>
 			</c:choose>
-
-			<c:if test="${empty email}">
-				<%-- form submits to current page --%>
-				<form href="" class="lang inline">
-					<span>
-						<spring:message code="form.registration.lang"/>
-					</span>
-					<select id="languageMenu" name="lang">
-						<option value="en">English</option>
-						<option value="es">español</option>
-					</select>
-				</form>
+			
+			<%--=================
+			Language Menu
+			=====================--%>
+			<c:if test="${empty email && !empty langOptions}">
+				<div class="lang inline">
+					<c:forEach var="entry" items="${langOptions}">
+						<c:if test="${entry.val == selectedLang}"><c:set var="selectedLangText" value="${entry.txt}"/></c:if>
+					</c:forEach>
+					<a id="langBtn" href="javascript:;"><span class="lbl"><spring:message code="form.registration.lang"/>:</span> ${selectedLangText} <b class="arw"></b></a>
+					
+					<ul id="languageMenu" name="lang" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+						<c:forEach var="entry" items="${langOptions}">
+							<c:set var="selected" value="${entry.val == selectedLang ? 'selected' : ''}"/>
+							<li><a tabindex="-1" href="?lang=${entry.val}">${entry.txt}</a></li>
+						</c:forEach>
+					</ul>
+				</div>
 			</c:if>
 			
 		</div>
