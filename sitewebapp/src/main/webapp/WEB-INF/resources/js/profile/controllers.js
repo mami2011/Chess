@@ -13,7 +13,7 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 	$scope.countryOptions = angular.copy(Data.countryOptions);
 	
 	// Remove email to let user enter new email
-	$scope.accountEdit.emailId = '';
+	//$scope.accountEdit.emailId = '';
 
 	/** Do something when param is 'edit'**/
 	//if ($routeParams.edit) {
@@ -41,7 +41,7 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 
 				$scope.accountEdit = angular.copy(data.account);
 				$scope.errorResponse = angular.copy(data.errorResponse);
-
+				
 				if ($scope.errorResponse.fieldBindingErrors.length > 0) {
 					// Show error message at the top of page
 					$('.alert-danger').show();
@@ -67,7 +67,6 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 					
 					// Only update this if no errors
 					$scope.accountOrig = angular.copy(data.account);
-
 					$scope.errorResponse = undefined;
 					
 					// Take user to profile page

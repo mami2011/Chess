@@ -12,9 +12,11 @@ public class AccountHubController {
 	@RequestMapping(value="accounthub", method=RequestMethod.GET)
 	public String getAccountHub(ModelMap modelMap, Principal principal) {
 		
-	    String name = principal.getName();
-	    modelMap.addAttribute("email", name);
-
-		return "accounthub";
+	    //String name = principal.getName();
+	    //modelMap.addAttribute("email", name);
+		modelMap.addAttribute("email", "ted@gmail.com");
+		modelMap.addAttribute("name", "Ted");
+		
+		return "accounthub/accounthub";
 	}
 }

@@ -53,7 +53,7 @@ public class ProfileController {
 			throw new VTRuntimeException("Cannot convert modelMap to json");
 		}
 		
-		return "profile/main";
+		return "profile/profile";
 	}
 
 	@RequestMapping(value="profile/save", method=RequestMethod.POST)

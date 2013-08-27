@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<table id="info" class="info" cellspacing="0" cellpadding="0">
+<table class="info" cellspacing="0" cellpadding="0">
 	<tr>
 		<td class="col1"><label>Email:</label></td>
 		<td class="col2"><input ng-model="accountOrig.emailId" class="form-control readonly" readonly/></td>

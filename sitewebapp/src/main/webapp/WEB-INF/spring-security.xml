@@ -31,7 +31,16 @@
   	<sec:http pattern="/confirmaccount" security="none"/>
   	<sec:http pattern="/confirmaccountsuccess" security="none"/>
   	<sec:http pattern="/confirmaccountfailed" security="none"/>
+  	
+  	
+  	<!--
+  	IMPORTANT!!!! 
+  	REMOVE LATER: ADDING ONLY FOR DEV WORK.
+  	-->
   	<sec:http pattern="/profile/**" security="none"/>
+  	<sec:http pattern="/accounthub/**" security="none"/>
+  	
+  	
   	
   	<!-- NOTE: IMPORTANT - Ordering of filter pattern is important -->
   	<!-- 
