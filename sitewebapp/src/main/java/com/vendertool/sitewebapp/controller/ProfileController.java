@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.exception.VTRuntimeException;
+import com.vendertool.sharedtypes.rnr.ChangeEmailRequest;
 import com.vendertool.sharedtypes.rnr.ErrorResponse;
 import com.vendertool.sharedtypes.rnr.UpdateAccountRequest;
 import com.vendertool.sitewebapp.util.MenuBuilder;
@@ -110,7 +111,26 @@ public class ProfileController {
 		return map;
 	}
 	
+	@RequestMapping(value="profile/email", method=RequestMethod.GET)
+	public Map<String, Object> getEmailView() {
+		logger.info("getProfileView controller invoked");
 
+		/***
+		 * TODO: Getting the real data needs to be implemented.
+		 */
+		ChangeEmailRequest changeEmailRequest = MockDataUtil.getEmail();
+		ErrorResponse errorResponse = new ErrorResponse();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("changeEmailRequest", changeEmailRequest);
+		map.put("errorResponse", errorResponse);
+		
+		return map;
+	}
+
+	
+	
+	
 	@RequestMapping(value = "profile/partial/account", method = RequestMethod.GET)
 	public String getAccountPartial() {
 		logger.info("getAccountPartial controller invoked");

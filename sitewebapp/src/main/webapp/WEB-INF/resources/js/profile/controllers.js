@@ -5,12 +5,15 @@
 Using the array notation requires the listing of
 all the function params as strings in same order.
 ********************/
-profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$location', 'Data', function($scope, $http, $routeParams, $location, Data) {
+profileApp.controller('ProfileCtrl', ['changeEmailService', '$scope', '$http', '$routeParams', '$location', 'Data', function(changeEmailService, $scope, $http, $routeParams, $location, Data) {
 	
 	$scope.accountOrig = angular.copy(Data.account);
 	$scope.accountEdit = angular.copy(Data.account);
 	$scope.errorResponse = angular.copy(Data.errorResponse);
 	$scope.countryOptions = angular.copy(Data.countryOptions);
+	$scope.changeEmailRequest = changeEmailService.getChangeEmailRequest();
+	
+	alert($scope.changeEmailRequest.oldEmailId);
 	
 	// Remove email to let user enter new email
 	//$scope.accountEdit.emailId = '';
@@ -110,5 +113,28 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 	};
   
 }]);
-	
+
+
+
+profileApp.factory('changeEmailService', function($http) {
+	return {
+		getChangeEmailRequest: function() {
+			alert('ss');
+			var changeEmailRequest = {};
+         
+			// TODO add possible caching via $cacheFactory
+			$http.get('profile/email').success(function(data) {
+				
+				alert("xxxx:" + data.changeEmailRequest.oldEmailId);
+				changeEmailRequest = data.changeEmailRequest;
+			});
+			return changeEmailRequest;
+	   }
+
+      // other functions
+   };
+
+});
+
+
 

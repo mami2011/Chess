@@ -10,6 +10,7 @@ import com.vendertool.sharedtypes.core.CountryEnum;
 import com.vendertool.sharedtypes.core.Phone;
 import com.vendertool.sharedtypes.core.Phone.PhoneType;
 import com.vendertool.sharedtypes.error.Errors;
+import com.vendertool.sharedtypes.rnr.ChangeEmailRequest;
 import com.vendertool.sharedtypes.rnr.ErrorResponse;
 
 
@@ -92,8 +93,13 @@ public class MockDataUtil {
 					"lastName");
 		}
 
-
 		return response;
+	}
+	
+	public static ChangeEmailRequest getEmail(){ 
+		ChangeEmailRequest req = new ChangeEmailRequest();
+		req.setEmailId("ted@gmail.com");
+		return req;
 	}
 	
 }

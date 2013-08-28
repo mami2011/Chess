@@ -22,6 +22,8 @@
 				<div class="list-group">
 					<a href="accounthub" 	ng-class="getClass('/accounthub')" 	class="list-group-item">Overview</a>
 					<a href="#/selling"		ng-class="getClass('/selling')" 	class="list-group-item">Selling</a>
+					<a href="#/selling"		ng-class="getClass('/selling')" 	class="list-group-item">Orders</a>
+					<a href="#/selling"		ng-class="getClass('/selling')" 	class="list-group-item">Selling</a>
 					<a href="#/inventory"	ng-class="getClass('/inventory')"	class="list-group-item">Inventory</a>
 				</div>
 			</jsp:attribute>
