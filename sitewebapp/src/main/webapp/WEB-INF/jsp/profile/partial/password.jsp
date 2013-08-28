@@ -35,7 +35,7 @@
 	<tr>
 		<td colspan="2" class="actns">
 			<div class="sub-cncl">
-				<input ng-click="savePassword()" type="submit" class="btn lg" value="Submit"/>
+				<input ng-click="savePassword()" type="submit" class="btn lg grn" value="Submit"/>
 				<a ng-click="resetPassword()" class="cncl lg" href="javascript:;">Cancel</a>
 			</div>
 		</td>

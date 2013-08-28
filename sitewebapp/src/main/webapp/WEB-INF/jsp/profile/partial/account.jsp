@@ -131,7 +131,7 @@
 	<tr>
 		<td colspan="2" class="actns">
 			<div class="sub-cncl">
-				<input ng-click="saveAccount()" type="submit" class="btn lg" value="Submit"/>
+				<input ng-click="saveAccount()" type="submit" class="btn lg grn" value="Submit"/>
 				<a ng-click="resetAccount()" class="cncl lg" href="javascript:;">Cancel</a>
 			</div>
 		</td>
