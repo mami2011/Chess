@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.exception.VTRuntimeException;
 import com.vendertool.sharedtypes.rnr.ChangeEmailRequest;
+import com.vendertool.sharedtypes.rnr.ChangePasswordRequest;
 import com.vendertool.sharedtypes.rnr.ErrorResponse;
 import com.vendertool.sharedtypes.rnr.UpdateAccountRequest;
 import com.vendertool.sitewebapp.util.MenuBuilder;
@@ -105,15 +106,12 @@ public class ProfileController {
 		map.put("account", responseAccount);
 		map.put("errorResponse", errorResponse);
 		
-		//Map<String, List<VTError>> errorMap = buildErrorMap(errorResponse);
-		//map.put("errorMap", errorMap);
-		
 		return map;
 	}
 	
 	@RequestMapping(value="profile/email", method=RequestMethod.GET)
-	public Map<String, Object> getEmailView() {
-		logger.info("getProfileView controller invoked");
+	public @ResponseBody Map<String, Object> getEmailView() {
+		logger.info("getEmailView controller invoked");
 
 		/***
 		 * TODO: Getting the real data needs to be implemented.
@@ -127,10 +125,71 @@ public class ProfileController {
 		
 		return map;
 	}
+	
+	@RequestMapping(value="profile/email/save", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> saveEmailChange(@RequestBody ChangeEmailRequest changeEmailRequest, HttpServletRequest request) {
+		logger.info("saveEmailChange controller invoked");
+		
+		if (changeEmailRequest == null) {
+			throw new VTRuntimeException("Cannot update email. changeEmailRequest is null.");
+		}
+		
+		/***
+		 * TODO: Getting the real data needs to be implemented.
+		 */
+		ErrorResponse errorResponse = MockDataUtil.getUpdateEmailErrors(changeEmailRequest);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("changeEmailRequest", changeEmailRequest);
+		map.put("errorResponse", errorResponse);
+		
+		return map;
+	}
+
+	@RequestMapping(value="profile/password", method=RequestMethod.GET)
+	public @ResponseBody Map<String, Object> getPasswordView() {
+		logger.info("getPasswordView controller invoked");
+
+		/***
+		 * TODO: Getting the real data needs to be implemented.
+		 */
+		ChangePasswordRequest changePasswordRequest = new ChangePasswordRequest();
+		ErrorResponse errorResponse = new ErrorResponse();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("changePasswordRequest", changePasswordRequest);
+		map.put("errorResponse", errorResponse);
+		
+		return map;
+	}
+	
+	@RequestMapping(value="profile/password/save", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> savePasswordChange(@RequestBody ChangePasswordRequest changePasswordRequest, HttpServletRequest request) {
+		logger.info("savePasswordChange controller invoked");
+		
+		if (changePasswordRequest == null) {
+			throw new VTRuntimeException("Cannot update password. changePasswordRequest is null.");
+		}
+		
+		/***
+		 * TODO: Getting the real data needs to be implemented.
+		 */
+		ErrorResponse errorResponse = MockDataUtil.getUpdatePasswordErrors(changePasswordRequest);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("changePasswordRequest", changePasswordRequest);
+		map.put("errorResponse", errorResponse);
+		
+		return map;
+	}
 
 	
 	
-	
+	/******************************************
+	 * 
+	 * Get partial pages for Angular
+	 * 
+	 ******************************************/
 	@RequestMapping(value = "profile/partial/account", method = RequestMethod.GET)
 	public String getAccountPartial() {
 		logger.info("getAccountPartial controller invoked");
@@ -148,8 +207,4 @@ public class ProfileController {
 		logger.info("getPasswordPartial controller invoked");
 		return "profile/partial/password";
 	}
-	
-
-
-	
 }

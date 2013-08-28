@@ -33,8 +33,8 @@
 	<tr>
 		<td colspan="2" class="actns">
 			<div class="sub-cncl">
-				<input ng-click="save()" type="submit" class="btn lg" value="Submit"/>
-				<a ng-click="reset()" class="cncl lg" href="javascript:;">Cancel</a>
+				<input ng-click="saveEmail()" type="submit" class="btn lg" value="Submit"/>
+				<a ng-click="resetEmail()" class="cncl lg" href="javascript:;">Cancel</a>
 			</div>
 		</td>
 	</tr>

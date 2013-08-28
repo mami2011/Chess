@@ -45,7 +45,9 @@
 			</jsp:attribute>
 			<jsp:attribute name="content">
 				<div class="pg-msg">
-					<div class="alert alert-success" style="display:none;">Profile information updated.</div>
+					<div class="alert alert-success profile" style="display:none;">Profile has been updated.</div>
+					<div class="alert alert-success email" style="display:none;">Email has been updated.</div>
+					<div class="alert alert-success password" style="display:none;">Password has been updated.</div>
 					<div class="alert alert-danger"  style="display:none;">Sorry, there's been an error.</div>
 				</div>
 				
