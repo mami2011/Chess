@@ -28,7 +28,10 @@
 	</tr>
 	<tr>
 		<td class="col1"><label>Current Password:</label></td>
-		<td class="col2"><input ng-model="accountOrig.password" class="form-control" type="password"/></td>
+		<td class="col2">
+			<input ng-model="accountOrig.password" class="form-control" type="password"/>
+			<div error field="password" cname="com.vendertool.sharedtypes.core.Account"></div>
+		</td>
 	</tr>
 	<tr>
 		<td colspan="2" class="actns">
