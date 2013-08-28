@@ -12,8 +12,8 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 	$scope.errorResponse = Data.errorResponse;
 	$scope.countryOptions = Data.countryOptions;
 	$scope.changeEmailRequest = {};
-
-
+	$scope.changePasswordRequest = {};
+	
 	/** Do something when param is 'edit'**/
 	//if ($routeParams.edit) {
 		//$('#info').removeClass('readonly');
@@ -27,8 +27,10 @@ profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$locat
 	//}
 	
 	/** Do something when page is 'email'**/
-	if ($location.path() === '/email') {
-
+	if ($location.path() === '/email' || $location.path() === '/password') {
+		
+		$('.alert-danger').hide();
+		
 		$http.get('profile/email').success(function(data) {
 			$scope.changeEmailRequest = data.changeEmailRequest;
 		});
