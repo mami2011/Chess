@@ -2,9 +2,7 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-	<table-filter match-name="account_confirmation"
+	<table-filter match-name="passsword_history"
 		match-catalog="invdb">
 	</table-filter>
-	<table-filter match-name="address" match-catalog="invdb"></table-filter>
-	<table-filter match-name="account" match-catalog="invdb"></table-filter>
 </hibernate-reverse-engineering>
