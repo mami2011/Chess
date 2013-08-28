@@ -7,6 +7,7 @@ public class ChangeEmailRequest extends BaseRequest {
 	private String oldEmailId;
 	private String newEmail;
 	private String confirmEmail;
+	private String password;
 	
 	public String getOldEmailId() {
 		return oldEmailId;
@@ -31,4 +32,14 @@ public class ChangeEmailRequest extends BaseRequest {
 	public void setConfirmEmail(String confirmEmail) {
 		this.confirmEmail = confirmEmail;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
 }

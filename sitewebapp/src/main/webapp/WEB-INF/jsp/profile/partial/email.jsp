@@ -29,8 +29,8 @@
 	<tr>
 		<td class="col1"><label>Current Password:</label></td>
 		<td class="col2">
-			<input ng-model="accountOrig.password" class="form-control" type="password"/>
-			<div error field="password" cname="com.vendertool.sharedtypes.core.Account"></div>
+			<input ng-model="changeEmailRequest.password" class="form-control" type="password"/>
+			<div error field="password" cname="com.vendertool.sharedtypes.rnr.ChangeEmailRequest"></div>
 		</td>
 	</tr>
 	<tr>
