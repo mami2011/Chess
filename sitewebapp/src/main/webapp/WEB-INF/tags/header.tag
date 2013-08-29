@@ -60,7 +60,7 @@ Attributes
 					<div class="user inline">
 						<a id="profileBtn" href="javascript:;">${email} <b class="arw"></b></a>
 						
-						<ul id="profileMenu" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+						<ul id="profileMenu" class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu">
 						  <li><a tabindex="-1" href="profile">Profile</a></li>
 						  <li class="divider"></li>
 						  <li><a tabindex="-1" href="<c:url value="j_spring_security_logout" />">Sign-out</a></li>
@@ -92,7 +92,7 @@ Attributes
 						
 					<a id="langBtn" href="javascript:;"><span class="lbl"><spring:message code="form.registration.lang"/>:</span> ${selectedLangText} <b class="arw"></b></a>
 					
-					<ul id="languageMenu" name="lang" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+					<ul id="languageMenu" name="lang" class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu">
 						<c:forEach var="lang" items="${languages}">
 							<c:set var="selected" value="${lang.isoLangCode == selectedLang ? 'selected' : ''}"/>
 							<li><a tabindex="-1" href="?lang=${lang.isoLangCode}">${lang.nativeName}</a></li>

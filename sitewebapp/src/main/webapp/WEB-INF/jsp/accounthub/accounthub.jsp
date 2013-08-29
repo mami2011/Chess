@@ -28,6 +28,17 @@
 				</div>
 			</jsp:attribute>
 			<jsp:attribute name="content">
+				<div class="sec navbar navbar-default" role="navigation">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Summary</a></li>
+						<li><a href="#">Uploads</a></li>
+						<li><a href="#">Orders</a></li>
+						<li><a href="#">Reports</a></li>
+						<li><a href="#">FAQ</a></li>
+						<li><a href="#">Subscription</a></li>
+						<li><a href="#">Role Management</a></li>
+					</ul>
+				</div>
 				<div class="msg">
 					<div class="alert alert-success" style="display:none;">Profile information updated.</div>
 					<div class="alert alert-danger"  style="display:none;">Sorry, there's been an error.</div>
