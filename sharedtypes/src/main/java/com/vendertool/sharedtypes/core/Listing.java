@@ -13,7 +13,26 @@ public class Listing {
 	
 	@XmlEnum
 	public enum ListingFormatEnum{
-		FIXED_PRICE, AUCTION, AD;
+		UNKNOWN(-1), FIXED_PRICE(1), AUCTION(2), AD(3);
+		private int id;
+
+		private ListingFormatEnum(int id) {
+			this.id = id; 
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public ListingFormatEnum get(int id) {
+			ListingFormatEnum[] values = ListingFormatEnum.values();
+			for (ListingFormatEnum typeEnum : values) {
+				if (typeEnum.getId() == id) {
+					return typeEnum;
+				}
+			}
+			return UNKNOWN;
+		}
 	}
 	
 	private String listingId;

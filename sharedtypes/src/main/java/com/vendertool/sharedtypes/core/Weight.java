@@ -9,7 +9,27 @@ public class Weight {
 	
 	@XmlEnum
 	public enum WeightUnitEnum {
-		GRAMS,KGS,OUNCES,LBS;
+		UNKNOWN(-1), GRAMS(1),KGS(2),OUNCES(3),LBS(4);
+		
+		private int id;
+
+		private WeightUnitEnum(int id) {
+			this.id = id; 
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public WeightUnitEnum get(int id) {
+			WeightUnitEnum[] values = WeightUnitEnum.values();
+			for (WeightUnitEnum typeEnum : values) {
+				if (typeEnum.getId() == id) {
+					return typeEnum;
+				}
+			}
+			return UNKNOWN;
+		}
 	}
 	
 	private double value;

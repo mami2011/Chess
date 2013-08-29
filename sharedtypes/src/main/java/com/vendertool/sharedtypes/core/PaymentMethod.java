@@ -9,7 +9,26 @@ public class PaymentMethod {
 	
 	@XmlEnum
 	public enum PaymentTypeEnum {
-		MERCADO_PAGO, CREDIT_CARD_VISA, CREDIT_CARD_MASTER, PAYPAL;
+		UNKNOWN(-1),MERCADO_PAGO(1), CREDIT_CARD_VISA(2), CREDIT_CARD_MASTER(3), PAYPAL(4);
+		private int id;
+
+		private PaymentTypeEnum(int id) {
+			this.id = id; 
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public PaymentTypeEnum get(int id) {
+			PaymentTypeEnum[] values = PaymentTypeEnum.values();
+			for (PaymentTypeEnum typeEnum : values) {
+				if (typeEnum.getId() == id) {
+					return typeEnum;
+				}
+			}
+			return UNKNOWN;
+		}
 	}
 	
 	

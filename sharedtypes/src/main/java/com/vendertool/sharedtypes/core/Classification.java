@@ -9,7 +9,27 @@ public class Classification {
 	
 	@XmlEnum
 	public enum ClassificationTypeEnum {
-		CATEGORY,PRODUCT,KEYWORD,TITLE;
+		UNKNOWN(-1), CATEGORY(1),PRODUCT(2),KEYWORD(3),TITLE(4);
+		
+		private int id;
+
+		private ClassificationTypeEnum(int id) {
+			this.id = id; 
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public ClassificationTypeEnum get(int id) {
+			ClassificationTypeEnum[] values = ClassificationTypeEnum.values();
+			for (ClassificationTypeEnum typeEnum : values) {
+				if (typeEnum.getId() == id) {
+					return typeEnum;
+				}
+			}
+			return UNKNOWN;
+		}
 	}
 	
 	private ClassificationTypeEnum classificationType;

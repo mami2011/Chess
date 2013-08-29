@@ -8,8 +8,27 @@ import javax.xml.bind.annotation.XmlEnum;
 public class ShippingPolicy {
 	
 	@XmlEnum
-	public enum ShippingTypeEnum{
-		CUSTOM, FIXED, CALCULATED;
+	public enum ShippingTypeEnum {
+		UNKNOWN(-1), CUSTOM(1), FIXED(2), CALCULATED(3);
+		private int id;
+
+		private ShippingTypeEnum(int id) {
+			this.id = id; 
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public ShippingTypeEnum get(int id) {
+			ShippingTypeEnum[] shippingTypeValues = ShippingTypeEnum.values();
+			for (ShippingTypeEnum typeEnum : shippingTypeValues) {
+				if (typeEnum.getId() == id) {
+					return typeEnum;
+				}
+			}
+			return UNKNOWN;
+		}
 	}
 	
 	private int id;
