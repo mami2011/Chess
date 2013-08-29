@@ -10,6 +10,8 @@ import com.vendertool.sharedtypes.core.CountryEnum;
 import com.vendertool.sharedtypes.core.Phone;
 import com.vendertool.sharedtypes.core.Phone.PhoneType;
 import com.vendertool.sharedtypes.error.Errors;
+import com.vendertool.sharedtypes.rnr.ChangeEmailRequest;
+import com.vendertool.sharedtypes.rnr.ChangePasswordRequest;
 import com.vendertool.sharedtypes.rnr.ErrorResponse;
 
 
@@ -92,7 +94,40 @@ public class MockDataUtil {
 					"lastName");
 		}
 
-
+		return response;
+	}
+	
+	public static ChangeEmailRequest getEmail(){ 
+		ChangeEmailRequest req = new ChangeEmailRequest();
+		req.setOldEmailId("ted@gmail.com");
+		return req;
+	}
+	
+	public static ErrorResponse getUpdateEmailErrors(ChangeEmailRequest changeEmailRequest) {
+		
+		ErrorResponse response = new ErrorResponse();
+		
+		if(changeEmailRequest.getNewEmail() == null || changeEmailRequest.getNewEmail().isEmpty()) {
+			response.addFieldBindingError(
+					Errors.REGISTRATION.EMAIL_MISSING,
+					changeEmailRequest.getClass().getName(),
+					"newEmail");
+		}
+		
+		return response;
+	}
+	
+	public static ErrorResponse getUpdatePasswordErrors(ChangePasswordRequest changePasswordRequest) {
+		
+		ErrorResponse response = new ErrorResponse();
+		
+		if(changePasswordRequest.getNewPassword() == null || changePasswordRequest.getNewPassword().isEmpty()) {
+			response.addFieldBindingError(
+					Errors.REGISTRATION.PASSWORD_LENGTH_INCORRECT,
+					changePasswordRequest.getClass().getName(),
+					"newPassword");
+		}
+		
 		return response;
 	}
 	

@@ -1,8 +1,6 @@
 package com.vendertool.sitewebapp.controller;
 
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import com.vendertool.sharedtypes.core.Language;
 import com.vendertool.sharedtypes.core.Signin;
 import com.vendertool.sitewebapp.util.MenuBuilder;
 
@@ -28,6 +27,7 @@ public class SigninController {
 
 		Signin signin = new Signin();
 		model.addAttribute("signin", signin);
+		model.addAttribute("languages", Language.getLanguages());
 		model.addAttribute("langOptions", MenuBuilder.getLanguageOptions(locale));
 		model.addAttribute("selectedLang", request.getParameter("lang"));
 		

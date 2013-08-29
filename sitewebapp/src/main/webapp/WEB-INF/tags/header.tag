@@ -11,9 +11,10 @@ Attributes
 
 <div id="header">
 	<div class="hdr">
-
 		<div class="topnav inline">
-			<a href="home"><spring:message code="form.header.logo"/></a>
+			<a href="home" class="home"><spring:message code="form.header.logo"/></a>
+			<a href="accounthub" class="accounthub">Account Hub</a>
+			<a href="settings" class="settings">Settings</a>
 			
 			<%-- 
 			<a href="#"><spring:message code="form.header.platform"/></a>
@@ -59,7 +60,7 @@ Attributes
 					<div class="user inline">
 						<a id="profileBtn" href="javascript:;">${email} <b class="arw"></b></a>
 						
-						<ul id="profileMenu" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+						<ul id="profileMenu" class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu">
 						  <li><a tabindex="-1" href="profile">Profile</a></li>
 						  <li class="divider"></li>
 						  <li><a tabindex="-1" href="<c:url value="j_spring_security_logout" />">Sign-out</a></li>
@@ -69,7 +70,7 @@ Attributes
 					Search Box
 					=====================--%>
 					<form class="srch inline">
-						<input placeholder="Search"/>
+						<input/>
 						<button title="Search"></button>
 					</form>
 				</c:otherwise>
@@ -78,17 +79,23 @@ Attributes
 			<%--=================
 			Language Menu
 			=====================--%>
-			<c:if test="${empty email && !empty langOptions}">
+			<c:if test="${empty email && !empty languages}">
 				<div class="lang inline">
-					<c:forEach var="entry" items="${langOptions}">
-						<c:if test="${entry.val == selectedLang}"><c:set var="selectedLangText" value="${entry.txt}"/></c:if>
+					<c:forEach var="lang" items="${languages}">
+						<c:if test="${lang.isoLangCode == selectedLang}">
+							<c:set var="selectedLangText" value="${lang.nativeName}"/>
+						</c:if>
 					</c:forEach>
+					<c:if test="${empty selectedLangText}">
+						<c:set var="selectedLangText" value="Select language"/>
+					</c:if>
+						
 					<a id="langBtn" href="javascript:;"><span class="lbl"><spring:message code="form.registration.lang"/>:</span> ${selectedLangText} <b class="arw"></b></a>
 					
-					<ul id="languageMenu" name="lang" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-						<c:forEach var="entry" items="${langOptions}">
-							<c:set var="selected" value="${entry.val == selectedLang ? 'selected' : ''}"/>
-							<li><a tabindex="-1" href="?lang=${entry.val}">${entry.txt}</a></li>
+					<ul id="languageMenu" name="lang" class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu">
+						<c:forEach var="lang" items="${languages}">
+							<c:set var="selected" value="${lang.isoLangCode == selectedLang ? 'selected' : ''}"/>
+							<li><a tabindex="-1" href="?lang=${lang.isoLangCode}">${lang.nativeName}</a></li>
 						</c:forEach>
 					</ul>
 				</div>

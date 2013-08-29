@@ -25,10 +25,6 @@ table.acct td.c2 {
 	border:1px solid #fff;
 }
 
-.acct .info-wrp {
-	min-height:600px;
-}
-
 .acct.contact .info {
 	background-color:#fff;
 	width:100%;

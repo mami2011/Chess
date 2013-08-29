@@ -12,11 +12,15 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 			<props>
 				<prop key="hibernate.bytecode.use_reflection_optimizer">false</prop>
 				<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+				
 				<!-- <prop key="hibernate.connection.username">user5</prop>
 				<prop key="hibernate.connection.password">password</prop>
 				<prop key="hibernate.connection.url">jdbc:mysql://ec2-54-234-99-88.compute-1.amazonaws.com:3306/invdb</prop> -->
-				<prop key="hibernate.connection.username">root</prop> <prop key="hibernate.connection.password">admin</prop> 
-					<prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/invdb</prop>
+				
+				<prop key="hibernate.connection.username">root</prop> 
+				<prop key="hibernate.connection.password">admin</prop> 
+				<prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/invdb</prop>
+				
 				<prop key="hibernate.current_session_context_class">thread</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.search.autoregister_listeners">false</prop>
@@ -29,6 +33,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 				<value>com.vendertool.registration.dal.account.Account</value>
 				<value>com.vendertool.registration.dal.accountConfirmation.AccountConfirmation</value>
 				<value>com.vendertool.registration.dal.address.Address</value>
+				<value>com.vendertool.registration.dal.passwordHistory.PasswordHistory</value>
 
 			</list>
 		</property>

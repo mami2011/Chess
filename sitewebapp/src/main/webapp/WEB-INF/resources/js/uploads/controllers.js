@@ -5,15 +5,18 @@
 Using the array notation requires the listing of
 all the function params as strings in same order.
 ********************/
-profileApp.controller('ProfileCtrl', ['$scope', '$http', '$routeParams', '$location', 'Data', function($scope, $http, $routeParams, $location, Data) {
+uploadsApp.controller('UploadsCtrl', ['$scope', '$http', '$routeParams', '$location', 'Data', function($scope, $http, $routeParams, $location, Data) {
 	
+	alert('hello');
+	
+	/**
 	$scope.accountOrig = Data.account;
 	$scope.accountEdit = angular.copy(Data.account);
 	$scope.errorResponse = Data.errorResponse;
 	$scope.countryOptions = Data.countryOptions;
 	$scope.changeEmailRequest = {};
 	$scope.changePasswordRequest = {};
-	
+	**/
 	/** Do something when param is 'edit'**/
 	//if ($routeParams.edit) {
 		//$('#info').removeClass('readonly');

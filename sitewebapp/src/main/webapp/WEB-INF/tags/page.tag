@@ -45,25 +45,20 @@ Variables
 	</head>
 	<body>
 		<div id="wrap">
-			
-			<%-- Page specific header section --%>
-			<jsp:invoke fragment="header"/>
-			
-			<div id="body">
+			<div id="content">
+				<%-- Page specific header section --%>
+				<jsp:invoke fragment="header"/>
 				
 				<%-- Main contents --%>
 				<jsp:doBody/>
-			
-				<div class="clr"></div>
 			</div>
-			
-			<div id="footer">
-				<div class="ftr">
-					<a href="#"><spring:message code="form.header.aboutus"/></a>
-					<a href="#"><spring:message code="form.header.contact"/></a>
-					<a href="#"><spring:message code="form.header.faq"/></a>
-					<a href="#"><spring:message code="form.header.privacy"/></a>
-				</div>
+		</div>
+		<div id="footer">
+			<div class="ftr">
+				<a href="#"><spring:message code="form.header.aboutus"/></a>
+				<a href="#"><spring:message code="form.header.contact"/></a>
+				<a href="#"><spring:message code="form.header.faq"/></a>
+				<a href="#"><spring:message code="form.header.privacy"/></a>
 			</div>
 		</div>
 

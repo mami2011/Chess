@@ -18,6 +18,8 @@ import com.vendertool.registration.dal.accountConfirmation.AccountConfirmationDa
 import com.vendertool.registration.dal.address.Address;
 import com.vendertool.registration.dal.address.AddressDao;
 import com.vendertool.registration.dal.address.AddressDaoImpl;
+import com.vendertool.registration.dal.passwordHistory.PasswordHistory;
+import com.vendertool.registration.dal.passwordHistory.PasswordHistoryDaoImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:config/dev/dal/Registration.xml","classpath:config/dev/dal/DBConnectionConfig.xml" })
@@ -25,23 +27,25 @@ public class DalTest {
 	
 	@Autowired
 	private AccountDaoImpl accountDao;
-	@Test
+	//@Test
 	public void addAccountTest() {
 		Account account = new Account();
 		
 		//account.setAccountId((long) 101);
-		account.setEmailAddr("tesst1@gmail.com");
+		account.setEmailAddr("tesst2@gmail.com");
 		account.setFirstName("test");
 		account.setPassword("test");
 		account.setSalt("salt");
 		accountDao.insert(account);
+	//	Long i = accountDao.getNextValue();
+		//System.out.println("Next value " + i);
 		
 	}
 	
 	//AccountConfirmationTest
 	@Autowired
 	private AccountConfirmationDaoImpl accountConfirmationDao;
-	@Test
+	//@Test
 	public void addAccountConfirmationTest() {
 		AccountConfirmation accountConfirmation = new AccountConfirmation();
 		
@@ -54,7 +58,7 @@ public class DalTest {
 	//Address 
 	@Autowired
 	private AddressDaoImpl addressDao;
-	@Test
+//	@Test
 	public void addAddressTest() {
 		Address address = new Address();
 		
@@ -66,5 +70,20 @@ public class DalTest {
 		addressDao.insert(address);
 		
 	}
+	
+	//password_history 
+		@Autowired
+		private PasswordHistoryDaoImpl passwordHistoryDao;
+		@Test
+		public void addPasswordHistoryTest() {
+			PasswordHistory passwordHistory = new PasswordHistory();
+			
+			passwordHistory.setAccountId(101L);
+			passwordHistory.setPassword("test password");
+			passwordHistory.setPassswordHistoryId(1L);
+			
+			passwordHistoryDao.insert(passwordHistory);
+			
+		}
 
 }

@@ -76,9 +76,9 @@ public class AccountDaoImpl extends BaseDAO implements AccountDao {
 	}
 	
 	public long getNextValue(){
-		Session session = getDalSession();
-		 SQLQuery query = session.createSQLQuery("VALUES NEXTVAL FOR <sequence_name>");
-		 query.addEntity(Long.class);
+		//Session session = getDalSession();
+		 SQLQuery query = getSession().createSQLQuery("select nextval('accountId');");
+		// query.addEntity(Long.class);
 		 List<Long> nextValue = query.list();
 		 return nextValue.get(0);
 	}
