@@ -17,6 +17,8 @@
 		<script src="<c:url value='/resources/js/shared/errorResponse.module.js' />" type="text/javascript"></script>
 	</jsp:attribute>
 	
+
+	
 	<jsp:attribute name="css">
 		<link href="<c:url value='/resources/css/accounthub.css' />" rel="stylesheet" type="text/css" />
 	</jsp:attribute>
@@ -27,8 +29,8 @@
 			<jsp:attribute name="leftNav">
 				<h3 class="ttl">Uploads</h3>
 				<div class="list-group">
-					<a href="accounthub" 	ng-class="getClass('/accounthub')" 	class="list-group-item">Overview</a>
-					<a href="#/selling"		ng-class="getClass('/selling')" 	class="list-group-item">Selling</a>
+					<a href="#/files" 	ng-class="getClass('/accounthub')" 	class="list-group-item">Files</a>
+					<a href="#/uploader"	ng-class="getClass('/uploader')" 	class="list-group-item">Upload</a>
 					<a href="#/selling"		ng-class="getClass('/selling')" 	class="list-group-item">Orders</a>
 					<a href="#/selling"		ng-class="getClass('/selling')" 	class="list-group-item">Selling</a>
 					<a href="#/inventory"	ng-class="getClass('/inventory')"	class="list-group-item">Inventory</a>

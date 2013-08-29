@@ -5,9 +5,9 @@
 Using the array notation requires the listing of
 all the function params as strings in same order.
 ********************/
-uploadsApp.controller('UploadsCtrl', ['$scope', '$http', '$routeParams', '$location', 'Data', function($scope, $http, $routeParams, $location, Data) {
+uploadsApp.controller('UploadsCtrl', ['$scope', '$http', '$routeParams', '$location', function($scope, $http, $routeParams, $location) {
 	
-	alert('hello');
+	//alert('hello' + URL.uploadsUrl);
 	
 	/**
 	$scope.accountOrig = Data.account;

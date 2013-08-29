@@ -4,10 +4,12 @@
 var uploadsApp = angular.module('uploadsApp', ['errorResponse']);
 
 uploadsApp.config(['$routeProvider', function($routeProvider) {
-
-	$routeProvider.when('/uploads',		{templateUrl: 'uploads/partial/files',	controller: 'ProfileCtrl'});
-	$routeProvider.when('/uploader',		{templateUrl: 'profile/partial/uploader',		controller: 'ProfileCtrl'});
-	$routeProvider.when('/password',	{templateUrl: 'profile/partial/password',	controller: 'ProfileCtrl'});
 	
-	$routeProvider.otherwise({redirectTo: '/accounthub'});
+	
+	// When there is something after the hashtag
+	$routeProvider.when('/files',		{templateUrl: 'uploads/partial/files',		controller: 'UploadsCtrl'});
+	$routeProvider.when('/uploader',	{templateUrl: 'uploads/partial/uploader',	controller: 'UploadsCtrl'});
+	
+	// Otherwise when no hashtag or hashtag path can't be found, add a hashtag
+	$routeProvider.otherwise({redirectTo: '/files'});
 }]);
