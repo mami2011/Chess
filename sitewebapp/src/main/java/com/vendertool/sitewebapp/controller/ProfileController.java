@@ -21,6 +21,7 @@ import com.vendertool.sharedtypes.rnr.ChangeEmailRequest;
 import com.vendertool.sharedtypes.rnr.ChangePasswordRequest;
 import com.vendertool.sharedtypes.rnr.ErrorResponse;
 import com.vendertool.sharedtypes.rnr.UpdateAccountRequest;
+import com.vendertool.sitewebapp.common.URLConstants;
 import com.vendertool.sitewebapp.util.MenuBuilder;
 import com.vendertool.sitewebapp.util.MockDataUtil;
 
@@ -28,7 +29,7 @@ import com.vendertool.sitewebapp.util.MockDataUtil;
 public class ProfileController {
 	private static final Logger logger = Logger.getLogger(ProfileController.class);
 
-	@RequestMapping(value="profile", method=RequestMethod.GET)
+	@RequestMapping(value=URLConstants.PROFILE, method=RequestMethod.GET)
 	public String getProfileView(ModelMap modelMap, HttpServletRequest request) {
 		logger.info("getProfileView controller invoked");
 
@@ -58,7 +59,7 @@ public class ProfileController {
 		return "profile/profile";
 	}
 
-	@RequestMapping(value="profile/save", method=RequestMethod.POST)
+	@RequestMapping(value=URLConstants.PROFILE_SAVE, method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> saveProfile(@RequestBody Account account, HttpServletRequest request) {
 		logger.info("saveProfile controller invoked");
 		
@@ -109,7 +110,7 @@ public class ProfileController {
 		return map;
 	}
 	
-	@RequestMapping(value="profile/email", method=RequestMethod.GET)
+	@RequestMapping(value=URLConstants.PROFILE_EMAIL, method=RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getEmailView() {
 		logger.info("getEmailView controller invoked");
 
@@ -126,7 +127,7 @@ public class ProfileController {
 		return map;
 	}
 	
-	@RequestMapping(value="profile/email/save", method=RequestMethod.POST)
+	@RequestMapping(value=URLConstants.PROFILE_EMAIL_SAVE, method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> saveEmailChange(@RequestBody ChangeEmailRequest changeEmailRequest, HttpServletRequest request) {
 		logger.info("saveEmailChange controller invoked");
 		
@@ -146,7 +147,7 @@ public class ProfileController {
 		return map;
 	}
 
-	@RequestMapping(value="profile/password", method=RequestMethod.GET)
+	@RequestMapping(value=URLConstants.PROFILE_PASSWORD, method=RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getPasswordView() {
 		logger.info("getPasswordView controller invoked");
 
@@ -163,7 +164,7 @@ public class ProfileController {
 		return map;
 	}
 	
-	@RequestMapping(value="profile/password/save", method=RequestMethod.POST)
+	@RequestMapping(value=URLConstants.PROFILE_PASSWORD_SAVE, method=RequestMethod.POST)
 	public @ResponseBody Map<String, Object> savePasswordChange(@RequestBody ChangePasswordRequest changePasswordRequest, HttpServletRequest request) {
 		logger.info("savePasswordChange controller invoked");
 		
