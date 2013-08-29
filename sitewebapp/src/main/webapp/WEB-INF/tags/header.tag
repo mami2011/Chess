@@ -4,6 +4,17 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%--============
+Get URLs
+================--%>
+<%@ tag import="com.vendertool.sitewebapp.common.URLHelper" %>
+<%
+	request.setAttribute("homeUrl", URLHelper.getHomeUrl());
+	request.setAttribute("accountHubUrl", URLHelper.getAccountHubUrl());
+	request.setAttribute("profileUrl", URLHelper.getProfileUrl());
+%>
+
+
+<%--============
 Attributes
 ================--%>
 <%@ attribute name="email"			required="false"%>
@@ -12,8 +23,8 @@ Attributes
 <div id="header">
 	<div class="hdr">
 		<div class="topnav inline">
-			<a href="home" class="home"><spring:message code="form.header.logo"/></a>
-			<a href="accounthub" class="accounthub">Account Hub</a>
+			<a href="${homeUrl}" class="home"><spring:message code="form.header.logo"/></a>
+			<a href="${accountHubUrl}" class="accounthub">Account Hub</a>
 			<a href="settings" class="settings">Settings</a>
 			
 			<%-- 
@@ -61,7 +72,7 @@ Attributes
 						<a id="profileBtn" href="javascript:;">${email} <b class="arw"></b></a>
 						
 						<ul id="profileMenu" class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu">
-						  <li><a tabindex="-1" href="profile">Profile</a></li>
+						  <li><a tabindex="-1" href="${profileUrl}">Profile</a></li>
 						  <li class="divider"></li>
 						  <li><a tabindex="-1" href="<c:url value="j_spring_security_logout" />">Sign-out</a></li>
 						</ul>

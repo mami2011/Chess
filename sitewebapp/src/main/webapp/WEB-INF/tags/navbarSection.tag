@@ -2,6 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--============
+Get URLs
+================--%>
+<%@ tag import="com.vendertool.sitewebapp.common.URLHelper" %>
+<%
+	request.setAttribute("accountHubUrl", URLHelper.getAccountHubUrl());
+	request.setAttribute("uploadsUrl", URLHelper.getUploadsUrl());
+%>
+
+<%--============
 Attributes
 ================--%>
 <%@ attribute name="current" required="true"%>
@@ -16,8 +25,8 @@ Attributes
 
 <div class="sec navbar navbar-default" role="navigation">
 	<ul class="nav navbar-nav">
-		<li class="${curr1}"><a href="summary">Summary</a></li>
-		<li class="${curr2}"><a href="uploads">Uploads</a></li>
+		<li class="${curr1}"><a href="${accountHubUrl}">Summary</a></li>
+		<li class="${curr2}"><a href="${uploadsUrl}">Uploads</a></li>
 		<li class="${curr3}"><a href="orders">Orders</a></li>
 		<li class="${curr4}"><a href="reports">Reports</a></li>
 		<li class="${curr5}"><a href="faq">FAQ</a></li>

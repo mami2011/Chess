@@ -4,6 +4,7 @@
 
 
 
+
 <t:page title="Account hub">
 	
 	<jsp:attribute name="header">
@@ -20,7 +21,7 @@
 			<jsp:attribute name="leftNav">
 				<h3 class="ttl">Summary</h3>
 				<div class="list-group">
-					<a href="accounthub" 	ng-class="getClass('/accounthub')" 	class="list-group-item">Overview</a>
+					<a href="${accountHubUrl}" 	ng-class="getClass('/accounthub')" 	class="list-group-item">Overview</a>
 					<a href="#/selling"		ng-class="getClass('/selling')" 	class="list-group-item">Selling</a>
 					<a href="#/selling"		ng-class="getClass('/selling')" 	class="list-group-item">Orders</a>
 					<a href="#/selling"		ng-class="getClass('/selling')" 	class="list-group-item">Selling</a>

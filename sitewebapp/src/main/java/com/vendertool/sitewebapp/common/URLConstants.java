@@ -14,4 +14,17 @@ public interface URLConstants {
 	public static final String CONFIRM_ACCOUNT_PATH = "/confirmaccount";
 	public static final String FILE_UPLOAD_PATH = "/fps/upload";
 	public static final String WS_METADATA_GET_LANGUAGES_PATH = "/metadata/getSupportedLanguages";
+	
+	/**
+	 * Don't start these urls with "/"
+	 */
+	public static final String HOME = "home";
+	public static final String PROFILE = "profile";
+	public static final String PROFILE_SAVE = "profile/save";
+	public static final String PROFILE_EMAIL = "profile/email";
+	public static final String PROFILE_EMAIL_SAVE = "profile/email/save";
+	public static final String PROFILE_PASSWORD = "profile/password";
+	public static final String PROFILE_PASSWORD_SAVE = "profile/password/save";
+	public static final String ACCOUNT_HUB = "accounthub";
+	public static final String UPLOADS = "accounthub/uploads";
 }
