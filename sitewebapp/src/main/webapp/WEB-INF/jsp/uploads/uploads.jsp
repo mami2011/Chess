@@ -4,10 +4,17 @@
 
 
 
-<t:page title="Account hub">
+<t:page title="Uploads" angularAppName="uploadsApp">
 	
 	<jsp:attribute name="header">
 		<t:header email="${email}" currentPage="accounthub"/>
+	</jsp:attribute>
+	
+	<jsp:attribute name="scripts">
+		<script src="<c:url value='/resources/js/shared/errorUtil.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/resources/js/uploads/app.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/resources/js/uploads/controllers.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/resources/js/shared/errorResponse.module.js' />" type="text/javascript"></script>
 	</jsp:attribute>
 	
 	<jsp:attribute name="css">
@@ -16,9 +23,9 @@
 	
 	<jsp:body>
 	
-		<t:layoutTable ngController="AcctHubCtrl">
+		<t:layoutTable ngController="UploadsCtrl">
 			<jsp:attribute name="leftNav">
-				<h3 class="ttl">Summary</h3>
+				<h3 class="ttl">Uploads</h3>
 				<div class="list-group">
 					<a href="accounthub" 	ng-class="getClass('/accounthub')" 	class="list-group-item">Overview</a>
 					<a href="#/selling"		ng-class="getClass('/selling')" 	class="list-group-item">Selling</a>
@@ -28,7 +35,7 @@
 				</div>
 			</jsp:attribute>
 			<jsp:attribute name="content">
-				<t:navbarSection current="summary"/>
+				<t:navbarSection current="uploads"/>
 				
 				<div class="msg">
 					<div class="alert alert-success" style="display:none;">Profile information updated.</div>

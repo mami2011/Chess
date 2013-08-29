@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class AccountHubController {
-	@RequestMapping(value="accounthub", method=RequestMethod.GET)
+	@RequestMapping(value= {"accounthub", "accounthub/summary"}, method=RequestMethod.GET)
 	public String getAccountHub(ModelMap modelMap, Principal principal) {
 		
 	    //String name = principal.getName();

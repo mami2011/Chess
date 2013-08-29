@@ -39,8 +39,8 @@
   	-->
   	<sec:http pattern="/profile/**" security="none"/>
   	<sec:http pattern="/accounthub/**" security="none"/>
-  	
-  	
+  	<sec:http pattern="/uploads/**" security="none"/>
+  	<sec:http pattern="/fileUpload/**" security="none"/>
   	
   	<!-- NOTE: IMPORTANT - Ordering of filter pattern is important -->
   	<!-- 
