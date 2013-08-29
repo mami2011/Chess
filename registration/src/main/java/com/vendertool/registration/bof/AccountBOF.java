@@ -17,7 +17,7 @@ public class AccountBOF extends BaseBOF {
 	private AccountDao dao;
 
 	// To make Singleton *** Start ***
-	private static class AccountBOFSingletonHelper {
+	private static class AccountBOFSingletonHolder {
 		private static final AccountBOF INSTANCE = new AccountBOF();
 	}
 
@@ -35,7 +35,7 @@ public class AccountBOF extends BaseBOF {
 	// To make Singleton *** End ***
 
 	public static AccountBOF getInstance() {
-		return AccountBOFSingletonHelper.INSTANCE;
+		return AccountBOFSingletonHolder.INSTANCE;
 	}
 
 	public void insert(Account accountBO) {
