@@ -31,6 +31,7 @@
 		<param-value>
 			/WEB-INF/vendertooldispatcher-servlet.xml, 
 			/WEB-INF/spring-security.xml
+			classpath:security\client-credentials.xml
 		</param-value>
 	</context-param>
  

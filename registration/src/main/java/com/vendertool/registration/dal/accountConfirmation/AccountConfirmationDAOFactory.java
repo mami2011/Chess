@@ -15,7 +15,7 @@ public class AccountConfirmationDAOFactory extends BaseDAOFactory{
 	}
 
 	private AccountConfirmationDAOFactory() {
-		DAOFactoryRegistry.getInstance().register(DAOFactoryKey.ACCOUNT_DAO, this);
+		DAOFactoryRegistry.getInstance().register(DAOFactoryKey.ACCOUNT_CONFIRMATION_DAO, this);
 		
 	}
 	// To make Singleton *** End ***

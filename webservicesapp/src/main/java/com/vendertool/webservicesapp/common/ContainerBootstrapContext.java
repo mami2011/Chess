@@ -1,4 +1,4 @@
-package com.vendertool.sitewebapp.common;
+package com.vendertool.webservicesapp.common;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;

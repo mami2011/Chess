@@ -15,7 +15,7 @@ import com.vendertool.sharedtypes.core.AccountStatusEnum;
 
 public class CustomUserDetails implements UserDetails, Serializable {
 
-	private static final Logger logger = Logger.getLogger(CustomUserDetailsService.class);
+	private static final Logger logger = Logger.getLogger(CustomUserDetails.class);
 
 	private Account account;
 	

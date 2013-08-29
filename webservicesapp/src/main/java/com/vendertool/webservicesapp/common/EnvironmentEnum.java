@@ -1,4 +1,4 @@
-package com.vendertool.sitewebapp.common;
+package com.vendertool.webservicesapp.common;
 
 public enum EnvironmentEnum {
 	DEVELOPMENT(1, "DEVELOPMENT"),

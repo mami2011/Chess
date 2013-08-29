@@ -23,6 +23,8 @@
 	<mvc:resources location="/WEB-INF/apple-touch-icon.png"
 		mapping="/apple-touch-icon.png" />
 
+	 <bean id="applicationContextUtils" class="com.vendertool.sitewebapp.common.SpringApplicationContextUtils"></bean>
+	 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"

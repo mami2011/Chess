@@ -19,10 +19,13 @@ import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.filter.HttpBasicAuthFilter;
 
 import com.vendertool.sharedtypes.core.HttpMethodEnum;
 import com.vendertool.sharedtypes.exception.VTRuntimeException;
 import com.vendertool.sharedtypes.rnr.BaseRequest;
+import com.vendertool.sitewebapp.security.CleintCredentials;
+import com.vendertool.sitewebapp.security.CleintCredentialsUtil;
 
 public class RestServiceClientHelper {
 	
@@ -49,6 +52,8 @@ public class RestServiceClientHelper {
 		ClientConfig clientConfig = new ClientConfig();
 		clientConfig.register(JacksonJsonProvider.class);
 		Client client = ClientBuilder.newClient(clientConfig);
+		CleintCredentials cd = CleintCredentialsUtil.getClientCredentials();
+		client.register(new HttpBasicAuthFilter(cd.getUsername(), cd.getPassword()));
 		Entity<BaseRequest> entity = null;
 		WebTarget webtarget = client.target(url);
 				

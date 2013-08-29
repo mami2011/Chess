@@ -8,5 +8,12 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean id="accountDao" class="com.vendertool.registration.dal.account.AccountDaoImpl">
 		<property name="sessionFactory" ref="invdbSessionFactory"></property>
 	</bean>
+	
+	<bean id="accountConfirmationDao" class="com.vendertool.registration.dal.accountConfirmation.AccountConfirmationDaoImpl">
+		<property name="sessionFactory" ref="invdbSessionFactory"></property>
+	</bean>
+	<bean id="addressDao" class="com.vendertool.registration.dal.address.AddressDaoImpl">
+		<property name="sessionFactory" ref="invdbSessionFactory"></property>
+	</bean>
 
 </beans>
