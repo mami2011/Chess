@@ -3,6 +3,7 @@ package com.vendertool.listing;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -10,6 +11,9 @@ import javax.ws.rs.core.MediaType;
 
 import com.vendertool.common.MarketCountryKey;
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
+import com.vendertool.listing.helper.BaseListingHelper;
+import com.vendertool.listing.helper.ListingHelperFactory;
+import com.vendertool.listing.helper.ListingHelperTypeEnum;
 import com.vendertool.mercadolibreadapter.IMarketListingAdapter;
 import com.vendertool.sharedtypes.core.CountryEnum;
 import com.vendertool.sharedtypes.core.Listing;
@@ -54,14 +58,14 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public AddListingResponse addListing(AddListingRequest request) {
-		Listing listing = request.getListing();
-		IMarketListingAdapter adapter = ListingMarketAdapterRegistry.getInstance().getMarketListingAdapter(
-				new MarketCountryKey(listing.getCountry(), listing.getMarket()));
-		adapter.addListing(request);
-				
 		AddListingResponse response = new AddListingResponse();
-		response.setListingId("L987654321");
-		
+		BaseListingHelper helper = ListingHelperFactory.getListingHelper(ListingHelperTypeEnum.ADD_LISTING);
+		helper.validate(request, response);
+		if(response.hasErrors()){
+			//TODO populate errors and return.
+			return response;
+		}
+		helper.performOperation(request, response);
 		return response;
 	}
 
@@ -80,7 +84,7 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 		return null;
 	}
 
-	@POST
+	@PUT
 	@Path("/updateListing")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -88,7 +92,7 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 		return null;
 	}
 
-	@POST
+	@PUT
 	@Path("/updateListingPriceQuantity")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -97,7 +101,7 @@ public class ListingServiceimpl extends BaseVenderToolServiceImpl
 		return null;
 	}
 
-	@POST
+	@PUT
 	@Path("/adjustListingQuantity")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
