@@ -24,6 +24,9 @@ public class ValidationUtil {
 		return ValidationUtilHolder.INSTANCE;
 	}
 	
+	private ValidationUtil(){
+		
+	}
 	/**
 	 * Checks for null
 	 * 
