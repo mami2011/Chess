@@ -2,13 +2,13 @@ package com.vendertool.sharedtypes.error;
 
 public class FPSErrors {
 	private static final VTErrorDomainEnum DOMAIN = VTErrorDomainEnum.FTS;
-	private static FPSErrors INSTANCE = null;
 	
-	public static synchronized FPSErrors getInstance(){
-		if(INSTANCE == null) {
-			INSTANCE = new FPSErrors();
-		}
-		return INSTANCE;
+	private static class FPSErrorsHolder {
+		private static final FPSErrors INSTANCE = new FPSErrors();
+	}
+	
+	public static FPSErrors getInstance(){
+		return FPSErrorsHolder.INSTANCE;
 	}
 	
 	private FPSErrors(){}

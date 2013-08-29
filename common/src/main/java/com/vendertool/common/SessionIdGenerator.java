@@ -7,7 +7,6 @@ import java.util.Random;
 public class SessionIdGenerator {
 	private static final int DEFAULT_RADIX = 32;
 	private static final int DEFAULT_MAX_BIT_LENGTH = 130;
-	private static SessionIdGenerator INSTANCE = null;
 	
 	private SecureRandom securerandom = null;
 	private static Random random = null;
@@ -17,12 +16,12 @@ public class SessionIdGenerator {
 		random = new Random();
 	}
 	
-	public static synchronized SessionIdGenerator getInstance() {
-		if(INSTANCE == null) {
-			INSTANCE = new SessionIdGenerator();
-		}
-		
-		return INSTANCE;
+	private static class SessionIdGeneratorHolder {
+		private static final SessionIdGenerator INSTANCE = new SessionIdGenerator();
+	}
+	
+	public static SessionIdGenerator getInstance() {
+		return SessionIdGeneratorHolder.INSTANCE;
 	}
 	
 	public String generateSessionId(boolean hash){

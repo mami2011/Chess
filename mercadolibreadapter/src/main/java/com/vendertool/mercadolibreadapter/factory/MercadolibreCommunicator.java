@@ -14,16 +14,16 @@ import com.vendertool.sharedtypes.core.HttpMethodEnum;
 import com.vendertool.sharedtypes.rnr.BaseRequest;
 
 public class MercadolibreCommunicator {
-	private static MercadolibreCommunicator uniqInstance;
 
 	private MercadolibreCommunicator() {
 	}
 
-	public static synchronized MercadolibreCommunicator getInstance() {
-		if (uniqInstance == null) {
-			uniqInstance = new MercadolibreCommunicator();
-		}
-		return uniqInstance;
+	private static class MercadolibreCommunicatorHolder {
+		private static final MercadolibreCommunicator INSTANCE = new MercadolibreCommunicator();
+	}
+	
+	public static MercadolibreCommunicator getInstance() {
+		return MercadolibreCommunicatorHolder.INSTANCE;
 	}
 	
 	public Response call(MercadolibreCommunicatorVO communicatorVO){

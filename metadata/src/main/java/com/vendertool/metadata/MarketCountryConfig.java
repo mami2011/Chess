@@ -18,7 +18,9 @@ import com.vendertool.sharedtypes.core.MarketEnum;
 public class MarketCountryConfig {
 	private Map<MarketEnum, List<CountryEnum>> marketCountryMap;
 	
-	private static MarketCountryConfig INSTANCE = null;
+	private static class MarketCountryConfigHolder {
+		private static final MarketCountryConfig INSTANCE = new MarketCountryConfig();
+	}
 	
 	private MarketCountryConfig() {
 		marketCountryMap = new HashMap<MarketEnum, List<CountryEnum>>();
@@ -29,11 +31,8 @@ public class MarketCountryConfig {
 		//addEbaySupportedCountries();
 	}
 	
-	public synchronized static MarketCountryConfig getInstance() {
-		if(INSTANCE == null) {
-			INSTANCE = new MarketCountryConfig();
-		}
-		return INSTANCE;
+	public static MarketCountryConfig getInstance() {
+		return MarketCountryConfigHolder.INSTANCE;
 	}
 	
 	public List<CountryEnum> getMarketSupportedCountries(MarketEnum market) {

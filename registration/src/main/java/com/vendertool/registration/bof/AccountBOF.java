@@ -12,8 +12,8 @@ import com.vendertool.sharedtypes.core.Account;
 
 public class AccountBOF extends BaseBOF {
 
-	private static final Logger logger = Logger.getLogger(AccountBOF.class
-			.getName());
+	private static final Logger logger = Logger.getLogger(AccountBOF.class.getName());
+	
 	private AccountDao dao;
 
 	// To make Singleton *** Start ***

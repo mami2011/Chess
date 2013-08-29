@@ -11,18 +11,17 @@ import java.util.regex.PatternSyntaxException;
  * A simple util that is commonly used for validations
  */
 public class ValidationUtil {
-	private static ValidationUtil INSTANCE = null;
+	private static class ValidationUtilHolder {
+		private static final ValidationUtil INSTANCE = new ValidationUtil();
+	}
 	
 	/**
 	 * Get the singleton instance of the class
 	 * 
 	 * @return
 	 */
-	public static synchronized ValidationUtil getInstance(){
-		if(INSTANCE == null) {
-			INSTANCE = new ValidationUtil();
-		}
-		return INSTANCE;
+	public static ValidationUtil getInstance(){
+		return ValidationUtilHolder.INSTANCE;
 	}
 	
 	/**

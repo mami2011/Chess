@@ -23,16 +23,16 @@ public class MercadolibreGetListingAdapter implements
 		IBaseMercadolibreOperationAdapter {
 
 	private static String GET_LISTING_URL = "https://api.mercadolibre.com/items/";
-	private static MercadolibreGetListingAdapter uniqInstance;
 
 	private MercadolibreGetListingAdapter() {
 	}
 
-	public static synchronized MercadolibreGetListingAdapter getInstance() {
-		if (uniqInstance == null) {
-			uniqInstance = new MercadolibreGetListingAdapter();
-		}
-		return uniqInstance;
+	private static class MercadolibreGetListingAdapterHolder {
+		private static final MercadolibreGetListingAdapter INSTANCE = new MercadolibreGetListingAdapter();
+	}
+	
+	public static MercadolibreGetListingAdapter getInstance() {
+		return MercadolibreGetListingAdapterHolder.INSTANCE;
 	}
 
 	public BaseResponse execute(BaseRequest request) {

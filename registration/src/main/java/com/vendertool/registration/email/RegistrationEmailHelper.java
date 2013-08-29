@@ -20,16 +20,16 @@ public class RegistrationEmailHelper {
 	
 	private static ValidationUtil validationUtil = ValidationUtil.getInstance();
 	private static final Logger logger = Logger.getLogger(RegistrationEmailHelper.class);
-	private static RegistrationEmailHelper INSTANCE = null;
+	
+	private static class RegistrationEmailHelperHolder {
+		private static final RegistrationEmailHelper INSTANCE = new RegistrationEmailHelper();
+	}
 	
 	private RegistrationEmailHelper() {
 	}
 	
-	public synchronized static RegistrationEmailHelper getInstance() {
-		if(validationUtil.isNull(INSTANCE)) {
-			INSTANCE = new RegistrationEmailHelper();
-		}
-		return INSTANCE;
+	public static RegistrationEmailHelper getInstance() {
+		return RegistrationEmailHelperHolder.INSTANCE;
 	}
 	
 	public void sendConfirmRegistrationEmail(Account account, String baseurl, Locale locale) {

@@ -95,17 +95,16 @@ public class EmailRegexValidator {
 	
 	private Pattern pattern;
 	
-	private static EmailRegexValidator INSTANCE = null;
+	private static class EmailRegexValidatorHolder {
+		private static final EmailRegexValidator INSTANCE = new EmailRegexValidator();
+	}
 	
 	private EmailRegexValidator() {
 		pattern = Pattern.compile(SIMPLE_EMAIL_PATTERN);
 	}
 	
-	public static synchronized EmailRegexValidator getInstance() {
-		if(INSTANCE == null) {
-			INSTANCE = new EmailRegexValidator();
-		}
-		return INSTANCE;
+	public static EmailRegexValidator getInstance() {
+		return EmailRegexValidatorHolder.INSTANCE;
 	}
 	
 	public boolean validate(String email) {

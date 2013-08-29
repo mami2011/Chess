@@ -23,17 +23,6 @@ public class MsgSource {
 	
 	private static ValidationUtil validationUtil = ValidationUtil.getInstance();
 	private static final Logger logger = Logger.getLogger(MsgSource.class);
-//	private static MsgSource INSTANCE = null;
-	
-//	public MsgSource() {
-//	}
-	
-//	public synchronized static MsgSource getInstance() {
-//		if(validationUtil.isNull(INSTANCE)) {
-//			INSTANCE = new MsgSource();
-//		}
-//		return INSTANCE;
-//	}
 	
 	private MessageSource getMessageSource() {
 		WebApplicationContext webAppContext = ContextLoader.getCurrentWebApplicationContext();

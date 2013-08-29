@@ -2,13 +2,13 @@ package com.vendertool.sharedtypes.error;
 
 public class RegistrationErrors {
 	private static final VTErrorDomainEnum DOMAIN = VTErrorDomainEnum.REGISTRATION;
-	private static RegistrationErrors INSTANCE = null;
 	
-	public static synchronized RegistrationErrors getInstance(){
-		if(INSTANCE == null) {
-			INSTANCE = new RegistrationErrors();
-		}
-		return INSTANCE;
+	private static class RegistrationErrorsHolder {
+		private static final RegistrationErrors INSTANCE = new RegistrationErrors();
+	}
+	
+	public static RegistrationErrors getInstance(){
+		return RegistrationErrorsHolder.INSTANCE;
 	}
 	
 	private RegistrationErrors(){}

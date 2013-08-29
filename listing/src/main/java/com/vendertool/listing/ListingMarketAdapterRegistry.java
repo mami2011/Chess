@@ -11,16 +11,16 @@ import com.vendertool.sharedtypes.core.MarketEnum;
 import com.vendertool.sharedtypes.exception.VTRuntimeException;
 
 public class ListingMarketAdapterRegistry {
-	private static ListingMarketAdapterRegistry instance = null;
 	  
 	private final static Map<MarketCountryKey, String> REGISTRY = 
 			new HashMap<MarketCountryKey, String>();
 	 
-	  public static synchronized ListingMarketAdapterRegistry getInstance() {
-	    if (instance == null) {
-	      instance = new ListingMarketAdapterRegistry();
-	    }
-	    return instance;
+	private static class ListingMarketAdapterRegistryHolder {
+		private static final ListingMarketAdapterRegistry INSTANCE = new ListingMarketAdapterRegistry();
+	}
+	
+	  public static ListingMarketAdapterRegistry getInstance() {
+	    return ListingMarketAdapterRegistryHolder.INSTANCE;
 	  }
 	  
 	  private ListingMarketAdapterRegistry() {

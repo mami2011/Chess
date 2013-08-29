@@ -17,17 +17,17 @@ public class CachedRegistrationAccountDatasource {
 	}
 	
 	private static Map<String, Account> ACCOUNT_DIRECTORY = null;
-	private static CachedRegistrationAccountDatasource INSTANCE = null;
+	
+	private static class CachedRegistrationAccountDatasourceHolder {
+		private static final CachedRegistrationAccountDatasource INSTANCE = new CachedRegistrationAccountDatasource();
+	}
 	
 	private CachedRegistrationAccountDatasource() {
 		ACCOUNT_DIRECTORY = new HashMap<String, Account>();
 	}
 	
-	public static synchronized CachedRegistrationAccountDatasource getInstance() {
-		if(INSTANCE == null) {
-			INSTANCE = new CachedRegistrationAccountDatasource();
-		}
-		return INSTANCE;
+	public static CachedRegistrationAccountDatasource getInstance() {
+		return CachedRegistrationAccountDatasourceHolder.INSTANCE;
 	}
 	
 	public Status addAccount(Account account) {

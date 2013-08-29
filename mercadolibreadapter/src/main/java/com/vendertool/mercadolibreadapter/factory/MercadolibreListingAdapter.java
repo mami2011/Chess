@@ -28,16 +28,16 @@ public class MercadolibreListingAdapter implements
 
 	private static String VERIFY_LISTING_URL = "https://api.mercadolibre.com/items/validate?access_token=$APP_USR-9773-041316-013619f30678959c46bbda5f211aff75__C_N__-107245974";
 	private static String LISTING_URL = "https://api.mercadolibre.com/items?access_token=$APP_USR-9773-041316-013619f30678959c46bbda5f211aff75__C_N__-107245974";
-	private static MercadolibreListingAdapter uniqInstance;
 
 	private MercadolibreListingAdapter() {
 	}
 
-	public static synchronized MercadolibreListingAdapter getInstance() {
-		if (uniqInstance == null) {
-			uniqInstance = new MercadolibreListingAdapter();
-		}
-		return uniqInstance;
+	private static class MercadolibreListingAdapterHolder {
+		private static final MercadolibreListingAdapter INSTANCE = new MercadolibreListingAdapter();
+	}
+	
+	public static MercadolibreListingAdapter getInstance() {
+		return MercadolibreListingAdapterHolder.INSTANCE;
 	}
 
 	public BaseResponse execute(BaseRequest request) {

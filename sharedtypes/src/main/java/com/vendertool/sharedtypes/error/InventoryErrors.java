@@ -2,13 +2,13 @@ package com.vendertool.sharedtypes.error;
 
 public class InventoryErrors {
 	private static final VTErrorDomainEnum DOMAIN = VTErrorDomainEnum.INVENTORY;
-	private static InventoryErrors INSTANCE = null;
 	
-	public static synchronized InventoryErrors getInstance(){
-		if(INSTANCE == null) {
-			INSTANCE = new InventoryErrors();
-		}
-		return INSTANCE;
+	private static class InventoryErrorsHolder {
+		private static final InventoryErrors INSTANCE = new InventoryErrors();
+	}
+	
+	public static InventoryErrors getInstance(){
+		return InventoryErrorsHolder.INSTANCE;
 	}
 	
 	private InventoryErrors(){}
