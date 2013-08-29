@@ -46,7 +46,7 @@ body {
 	padding: 15px 20px;
 }
 .main .c2 {
-	padding: 15px;
+	padding: 10px;
 }
 .main .cell-pad {
 	visibility: hidden;
@@ -117,7 +117,8 @@ Page Header
 	padding:12px 30px;
 }
 .hdr .topnav .curr {
-	background-color:#26599e;
+	/*
+	background-color:#26599e;*/
 	color:#fff;
 }
 
