@@ -45,7 +45,9 @@ public class ContainerBootstrapContext {
 		    	AccountDAOFactory.getInstance().init();
 		    	AccountConfirmationDAOFactory.getInstance().init();
 		    	AddressDAOFactory.getInstance().init();
+		    	//Do processor Init
 		    	Module.getInstance().init();
+		    	com.vendertool.inventory.processor.Module.getInstance().init();
 	    	} finally {
 	    		CTX.set(this);
 	    	}

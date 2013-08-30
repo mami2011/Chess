@@ -19,4 +19,16 @@ public class ListingErrors {
 			"Unbale to list due to market errors", 
 			VTErrorSeverityEnum.ERROR, 
 			DOMAIN);
+	
+	public VTError LISTING_CONTAINER_IS_EMPTY = new VTError(
+			ListingErrorCode.LISTING_CONTAINER_IS_EMPTY, 
+			"Provided Listing Container is Empty", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	
+	public VTError PRODUCT_CONTAINER_IS_EMPTY = new VTError(
+			ListingErrorCode.PRODUCT_CONTAINER_IS_EMPTY, 
+			"Provided Product Container is Empty", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
 }

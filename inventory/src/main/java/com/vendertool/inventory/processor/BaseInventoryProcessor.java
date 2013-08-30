@@ -1,22 +1,23 @@
-package com.vendertool.listing.helper;
+package com.vendertool.inventory.processor;
 
 import com.vendertool.sharedtypes.rnr.BaseRequest;
 import com.vendertool.sharedtypes.rnr.BaseResponse;
 
-public abstract class BaseListingProcessor {
 
-	public BaseListingProcessor(ListingProcessorTypeEnum helperType) {
+public abstract class BaseInventoryProcessor {
+
+	public BaseInventoryProcessor(InventoryProcessorTypeEnum helperType) {
 		this.processorType = helperType;
 	}
 
-	private ListingProcessorTypeEnum processorType;
+	private InventoryProcessorTypeEnum processorType;
 
-	public ListingProcessorTypeEnum getProcessorType() {
+	public InventoryProcessorTypeEnum getProcessorType() {
 		return processorType;
 	}
 
 	public void register() {
-		ListingProcessorRegistry.getInstance()
+		InventoryProcessorRegistry.getInstance()
 				.register(this.getProcessorType(), this);
 	}
 

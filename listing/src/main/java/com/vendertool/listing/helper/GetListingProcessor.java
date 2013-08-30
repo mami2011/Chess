@@ -2,11 +2,6 @@ package com.vendertool.listing.helper;
 
 import org.apache.log4j.Logger;
 
-import com.vendertool.common.MarketCountryKey;
-import com.vendertool.listing.ListingMarketAdapterRegistry;
-import com.vendertool.mercadolibreadapter.IMarketListingAdapter;
-import com.vendertool.sharedtypes.core.CountryEnum;
-import com.vendertool.sharedtypes.core.MarketEnum;
 import com.vendertool.sharedtypes.exception.VTRuntimeException;
 import com.vendertool.sharedtypes.rnr.BaseRequest;
 import com.vendertool.sharedtypes.rnr.BaseResponse;

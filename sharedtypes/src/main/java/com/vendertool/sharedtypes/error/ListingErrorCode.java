@@ -28,4 +28,8 @@ public class ListingErrorCode extends VTErrorCode implements Serializable{
 			"UNABLE_TO_LIST");
 	public static VTErrorCode LISTING_HAS_MARKET_ERRORS = new ListingErrorCode(
 			"INVALID_PRODUCT");
+	public static VTErrorCode LISTING_CONTAINER_IS_EMPTY = new ListingErrorCode(
+			"LISTING_CONTAINER_IS_EMPTY");
+	public static VTErrorCode PRODUCT_CONTAINER_IS_EMPTY = new ListingErrorCode(
+			"PRODUCT_CONTAINER_IS_EMPTY");
 }

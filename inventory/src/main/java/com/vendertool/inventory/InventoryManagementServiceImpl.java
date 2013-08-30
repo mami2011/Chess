@@ -38,6 +38,7 @@ public class InventoryManagementServiceImpl extends BaseVenderToolServiceImpl im
 	@Path("/getProduct")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public GetProductResponse getProduct(@QueryParam("productId") String id) {
+		
 		GetProductResponse response = new GetProductResponse();
 		Product product = new Product("iPhone 5");
 		String pid = "P123456789";
