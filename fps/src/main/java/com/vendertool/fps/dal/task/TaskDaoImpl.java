@@ -41,9 +41,10 @@ public class TaskDaoImpl extends BaseDAO implements TaskDao {
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void update(Task task) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().update(task);
-
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.update(task);
+		trans.commit();
 	}
 
 	/*
@@ -54,9 +55,10 @@ public class TaskDaoImpl extends BaseDAO implements TaskDao {
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void delete(Task task) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(task);
-
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(task);
+		trans.commit();
 	}
 
 	

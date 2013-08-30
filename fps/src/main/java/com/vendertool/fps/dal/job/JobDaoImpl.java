@@ -41,9 +41,10 @@ public class JobDaoImpl extends BaseDAO implements JobDao {
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void update(Job job) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().update(job);
-
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.update(job);
+		trans.commit();
 	}
 
 	/*
@@ -54,9 +55,10 @@ public class JobDaoImpl extends BaseDAO implements JobDao {
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void delete(Job job) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(job);
-
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(job);
+		trans.commit();
 	}
 
 	public List<Job> findByJobId(long jobId) {

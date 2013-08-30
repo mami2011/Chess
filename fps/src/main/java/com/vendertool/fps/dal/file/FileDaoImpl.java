@@ -37,8 +37,10 @@ public class FileDaoImpl extends BaseDAO implements FileDao {
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void update(File file) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().update(file);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.update(file);
+		trans.commit();
 
 	}
 
@@ -50,8 +52,10 @@ public class FileDaoImpl extends BaseDAO implements FileDao {
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void delete(File file) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(file);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(file);
+		trans.commit();
 
 	}
 
