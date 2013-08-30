@@ -42,6 +42,9 @@ public class Product implements java.io.Serializable {
 	private String productcol;
 
 	public Product() {
+		Date now = new Date();
+		createdDate = now;
+		lastModifiedDate = now;
 	}
 
 	public Product(String title, String sku, String descriptionText,

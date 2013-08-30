@@ -30,6 +30,9 @@ public class ProductVariation implements java.io.Serializable {
 	private Date lastModifiedDate;
 
 	public ProductVariation() {
+		Date now = new Date();
+		createdDate = now;
+		lastModifiedDate = now;
 	}
 
 	public ProductVariation(long productId) {
