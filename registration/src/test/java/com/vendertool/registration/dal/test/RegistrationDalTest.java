@@ -23,7 +23,7 @@ import com.vendertool.registration.dal.passwordHistory.PasswordHistoryDaoImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:config/dev/dal/Registration.xml","classpath:config/dev/dal/DBConnectionConfig.xml" })
-public class DalTest {
+public class RegistrationDalTest {
 	
 	@Autowired
 	private AccountDaoImpl accountDao;
@@ -32,14 +32,16 @@ public class DalTest {
 		Account account = new Account();
 		
 		account.setAccountId((long) 1);
-		account.setEmailAddr("tesst2@gmail.com");
-		account.setFirstName("test");
+		account.setEmailAddr("tesst3@gmail.com");
+		account.setFirstName("testfirst");
 		account.setPassword("test");
 		account.setSalt("salt");
-	//	accountDao.insert(account);
+		accountDao.insert(account);
 		accountDao.delete(account);
 		//Long i = accountDao.getNextValue();
 		//System.out.println("Next value " + i);
+		List<Account> accountlist = accountDao.findByAccountId(3);
+		System.out.println(accountlist.get(0).getFirstName());
 		
 	}
 	

@@ -31,8 +31,10 @@ public class PasswordHistoryDaoImpl extends BaseDAO implements PasswordHistoryDa
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#update(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
 	public void update(PasswordHistory passwordHistory) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().update(passwordHistory);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(passwordHistory);
+		trans.commit();
 
 	}
 
@@ -40,8 +42,10 @@ public class PasswordHistoryDaoImpl extends BaseDAO implements PasswordHistoryDa
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#delete(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
 	public void delete(PasswordHistory passwordHistory) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(passwordHistory);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(passwordHistory);
+		trans.commit();
 
 	}
 
@@ -49,9 +53,10 @@ public class PasswordHistoryDaoImpl extends BaseDAO implements PasswordHistoryDa
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#findByStockCode(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
 	public List<PasswordHistory> findByAccountId(Long account_id) {
-		// TODO Auto-generated method stub
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
 		String sql = "select * from password_history where account_id = :account_id";
-		SQLQuery query=getSession().createSQLQuery(sql);
+		SQLQuery query=session.createSQLQuery(sql);
 		query.setParameter("aaccount_id", account_id);
 		query.addEntity(PasswordHistory.class);
 		List<PasswordHistory> results = query.list();

@@ -41,7 +41,10 @@ public class AccountDaoImpl extends BaseDAO implements AccountDao {
 	 */
 	public void update(Account account) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().update(account);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.update(account);
+		trans.commit();
 
 	}
 
@@ -67,10 +70,12 @@ public class AccountDaoImpl extends BaseDAO implements AccountDao {
 	 * com.vendertool.inventory.DBL.BO.MerchantProductDao#findByStockCode(com
 	 * .vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
-	public List<Account> findByAccountId(Long accountId) {
+	public List<Account> findByAccountId(long accountId) {
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
 		// TODO Auto-generated method stub
 		String sql = "select * from account where account_id = :accountId";
-		SQLQuery query = getSession().createSQLQuery(sql);
+		SQLQuery query = session.createSQLQuery(sql);
 		query.setParameter("accountId", accountId);
 		query.addEntity(Account.class);
 		List<Account> results = query.list();
@@ -90,8 +95,10 @@ public class AccountDaoImpl extends BaseDAO implements AccountDao {
 	}
 
 	public List<Account> findByEmailId(String emailId) {
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
 		String sql = "select * from account where email_addr = :emailId";
-		SQLQuery query = getSession().createSQLQuery(sql);
+		SQLQuery query = session.createSQLQuery(sql);
 		query.setParameter("emailId", emailId);
 		query.addEntity(Account.class);
 		List<Account> results = query.list();

@@ -43,7 +43,10 @@ public class AccountConfirmationDaoImpl extends BaseDAO implements AccountConfir
 	 */
 	public void update(AccountConfirmation accountConfirmation) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().update(accountConfirmation);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.update(accountConfirmation);
+		trans.commit();
 
 	}
 
@@ -56,7 +59,10 @@ public class AccountConfirmationDaoImpl extends BaseDAO implements AccountConfir
 	 */
 	public void delete(AccountConfirmation accountConfirmation) {
 		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(accountConfirmation);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(accountConfirmation);
+		trans.commit();
 
 	}
 
@@ -68,9 +74,10 @@ public class AccountConfirmationDaoImpl extends BaseDAO implements AccountConfir
 	 * .vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
 	public List<AccountConfirmation> findByAccountId(Long accountId) {
-		// TODO Auto-generated method stub
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
 		String sql = "select * from account_confirmation where account_id = :accountId";
-		SQLQuery query = getSession().createSQLQuery(sql);
+		SQLQuery query = session.createSQLQuery(sql);
 		query.setParameter("accountId", accountId);
 		query.addEntity(AccountConfirmation.class);
 		List<AccountConfirmation> results = query.list();

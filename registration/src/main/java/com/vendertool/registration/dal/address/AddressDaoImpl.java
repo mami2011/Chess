@@ -29,8 +29,10 @@ public class AddressDaoImpl extends BaseDAO implements AddressDao {
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#update(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
 	public void update(Address address) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().update(address);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.update(address);
+		trans.commit();
 
 	}
 
@@ -38,8 +40,11 @@ public class AddressDaoImpl extends BaseDAO implements AddressDao {
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#delete(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
 	public void delete(Address address) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(address);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(address);
+		trans.commit();
+
 
 	}
 
@@ -47,9 +52,10 @@ public class AddressDaoImpl extends BaseDAO implements AddressDao {
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#findByStockCode(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
 	public List<Address> findByAddressId(Address address) {
-		// TODO Auto-generated method stub
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
 		String sql = "select * from address where address_id = :address_id";
-		SQLQuery query=getSession().createSQLQuery(sql);
+		SQLQuery query=session.createSQLQuery(sql);
 		query.setParameter("address_id", address.getAddressId());
 		query.addEntity(Address.class);
 		List<Address> results = query.list();
