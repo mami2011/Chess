@@ -40,8 +40,11 @@ public class ProductDaoImpl extends BaseDAO implements ProductDao {
 	 * .inventory.DBL.BO.Product)
 	 */
 	public void update(Product product) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().update(product);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.update(product);
+		trans.commit();
+
 
 	}
 
@@ -53,16 +56,18 @@ public class ProductDaoImpl extends BaseDAO implements ProductDao {
 	 * .inventory.DBL.BO.Product)
 	 */
 	public void delete(Product product) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(product);
-
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(product);
+		trans.commit();
 	}
 
 
 		public List<Product> findByAccountId(long accountId) {
-			// TODO Auto-generated method stub
+			Session session = getDalSession();
+			Transaction trans = session.beginTransaction();
 			String sql = "select * from _product where account_id = :account_id";
-			SQLQuery query=getSession().createSQLQuery(sql);
+			SQLQuery query=session.createSQLQuery(sql);
 			query.setParameter("account_id", accountId);
 			query.addEntity(Product.class);
 			List<Product> results = query.list();
@@ -70,9 +75,10 @@ public class ProductDaoImpl extends BaseDAO implements ProductDao {
 		}
 
 		public List<Product> findByProductId(long productId) {
-			// TODO Auto-generated method stub
+			Session session = getDalSession();
+			Transaction trans = session.beginTransaction();
 			String sql = "select * from _product where product_id = :product_id";
-			SQLQuery query=getSession().createSQLQuery(sql);
+			SQLQuery query=session.createSQLQuery(sql);
 			query.setParameter("product_id", productId);
 			query.addEntity(Product.class);
 			List<Product> results = query.list();
@@ -81,8 +87,10 @@ public class ProductDaoImpl extends BaseDAO implements ProductDao {
 
 		public List<Product> findByAccountIdAndSKU(long accountId,
 				String sku) {
+			Session session = getDalSession();
+			Transaction trans = session.beginTransaction();
 			String sql = "select * from _product where account_id = :account_id and sku = :sku";
-			SQLQuery query=getSession().createSQLQuery(sql);
+			SQLQuery query=session.createSQLQuery(sql);
 			query.setParameter("account_id", accountId);
 			query.setParameter("sku", sku);
 			query.addEntity(Product.class);

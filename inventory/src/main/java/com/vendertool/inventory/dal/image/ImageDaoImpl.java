@@ -40,8 +40,11 @@ public class ImageDaoImpl extends BaseDAO implements ImageDao {
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void update(Image image) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().update(image);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.update(image);
+		trans.commit();
+
 
 	}
 
@@ -53,15 +56,16 @@ public class ImageDaoImpl extends BaseDAO implements ImageDao {
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void delete(Image image) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(image);
-
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(image);
+		trans.commit();
 	}
 
-	public List<Image> findByAccountId(long accountId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	/*public List<Image> findByAccountId(long accountId) {
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+	}*/
 
 	
 }

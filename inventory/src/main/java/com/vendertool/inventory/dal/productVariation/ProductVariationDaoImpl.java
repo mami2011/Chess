@@ -40,8 +40,10 @@ public class ProductVariationDaoImpl extends BaseDAO implements ProductVariation
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void update(ProductVariation productVariation) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().update(productVariation);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.update(productVariation);
+		trans.commit();
 
 	}
 
@@ -53,15 +55,18 @@ public class ProductVariationDaoImpl extends BaseDAO implements ProductVariation
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void delete(ProductVariation productVariation) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(productVariation);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(productVariation);
+		trans.commit();
 
 	}
 
 	public List<ProductVariation> findByProductId(long productId) {
-		// TODO Auto-generated method stub
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
 		String sql = "select * from product_variation where product_id = :product_id";
-		SQLQuery query=getSession().createSQLQuery(sql);
+		SQLQuery query=session.createSQLQuery(sql);
 		query.setParameter("product_id", productId);
 		query.addEntity(ProductVariation.class);
 		List<ProductVariation> results = query.list();

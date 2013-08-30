@@ -40,8 +40,11 @@ public class ProductAttributeDaoImpl extends BaseDAO implements ProductAttribute
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void update(ProductAttribute productAttribute) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().update(productAttribute);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.update(productAttribute);
+		trans.commit();
+
 
 	}
 
@@ -53,15 +56,18 @@ public class ProductAttributeDaoImpl extends BaseDAO implements ProductAttribute
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void delete(ProductAttribute productAttribute) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(productAttribute);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(productAttribute);
+		trans.commit();
 
 	}
 
 	/*public List<ProductAttribute> findByProductAttributeId(long productAttributeId) {
-		// TODO Auto-generated method stub
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
 		String sql = "select * from product_attribute where product_attribute_id = :productAttributeId";
-		SQLQuery query=getSession().createSQLQuery(sql);
+		SQLQuery query=session.createSQLQuery(sql);
 		query.setParameter("productAttributeId", productAttributeId);
 		query.addEntity(ProductAttribute.class);
 		List<ProductAttribute> results = query.list();
