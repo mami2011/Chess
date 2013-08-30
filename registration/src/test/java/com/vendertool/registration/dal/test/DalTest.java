@@ -1,4 +1,4 @@
-package com.dal.test;
+package com.vendertool.registration.dal.test;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class DalTest {
 	
 	@Autowired
 	private AccountDaoImpl accountDao;
-	//@Test
+	@Test
 	public void addAccountTest() {
 		Account account = new Account();
 		
@@ -36,9 +36,9 @@ public class DalTest {
 		account.setFirstName("test");
 		account.setPassword("test");
 		account.setSalt("salt");
-		accountDao.insert(account);
-	//	Long i = accountDao.getNextValue();
-		//System.out.println("Next value " + i);
+		//accountDao.insert(account);
+		Long i = accountDao.getNextValue();
+		System.out.println("Next value " + i);
 		
 	}
 	
@@ -74,7 +74,7 @@ public class DalTest {
 	//password_history 
 		@Autowired
 		private PasswordHistoryDaoImpl passwordHistoryDao;
-		@Test
+//		@Test
 		public void addPasswordHistoryTest() {
 			PasswordHistory passwordHistory = new PasswordHistory();
 			

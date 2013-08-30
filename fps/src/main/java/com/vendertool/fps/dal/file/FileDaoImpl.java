@@ -4,13 +4,10 @@
 package com.vendertool.fps.dal.file;
 
 import java.util.List;
-
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import com.vendertool.common.dal.BaseDAO;
-
 /**
  * @author murali HibernateDaoSupport
  */
@@ -59,9 +56,35 @@ public class FileDaoImpl extends BaseDAO implements FileDao {
 	}
 
 	public List<File> findByAccountId(long accountId) {
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery("select * from file where account_id = :accountId");
+		query.setParameter("accountId", accountId);
+		query.addEntity(File.class);
+		List<File> results = query.list();
+		trans.commit();
+		return results;
+	}
+
+	public List<File> findByAccountIdAndFileGroupId(long accountId,
+			String fileGroupId) {
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery("select * from file where account_id = :accountId and file_group_id = :fileGroupId");
+		query.setParameter("accountId", accountId);
+		query.setParameter("fileGroupId", fileGroupId);
+		query.addEntity(File.class);
+		List<File> results = query.list();
+		trans.commit();
+		return results;
+	}
+
+	public List<File> findByAccountIdAndFileId(long accountId, long fileId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 	
 }
