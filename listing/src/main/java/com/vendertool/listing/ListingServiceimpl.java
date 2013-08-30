@@ -10,9 +10,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
-import com.vendertool.listing.helper.BaseListingProcessor;
-import com.vendertool.listing.helper.ListingProcessorFactory;
-import com.vendertool.listing.helper.ListingProcessorTypeEnum;
+import com.vendertool.listing.processor.BaseListingProcessor;
+import com.vendertool.listing.processor.ListingProcessorFactory;
+import com.vendertool.listing.processor.ListingProcessorTypeEnum;
 import com.vendertool.sharedtypes.rnr.AddListingRequest;
 import com.vendertool.sharedtypes.rnr.AddListingResponse;
 import com.vendertool.sharedtypes.rnr.AdjustListingQuantityRequest;
