@@ -27,7 +27,6 @@ public class ListingDaoImpl extends BaseDAO implements ListingDao {
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void insert(Listing listing) {
-		// TODO Auto-generated method stub
 		Session session = getDalSession();
 		Transaction trans = session.beginTransaction();
 		session.save(listing);
@@ -42,8 +41,10 @@ public class ListingDaoImpl extends BaseDAO implements ListingDao {
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void update(Listing listing) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().update(listing);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.update(listing);
+		trans.commit();
 
 	}
 
@@ -55,16 +56,19 @@ public class ListingDaoImpl extends BaseDAO implements ListingDao {
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void delete(Listing listing) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(listing);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(listing);
+		trans.commit();
 
 	}
 
 	
 	public List<Listing> findByListingId(long listingId) {
-		// TODO Auto-generated method stub
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
 		String sql = "select * from listing where listing_id = :listing_id";
-		SQLQuery query=getSession().createSQLQuery(sql);
+		SQLQuery query=session.createSQLQuery(sql);
 		query.setParameter("listing_id", listingId);
 		query.addEntity(Listing.class);
 		List<Listing> results = query.list();
@@ -75,9 +79,10 @@ public class ListingDaoImpl extends BaseDAO implements ListingDao {
 	 * @see com.vendertool.inventory.DBL.BO.MerchantProductDao#findByStockCode(com.vendertool.inventory.DBL.BO.MerchantProduct)
 	 */
 	public List<Listing> findByAccountId(long accountId) {
-		// TODO Auto-generated method stub
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
 		String sql = "select * from listing where account_id = :account_id";
-		SQLQuery query=getSession().createSQLQuery(sql);
+		SQLQuery query=session.createSQLQuery(sql);
 		query.setParameter("account_id", accountId);
 		query.addEntity(Listing.class);
 		List<Listing> results = query.list();
