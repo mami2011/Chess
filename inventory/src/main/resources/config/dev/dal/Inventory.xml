@@ -1,0 +1,20 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- Hibernate session factory -->
+	<bean id="accountDao" class="com.vendertool.registration.dal.account.AccountDaoImpl">
+		<property name="sessionFactory" ref="invdbSessionFactory"></property>
+	</bean>
+	<bean id="accountConfirmationDao" class="com.vendertool.registration.dal.accountConfirmation.AccountConfirmationDaoImpl">
+		<property name="sessionFactory" ref="invdbSessionFactory"></property>
+	</bean>
+	<bean id="addressDao" class="com.vendertool.registration.dal.address.AddressDaoImpl">
+		<property name="sessionFactory" ref="invdbSessionFactory"></property>
+	</bean>
+	<bean id="passwordHistoryDao" class="com.vendertool.registration.dal.passwordHistory.PasswordHistoryDaoImpl">
+		<property name="sessionFactory" ref="invdbSessionFactory"></property>
+	</bean>
+</beans>
