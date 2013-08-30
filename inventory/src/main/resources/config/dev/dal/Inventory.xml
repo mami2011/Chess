@@ -5,16 +5,20 @@
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<!-- Hibernate session factory -->
-	<bean id="accountDao" class="com.vendertool.registration.dal.account.AccountDaoImpl">
+	<bean id="imageDao" class="com.vendertool.inventory.dal.image.ImageDaoImpl">
 		<property name="sessionFactory" ref="invdbSessionFactory"></property>
 	</bean>
-	<bean id="accountConfirmationDao" class="com.vendertool.registration.dal.accountConfirmation.AccountConfirmationDaoImpl">
+	
+	<bean id="productDao" class="com.vendertool.inventory.dal.product.ProductDaoImpl">
 		<property name="sessionFactory" ref="invdbSessionFactory"></property>
 	</bean>
-	<bean id="addressDao" class="com.vendertool.registration.dal.address.AddressDaoImpl">
+	
+	<bean id="productAttributeDao" class="com.vendertool.inventory.dal.productAttribute.ProductAttributeDaoImpl">
 		<property name="sessionFactory" ref="invdbSessionFactory"></property>
 	</bean>
-	<bean id="passwordHistoryDao" class="com.vendertool.registration.dal.passwordHistory.PasswordHistoryDaoImpl">
+	
+	<bean id="productVariationDao" class="com.vendertool.inventory.dal.productVariation.ProductVariationDaoImpl">
 		<property name="sessionFactory" ref="invdbSessionFactory"></property>
 	</bean>
+	
 </beans>

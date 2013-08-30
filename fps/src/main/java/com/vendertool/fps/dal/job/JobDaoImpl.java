@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.vendertool.common.dal.BaseDAO;
+import com.vendertool.fps.dal.file.File;
 
 /**
  * @author murali HibernateDaoSupport
@@ -58,10 +59,47 @@ public class JobDaoImpl extends BaseDAO implements JobDao {
 
 	}
 
-	public List<Job> findByAccountId(long accountId) {
+	public List<Job> findByJobId(long jobId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public List<Job> findByAccountId(long accountId) {
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery("select * from job where account_id = :accountId");
+		query.setParameter("accountId", accountId);
+		query.addEntity(Job.class);
+		List<Job> results = query.list();
+		trans.commit();
+		return results;
+	}
+
+	public List<Job> findByAccountIdAndReqFileGroupId(long accountId,
+			String reqFileGroupId) {
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery("select * from job where account_id = :accountId and request_file_group_id = :reqFileGroupId");
+		query.setParameter("reqFileGroupId", reqFileGroupId);
+		query.addEntity(Job.class);
+		List<Job> results = query.list();
+		trans.commit();
+		return results;
+	}
+
+	public List<Job> findByAccountIdAndResFileGroupId(long accountId,
+			String resFileGroupId) {
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery("select * from job where account_id = :accountId and response_file_group_id = :resFileGroupId");
+		query.setParameter("resFileGroupId", resFileGroupId);
+		query.addEntity(Job.class);
+		List<Job> results = query.list();
+		trans.commit();
+		return results;
+	}
+
+	
 
 	
 }

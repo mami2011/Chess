@@ -30,11 +30,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 		<property name="annotatedClasses">
 			<list>
 				<!-- Registration -->
-				<value>com.vendertool.registration.dal.account.Account</value>
-				<value>com.vendertool.registration.dal.accountConfirmation.AccountConfirmation</value>
-				<value>com.vendertool.registration.dal.address.Address</value>
-				<value>com.vendertool.registration.dal.passwordHistory.PasswordHistory</value>
-
+				<value>com.vendertool.inventory.dal.product.Product</value>
+				
 			</list>
 		</property>
 	</bean>

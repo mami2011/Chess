@@ -28,19 +28,19 @@ public class Job implements java.io.Serializable {
 	private String error;
 	private Long totalRequestFileSize;
 	private Long totalResponseFileSize;
-	private Date createDate;
+	private Date createdDate;
 	private Date lastModifiedDate;
 
 	public Job() {
 	}
 
 	public Job(long jobId, long accountId, String requestFileGroupId,
-			byte status, Date createDate, Date lastModifiedDate) {
+			byte status, Date createdDate, Date lastModifiedDate) {
 		this.jobId = jobId;
 		this.accountId = accountId;
 		this.requestFileGroupId = requestFileGroupId;
 		this.status = status;
-		this.createDate = createDate;
+		this.createdDate = createdDate;
 		this.lastModifiedDate = lastModifiedDate;
 	}
 
@@ -48,7 +48,7 @@ public class Job implements java.io.Serializable {
 			String responseFileGroupId, String isoCuntryCode, byte status,
 			String title, Byte usecase, String error,
 			Long totalRequestFileSize, Long totalResponseFileSize,
-			Date createDate, Date lastModifiedDate) {
+			Date createdDate, Date lastModifiedDate) {
 		this.jobId = jobId;
 		this.accountId = accountId;
 		this.requestFileGroupId = requestFileGroupId;
@@ -60,7 +60,7 @@ public class Job implements java.io.Serializable {
 		this.error = error;
 		this.totalRequestFileSize = totalRequestFileSize;
 		this.totalResponseFileSize = totalResponseFileSize;
-		this.createDate = createDate;
+		this.createdDate = createdDate;
 		this.lastModifiedDate = lastModifiedDate;
 	}
 
@@ -165,13 +165,13 @@ public class Job implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "create_date", nullable = false, length = 19)
-	public Date getCreateDate() {
-		return this.createDate;
+	@Column(name = "created_date", nullable = false, length = 19)
+	public Date getCreatedDate() {
+		return this.createdDate;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
