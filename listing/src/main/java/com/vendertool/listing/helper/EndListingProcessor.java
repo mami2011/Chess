@@ -9,13 +9,13 @@ import com.vendertool.sharedtypes.rnr.EndListingRequest;
 import com.vendertool.sharedtypes.rnr.EndListingResponse;
 import com.vendertool.sharedtypes.rnr.VerifyListingResponse;
 
-public class EndListingHelper extends BaseListingHelper {
+public class EndListingProcessor extends BaseListingProcessor {
 	
 	private static final Logger logger = Logger
-			.getLogger(EndListingHelper.class);
+			.getLogger(EndListingProcessor.class);
 
 	private static class EndListingHelperHolder {
-		private static final EndListingHelper INSTANCE = new EndListingHelper();
+		private static final EndListingProcessor INSTANCE = new EndListingProcessor();
 	}
 
 	/**
@@ -23,12 +23,12 @@ public class EndListingHelper extends BaseListingHelper {
 	 * 
 	 * @return
 	 */
-	public static EndListingHelper getInstance() {
+	public static EndListingProcessor getInstance() {
 		return EndListingHelperHolder.INSTANCE;
 	}
 
-	private EndListingHelper() {
-		super(ListingHelperTypeEnum.END_LISTING);
+	private EndListingProcessor() {
+		super(ListingProcessorTypeEnum.END_LISTING);
 	}
 
 	@Override

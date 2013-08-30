@@ -16,16 +16,16 @@ public class Module {
 
 	public void init() {
 		//All helpers needs to be registered here.
-		AddListingHelper.getInstance().register();
-		DuplicateListingHelper.getInstance().register();
-		EndListingHelper.getInstance().register();
-		GetAuctionBidCountHelper.getInstance().register();
-		GetAuctionHighBidderHelper.getInstance().register();
-		GetListingHelper.getInstance().register();
-		GetListingPriceQuantityHelper.getInstance().register();
-		VerifyListingHelper.getInstance().register();
-		AdjustListingQuantityHelper.getInstance().register();
-		UpdateListingHelper.getInstance().register();
-		UpdateListingPriceQuantityHelper.getInstance().register();
+		AddListingProcessor.getInstance().register();
+		DuplicateListingProcessor.getInstance().register();
+		EndListingProcessor.getInstance().register();
+		GetAuctionBidCountProcessor.getInstance().register();
+		GetAuctionHighBidderProcessor.getInstance().register();
+		GetListingProcessor.getInstance().register();
+		GetListingPriceQuantityProcessor.getInstance().register();
+		VerifyListingProcessor.getInstance().register();
+		AdjustListingQuantityProcessor.getInstance().register();
+		UpdateListingProcessor.getInstance().register();
+		UpdateListingPriceQuantityProcessor.getInstance().register();
 	}
 }

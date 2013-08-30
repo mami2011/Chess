@@ -3,20 +3,20 @@ package com.vendertool.listing.helper;
 import com.vendertool.sharedtypes.rnr.BaseRequest;
 import com.vendertool.sharedtypes.rnr.BaseResponse;
 
-public abstract class BaseListingHelper {
+public abstract class BaseListingProcessor {
 
-	public BaseListingHelper(ListingHelperTypeEnum helperType) {
+	public BaseListingProcessor(ListingProcessorTypeEnum helperType) {
 		this.helperType = helperType;
 	}
 
-	private ListingHelperTypeEnum helperType;
+	private ListingProcessorTypeEnum helperType;
 
-	public ListingHelperTypeEnum getHelperType() {
+	public ListingProcessorTypeEnum getHelperType() {
 		return helperType;
 	}
 
 	public void register() {
-		ListingHelperRegistry.getInstance()
+		ListingProcessorRegistry.getInstance()
 				.register(this.getHelperType(), this);
 	}
 

@@ -23,7 +23,7 @@ public class Image {
 			return id;
 		}
 
-		public ImageFormatEnum get(int id) {
+		public static ImageFormatEnum get(int id) {
 			ImageFormatEnum[] values = ImageFormatEnum.values();
 			for (ImageFormatEnum typeEnum : values) {
 				if (typeEnum.getId() == id) {

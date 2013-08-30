@@ -8,21 +8,21 @@ import com.vendertool.sharedtypes.rnr.BaseResponse;
 import com.vendertool.sharedtypes.rnr.UpdateListingRequest;
 import com.vendertool.sharedtypes.rnr.UpdateListingResponse;
 
-public class UpdateListingHelper extends BaseListingHelper {
+public class UpdateListingProcessor extends BaseListingProcessor {
 
 	private static final Logger logger = Logger
-			.getLogger(UpdateListingHelper.class);
+			.getLogger(UpdateListingProcessor.class);
 
 	private static class UpdateListingHelperHolder {
-		private static final UpdateListingHelper INSTANCE = new UpdateListingHelper();
+		private static final UpdateListingProcessor INSTANCE = new UpdateListingProcessor();
 	}
 
-	public static UpdateListingHelper getInstance() {
+	public static UpdateListingProcessor getInstance() {
 		return UpdateListingHelperHolder.INSTANCE;
 	}
 
-	private UpdateListingHelper() {
-		super(ListingHelperTypeEnum.UPDATE_LISTING);
+	private UpdateListingProcessor() {
+		super(ListingProcessorTypeEnum.UPDATE_LISTING);
 	}
 
 	@Override

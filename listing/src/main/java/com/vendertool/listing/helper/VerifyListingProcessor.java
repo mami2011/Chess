@@ -8,13 +8,13 @@ import com.vendertool.sharedtypes.rnr.BaseResponse;
 import com.vendertool.sharedtypes.rnr.VerifyListingRequest;
 import com.vendertool.sharedtypes.rnr.VerifyListingResponse;
 
-public class VerifyListingHelper extends BaseListingHelper {
+public class VerifyListingProcessor extends BaseListingProcessor {
 	
 	private static final Logger logger = Logger
-			.getLogger(AddListingHelper.class);
+			.getLogger(AddListingProcessor.class);
 
 	private static class VerifyListingHelperHolder {
-		private static final VerifyListingHelper INSTANCE = new VerifyListingHelper();
+		private static final VerifyListingProcessor INSTANCE = new VerifyListingProcessor();
 	}
 
 	/**
@@ -22,12 +22,12 @@ public class VerifyListingHelper extends BaseListingHelper {
 	 * 
 	 * @return
 	 */
-	public static VerifyListingHelper getInstance() {
+	public static VerifyListingProcessor getInstance() {
 		return VerifyListingHelperHolder.INSTANCE;
 	}
 
-	private VerifyListingHelper() {
-		super(ListingHelperTypeEnum.VERIFY_LISTING);
+	private VerifyListingProcessor() {
+		super(ListingProcessorTypeEnum.VERIFY_LISTING);
 	}
 
 	@Override

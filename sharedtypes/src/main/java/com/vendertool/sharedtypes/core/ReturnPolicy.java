@@ -20,7 +20,7 @@ public class ReturnPolicy {
 			return id;
 		}
 
-		public ReturnShippingPayerTypeEnum get(int id) {
+		public static ReturnShippingPayerTypeEnum get(int id) {
 			ReturnShippingPayerTypeEnum[] values = ReturnShippingPayerTypeEnum.values();
 			for (ReturnShippingPayerTypeEnum typeEnum : values) {
 				if (typeEnum.getId() == id) {

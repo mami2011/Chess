@@ -20,7 +20,7 @@ public class ShippingPolicy {
 			return id;
 		}
 
-		public ShippingTypeEnum get(int id) {
+		public static ShippingTypeEnum get(int id) {
 			ShippingTypeEnum[] shippingTypeValues = ShippingTypeEnum.values();
 			for (ShippingTypeEnum typeEnum : shippingTypeValues) {
 				if (typeEnum.getId() == id) {

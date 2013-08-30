@@ -8,13 +8,13 @@ import com.vendertool.sharedtypes.rnr.BaseResponse;
 import com.vendertool.sharedtypes.rnr.GetAuctionHighBidderRequest;
 import com.vendertool.sharedtypes.rnr.GetAuctionHighBidderResponse;
 
-public class GetAuctionHighBidderHelper extends BaseListingHelper {
+public class GetAuctionHighBidderProcessor extends BaseListingProcessor {
 	
 	private static final Logger logger = Logger
-			.getLogger(GetAuctionHighBidderHelper.class);
+			.getLogger(GetAuctionHighBidderProcessor.class);
 
 	private static class GetAuctionHighBidderHelperHolder {
-		private static final GetAuctionHighBidderHelper INSTANCE = new GetAuctionHighBidderHelper();
+		private static final GetAuctionHighBidderProcessor INSTANCE = new GetAuctionHighBidderProcessor();
 	}
 
 	/**
@@ -22,12 +22,12 @@ public class GetAuctionHighBidderHelper extends BaseListingHelper {
 	 * 
 	 * @return
 	 */
-	public static GetAuctionHighBidderHelper getInstance() {
+	public static GetAuctionHighBidderProcessor getInstance() {
 		return GetAuctionHighBidderHelperHolder.INSTANCE;
 	}
 
-	private GetAuctionHighBidderHelper() {
-		super(ListingHelperTypeEnum.GET_AUCTION_HIGH_BIDDER);
+	private GetAuctionHighBidderProcessor() {
+		super(ListingProcessorTypeEnum.GET_AUCTION_HIGH_BIDDER);
 	}
 
 	@Override

@@ -8,21 +8,21 @@ import com.vendertool.sharedtypes.rnr.BaseResponse;
 import com.vendertool.sharedtypes.rnr.GetListingPriceQuantityRequest;
 import com.vendertool.sharedtypes.rnr.GetListingPriceQuantityResponse;
 
-public class GetListingPriceQuantityHelper extends BaseListingHelper {
+public class GetListingPriceQuantityProcessor extends BaseListingProcessor {
 
 	private static final Logger logger = Logger
-			.getLogger(GetListingPriceQuantityHelper.class);
+			.getLogger(GetListingPriceQuantityProcessor.class);
 
 	private static class GetListingPriceQuantityHelperHolder {
-		private static final GetListingPriceQuantityHelper INSTANCE = new GetListingPriceQuantityHelper();
+		private static final GetListingPriceQuantityProcessor INSTANCE = new GetListingPriceQuantityProcessor();
 	}
 
-	public static GetListingPriceQuantityHelper getInstance() {
+	public static GetListingPriceQuantityProcessor getInstance() {
 		return GetListingPriceQuantityHelperHolder.INSTANCE;
 	}
 
-	private GetListingPriceQuantityHelper() {
-		super(ListingHelperTypeEnum.GET_LISTING_PRICE_QTY);
+	private GetListingPriceQuantityProcessor() {
+		super(ListingProcessorTypeEnum.GET_LISTING_PRICE_QTY);
 	}
 
 	@Override

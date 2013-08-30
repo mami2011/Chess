@@ -8,13 +8,13 @@ import com.vendertool.sharedtypes.rnr.AdjustListingQuantityResponse;
 import com.vendertool.sharedtypes.rnr.BaseRequest;
 import com.vendertool.sharedtypes.rnr.BaseResponse;
 
-public class AdjustListingQuantityHelper extends BaseListingHelper {
+public class AdjustListingQuantityProcessor extends BaseListingProcessor {
 	
 	private static final Logger logger = Logger
-			.getLogger(AdjustListingQuantityHelper.class);
+			.getLogger(AdjustListingQuantityProcessor.class);
 
 	private static class AdjustListingQuantityHelperHolder {
-		private static final AdjustListingQuantityHelper INSTANCE = new AdjustListingQuantityHelper();
+		private static final AdjustListingQuantityProcessor INSTANCE = new AdjustListingQuantityProcessor();
 	}
 
 	/**
@@ -22,12 +22,12 @@ public class AdjustListingQuantityHelper extends BaseListingHelper {
 	 * 
 	 * @return
 	 */
-	public static AdjustListingQuantityHelper getInstance() {
+	public static AdjustListingQuantityProcessor getInstance() {
 		return AdjustListingQuantityHelperHolder.INSTANCE;
 	}
 
-	private AdjustListingQuantityHelper() {
-		super(ListingHelperTypeEnum.ADJUST_LISTING_QUANTITY);
+	private AdjustListingQuantityProcessor() {
+		super(ListingProcessorTypeEnum.ADJUST_LISTING_QUANTITY);
 	}
 
 	@Override

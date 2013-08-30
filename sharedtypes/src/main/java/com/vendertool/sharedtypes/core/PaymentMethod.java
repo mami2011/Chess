@@ -20,7 +20,7 @@ public class PaymentMethod {
 			return id;
 		}
 
-		public PaymentTypeEnum get(int id) {
+		public static PaymentTypeEnum get(int id) {
 			PaymentTypeEnum[] values = PaymentTypeEnum.values();
 			for (PaymentTypeEnum typeEnum : values) {
 				if (typeEnum.getId() == id) {

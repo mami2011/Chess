@@ -8,13 +8,13 @@ import com.vendertool.sharedtypes.rnr.BaseResponse;
 import com.vendertool.sharedtypes.rnr.DuplicateListingRequest;
 import com.vendertool.sharedtypes.rnr.DuplicateListingResponse;
 
-public class DuplicateListingHelper extends BaseListingHelper {
+public class DuplicateListingProcessor extends BaseListingProcessor {
 
 	private static final Logger logger = Logger
-			.getLogger(DuplicateListingHelper.class);
+			.getLogger(DuplicateListingProcessor.class);
 
 	private static class DuplicateListingHelperHolder {
-		private static final DuplicateListingHelper INSTANCE = new DuplicateListingHelper();
+		private static final DuplicateListingProcessor INSTANCE = new DuplicateListingProcessor();
 	}
 
 	/**
@@ -22,12 +22,12 @@ public class DuplicateListingHelper extends BaseListingHelper {
 	 * 
 	 * @return
 	 */
-	public static DuplicateListingHelper getInstance() {
+	public static DuplicateListingProcessor getInstance() {
 		return DuplicateListingHelperHolder.INSTANCE;
 	}
 
-	private DuplicateListingHelper() {
-		super(ListingHelperTypeEnum.DUPLICATE_LISTING);
+	private DuplicateListingProcessor() {
+		super(ListingProcessorTypeEnum.DUPLICATE_LISTING);
 	}
 
 	@Override

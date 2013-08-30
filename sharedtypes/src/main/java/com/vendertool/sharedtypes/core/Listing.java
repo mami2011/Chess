@@ -24,7 +24,7 @@ public class Listing {
 			return id;
 		}
 
-		public ListingFormatEnum get(int id) {
+		public static ListingFormatEnum get(int id) {
 			ListingFormatEnum[] values = ListingFormatEnum.values();
 			for (ListingFormatEnum typeEnum : values) {
 				if (typeEnum.getId() == id) {

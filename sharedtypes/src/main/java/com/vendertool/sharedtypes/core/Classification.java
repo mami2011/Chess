@@ -21,7 +21,7 @@ public class Classification {
 			return id;
 		}
 
-		public ClassificationTypeEnum get(int id) {
+		public static ClassificationTypeEnum get(int id) {
 			ClassificationTypeEnum[] values = ClassificationTypeEnum.values();
 			for (ClassificationTypeEnum typeEnum : values) {
 				if (typeEnum.getId() == id) {

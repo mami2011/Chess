@@ -8,13 +8,13 @@ import com.vendertool.sharedtypes.rnr.BaseResponse;
 import com.vendertool.sharedtypes.rnr.GetAuctionBidCountRequest;
 import com.vendertool.sharedtypes.rnr.GetAuctionBidCountResponse;
 
-public class GetAuctionBidCountHelper extends BaseListingHelper {
+public class GetAuctionBidCountProcessor extends BaseListingProcessor {
 	
 	private static final Logger logger = Logger
-			.getLogger(GetAuctionBidCountHelper.class);
+			.getLogger(GetAuctionBidCountProcessor.class);
 
 	private static class GetAuctionBidCountHelperHolder {
-		private static final GetAuctionBidCountHelper INSTANCE = new GetAuctionBidCountHelper();
+		private static final GetAuctionBidCountProcessor INSTANCE = new GetAuctionBidCountProcessor();
 	}
 
 	/**
@@ -22,12 +22,12 @@ public class GetAuctionBidCountHelper extends BaseListingHelper {
 	 * 
 	 * @return
 	 */
-	public static GetAuctionBidCountHelper getInstance() {
+	public static GetAuctionBidCountProcessor getInstance() {
 		return GetAuctionBidCountHelperHolder.INSTANCE;
 	}
 
-	private GetAuctionBidCountHelper() {
-		super(ListingHelperTypeEnum.GET_AUCTION_BID_COUNT);
+	private GetAuctionBidCountProcessor() {
+		super(ListingProcessorTypeEnum.GET_AUCTION_BID_COUNT);
 	}
 
 	@Override

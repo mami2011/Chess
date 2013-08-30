@@ -21,7 +21,7 @@ public class Weight {
 			return id;
 		}
 
-		public WeightUnitEnum get(int id) {
+		public static WeightUnitEnum get(int id) {
 			WeightUnitEnum[] values = WeightUnitEnum.values();
 			for (WeightUnitEnum typeEnum : values) {
 				if (typeEnum.getId() == id) {

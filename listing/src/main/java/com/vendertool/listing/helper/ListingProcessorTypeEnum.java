@@ -1,6 +1,6 @@
 package com.vendertool.listing.helper;
 
-public enum ListingHelperTypeEnum {
+public enum ListingProcessorTypeEnum {
 	ADD_LISTING, 
 	GET_LISTING, 
 	VERIFY_LISTING, 

@@ -12,13 +12,13 @@ import com.vendertool.sharedtypes.rnr.AddListingResponse;
 import com.vendertool.sharedtypes.rnr.BaseRequest;
 import com.vendertool.sharedtypes.rnr.BaseResponse;
 
-public class AddListingHelper extends BaseListingHelper {
+public class AddListingProcessor extends BaseListingProcessor {
 
 	private static final Logger logger = Logger
-			.getLogger(AddListingHelper.class);
+			.getLogger(AddListingProcessor.class);
 
 	private static class AddListingHelperHolder {
-		private static final AddListingHelper INSTANCE = new AddListingHelper();
+		private static final AddListingProcessor INSTANCE = new AddListingProcessor();
 	}
 
 	/**
@@ -26,12 +26,12 @@ public class AddListingHelper extends BaseListingHelper {
 	 * 
 	 * @return
 	 */
-	public static AddListingHelper getInstance() {
+	public static AddListingProcessor getInstance() {
 		return AddListingHelperHolder.INSTANCE;
 	}
 
-	private AddListingHelper() {
-		super(ListingHelperTypeEnum.ADD_LISTING);
+	private AddListingProcessor() {
+		super(ListingProcessorTypeEnum.ADD_LISTING);
 	}
 
 	@Override

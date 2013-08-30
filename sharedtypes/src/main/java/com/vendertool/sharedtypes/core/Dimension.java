@@ -21,7 +21,7 @@ public class Dimension {
 			return id;
 		}
 
-		public DimensionUnitEnum get(int id) {
+		public static DimensionUnitEnum get(int id) {
 			DimensionUnitEnum[] values = DimensionUnitEnum.values();
 			for (DimensionUnitEnum typeEnum : values) {
 				if (typeEnum.getId() == id) {

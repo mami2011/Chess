@@ -2,27 +2,32 @@ package com.vendertool.listing.helper;
 
 import org.apache.log4j.Logger;
 
+import com.vendertool.common.MarketCountryKey;
+import com.vendertool.listing.ListingMarketAdapterRegistry;
+import com.vendertool.mercadolibreadapter.IMarketListingAdapter;
+import com.vendertool.sharedtypes.core.CountryEnum;
+import com.vendertool.sharedtypes.core.MarketEnum;
 import com.vendertool.sharedtypes.exception.VTRuntimeException;
 import com.vendertool.sharedtypes.rnr.BaseRequest;
 import com.vendertool.sharedtypes.rnr.BaseResponse;
 import com.vendertool.sharedtypes.rnr.GetListingRequest;
 import com.vendertool.sharedtypes.rnr.GetListingResponse;
 
-public class GetListingHelper  extends BaseListingHelper {
+public class GetListingProcessor  extends BaseListingProcessor {
 
 	private static final Logger logger = Logger
-			.getLogger(GetListingHelper.class);
+			.getLogger(GetListingProcessor.class);
 
 	private static class GetListingHelperHolder {
-		private static final GetListingHelper INSTANCE = new GetListingHelper();
+		private static final GetListingProcessor INSTANCE = new GetListingProcessor();
 	}
 
-	public static GetListingHelper getInstance() {
+	public static GetListingProcessor getInstance() {
 		return GetListingHelperHolder.INSTANCE;
 	}
 
-	private GetListingHelper() {
-		super(ListingHelperTypeEnum.GET_LISTING);
+	private GetListingProcessor() {
+		super(ListingProcessorTypeEnum.GET_LISTING);
 	}
 
 	@Override
@@ -50,5 +55,14 @@ public class GetListingHelper  extends BaseListingHelper {
 					ex);
 			throw ex;
 		}
+		
+/*		CountryEnum countryId = CountryEnum.ALL;
+		MarketEnum marketId = MarketEnum.MERCADO_LIBRE;
+
+		IMarketListingAdapter adapter = ListingMarketAdapterRegistry
+				.getInstance().getMarketListingAdapter(
+						new MarketCountryKey(countryId, marketId));
+
+		return adapter.getListing(id);*/
 	}
 }
