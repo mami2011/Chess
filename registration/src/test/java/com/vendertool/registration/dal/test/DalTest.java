@@ -31,14 +31,15 @@ public class DalTest {
 	public void addAccountTest() {
 		Account account = new Account();
 		
-		//account.setAccountId((long) 101);
+		account.setAccountId((long) 1);
 		account.setEmailAddr("tesst2@gmail.com");
 		account.setFirstName("test");
 		account.setPassword("test");
 		account.setSalt("salt");
-		//accountDao.insert(account);
-		Long i = accountDao.getNextValue();
-		System.out.println("Next value " + i);
+	//	accountDao.insert(account);
+		accountDao.delete(account);
+		//Long i = accountDao.getNextValue();
+		//System.out.println("Next value " + i);
 		
 	}
 	

@@ -19,6 +19,7 @@ public class File implements java.io.Serializable {
 
 	private long fileId;
 	private String fileGroupId;
+	private Byte filesCountInGroup;
 	private long accountId;
 	private String refUrl;
 	private Byte storageSource;
@@ -36,11 +37,12 @@ public class File implements java.io.Serializable {
 		this.accountId = accountId;
 	}
 
-	public File(long fileId, String fileGroupId, long accountId, String refUrl,
+	public File(long fileId, String fileGroupId, Byte filesCountInGroup,long accountId, String refUrl,
 			Byte storageSource, Date createdDate, Date lastModifiedDate,
 			Byte useCase, Byte status) {
 		this.fileId = fileId;
 		this.fileGroupId = fileGroupId;
+		this.filesCountInGroup = filesCountInGroup;
 		this.accountId = accountId;
 		this.refUrl = refUrl;
 		this.storageSource = storageSource;
@@ -132,6 +134,14 @@ public class File implements java.io.Serializable {
 
 	public void setStatus(Byte status) {
 		this.status = status;
+	}
+	@Column(name = "files_count_in_group")
+	public Byte getFilesCountInGroup() {
+		return filesCountInGroup;
+	}
+
+	public void setFilesCountInGroup(Byte filesCountInGroup) {
+		this.filesCountInGroup = filesCountInGroup;
 	}
 
 }

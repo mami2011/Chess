@@ -1,4 +1,4 @@
-package com.vendertool.inventory.dal.test;
+package com.vendertool.fts.dal.test;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import com.vendertool.fps.dal.file.File;
 import com.vendertool.fps.dal.file.FileDaoImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:config/dev/dal/Inventory.xml","classpath:config/dev/dal/DBConnectionConfig.xml" })
+@ContextConfiguration(locations = { "classpath:config/dev/dal/Batch.xml","classpath:config/dev/dal/DBConnectionConfig.xml" })
 public class BatchDalTest {
 
 	@Autowired
@@ -20,6 +20,7 @@ public class BatchDalTest {
 
 		file.setAccountId(1);
 		file.setFileId(101);
+		file.setFilesCountInGroup((byte) 5);
 		file.setFileGroupId("myfirstfile");
 		
 		fileDao.insert(file);

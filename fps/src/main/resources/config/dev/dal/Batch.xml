@@ -15,7 +15,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean id="taskDao" class="com.vendertool.fps.dal.task.TaskDaoImpl">
 		<property name="sessionFactory" ref="batchdbSessionFactory"></property>
 	</bean>
-	<bean id="sequenceDataDao" class="com.vendertool.fps.dal.sequenceData.SequenceDataDaoImpl">
+<!-- 	<bean id="sequenceDataDao" class="com.vendertool.fps.dal.sequenceData.SequenceDataDaoImpl">
 		<property name="sessionFactory" ref="batchdbSessionFactory"></property>
-	</bean>
+	</bean> -->
 </beans>

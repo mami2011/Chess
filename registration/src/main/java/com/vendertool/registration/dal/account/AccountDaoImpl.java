@@ -53,8 +53,10 @@ public class AccountDaoImpl extends BaseDAO implements AccountDao {
 	 * .inventory.DBL.BO.MerchantProduct)
 	 */
 	public void delete(Account account) {
-		// TODO Auto-generated method stub
-		getHibernateTemplate().delete(account);
+		Session session = getDalSession();
+		Transaction trans = session.beginTransaction();
+		session.delete(account);
+		trans.commit();
 
 	}
 
