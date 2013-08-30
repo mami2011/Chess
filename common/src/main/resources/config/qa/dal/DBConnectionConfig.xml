@@ -31,7 +31,44 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 				<value>com.vendertool.registration.dal.accountConfirmation.AccountConfirmation</value>
 				<value>com.vendertool.registration.dal.address.Address</value>
 				<value>com.vendertool.registration.dal.passwordHistory.PasswordHistory</value>
+				<!-- Inventory -->
+				<value>com.vendertool.inventory.dal.image.Image</value>
+				<value>com.vendertool.inventory.dal.product.Product</value>
+				<value>com.vendertool.inventory.dal.productAttribute.ProductAttribute</value>
+				<value>com.vendertool.inventory.dal.productVariation.ProductVariation</value>
+				<!-- Listing -->
+				<value>com.vendertool.listing.dal.listing.Listing</value>
+				<value>com.vendertool.listing.dal.listingVariation.ListingVariation</value>
 
+			</list>
+		</property>
+	</bean>
+		<bean id="batchdbSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<!-- <property name="dataSource" ref="dataSourceForJNDI"/> -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.bytecode.use_reflection_optimizer">false</prop>
+				<prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+				<prop key="hibernate.connection.username">user5</prop>
+				<prop key="hibernate.connection.password">password</prop>
+				<prop key="hibernate.connection.url">jdbc:mysql://ec2-54-234-99-88.compute-1.amazonaws.com:3306/batchdb
+				</prop>
+				<!-- <prop key="hibernate.connection.username">root</prop> <prop key="hibernate.connection.password">admin</prop> 
+					<prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/batchdb</prop> -->
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.search.autoregister_listeners">false</prop>
+				<prop key="hibernate.connection.autocommit">true</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<!-- Batch -->
+				<value>com.vendertool.fps.dal.file.File</value>
+				<value>com.vendertool.fps.dal.job.Job</value>
+				<value>com.vendertool.fps.dal.task.Task</value>
+				<value>com.vendertool.fps.dal.sequenceData.SequenceData</value>
 			</list>
 		</property>
 	</bean>
