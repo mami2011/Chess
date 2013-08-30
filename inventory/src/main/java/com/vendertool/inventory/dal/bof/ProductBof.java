@@ -92,7 +92,12 @@ public class ProductBof {
 
 		List<NameValuePair> properties = product.getProperties();
 		if (properties != null && properties.size() > 0) {
-
+			for(NameValuePair property : properties){
+				if(property == null){
+					continue;
+				}
+				
+			}
 		}
 	}
 
