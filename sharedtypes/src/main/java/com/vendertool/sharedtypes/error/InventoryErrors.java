@@ -79,5 +79,32 @@ public class InventoryErrors {
 			"Product image quality is very poor", 
 			VTErrorSeverityEnum.ERROR, 
 			DOMAIN);
+
+	public VTError MISSING_PRICE = new VTError(
+			InventoryErrorCode.MISSING_PRICE, 
+			"Price is not specified", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	
+	public VTError MISSING_SKU = new VTError(
+			InventoryErrorCode.MISSING_SKU, 
+			"Sku is not specified", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	public VTError MISSING_PRODUCT_CODE = new VTError(
+			InventoryErrorCode.MISSING_PRODUCT_CODE, 
+			"Product Code is not specified", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	public VTError MISSING_PRODUCT_CODE_TYPE = new VTError(
+			InventoryErrorCode.MISSING_PRODUCT_CODE_TYPE, 
+			"Product Code Type is not specified", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
+	public VTError INVALID_QUANTITY = new VTError(
+			InventoryErrorCode.INVALID_QUANTITY, 
+			"Qty is not provided or Invalid Qty Specified", 
+			VTErrorSeverityEnum.ERROR, 
+			DOMAIN);
 	
 }

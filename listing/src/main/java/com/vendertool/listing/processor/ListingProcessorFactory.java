@@ -10,16 +10,16 @@ public class ListingProcessorFactory {
 			.getLogger(ListingProcessorFactory.class);
 
 	public static BaseListingProcessor getListingProcessor(
-			ListingProcessorTypeEnum helperTypeEnum) {
+			ListingProcessorTypeEnum processorTypeEnum) {
 		BaseListingProcessor helper = ListingProcessorRegistry.getInstance()
-				.getProcessor(helperTypeEnum);
+				.getProcessor(processorTypeEnum);
 		if (helper == null) {
 			VTRuntimeException ex = new VTRuntimeException(
 					" getListingHelper in ListingHelperFactory -- No object availalbe for Key  (Make sure if the helper is registered in Module) : "
-							+ helperTypeEnum);
+							+ processorTypeEnum);
 			logger.debug(
 					" getListingHelper in ListingHelperFactory -- No object availalbe for Key  (Make sure if the helper is registered in Module) : "
-							+ helperTypeEnum, ex);
+							+ processorTypeEnum, ex);
 			throw ex;
 		}
 		return helper;

@@ -2,8 +2,9 @@ package com.vendertool.inventory.processor;
 
 import org.apache.log4j.Logger;
 
-import com.vendertool.common.validation.ValidationUtil;
-import com.vendertool.sharedtypes.exception.VTRuntimeException;
+import com.vendertool.inventory.dal.bof.ProductBof;
+import com.vendertool.inventory.validation.AddProductValidator;
+import com.vendertool.sharedtypes.core.Product;
 import com.vendertool.sharedtypes.rnr.AddProductRequest;
 import com.vendertool.sharedtypes.rnr.AddProductResponse;
 import com.vendertool.sharedtypes.rnr.BaseRequest;
@@ -13,8 +14,9 @@ public class AddProductProcessor extends BaseInventoryProcessor {
 
 	private static final Logger logger = Logger
 			.getLogger(AddProductProcessor.class);
-	private static ValidationUtil s_validationUtil = ValidationUtil
+	private static AddProductValidator s_validator = AddProductValidator
 			.getInstance();
+
 	private static class AddProductProcessorHolder {
 		private static final AddProductProcessor INSTANCE = new AddProductProcessor();
 	}
@@ -29,31 +31,15 @@ public class AddProductProcessor extends BaseInventoryProcessor {
 
 	@Override
 	public void validate(BaseRequest request, BaseResponse response) {
-		if (s_validationUtil.isNull(request)
-				|| s_validationUtil.isNull(response)) {
-			VTRuntimeException ex = new VTRuntimeException(
-					"NULL value passed to validate in AddProductProcessor");
-			logger.debug("NULL value passed to validate in AddProductProcessor",
-					ex);
-			throw ex;
-		}
-		AddProductRequest addProductRequest = (AddProductRequest) request;
-		AddProductResponse addProductResponse = (AddProductResponse) response;
-
+		s_validator.validate((AddProductResponse) response,
+				(AddProductRequest) request);
 	}
 
 	@Override
 	public void performOperation(BaseRequest request, BaseResponse response) {
-		if (s_validationUtil.isNull(request)
-				|| s_validationUtil.isNull(response)) {
-			VTRuntimeException ex = new VTRuntimeException(
-					"NULL value passed to performOperation in AddProductProcessor");
-			logger.debug("NULL value passed to performOperation in AddProductProcessor",
-					ex);
-			throw ex;
-		}
 		AddProductRequest addProductRequest = (AddProductRequest) request;
 		AddProductResponse addProductResponse = (AddProductResponse) response;
-
+		Product product = addProductRequest.getProduct();
+		ProductBof.getInstance().insert(product);
 	}
 }

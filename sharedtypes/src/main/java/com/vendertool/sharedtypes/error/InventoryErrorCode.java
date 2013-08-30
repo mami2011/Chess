@@ -47,4 +47,14 @@ public class InventoryErrorCode extends VTErrorCode implements Serializable {
 			"IMAGE_FORMAT_NOT_SUPPORTED");
 	public static VTErrorCode IMAGE_QUALITY_NOT_GOOD = new InventoryErrorCode(
 			"IMAGE_QUALITY_NOT_GOOD");
+	public static VTErrorCode MISSING_PRICE = new InventoryErrorCode(
+			"MISSING_PRICE");
+	public static VTErrorCode MISSING_SKU = new InventoryErrorCode(
+			"MISSING_SKU");
+	public static VTErrorCode MISSING_PRODUCT_CODE = new InventoryErrorCode(
+			"MISSING_PRODUCT_CODE");
+	public static VTErrorCode MISSING_PRODUCT_CODE_TYPE = new InventoryErrorCode(
+			"MISSING_PRODUCT_CODE_TYPE");
+	public static VTErrorCode INVALID_QUANTITY = new InventoryErrorCode(
+			"INVALID_QUANTITY");
 }
