@@ -21,6 +21,7 @@
 	
 	<jsp:attribute name="css">
 		<link href="<c:url value='/resources/css/accounthub.css' />" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/resources/css/directive/file-uploader.css' />" rel="stylesheet" type="text/css" />
 	</jsp:attribute>
 	
 	<jsp:body>
