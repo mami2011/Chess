@@ -1,15 +1,13 @@
 .fup {
 	postion:static;
-	width:500px;
-	height:500px;
-	border:1px solid red;
+	width:152px;
+	height:45px;
 }
 .fup .form-wrp {
 	position:relative;
 	width:152px;
 	height:45px;
 	overflow:hidden;
-	border:1px solid red;
 }
 .fup-inp-main {
 	position:relative;
