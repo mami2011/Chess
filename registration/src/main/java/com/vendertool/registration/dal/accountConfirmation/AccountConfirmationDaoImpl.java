@@ -11,7 +11,7 @@ import org.hibernate.Transaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ContextLoader;
 
-import com.vendertool.common.dal.BaseDAO;
+import com.vendertool.common.dal.deprecate.BaseDAO;
 
 /**
  * @author murali HibernateDaoSupport

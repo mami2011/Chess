@@ -6,8 +6,10 @@ import com.vendertool.common.DAOFactoryKey;
 import com.vendertool.common.dal.BaseBOF;
 import com.vendertool.common.dal.BaseDAOFactory;
 import com.vendertool.common.dal.DAOFactoryRegistry;
-import com.vendertool.registration.dal.account.AccountDAOFactory;
-import com.vendertool.registration.dal.account.AccountDao;
+import com.vendertool.common.dal.exception.DBConnectionException;
+import com.vendertool.common.dal.exception.InsertException;
+import com.vendertool.registration.dal.account.deprecate.AccountDAOFactory;
+import com.vendertool.registration.dal.account.deprecate.AccountDao;
 import com.vendertool.sharedtypes.core.Account;
 
 public class AccountBOF extends BaseBOF {
@@ -38,8 +40,9 @@ public class AccountBOF extends BaseBOF {
 		return AccountBOFSingletonHolder.INSTANCE;
 	}
 
-	public void insert(Account accountBO) {
-		com.vendertool.registration.dal.account.Account accountDo = new com.vendertool.registration.dal.account.Account();
+	public void insert(Account accountBO) throws DBConnectionException, InsertException {
+		com.vendertool.registration.dal.account.deprecate.Account accountDo = 
+				new com.vendertool.registration.dal.account.deprecate.Account();
 		accountDo.setEmailAddr(accountBO.getEmailId());
 		accountDo.setFirstName(accountBO.getContactDetails().getFirstName());
 		accountDo.setLastName(accountBO.getContactDetails().getLastName());
@@ -49,7 +52,20 @@ public class AccountBOF extends BaseBOF {
 		// Insert into DB
 		logger.info(" Call AccountDaoImpl to insert : "
 				+ accountBO.getEmailId());
-		dao.insert(accountDo);
+		try {
+			dao.insert(accountDo);
+		} catch (DBConnectionException e) {
+			logger.debug(e.getMessage(), e);
+			throw e;
+		} catch (InsertException e) {
+			logger.debug(e.getMessage(), e);
+			throw e;
+		}
+	}
+	
+	public void createAccount(Account account) throws DBConnectionException,
+			InsertException {
+
 	}
 
 }

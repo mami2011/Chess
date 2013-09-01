@@ -1,9 +1,9 @@
 package com.vendertool.registration.dal.address;
 
 import com.vendertool.common.DAOFactoryKey;
-import com.vendertool.common.dal.BaseDAO;
 import com.vendertool.common.dal.BaseDAOFactory;
 import com.vendertool.common.dal.DAOFactoryRegistry;
+import com.vendertool.common.dal.deprecate.BaseDAO;
 
 
 public class AddressDAOFactory extends BaseDAOFactory{

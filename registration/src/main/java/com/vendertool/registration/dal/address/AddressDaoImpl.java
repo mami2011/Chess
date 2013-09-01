@@ -8,7 +8,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.vendertool.common.dal.BaseDAO;
+import com.vendertool.common.dal.deprecate.BaseDAO;
 
 /**
  * @author murali

@@ -1,22 +1,18 @@
 package com.dal.test;
 
-import java.util.List;
-
+import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.persister.entity.AbstractEntityPersister;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.vendertool.registration.dal.account.Account;
-import com.vendertool.registration.dal.account.AccountDao;
-import com.vendertool.registration.dal.account.AccountDaoImpl;
+import com.vendertool.registration.dal.account.deprecate.Account;
+import com.vendertool.registration.dal.account.deprecate.AccountDaoImpl;
 import com.vendertool.registration.dal.accountConfirmation.AccountConfirmation;
 import com.vendertool.registration.dal.accountConfirmation.AccountConfirmationDaoImpl;
 import com.vendertool.registration.dal.address.Address;
-import com.vendertool.registration.dal.address.AddressDao;
 import com.vendertool.registration.dal.address.AddressDaoImpl;
 import com.vendertool.registration.dal.passwordHistory.PasswordHistory;
 import com.vendertool.registration.dal.passwordHistory.PasswordHistoryDaoImpl;
@@ -27,7 +23,7 @@ public class DalTest {
 	
 	@Autowired
 	private AccountDaoImpl accountDao;
-	//@Test
+	@Test
 	public void addAccountTest() {
 		Account account = new Account();
 		
@@ -36,7 +32,16 @@ public class DalTest {
 		account.setFirstName("test");
 		account.setPassword("test");
 		account.setSalt("salt");
-		accountDao.insert(account);
+		try {
+//			accountDao.insert(account);
+			ClassMetadata cmd = accountDao.getSessionFactory().getClassMetadata(account.getClass().getName());
+			System.err.println(cmd.getPropertyNames());
+			System.err.println(cmd);
+			AbstractEntityPersister persister = (AbstractEntityPersister)cmd;
+			System.err.println(persister.getPropertyColumnNames("alternateEmail")[0]);
+		} catch (Exception ex) {
+			System.err.println(ex);
+		}
 	//	Long i = accountDao.getNextValue();
 		//System.out.println("Next value " + i);
 		
@@ -74,7 +79,7 @@ public class DalTest {
 	//password_history 
 		@Autowired
 		private PasswordHistoryDaoImpl passwordHistoryDao;
-		@Test
+//		@Test
 		public void addPasswordHistoryTest() {
 			PasswordHistory passwordHistory = new PasswordHistory();
 			

@@ -1,9 +1,9 @@
-package com.vendertool.registration.dal.account;
+package com.vendertool.registration.dal.account.deprecate;
 
 import com.vendertool.common.DAOFactoryKey;
-import com.vendertool.common.dal.BaseDAO;
 import com.vendertool.common.dal.BaseDAOFactory;
 import com.vendertool.common.dal.DAOFactoryRegistry;
+import com.vendertool.common.dal.deprecate.BaseDAO;
 
 
 public class AccountDAOFactory extends BaseDAOFactory{

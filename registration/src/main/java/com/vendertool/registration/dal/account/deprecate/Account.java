@@ -1,4 +1,4 @@
-package com.vendertool.registration.dal.account;
+package com.vendertool.registration.dal.account.deprecate;
 
 // Generated Aug 26, 2013 10:07:55 PM by Hibernate Tools 3.4.0.CR1
 
