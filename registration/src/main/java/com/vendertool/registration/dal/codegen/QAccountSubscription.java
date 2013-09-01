@@ -39,7 +39,7 @@ public class QAccountSubscription extends com.mysema.query.sql.RelationalPathBas
 
     public final com.mysema.query.sql.PrimaryKey<QAccountSubscription> primary = createPrimaryKey(accountId, accountSubscriptionId);
 
-    public final com.mysema.query.sql.ForeignKey<QSubscriptionDetail> accountSubscriptionSubscriptionDetail1Fk = createForeignKey(subscriptionId, "subscription_id");
+//    public final com.mysema.query.sql.ForeignKey<QSubscriptionDetail> accountSubscriptionSubscriptionDetail1Fk = createForeignKey(subscriptionId, "subscription_id");
 
     public QAccountSubscription(String variable) {
         super(QAccountSubscription.class, forVariable(variable), "null", "account_subscription");
