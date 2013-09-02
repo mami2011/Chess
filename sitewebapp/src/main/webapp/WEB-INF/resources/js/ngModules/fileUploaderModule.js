@@ -1,4 +1,4 @@
-angular.module('FileUploaderModule', []).directive("fileUploader", function() {
+angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 	
 	_css = {
 		'fileInput':		'qry-fup-inp',
@@ -332,7 +332,7 @@ angular.module('FileUploaderModule', []).directive("fileUploader", function() {
 			uploadBtn.bind		('click', 	uploadFiles);
 		
 		},
-		templateUrl:'/site/directive/fileUploader',
+		templateUrl:'/site/ngModules/fileUploaderModule',
 		scope: true
 		
 	};// End of returned statement

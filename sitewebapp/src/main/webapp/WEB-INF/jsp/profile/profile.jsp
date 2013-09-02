@@ -13,10 +13,9 @@
 	</jsp:attribute>
 	
 	<jsp:attribute name="scripts">
-		<script src="<c:url value='/resources/js/shared/errorUtil.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/resources/js/profile/app.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/resources/js/profile/controllers.js' />" type="text/javascript"></script>
-		<script src="<c:url value='/resources/js/shared/errorResponse.module.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/resources/js/ngModules/errorResponseModule.js' />" type="text/javascript"></script>
 	</jsp:attribute>
 	
 	<jsp:attribute name="inlineJs">
@@ -29,6 +28,7 @@
 
 	<jsp:attribute name="css">
 		<link href="<c:url value='/resources/css/profile.css' />" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/resources/css/ngModules/errorResponseModule.css' />" rel="stylesheet" type="text/css" />
 	</jsp:attribute>
 	
 	<jsp:body>

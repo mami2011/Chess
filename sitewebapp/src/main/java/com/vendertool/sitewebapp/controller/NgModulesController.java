@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class NgDirecitveController {
-	private static final Logger logger = Logger.getLogger(NgDirecitveController.class);
+public class NgModulesController {
+	private static final Logger logger = Logger.getLogger(NgModulesController.class);
 	
-	@RequestMapping(value = "directive/fileUploader", method = RequestMethod.GET)
+	@RequestMapping(value = "ngModules/fileUploaderModule", method = RequestMethod.GET)
 	public String getFileUploaderTemplate() {
 		logger.info("getFileUploaderTemplate controller invoked");
-		return "ng-directive/fileUploader";
+		return "ngModules/fileUploaderModule";
 	}
 }

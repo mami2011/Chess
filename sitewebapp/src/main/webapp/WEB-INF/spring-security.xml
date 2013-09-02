@@ -41,7 +41,7 @@
   	<sec:http pattern="/accounthub/**" security="none"/>
   	<sec:http pattern="/uploads/**" security="none"/>
   	<sec:http pattern="/fileUpload/**" security="none"/>
-  	<sec:http pattern="/directive/**" security="none"/>
+  	<sec:http pattern="/ngModules/**" security="none"/>
   	
   	
   	<!-- NOTE: IMPORTANT - Ordering of filter pattern is important -->
