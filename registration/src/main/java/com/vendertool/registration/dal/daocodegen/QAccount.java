@@ -1,4 +1,4 @@
-package com.vendertool.registration.dal.codegen;
+package com.vendertool.registration.dal.daocodegen;
 
 import static com.mysema.query.types.PathMetadataFactory.*;
 
@@ -15,7 +15,7 @@ import com.mysema.query.types.Path;
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
 public class QAccount extends com.mysema.query.sql.RelationalPathBase<QAccount> {
 
-    private static final long serialVersionUID = 1562705284;
+    private static final long serialVersionUID = 1215834300;
 
     public static final QAccount account = new QAccount("account");
 

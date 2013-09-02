@@ -20,7 +20,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			value="jdbc:mysql://ec2-54-234-99-88.compute-1.amazonaws.com:3306/invdb" />
 		<property name="user" value="user5" />
 		<property name="password" value="password" />
-		<property name="codeGenDetails" ref="accountTableDetails" />
+		<property name="codeGenDetails" ref="registrationTableDetails" />
 	</bean>
 
 	<util:list id="registrationTableDetails" list-class="java.util.ArrayList">
@@ -31,7 +31,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 
 	<!-- Table Details -->
 	<bean id="registrationDB" class="com.vendertool.dbscripts.codegen.DBCodeGenDetails">
-		<property name="packageName" value="com.vendertool.registration.dal.daoCodegen" />
+		<property name="packageName" value="com.vendertool.registration.dal.daocodegen" />
 		<property name="targetFolder" value="../registration/src/main/java" />
 		<property name="tableNamePattern" value="account,account_confirmation,account_subscription,address,passsword_history" />
 	</bean>
@@ -46,18 +46,18 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			value="jdbc:mysql://ec2-54-234-99-88.compute-1.amazonaws.com:3306/invdb" />
 		<property name="user" value="user5" />
 		<property name="password" value="password" />
-		<property name="codeGenDetails" ref="accountTableDetails" />
+		<property name="codeGenDetails" ref="inventoryTableDetails" />
 	</bean>
 
 	<util:list id="inventoryTableDetails" list-class="java.util.ArrayList">
 		<!-- Add all DB for which code needs to be generated. -->
-		<ref bean="productDB" />
+		<ref bean="inventoryDB" />
 		<!-- <ref bean="productDB2" /> -->
 	</util:list>
 
 	<!-- Table Details -->
 	<bean id="inventoryDB" class="com.vendertool.dbscripts.codegen.DBCodeGenDetails">
-		<property name="packageName" value="com.vendertool.inventory.dal.daoCodegen" />
+		<property name="packageName" value="com.vendertool.inventory.dal.daocodegen" />
 		<property name="targetFolder" value="../inventory/src/main/java" />
 		<property name="tableNamePattern" value="image,product,product_attribute,product_variation" />
 	</bean>
@@ -71,18 +71,18 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			value="jdbc:mysql://ec2-54-234-99-88.compute-1.amazonaws.com:3306/invdb" />
 		<property name="user" value="user5" />
 		<property name="password" value="password" />
-		<property name="codeGenDetails" ref="accountTableDetails" />
+		<property name="codeGenDetails" ref="listingTableDetails" />
 	</bean>
 
 	<util:list id="listingTableDetails" list-class="java.util.ArrayList">
 		<!-- Add all DB for which code needs to be generated. -->
-		<ref bean="productDB" />
+		<ref bean="listingDB" />
 		<!-- <ref bean="productDB2" /> -->
 	</util:list>
 
 	<!-- Table Details -->
 	<bean id="listingDB" class="com.vendertool.dbscripts.codegen.DBCodeGenDetails">
-		<property name="packageName" value="com.vendertool.listing.dal.daoCodegen" />
+		<property name="packageName" value="com.vendertool.listing.dal.daocodegen" />
 		<property name="targetFolder" value="../listing/src/main/java" />
 		<property name="tableNamePattern" value="listing,listing_variation" />
 	</bean>
@@ -97,19 +97,19 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			value="jdbc:mysql://ec2-54-234-99-88.compute-1.amazonaws.com:3306/batchdb" />
 		<property name="user" value="user5" />
 		<property name="password" value="password" />
-		<property name="codeGenDetails" ref="accountTableDetails" />
+		<property name="codeGenDetails" ref="batchTableDetails" />
 	</bean>
 
 	<util:list id="batchTableDetails" list-class="java.util.ArrayList">
 		<!-- Add all DB for which code needs to be generated. -->
-		<ref bean="productDB" />
+		<ref bean="batchDB" />
 		<!-- <ref bean="productDB2" /> -->
 	</util:list>
 
 	<!-- Table Details -->
 	<bean id="batchDB" class="com.vendertool.dbscripts.codegen.DBCodeGenDetails">
-		<property name="packageName" value="com.vendertool.fts.dal.daoCodegen" />
-		<property name="targetFolder" value="../fts/src/main/java" />
+		<property name="packageName" value="com.vendertool.fts.dal.daocodegen" />
+		<property name="targetFolder" value="../fps/src/main/java" />
 		<property name="tableNamePattern" value="file,job,task,sequence_data" />
 	</bean>
 
