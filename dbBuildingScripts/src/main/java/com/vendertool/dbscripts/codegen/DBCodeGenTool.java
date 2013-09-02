@@ -29,15 +29,27 @@ public class DBCodeGenTool {
 					connectionData.getPassword());
 			List<DBCodeGenDetails> codeGenDetails = connectionData
 					.getCodeGenDetails();
+			
+			
 			for (DBCodeGenDetails codeGen : codeGenDetails) {
 				MetaDataExporter exporter = new MetaDataExporter();
-				exporter.setTableNamePattern(codeGen.getTableNamePattern());
+				//exporter.setTableNamePattern(codeGen.getTableNamePattern());
 				exporter.setPackageName(codeGen.getPackageName());
 				exporter.setTargetFolder(new File(codeGen.getTargetFolder()));
+				System.out.println("Input Table Name Patterns :" + codeGen.getTableNamePattern());
+				String tablesPattrent = codeGen.getTableNamePattern();
+				for (String tablePat :tablesPattrent.split(",")){
+				System.out.println("Currently generating for table pattrent :" + tablePat);
+				System.out.println("Output Folder " + codeGen.getTargetFolder());
+				System.out.println("Output package : "+codeGen.getPackageName() );
+				exporter.setTableNamePattern(tablePat);
 				exporter.export(connection.getMetaData());
+				System.out.println("*******************Completed for " + tablePat +"**************** !!!");
+				}
 			}
+			
 		}
 
-		System.out.println("Completed!");
+		System.out.println("All Completed!!!");
 	}
 }
