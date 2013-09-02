@@ -11,6 +11,8 @@ public class URLHelper {
 		ContainerBootstrapContext ctx = ContainerBootstrapContext.getContext();
 		EnvironmentEnum env = ctx.getEnvironment();
 		
+		System.err.println("req.getRemoteAddr():" + req.getRemoteAddr());
+	
 		baseUrl = RestServiceClientHelper.getServerURL(req);
 		
 		if (env == EnvironmentEnum.DEVELOPMENT) {

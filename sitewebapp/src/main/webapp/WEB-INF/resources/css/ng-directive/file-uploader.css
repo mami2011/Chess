@@ -38,3 +38,10 @@
 .fup .ftable .c2{
 	width:20%;
 }
+.fup .disabled {
+	color:#ccc;
+}
+.fup .size {
+	color:#999;
+	font-size:10px;
+}
