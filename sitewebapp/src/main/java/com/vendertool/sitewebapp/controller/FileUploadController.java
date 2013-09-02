@@ -96,6 +96,35 @@ public class FileUploadController {
 		return "fileUploadSuccess";
 	}
 	
+	@RequestMapping(value=URLConstants.FILE_UPLOADER, method=RequestMethod.GET)
+	public String getFileUploaderView(ModelMap modelMap, Principal principal) {
+		logger.info("getFileUploaderView controller invoked");
+		
+		/**
+		FileUploadDataModel fileUpload = new FileUploadDataModel();
+		
+		// TODO: principal is throwing error
+		//modelMap.addAttribute("email", principal.getName());
+		modelMap.addAttribute("email", "ted@gmail.com");
+		modelMap.addAttribute("fileUpload", fileUpload);
+		modelMap.addAttribute("errorResponse", new ErrorResponse());
+		
+		// Add JSON for Angular
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			String modelMapJson= mapper.writeValueAsString(modelMap);
+			modelMap.put("modelMapJson", modelMapJson);
+		}
+		catch (Exception e) {
+			logger.log(Level.ERROR, e.getMessage(), e);
+			e.printStackTrace();
+			throw new VTRuntimeException("Cannot convert modelMap to json");
+		}
+		**/
+		
+		return "fileUploader/fileUploader";
+	}
+	
 	/*
 	@RequestMapping(value = "fileUpload", method = RequestMethod.GET)
 	public String getFileUploadPage(ModelMap modelMap, Principal principal) {

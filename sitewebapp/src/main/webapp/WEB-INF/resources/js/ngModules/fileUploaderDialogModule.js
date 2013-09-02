@@ -1,8 +1,9 @@
-angular.module('fileUploaderModule', []).directive("fileUploader", function() {
+angular.module('fileUploaderDialogModule', []).directive("fileUploader", function() {
 	
 	_css = {
 		'fileInput':		'qry-fup-inp',
 		'fileInputMore':	'qry-fup-inp-more',
+		'dialog':			'qry-fup-dlg',
 		'uploadBtn':		'qry-fup-upBtn'
 	};
 
@@ -14,6 +15,7 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 				fileInput,
 				fileInputMore,
 				uploadBtn,
+				dialog,
 				
 				/** functions **/
 				initScopeVars,
@@ -35,6 +37,7 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 			fileInput		= $(element).find('.' + _css.fileInput);
 			fileInputMore	= $(element).find('.' + _css.fileInputMore);
 			uploadBtn		= $(element).find('.' + _css.uploadBtn);
+			dialog			= $(element).find('.' + _css.dialog);
 			
 			initScopeVars = function() {
 				scope.percentDone = 0;
@@ -45,7 +48,6 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 				scope.groupId = makeGroupId();
 			};
 			
-			/**
 			dialog.on('hidden.bs.modal', function () {
 				// Only send 'allDone' flag if at least
 				// one file was upload
@@ -56,7 +58,7 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 					}
 				}
 			});
-			
+
 			showDialog = function() {
 
 				initScopeVars();
@@ -68,18 +70,6 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 				dialog.modal('show');
 				
 				clearFileInput(_css.fileInput, showDialog);
-			};**/
-			
-			showTable = function() {
-
-				initScopeVars();
-				
-				addFiles(this.files);
-
-				scope.$apply();
-
-				
-				clearFileInput(_css.fileInput, showTable);
 			};
 
 			addFiles = function(files, skipFileNames) {
@@ -337,7 +327,7 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 			//
 			// Bind the elements
 			//
-			fileInput.bind		('change',	showTable);
+			fileInput.bind		('change',	showDialog);
 			fileInputMore.bind	('change',	addMoreFiles);
 			uploadBtn.bind		('click', 	uploadFiles);
 		

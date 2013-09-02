@@ -1,7 +1,7 @@
 .fup {
 	postion:static;
-	width:100%;
-	padding:20px;
+	width:152px;
+	height:45px;
 }
 .fup .form-wrp {
 	position:relative;
@@ -15,34 +15,12 @@
 	width: 100%; /* Required for IE 5, 6, 7 */
 	filter: alpha(opacity=0); /** IE **/
 	opacity: 0.0;
-	cursor:pointer;
 }
 .fup .upload-btn {
 	position:absolute;
 	top:0;
-	width:130px;
-	background-color:#a9cbaa;
-	overflow:hidden;
-	border:0;
-	color:#333;
-	cursor:pointer;
+	width:150px;
 }
-.fup .upload-btn span {
-	display:inline-block;
-	font-size:16px;
-	margin-left:25px;
-}
-.fup .upload-btn .plus {
-	position:absolute;
-	width:35px;
-	height:37px;
-	display:inline-block;
-	left:0;
-	background:url('../../img/icons.png') no-repeat -54px 6px #2bbc2e;
-	top:0;
-}
-
-
 .fup .ftable {
 	width:100%;
 }

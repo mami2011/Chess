@@ -1,11 +1,9 @@
 <%@ tag pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%--============
 Page fragments
 ================--%>
-<%@ attribute name="header"		fragment="true"%>
 <%@ attribute name="scripts"	fragment="true"%>
 <%@ attribute name="css"		fragment="true"%>
 <%@ attribute name="inlineJs"	fragment="true" %>
@@ -45,19 +43,7 @@ Variables
 	<body>
 		<div id="wrap">
 			<div id="content">
-				<%-- Page specific header section --%>
-				<jsp:invoke fragment="header"/>
-				
-				<%-- Main contents --%>
 				<jsp:doBody/>
-			</div>
-		</div>
-		<div id="footer">
-			<div class="ftr">
-				<a href="#"><spring:message code="form.header.aboutus"/></a>
-				<a href="#"><spring:message code="form.header.contact"/></a>
-				<a href="#"><spring:message code="form.header.faq"/></a>
-				<a href="#"><spring:message code="form.header.privacy"/></a>
 			</div>
 		</div>
 
@@ -66,7 +52,6 @@ Variables
 		<c:if test="${!empty angularAppName}">
 			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 		</c:if>
-		<script src='<c:url value="/resources/js/header.js" />'></script>
 		
 		<%-- Page specific javascript tags --%>
 		<jsp:invoke fragment="scripts"/>

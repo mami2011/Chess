@@ -42,6 +42,7 @@
   	<sec:http pattern="/uploads/**" security="none"/>
   	<sec:http pattern="/fileUpload/**" security="none"/>
   	<sec:http pattern="/ngModules/**" security="none"/>
+  	<sec:http pattern="/fileUploader/**" security="none"/>
   	
   	
   	<!-- NOTE: IMPORTANT - Ordering of filter pattern is important -->
