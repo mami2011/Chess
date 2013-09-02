@@ -27,7 +27,7 @@ public class QAccount extends com.mysema.query.sql.RelationalPathBase<QAccount> 
 
     public final DateTimePath<java.sql.Timestamp> createdDate = createDateTime("created_date", java.sql.Timestamp.class);
 
-    public final NumberPath<Byte> currencyCodeIso3 = createNumber("currency_code_iso3", Byte.class);
+    public final StringPath currencyCodeIso3 = createString("currency_code_iso3");
 
     public final StringPath emailAddr = createString("email_addr");
 
