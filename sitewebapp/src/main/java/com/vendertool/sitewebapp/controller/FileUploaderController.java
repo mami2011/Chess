@@ -34,7 +34,7 @@ public class FileUploaderController {
 	
 	private static final Logger logger = Logger.getLogger(FileUploaderController.class);
 	
-	@RequestMapping(value = "uploadFile", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "uploadFile", method = RequestMethod.POST)
 	protected @ResponseBody Response saveFile(HttpServletRequest request) 
 		throws IOException {
 		
