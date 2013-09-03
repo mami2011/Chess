@@ -20,7 +20,7 @@
 	<jsp:body>
 		<div ngController="FileUploaderCtrl">
 			
-			<div file-uploader upload-url="/comps/upload" all-done-url="x"></div>
+			<div file-uploader upload-url="uploadFile" all-done-url="x"></div>
 		</div>
 	</jsp:body>
 </t:popup>
