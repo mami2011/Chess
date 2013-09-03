@@ -1,6 +1,7 @@
 package com.vendertool.sitewebapp.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -81,6 +83,12 @@ public class FileUploaderController {
 		}
  
 		return serviceRes;
+	}
+	
+	@RequestMapping(value=URLConstants.FILE_UPLOADER, method=RequestMethod.GET)
+	public String getFileUploaderPopup(ModelMap modelMap, Principal principal) {
+		logger.info("getFileUploaderPopup controller invoked");
+		return "fileUploader/fileUploader";
 	}
 	
 }

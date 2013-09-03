@@ -36,103 +36,17 @@ public class FileUploadController {
 
 //	private static ValidationUtil validationUtil = ValidationUtil.getInstance();
 
-	@RequestMapping(value=URLConstants.UPLOADS, method=RequestMethod.GET)
-	public String getUploadsView(ModelMap modelMap, Principal principal) {
-		logger.info("getUploadsView controller invoked");
-
-		FileUploadDataModel fileUpload = new FileUploadDataModel();
-		
-		// TODO: principal is throwing error
-		//modelMap.addAttribute("email", principal.getName());
-		modelMap.addAttribute("email", "ted@gmail.com");
-		modelMap.addAttribute("fileUpload", fileUpload);
-		modelMap.addAttribute("errorResponse", new ErrorResponse());
-		
-		// Add JSON for Angular
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			String modelMapJson= mapper.writeValueAsString(modelMap);
-			modelMap.put("modelMapJson", modelMapJson);
-		}
-		catch (Exception e) {
-			logger.log(Level.ERROR, e.getMessage(), e);
-			e.printStackTrace();
-			throw new VTRuntimeException("Cannot convert modelMap to json");
-		}
-		
-		return "uploads/uploads";
-	}
-	
-	@RequestMapping(value = "upload", method = RequestMethod.POST)
-	public String save(
-			@ModelAttribute("uploadFile") FileUploadDataModel uploadForm,
-			Model map, HttpServletRequest request) throws IOException {
-
-		MultipartFile file = uploadForm.getFile();
-		FileUploadRequest fileRequest = null;
-		if (file != null) {
-			fileRequest = new FileUploadRequest();
-			List<FileInformation> fileInformationList = new ArrayList<>();
-
-			FileInformation fileInfo = new FileInformation();
-			fileInfo.setFileData(file.getBytes());
-			fileInfo.setFileName(file.getOriginalFilename());
-			fileInfo.setFileSize(file.getSize());
-
-			fileInformationList.add(fileInfo);
-			fileRequest.setFiles(fileInformationList);
-		}
-
-		if (fileRequest != null) {
-			String hostName = RestServiceClientHelper.getServerURL(request);
-			String url = hostName + URLConstants.WEB_SERVICE_PATH
-					+ URLConstants.FILE_UPLOAD_PATH;
-			Response response = RestServiceClientHelper
-					.invokeRestService(url, fileRequest, null, MediaType.APPLICATION_JSON_TYPE,
-							HttpMethodEnum.POST);
-		} else {
-			// Error page.
-		}
-		return "fileUploadSuccess";
-	}
-	
-	@RequestMapping(value=URLConstants.FILE_UPLOADER, method=RequestMethod.GET)
-	public String getFileUploaderView(ModelMap modelMap, Principal principal) {
-		logger.info("getFileUploaderView controller invoked");
-		
-		/**
-		FileUploadDataModel fileUpload = new FileUploadDataModel();
-		
-		// TODO: principal is throwing error
-		//modelMap.addAttribute("email", principal.getName());
-		modelMap.addAttribute("email", "ted@gmail.com");
-		modelMap.addAttribute("fileUpload", fileUpload);
-		modelMap.addAttribute("errorResponse", new ErrorResponse());
-		
-		// Add JSON for Angular
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			String modelMapJson= mapper.writeValueAsString(modelMap);
-			modelMap.put("modelMapJson", modelMapJson);
-		}
-		catch (Exception e) {
-			logger.log(Level.ERROR, e.getMessage(), e);
-			e.printStackTrace();
-			throw new VTRuntimeException("Cannot convert modelMap to json");
-		}
-		**/
-		
-		return "fileUploader/fileUploader";
-	}
-	
-	/*
 	@RequestMapping(value = "fileUpload", method = RequestMethod.GET)
 	public String getFileUploadPage(ModelMap modelMap, Principal principal) {
 		// TODO validate session
 		logger.info("fileUpload GET controller invoked");
 		FileUploadDataModel uploadForm = new FileUploadDataModel();
 		
-		modelMap.addAttribute("email", principal.getName());
+		/**
+		 * principal.getName() throwing error. Using misc string for now.
+		 */
+		//modelMap.addAttribute("email", principal.getName());
+		modelMap.addAttribute("email", "xxxxxxx");
 		modelMap.addAttribute("uploadFile", uploadForm);
 		
 		return "fileupload";
@@ -169,23 +83,6 @@ public class FileUploadController {
 			// Error page.
 		}
 		return "fileUploadSuccess";
-	}*/
-	
-	/******************************************
-	 * 
-	 * Get partial pages for Angular
-	 * 
-	 ******************************************/
-	@RequestMapping(value = "accounthub/uploads/partial/files", method = RequestMethod.GET)
-	public String getFilesPartial() {
-		logger.info("getFilesPartial controller invoked");
-		return "uploads/partial/files";
 	}
-	
-	@RequestMapping(value = "accounthub/uploads/partial/uploader", method = RequestMethod.GET)
-	public String getUploaderPartial() {
-		logger.info("getUploaderPartial controller invoked");
-		return "uploads/partial/uploader";
-	}
-	
+
 }
