@@ -14,16 +14,24 @@
 				top,
 				width = 575,
 				height = 325,
-				topOffset = screen.height/10,
 				props
 			;
-			
-			left = screen.width/2 - width/2;
-			top = screen.height/2 - height/2 - topOffset;
-			
-			props = 'left=' + left + ',top=' + top + ',width=' + width + ',height=' + height + ',toolbar=0,location=0,status=0,menubar=0,resizable=1';
-			
+
 			$('#fileUploader').bind('click', function() {
+				
+				wLeft = window.screenLeft ? window.screenLeft : window.screenX;
+				wTop = window.screenTop ? window.screenTop : window.screenY;
+				
+				left = wLeft + (window.innerWidth/2) - (width/2);
+				top = wTop + (window.innerHeight/2) - (height/2);
+				
+				// Prevent top of popup from being above parent window
+				if (top < wTop) {
+					top = wTop;
+				}
+				
+				props = 'left=' + left + ',top=' + top + ',width=' + width + ',height=' + height + ',toolbar=0,location=0,status=0,menubar=0,resizable=1';
+				
 				 var popup = window.open('../fileUploader', 'popup', props);
 			});
 		}

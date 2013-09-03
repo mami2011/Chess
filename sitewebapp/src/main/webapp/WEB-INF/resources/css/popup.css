@@ -1,0 +1,24 @@
+/**************************************
+Layout
+***************************************/
+html, body, #wrap {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+body > #wrap {
+	height: auto;
+	min-height: 100%;
+}
+body {
+	font-family: helvetica, arial, san-serif;
+   	background-color: #eee !important;
+}
+#content {
+	padding-bottom: 0;
+}
+.clr {
+	clear:both;
+}
+
+

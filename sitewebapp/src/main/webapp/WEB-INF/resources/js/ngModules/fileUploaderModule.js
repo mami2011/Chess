@@ -2,7 +2,6 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 	
 	_css = {
 		'fileInput':		'qry-fup-inp',
-		'fileInputMore':	'qry-fup-inp-more',
 		'uploadBtn':		'qry-fup-upBtn'
 	};
 
@@ -12,12 +11,10 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 			var uploadUrl = attrs.uploadUrl,
 				allDoneUrl = attrs.allDoneUrl,
 				fileInput,
-				fileInputMore,
 				uploadBtn,
 				
 				/** functions **/
 				initScopeVars,
-				showDialog,
 				addFiles,
 				addMoreFiles,
 				uploadFiles,
@@ -32,9 +29,8 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 			//
 			// Find the elements
 			//
-			fileInput		= $(element).find('.' + _css.fileInput);
-			fileInputMore	= $(element).find('.' + _css.fileInputMore);
-			uploadBtn		= $(element).find('.' + _css.uploadBtn);
+			fileInput = $(element).find('.' + _css.fileInput);
+			uploadBtn = $(element).find('.' + _css.uploadBtn);
 			
 			initScopeVars = function() {
 				scope.percentDone = 0;
@@ -45,50 +41,56 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 				scope.groupId = makeGroupId();
 			};
 			
-			/**
-			dialog.on('hidden.bs.modal', function () {
-				// Only send 'allDone' flag if at least
-				// one file was upload
-				for (var i=0, n=scope.fileWrappers.length; i<n; i++) {
-					if (scope.fileWrappers[i].status && scope.fileWrappers[i].status === 'success') {
-						alert('done with groupid: ' + scope.groupId + ' allDoneUrl:' + allDoneUrl);
-						break;
+			//
+			// If user tries to close popup, show warning if there
+			// are files in the list that have not been uploaded.
+			//
+			$(window).bind('beforeunload', function() {
+				if (!scope.allUploadsSuccessful) {
+					
+					var notUploadedCount = 0;
+					
+					for (var i=0, n=scope.fileWrappers.length; i<n; i++) {
+						if (!scope.fileWrappers[i].status || scope.fileWrappers[i].status!='success') {
+							notUploadedCount++;
+						}
+					}
+
+					if (notUploadedCount == 1) {
+						return 'A file has not been uploaded.';
+					}
+					else if (notUploadedCount > 1) {
+						return 'Some files have not been uploaded.';
 					}
 				}
 			});
 			
-			showDialog = function() {
+
+			$(window).bind('unload', function() {
+				// Send ajax flag to say that this group is done
+				$.ajax({
+					url: "http://www.amazon.com",
+					context: "oooo"
+				});
+			});
+
+			initialAdd = function() {
 
 				initScopeVars();
-				
 				addFiles(this.files);
-
 				scope.$apply();
-
-				dialog.modal('show');
 				
-				clearFileInput(_css.fileInput, showDialog);
-			};**/
-			
-			showTable = function() {
-
-				initScopeVars();
-				
-				addFiles(this.files);
-
-				scope.$apply();
-
-				
-				clearFileInput(_css.fileInput, showTable);
+				// Clear and rebind fileInput to add additional files
+				clearFileInput(_css.fileInput, addMoreFiles);
 			};
-
-			addFiles = function(files, skipFileNames) {
+			
+			addFiles = function(files, dupeNames) {
 				var filesToAdd = [], fileWrap, dupes;
 				
-				// Remove files that should be skipped (they are dupes)
-				if (skipFileNames) {
+				// Remove files that are dupes
+				if (dupeNames) {
 					for (var i=0, n=files.length; i<n; i++) {
-						if (skipFileNames.indexOf(files[i].name) === -1) {
+						if (dupeNames.indexOf(files[i].name) === -1) {
 							filesToAdd.push(files[i]);
 						}
 					}
@@ -115,17 +117,14 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 				
 				if (dupeNames && dupeNames.length > 0) {
 					scope.dupeNames = dupeNames;
-					scope.$apply();
-
 					addFiles(this.files, dupeNames);
 				}
 				else {
 					addFiles(this.files);
 				}
 				
-				updateUploadStatus('doNotApplyScope');
-				scope.$apply();
-				clearFileInput(_css.fileInputMore, addMoreFiles);
+				updateUploadStatus();
+				clearFileInput(_css.fileInput, addMoreFiles);
 			};
 			
 			uploadFiles = function() {
@@ -169,12 +168,12 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 						updateUploadStatus();
 
 						//
-						// If all uploads are successful, close dialog.
+						// If all uploads are successful, close popup.
 						// There's a listener on the close event that
 						// sends the the 'done' flag to backend.
 						//
 						if (scope.allUploadsSuccessful) {			
-							dialog.modal('hide');
+							window.close();
 						}
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
@@ -188,7 +187,6 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 						updateUploadStatus();
 					},
 					xhr: function() {
-						var self = this;
 						var fileId = fileWrap.id;
 						
 				        var myXhr = $.ajaxSettings.xhr();
@@ -244,7 +242,7 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 				
 				return dupes;
 			};
-			
+
 			makeId = function() {
 				var rand = Math.floor((Math.random()*100000000) + 1);
 				var millis = new Date().getTime();
@@ -255,7 +253,7 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 				return makeId();
 			};
 			
-			updateUploadStatus = function(doNotApplyScope) {
+			updateUploadStatus = function() {
 				var doneCount = 0;
 				scope.allUploadsSuccessful = false;
 				
@@ -269,9 +267,7 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 					scope.allUploadsSuccessful = true;
 				}
 
-				if (!doNotApplyScope) {
-					scope.$apply();
-				}
+				scope.$apply();
 			};
 			
 			overallProgress = function(evt, fileId) {
@@ -301,6 +297,16 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 				}
 			};
 			
+			getMapSize = function(map) {
+			    var count = 0, key;
+			    for (key in map) {
+			        if (map.hasOwnProperty(key)) {
+			            count++;
+			        }
+			    }
+			    return count;
+			};
+			
 			scope.remove = function(fileId) {
 
 				for (var i=0, n=scope.fileWrappers.length; i<n; i++) {
@@ -321,28 +327,21 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 					}
 				}
 				
-				updateUploadStatus('doNotApplyScope');
+				updateUploadStatus();
 			};
 			
-			getMapSize = function(map) {
-			    var count = 0, key;
-			    for (key in map) {
-			        if (map.hasOwnProperty(key)) {
-			            count++;
-			        }
-			    }
-			    return count;
+			scope.closePopup = function() {
+				window.close();
 			};
-			
+
 			//
 			// Bind the elements
 			//
-			fileInput.bind		('change',	showTable);
-			fileInputMore.bind	('change',	addMoreFiles);
-			uploadBtn.bind		('click', 	uploadFiles);
+			fileInput.bind('change', initialAdd);
+			uploadBtn.bind('click', uploadFiles);
 		
 		},
-		templateUrl:'/site/ngModules/fileUploaderModule',
+		templateUrl:'ngModules/fileUploaderModule',
 		scope: true
 		
 	};// End of returned statement
