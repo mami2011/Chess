@@ -35,7 +35,7 @@ public class FileUploaderController {
 	private static final Logger logger = Logger.getLogger(FileUploaderController.class);
 	
 	@RequestMapping(value = "uploadFile", method = RequestMethod.POST)
-	protected @ResponseBody Response saveFile(HttpServletRequest request) 
+	protected @ResponseBody ModelMap saveFile(HttpServletRequest request) 
 		throws IOException {
 		
 		Response serviceRes = null;
@@ -81,8 +81,17 @@ public class FileUploaderController {
 		        e.printStackTrace();
 		    }
 		}
- 
-		return serviceRes;
+		
+		ModelMap modelMap = new ModelMap();
+		
+		if (serviceRes == null || serviceRes.getStatus() != 200) {
+			modelMap.put("statusMessage", "error");
+		}
+		else {
+			modelMap.put("statusMessage", "success");
+		}
+		
+		return modelMap;
 	}
 	
 	@RequestMapping(value=URLConstants.FILE_UPLOADER, method=RequestMethod.GET)
