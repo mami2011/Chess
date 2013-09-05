@@ -7,6 +7,18 @@ all the function params as strings in same order.
 ********************/
 uploadsApp.controller('UploadsCtrl', ['$scope', '$http', '$routeParams', '$location', function($scope, $http, $routeParams, $location) {
 	
+	
+
+	window.$windowScope = $scope;
+	
+	
+	$scope.updateFiles = function(files) {
+		
+		//alert(files[0] + 'xxx');
+	};
+	
+	
+	
 	//alert('hello' + URL.uploadsUrl);
 	
 	/**

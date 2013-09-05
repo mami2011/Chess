@@ -332,7 +332,7 @@ angular.module('fileUploaderDialogModule', []).directive("fileUploader", functio
 			uploadBtn.bind		('click', 	uploadFiles);
 		
 		},
-		templateUrl:'/site/ngModules/fileUploaderModule',
+		templateUrl:'/site/shardNgModules/fileUploaderModule',
 		scope: true
 		
 	};// End of returned statement

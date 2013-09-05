@@ -22,7 +22,6 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 				clearFileInput,
 				findDupes,
 				makeId,
-				progressHandler,
 				getMapSize
 			;
 
@@ -39,6 +38,8 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 				scope.errors = undefined; // map of fileId to fileName
 				scope.allUploadsSuccessful = false;
 				scope.groupId = makeGroupId();
+				scope.uploadProgress = {}; // map of fileId to {'loaded':999, 'total':999}
+				scope.uploadInProgress = false;
 			};
 			
 			//
@@ -132,10 +133,14 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 				var fileWrap, formData;
 				
 				// Reset the progress bar and errors
-				scope.percentDone = 0;
 				scope.errors = undefined;
 				scope.dupeNames = [];
-
+				scope.percentDone = 0;
+				scope.uploadProgress = {};
+				scope.uploadCount = 0;
+				
+				scope.uploadInProgress = true;
+				
 				if (window.FormData){
 					for (var i=0, n=scope.fileWrappers.length; i<n; i++) {
 						fileWrap = scope.fileWrappers[i];
@@ -144,6 +149,10 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 						// We allow user to hit uploadBtn again to upload any
 						// files that errored in a previous upload attempt.
 						if (!fileWrap.status || fileWrap.status !== 'success') {
+							
+							// Setup for progress bar
+							scope.uploadProgress[fileWrap.id] = {'loaded':0, 'total':0};
+							
 							formData = new FormData();
 							formData.append(scope.groupId, fileWrap.file);
 							send(formData, fileWrap);
@@ -153,7 +162,9 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 			};
 			
 			send = function(formData, fileWrap) {
-
+				
+				var progressPercentToWaitAt = 95;
+				
 				$.ajax({
 					type: 'post',
 					url: uploadUrl,
@@ -161,42 +172,96 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 					cache: false,
 			        contentType: false,
 			        processData: false,
-					success: function(data, textStatus, jqXHR) {
-
+					success: function(data, textStatus, jqXHR) {						
+						
 						fileWrap.status = 'success';
+						scope.uploadCount++;
+						
+						if (scope.uploadCount === getMapSize(scope.uploadProgress)) {
+							
+							scope.uploadInProgress = false;
+							updateUploadStatus();
+							
+							// This moved the progress bar to 100%
+							scope.percentDone = 100;
+							scope.$apply();
+							
+							// Pause for 2 seconds after progress bar hits 100%
+							setTimeout( function(){
+								//
+								// If all uploads are successful, close popup.
+								// There's a listener on the close event that
+								// sends the the 'done' flag to backend.
+								//
+								if (scope.allUploadsSuccessful) {
 
-						updateUploadStatus();
+									// Send message back to parent window
+									if (window.opener) {
+										scope.parentWindow = window.opener.$windowScope;
+										scope.parentWindow.updateFiles(['ted']);
+									}
 
-						//
-						// If all uploads are successful, close popup.
-						// There's a listener on the close event that
-						// sends the the 'done' flag to backend.
-						//
-						if (scope.allUploadsSuccessful) {			
-							window.close();
+									window.close();
+								}
+								
+							}, 2000);
 						}
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
 						
 						fileWrap.status = 'error';
+						scope.uploadCount++;
+						
+						if (scope.uploadCount === getMapSize(scope.uploadProgress)) {
+							scope.uploadInProgress = false;
+							updateUploadStatus();
+						}
+						
 						if (!scope.errors) {
 							scope.errors = {};
 						}
 						scope.errors[fileWrap.id] = fileWrap.file.name;
-						
-						updateUploadStatus();
 					},
 					xhr: function() {
-						var fileId = fileWrap.id;
+						var xhr = new window.XMLHttpRequest();
 						
-				        var myXhr = $.ajaxSettings.xhr();
-				        if (myXhr.upload) {
-				            myXhr.upload.addEventListener('progress', function(evt) {
-				            	overallProgress(evt, fileId);
-				            }, false);
-				        }
-				        return myXhr;
-				    }
+						xhr.upload.addEventListener("progress", function(evt){
+							var progress, loaded = 0, total = 0;
+							
+							if (evt.lengthComputable) {
+								
+								progress = scope.uploadProgress[fileWrap.id];
+								if (progress) {
+									progress['loaded'] = evt.loaded;
+									progress['total'] = evt.total;
+									
+									console.log('loaded:' + progress['loaded']);
+									console.log('total:' + progress['total']);
+								}
+
+								loaded = 0;
+								total = 0;
+								for (var key in scope.uploadProgress) {
+									if (scope.uploadProgress.hasOwnProperty(key)) {
+										progress = scope.uploadProgress[key];
+										loaded += progress.loaded;
+										total += progress.total;
+									}
+								}
+
+								scope.percentDone = parseInt(100.0 * (loaded/total));
+								
+								// Only move progess bar close to the end.
+								// Need to let the request return 'success'
+								// before moving all the way to 100%.
+								if (scope.percentDone <= progressPercentToWaitAt) {
+									scope.$apply();
+								}
+							}
+						}, false);
+						
+						return xhr;
+					}
 				});
 			};
 			
@@ -269,34 +334,7 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 
 				scope.$apply();
 			};
-			
-			overallProgress = function(evt, fileId) {
-				console.log(fileId);
-			};
 
-			progressHandler = function(evt) {
-				if (evt.lengthComputable) {
-					
-					scope.percentDone = parseInt(100.0 * (evt.loaded/evt.total));
-					scope.$apply();
-					
-					if (scope.percentDone === 100) {
-						//alert('done');
-
-					}
-					console.log(evt.loaded + ":" + evt.total + ":" + evt.totalSize);
-					/*
-					if (percent_done < 99) {
-						percent_done = 'Uploading: ' + percent_done + '%';
-					}
-					else {
-						percent_done = 'Processing File...';
-					}
-					//$('#your-progress-div').text(percent_done);
-					console.log(percent_done);*/
-				}
-			};
-			
 			getMapSize = function(map) {
 			    var count = 0, key;
 			    for (key in map) {
@@ -310,9 +348,9 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 			scope.remove = function(fileId) {
 
 				for (var i=0, n=scope.fileWrappers.length; i<n; i++) {
-					var fw = scope.fileWrappers[i];
+					var fileWrap = scope.fileWrappers[i];
 
-					if (fw.id === fileId) {
+					if (fileWrap.id === fileId) {
 						scope.fileWrappers.splice(i, 1);
 						
 						// Update error object since an error file might have been removed.
@@ -320,6 +358,13 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 							delete scope.errors[fileId];
 							if (getMapSize(scope.errors) === 0) {
 								scope.errors = undefined;
+							}
+						}
+						
+						// Update dupeNames object since an dupe file might have been removed.
+						for (var j=0, m=scope.dupeNames.length; j<m; j++) {
+							if (scope.dupeNames[j] === fileWrap.file.name) {
+								scope.dupeNames.splice(j, 1);
 							}
 						}
 
@@ -341,7 +386,7 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 			uploadBtn.bind('click', uploadFiles);
 		
 		},
-		templateUrl:'ngModules/fileUploaderModule',
+		templateUrl:'sharedNgModules/fileUploaderModule',
 		scope: true
 		
 	};// End of returned statement

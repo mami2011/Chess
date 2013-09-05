@@ -41,7 +41,7 @@
   	<sec:http pattern="/accounthub/**" security="none"/>
   	<sec:http pattern="/uploads/**" security="none"/>
   	<sec:http pattern="/fileUpload/**" security="none"/>
-  	<sec:http pattern="/ngModules/**" security="none"/>
+  	<sec:http pattern="/sharedNgModules/**" security="none"/>
   	<sec:http pattern="/fileUploader/**" security="none"/>
   	<sec:http pattern="/uploadFile/**" security="none"/>
   	

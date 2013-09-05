@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class NgModulesController {
 	private static final Logger logger = Logger.getLogger(NgModulesController.class);
 	
-	@RequestMapping(value = "ngModules/fileUploaderModule", method = RequestMethod.GET)
+	@RequestMapping(value = "sharedNgModules/fileUploaderModule", method = RequestMethod.GET)
 	public String getFileUploaderTemplate() {
 		logger.info("getFileUploaderTemplate controller invoked");
-		return "ngModules/fileUploaderModule";
+		return "sharedNgModules/fileUploaderModule";
 	}
 }

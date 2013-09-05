@@ -14,14 +14,14 @@
 		<script src="<c:url value='/resources/js/uploads/app.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/resources/js/uploads/controllers.js' />" type="text/javascript"></script>
 		
-		<script src="<c:url value='/resources/js/ngModules/fileUploaderModule.js' />" type="text/javascript"></script>  
+		<script src="<c:url value='/resources/js/sharedNgModules/fileUploaderModule.js' />" type="text/javascript"></script>  
 	</jsp:attribute>
 	
 
 	
 	<jsp:attribute name="css">
 		<link href="<c:url value='/resources/css/accounthub.css' />" rel="stylesheet" type="text/css" />
-		<link href="<c:url value='/resources/css/ngModules/fileUploaderModule.css' />" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/resources/css/sharedNgModules/fileUploaderModule.css' />" rel="stylesheet" type="text/css" />
 	</jsp:attribute>
 	
 	<jsp:body>
