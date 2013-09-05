@@ -35,6 +35,9 @@ body {
 	min-height: 600px;
 	max-width: 1024px;
 	background-color:#fff;
+	border-left:1px solid #ccc;
+	border-top:0;
+	border-bottom:0;
 	/*
 	-webkit-box-shadow: 1px 1px 10px rgba(50, 50, 50, 0.20);
 	-moz-box-shadow:    1px 1px 10px rgba(50, 50, 50, 0.20);
