@@ -251,14 +251,23 @@ Page Footer
 }
 
 .btn.btn-primary.grn {
+	/*
 	background-color:#5eb161;
-	border:1px solid #5eb161;
+	border:1px solid #5eb161;*/
+	
+	background-color:#ebc358;
+	border:1px solid #ebc358;
 	font-size:17px;
 	padding-left:50px;
 	padding-right:50px;
+	color:#555;
 }
 .btn.btn-primary.grn:hover {
-	background-color:#529b55;
+	/*
+	background-color:#529b55;*/
+	border:1px solid #eba138;
+	background-color:#eba138;
+	
 }
 
 
