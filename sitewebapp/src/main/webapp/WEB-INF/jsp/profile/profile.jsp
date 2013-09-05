@@ -37,7 +37,7 @@
 			<jsp:attribute name="leftNav">
 				<h3 class="ttl">Profile</h3>
 				<div class="list-group">
-					<a href="${profileUrl}" ng-class="getClass('/profile')" 	class="list-group-item">Change info</a>
+					<a href="#/profile" ng-class="getClass('/profile')" 	class="list-group-item">Change info</a>
 					<a href="#/email"		ng-class="getClass('/email')" 		class="list-group-item">Change email</a>
 					<a href="#/password"	ng-class="getClass('/password')"	class="list-group-item">Change password</a>
 				</div>
