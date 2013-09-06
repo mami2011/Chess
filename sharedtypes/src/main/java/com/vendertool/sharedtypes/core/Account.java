@@ -1,24 +1,48 @@
 package com.vendertool.sharedtypes.core;
 
+import java.util.Currency;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Account {
+	@JsonIgnore
+	private static final String VALUE_DELIMITER = ",";
+	
+	private Long id;
 	private String emailId;
+	private String alternateEmailId;
 	private String password;
 	private String confirmPassword;
 	private String passwordSalt;
 	private ContactDetails contactDetails;
+	private Address billingAddress;
+	private Currency currency;
+	private Language language;
 	private Date createDate;
+	private Date lastModifiedDate;
 	private Date validTillDate;
-	private AccountRoleEnum role;
+	private Image picture;
+	private Set<AccountRoleEnum> roles;
 	private AccountStatusEnum accountStatus;
 	private AccountConfirmation accountConf;
 	
 	public Account(){}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getEmailId() {
 		return emailId;
@@ -26,6 +50,14 @@ public class Account {
 
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
+	}
+
+	public String getAlternateEmailId() {
+		return alternateEmailId;
+	}
+
+	public void setAlternateEmailId(String alternateEmailId) {
+		this.alternateEmailId = alternateEmailId;
 	}
 
 	public ContactDetails getContactDetails() {
@@ -42,6 +74,14 @@ public class Account {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	public Language getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(Language language) {
+		this.language = language;
 	}
 
 	public Date getValidTillDate() {
@@ -68,12 +108,12 @@ public class Account {
 		this.passwordSalt = passwordSalt;
 	}
 
-	public AccountRoleEnum getRole() {
-		return role;
+	public Set<AccountRoleEnum> getRoles() {
+		return roles;
 	}
 
-	public void setRole(AccountRoleEnum role) {
-		this.role = role;
+	public void setRoles(Set<AccountRoleEnum> roles) {
+		this.roles = roles;
 	}
 
 	public AccountStatusEnum getAccountStatus() {
@@ -111,5 +151,91 @@ public class Account {
 	
 	public void clearAccountConfirmation() {
 		setAccountConf(null);
+	}
+
+	public Address getBillingAddress() {
+		return billingAddress;
+	}
+
+	public void setBillingAddress(Address billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+
+	public Currency getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
+	}
+
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+
+	public void setLastModifiedDate(Date lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
+	}
+	
+	public Image getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Image picture) {
+		this.picture = picture;
+	}
+
+	@JsonIgnore
+	public Set<AccountRoleEnum> denormalize(String _roles) {
+		Set<AccountRoleEnum> roles = new HashSet<AccountRoleEnum>();
+		if((_roles == null) || (_roles.trim().isEmpty())) {
+			return roles;
+		}
+		
+		StringTokenizer st = new StringTokenizer(_roles, VALUE_DELIMITER);
+		while(st.hasMoreTokens()) {
+			String s = st.nextToken();
+			AccountRoleEnum role = AccountRoleEnum.get(s);
+			if(role != null) {
+				roles.add(role);
+			}
+		}
+		return roles;
+	}
+	
+	@JsonIgnore
+	public String normalize(Set<AccountRoleEnum> _roles) {
+		if((_roles == null) || (_roles.isEmpty())) {
+			return null;
+		}
+		
+		//since java.util.Set doesn't provide get(idx) method
+		AccountRoleEnum[] roles = (AccountRoleEnum[])_roles.toArray();
+		
+		StringBuffer sb = new StringBuffer();
+		for(int i=0; i<roles.length; i++) {
+			AccountRoleEnum role = roles[i];
+			sb.append(role.getValue());
+			if(i < (roles.length-1)) {
+				sb.append(VALUE_DELIMITER);
+			}
+		}
+		
+		return sb.toString();
+	}
+	
+	@JsonIgnore
+	public void addRole(AccountRoleEnum role) {
+		if(role == null) {
+			return;
+		}
+		
+		Set<AccountRoleEnum> roles = getRoles();
+		if(roles == null) {
+			roles = new HashSet<AccountRoleEnum>();
+			setRoles(roles);
+		}
+		
+		roles.add(role);
 	}
 }

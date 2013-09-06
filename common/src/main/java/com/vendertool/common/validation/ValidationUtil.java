@@ -24,6 +24,9 @@ public class ValidationUtil {
 		return ValidationUtilHolder.INSTANCE;
 	}
 	
+	private ValidationUtil(){
+		
+	}
 	/**
 	 * Checks for null
 	 * 
@@ -193,5 +196,14 @@ public class ValidationUtil {
 		
 		int length = Array.getLength(value);
 		return ((length >= min) && (length <= max));
+	}
+	/**
+	 * This method determines if the given number is positive integer.
+	 * 
+	 * @param value
+	 * @return
+	 */
+	public boolean isPositiveInteger(int value){
+		return value > 0;
 	}
 }

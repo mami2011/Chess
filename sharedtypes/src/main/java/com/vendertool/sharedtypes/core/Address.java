@@ -12,6 +12,7 @@ public class Address {
 		RESENTIAL, BUSINESS;
 	}
 	
+	private Long id;
 	private String addressLine1;
 	private String addressLine2;
 	private String city;
@@ -20,6 +21,14 @@ public class Address {
 	private CountryEnum country;
 	
 	public Address(){}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getAddressLine1() {
 		return addressLine1;

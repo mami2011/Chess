@@ -3,8 +3,7 @@ package com.vendertool.sharedtypes.rnr;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vendertool.sharedtypes.error.VTError;
 import com.vendertool.sharedtypes.error.VTErrorCode;
 import com.vendertool.sharedtypes.error.VTErrorFieldBindingMap;

@@ -3,11 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.vendertool.parent</groupId>
-		<artifactId>parent</artifactId>
+		<groupId>com.vendertool.serviceparent</groupId>
+		<artifactId>serviceparent</artifactId>
 		<version>1.0</version>
-		<relativePath>../parent/pom.xml</relativePath>
+		<relativePath>../serviceparent/pom.xml</relativePath>
 	</parent>
+	
 	<groupId>com.vendertool.fps</groupId>
 	<artifactId>fps</artifactId>
 	<packaging>jar</packaging>
@@ -25,10 +26,25 @@
 			<artifactId>sharedtypes</artifactId>
 			<version>${vendertool-version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.vendertool.common</groupId>
 			<artifactId>common</artifactId>
 			<version>${vendertool-version}</version>
 		</dependency>
+		
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

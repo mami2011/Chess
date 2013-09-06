@@ -16,7 +16,7 @@
 			<param-value>com.vendertool;org.codehaus.jackson.jaxrs</param-value> </init-param> -->
 		<init-param>
 			<param-name>jersey.config.server.provider.packages</param-name>
-			<param-value>com.vendertool;org.codehaus.jackson.jaxrs;com.vendertool.fps.fileupload</param-value>
+			<param-value>com.vendertool;com.fasterxml.jackson.jaxrs;com.vendertool.fps.fileupload</param-value>
 		</init-param>
 
 		<load-on-startup>1</load-on-startup>
@@ -42,9 +42,8 @@
 		<param-value>
 			/WEB-INF/application-context.xml 
 			/WEB-INF/spring-security.xml
+			/WEB-INF/dal-module.xml
 			classpath:security\security-credentials.xml
-			classpath:dal\DBConnectionConfig.xml 
-			classpath:dal\Registration.xml
 		</param-value>
 	</context-param>
 

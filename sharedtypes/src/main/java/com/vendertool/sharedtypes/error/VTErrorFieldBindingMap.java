@@ -9,8 +9,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vendertool.sharedtypes.exception.VTRuntimeException;
 
 @XmlAccessorType(XmlAccessType.FIELD)

@@ -4,12 +4,34 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlEnum;
 
+import com.vendertool.sharedtypes.core.Dimension.DimensionUnitEnum;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Image {
 	
 	@XmlEnum
 	public enum ImageFormatEnum {
-		JPEG,GIF,BMP,PNG,TIFF,EXIF;
+		UNKNOWN(-1), JPEG(1),GIF(2),BMP(3),PNG(4),TIFF(5),EXIF(6);
+		
+		private int id;
+
+		private ImageFormatEnum(int id) {
+			this.id = id; 
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public static ImageFormatEnum get(int id) {
+			ImageFormatEnum[] values = ImageFormatEnum.values();
+			for (ImageFormatEnum typeEnum : values) {
+				if (typeEnum.getId() == id) {
+					return typeEnum;
+				}
+			}
+			return UNKNOWN;
+		}
 	}
 	
 	private int imageId;

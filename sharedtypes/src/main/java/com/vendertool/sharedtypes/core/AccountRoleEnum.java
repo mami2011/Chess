@@ -13,26 +13,9 @@ public enum AccountRoleEnum {
 	private String value;
 	
 	AccountRoleEnum(int id, String value) {
-		/*if(contains(id)) {
-			throw new VTRuntimeException("Duplicate enum id '" + 
-							AccountRoleEnum.class.getName() + ".id=" + id + "'.");
-		}*/
 		this.id = id;
 		this.value = value;
 	}
-	
-	/*private boolean contains(int id) {
-		AccountRoleEnum[] roles = values();
-		if(roles == null){
-			return false;
-		}
-		for(AccountRoleEnum role : roles) {
-			if(role.getId() == id) {
-				return true;
-			}
-		}
-		return false;
-	}*/
 
 	public int getId() {
 		return id;
@@ -40,5 +23,28 @@ public enum AccountRoleEnum {
 
 	public String getValue() {
 		return value;
+	}
+	
+	public static AccountRoleEnum get(int id) {
+		AccountRoleEnum[] values = AccountRoleEnum.values();
+		for(AccountRoleEnum e : values) {
+			if(e.getId() == id) {
+				return e;
+			}
+		}
+		return null;
+	}
+	
+	public static AccountRoleEnum get(String value) {
+		if((value == null) || (value.trim().isEmpty())) {
+			return null;
+		}
+		AccountRoleEnum[] values = AccountRoleEnum.values();
+		for(AccountRoleEnum e : values) {
+			if(e.getValue().equalsIgnoreCase(value)) {
+				return e;
+			}
+		}
+		return null;
 	}
 }

@@ -23,7 +23,6 @@ import com.vendertool.common.SessionIdGenerator;
 import com.vendertool.common.URLConstants;
 import com.vendertool.common.service.BaseVenderToolServiceImpl;
 import com.vendertool.common.validation.ValidationUtil;
-import com.vendertool.registration.bof.AccountBOF;
 import com.vendertool.registration.email.RegistrationEmailHelper;
 import com.vendertool.registration.validation.RegistrationValidator;
 import com.vendertool.sharedtypes.core.Account;
@@ -107,9 +106,6 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 			//replace this with real DB call & shield it with try/catch
 			status = cachedDS.addAccount(account);
 			if(status == CachedRegistrationAccountDatasource.Status.NEW) {
-				
-				
-				AccountBOF.getInstance().insert(account);
 				response.setSuccess(true);
 				response.setAccount(account);
 				
@@ -163,7 +159,7 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		ac.setConfirmCode(code);
 		ac.setConfirmSessionId(sessionId);
 		account.setAccountConf(ac);
-		account.setRole(AccountRoleEnum.ROLE_USER);
+		account.addRole(AccountRoleEnum.ROLE_USER);
 	}
 
 	private String saltHashPassword(Account account) {
@@ -277,8 +273,8 @@ public class RegistrationServiceImpl extends BaseVenderToolServiceImpl
 		
 //		account.clearPassword();
 //		account.clearAccountConfirmation();
-		if(account.getRole() == null) {
-			account.setRole(AccountRoleEnum.ROLE_USER);
+		if(account.getRoles() == null) {
+			account.addRole(AccountRoleEnum.ROLE_USER);
 		}
 		response.setAccount(account);
 		response.setStatus(ResponseAckStatusEnum.SUCCESS);

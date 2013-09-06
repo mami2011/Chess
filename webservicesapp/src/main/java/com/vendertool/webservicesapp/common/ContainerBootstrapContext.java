@@ -6,9 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.vendertool.registration.dal.account.deprecate.AccountDAOFactory;
-import com.vendertool.registration.dal.accountConfirmation.AccountConfirmationDAOFactory;
-import com.vendertool.registration.dal.address.AddressDAOFactory;
+import com.vendertool.listing.processor.Module;
 
 public class ContainerBootstrapContext {
 	   
@@ -41,9 +39,12 @@ public class ContainerBootstrapContext {
 		    		environment = EnvironmentEnum.get(prop.toUpperCase());
 		    	}
 		    	//DO DAL Init
-		    	AccountDAOFactory.getInstance().init();
-		    	AccountConfirmationDAOFactory.getInstance().init();
-		    	AddressDAOFactory.getInstance().init();
+//		    	AccountDAOFactory.getInstance().init();
+//		    	AccountConfirmationDAOFactory.getInstance().init();
+//		    	AddressDAOFactory.getInstance().init();
+		    	//Do processor Init
+		    	Module.getInstance().init();
+		    	com.vendertool.inventory.processor.Module.getInstance().init();
 	    	} finally {
 	    		CTX.set(this);
 	    	}

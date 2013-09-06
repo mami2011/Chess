@@ -11,20 +11,20 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class Product{
 	private String productId;
 	private String title;
-	private String description;
+	private String description;//optional
 	private String sku;
 	private Amount price;
 	private ProductCodeTypeEnum productCodeType;
 	private String productCode;
-	private int quantity;
-	private Weight weight;
-	private Dimension dimension;
-	private List<Image> images;
-	private List<NameValuePair> properties;
-	private List<ProductVariation> variations;
+	private int quantity = 1;//default to 1
+	private Weight weight;//optional
+	private Dimension dimension;//optional
+	private List<Image> images;//optional
+	private List<NameValuePair> properties;//optional
+	private List<ProductVariation> variations;//optional
 	private Date createDate;
 	private Date lastModifiedDate;
-	private String createOwnerId;
+	private String accountId;
 	
 	
 	public Product(){}
@@ -160,11 +160,11 @@ public class Product{
 		this.lastModifiedDate = lastModifiedDate;
 	}
 
-	public String getCreateOwnerId() {
-		return createOwnerId;
+	public String getAccountId() {
+		return accountId;
 	}
 
-	public void setCreateOwnerId(String createOwnerId) {
-		this.createOwnerId = createOwnerId;
+	public void setAccountId(String createOwnerId) {
+		this.accountId = createOwnerId;
 	}
 }

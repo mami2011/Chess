@@ -9,7 +9,26 @@ public class ReturnPolicy {
 	
 	@XmlEnum
 	public enum ReturnShippingPayerTypeEnum{
-		SELLER, BUYER, MARKET_PLATFORM;
+		UNKNOWN(-1), SELLER(1), BUYER(2), MARKET_PLATFORM(3);
+		private int id;
+
+		private ReturnShippingPayerTypeEnum(int id) {
+			this.id = id; 
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public static ReturnShippingPayerTypeEnum get(int id) {
+			ReturnShippingPayerTypeEnum[] values = ReturnShippingPayerTypeEnum.values();
+			for (ReturnShippingPayerTypeEnum typeEnum : values) {
+				if (typeEnum.getId() == id) {
+					return typeEnum;
+				}
+			}
+			return UNKNOWN;
+		}
 	}
 	
 	private int policyId;

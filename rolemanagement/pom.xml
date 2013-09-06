@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-	<groupId>com.vendertool.parent</groupId>
-	<artifactId>parent</artifactId>
-	<version>1.0</version>
-	<relativePath>../parent/pom.xml</relativePath>
-  </parent>
+	<parent>
+		<groupId>com.vendertool.serviceparent</groupId>
+		<artifactId>serviceparent</artifactId>
+		<version>1.0</version>
+		<relativePath>../serviceparent/pom.xml</relativePath>
+	</parent>
   
   <groupId>com.vendertool.rolemanagement</groupId>
   <artifactId>rolemanagement</artifactId>
@@ -31,22 +31,18 @@
       <artifactId>common</artifactId>
       <version>${vendertool-version}</version>
     </dependency>
-    
-    <dependency>
-      <groupId>com.vendertool.signin</groupId>
-      <artifactId>signin</artifactId>
-      <version>${vendertool-version}</version>
-    </dependency>
-    
-    <!--
-   	<dependency>
-    		<groupId>com.sun.jersey</groupId>
-      		<artifactId>jersey</artifactId>
-   	</dependency>
-   	<dependency>
-		<groupId>com.sun.jersey</groupId>
-		<artifactId>jersey-json</artifactId>
-	</dependency>
-	-->
   </dependencies>
+  
+  	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

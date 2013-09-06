@@ -9,7 +9,27 @@ public class Dimension {
 	
 	@XmlEnum
 	public enum DimensionUnitEnum {
-		MM,CMS,INCHES,FEET;
+		UNKNOWN(-1),MM(1),CMS(2),INCHES(3),FEET(4);
+		
+		private int id;
+
+		private DimensionUnitEnum(int id) {
+			this.id = id; 
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public static DimensionUnitEnum get(int id) {
+			DimensionUnitEnum[] values = DimensionUnitEnum.values();
+			for (DimensionUnitEnum typeEnum : values) {
+				if (typeEnum.getId() == id) {
+					return typeEnum;
+				}
+			}
+			return UNKNOWN;
+		}
 	}
 	
 	private int length;

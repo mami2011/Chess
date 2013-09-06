@@ -11,7 +11,6 @@ import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.vendertool.sharedtypes.core.Account;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vendertool.sharedtypes.core.FileInformation;
 import com.vendertool.sharedtypes.core.FileUploadDataModel;
 import com.vendertool.sharedtypes.core.HttpMethodEnum;
@@ -29,8 +28,6 @@ import com.vendertool.sharedtypes.rnr.ErrorResponse;
 import com.vendertool.sharedtypes.rnr.FileUploadRequest;
 import com.vendertool.sitewebapp.common.RestServiceClientHelper;
 import com.vendertool.sitewebapp.common.URLConstants;
-import com.vendertool.sitewebapp.util.MenuBuilder;
-import com.vendertool.sitewebapp.util.MockDataUtil;
 
 @Controller
 public class FileUploadController {
@@ -39,7 +36,7 @@ public class FileUploadController {
 
 //	private static ValidationUtil validationUtil = ValidationUtil.getInstance();
 
-	@RequestMapping(value="accounthub/uploads", method=RequestMethod.GET)
+	@RequestMapping(value=URLConstants.UPLOADS, method=RequestMethod.GET)
 	public String getUploadsView(ModelMap modelMap, Principal principal) {
 		logger.info("getUploadsView controller invoked");
 
@@ -150,10 +147,16 @@ public class FileUploadController {
 	 * Get partial pages for Angular
 	 * 
 	 ******************************************/
-	@RequestMapping(value = "uploads/partial/upload", method = RequestMethod.GET)
-	public String getUploadPartial() {
-		logger.info("getUploadPartial controller invoked");
-		return "uploads/partial/upload";
+	@RequestMapping(value = "accounthub/uploads/partial/files", method = RequestMethod.GET)
+	public String getFilesPartial() {
+		logger.info("getFilesPartial controller invoked");
+		return "uploads/partial/files";
+	}
+	
+	@RequestMapping(value = "accounthub/uploads/partial/uploader", method = RequestMethod.GET)
+	public String getUploaderPartial() {
+		logger.info("getUploaderPartial controller invoked");
+		return "uploads/partial/uploader";
 	}
 	
 }

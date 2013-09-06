@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.vendertool.sharedtypes.core.Account;
+import com.vendertool.sharedtypes.core.AccountRoleEnum;
 import com.vendertool.sharedtypes.core.AccountStatusEnum;
 
 public class CustomUserDetails implements UserDetails, Serializable {
@@ -28,9 +30,17 @@ public class CustomUserDetails implements UserDetails, Serializable {
 		logger.debug("Getting authorities");
 
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        GrantedAuthority role = new SimpleGrantedAuthority(account.getRole().getValue());
-
-        authorities.add(role);
+        
+        Set<AccountRoleEnum> _roles = account.getRoles();
+        if((_roles == null) || (_roles.isEmpty())) {
+        	return authorities;
+        }
+        
+        AccountRoleEnum[] roles = (AccountRoleEnum[])_roles.toArray();
+        for(AccountRoleEnum role : roles) {
+        	GrantedAuthority ga = new SimpleGrantedAuthority(role.getValue());
+        	authorities.add(ga);
+        }
 
         return authorities;
 	}
