@@ -135,11 +135,12 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 				// Reset the progress bar and errors
 				scope.errors = undefined;
 				scope.dupeNames = [];
-				scope.percentDone = 0;
+				scope.percentDone = 2; // Give progress bar a head start. Otherwise there's no movement for a second or two.
 				scope.uploadProgress = {};
 				scope.uploadCount = 0;
 				
 				scope.uploadInProgress = true;
+				scope.$apply(); // This disables the upload button right away.
 				
 				if (window.FormData){
 					for (var i=0, n=scope.fileWrappers.length; i<n; i++) {
@@ -248,7 +249,7 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 										total += progress.total;
 									}
 								}
-
+								
 								scope.percentDone = parseInt(100.0 * (loaded/total));
 								
 								// Only move progess bar close to the end.
