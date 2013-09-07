@@ -1,15 +1,12 @@
 package com.vendertool.registration.dal.dao.codegen;
 
-import static com.mysema.query.types.PathMetadataFactory.forVariable;
+import static com.mysema.query.types.PathMetadataFactory.*;
 
-import javax.annotation.Generated;
+import com.mysema.query.types.path.*;
 
-import com.mysema.query.types.Path;
 import com.mysema.query.types.PathMetadata;
-import com.mysema.query.types.path.DateTimePath;
-import com.mysema.query.types.path.NumberPath;
-import com.mysema.query.types.path.SimplePath;
-import com.mysema.query.types.path.StringPath;
+import javax.annotation.Generated;
+import com.mysema.query.types.Path;
 
 
 /**
@@ -18,7 +15,7 @@ import com.mysema.query.types.path.StringPath;
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
 public class QAccount extends com.mysema.query.sql.RelationalPathBase<QAccount> {
 
-    private static final long serialVersionUID = 1562705284;
+    private static final long serialVersionUID = -1253925408;
 
     public static final QAccount account = new QAccount("account");
 

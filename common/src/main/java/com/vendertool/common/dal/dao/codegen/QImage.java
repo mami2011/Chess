@@ -1,14 +1,12 @@
 package com.vendertool.common.dal.dao.codegen;
 
-import static com.mysema.query.types.PathMetadataFactory.forVariable;
+import static com.mysema.query.types.PathMetadataFactory.*;
 
-import javax.annotation.Generated;
+import com.mysema.query.types.path.*;
 
-import com.mysema.query.types.Path;
 import com.mysema.query.types.PathMetadata;
-import com.mysema.query.types.path.DateTimePath;
-import com.mysema.query.types.path.NumberPath;
-import com.mysema.query.types.path.StringPath;
+import javax.annotation.Generated;
+import com.mysema.query.types.Path;
 
 
 /**
@@ -17,7 +15,7 @@ import com.mysema.query.types.path.StringPath;
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
 public class QImage extends com.mysema.query.sql.RelationalPathBase<QImage> {
 
-    private static final long serialVersionUID = -1586694839;
+    private static final long serialVersionUID = -520413412;
 
     public static final QImage image = new QImage("image");
 

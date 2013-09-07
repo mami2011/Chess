@@ -60,7 +60,7 @@
 	                <input id="password" class="form-control" name="j_password" type="password" placeholder="${passwordlabel}"/>
 	            </div>
 	            <div class="submit">
-	                <input type="submit" class="btn lg grn" value="${submit}"/>
+	            	<input type="submit" class="btn btn-primary grn" value="${submit}" />
 	            </div>
 	        </form>
 	    </div>

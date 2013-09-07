@@ -36,9 +36,9 @@ public class CustomUserDetails implements UserDetails, Serializable {
         	return authorities;
         }
         
-        AccountRoleEnum[] roles = (AccountRoleEnum[])_roles.toArray();
-        for(AccountRoleEnum role : roles) {
-        	GrantedAuthority ga = new SimpleGrantedAuthority(role.getValue());
+        Object[] roles = _roles.toArray();
+        for(Object role : roles) {
+        	GrantedAuthority ga = new SimpleGrantedAuthority(((AccountRoleEnum)role).getValue());
         	authorities.add(ga);
         }
 

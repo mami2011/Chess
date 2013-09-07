@@ -134,7 +134,7 @@
 				</div>
 
 				<div class="submit">
-					<input type="submit" class="btn lg grn" value="${submit}" />
+					<input type="submit" class="btn btn-primary grn" value="${submit}" />
 				</div>
 				
 				<c:if test="${errorResponse.hasErrors()}">

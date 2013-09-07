@@ -15,7 +15,7 @@ import com.mysema.query.types.Path;
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
 public class QAccountConfirmation extends com.mysema.query.sql.RelationalPathBase<QAccountConfirmation> {
 
-    private static final long serialVersionUID = -955598887;
+    private static final long serialVersionUID = 1993256501;
 
     public static final QAccountConfirmation accountConfirmation = new QAccountConfirmation("account_confirmation");
 

@@ -1,14 +1,12 @@
 package com.vendertool.common.dal.dao.codegen;
 
-import static com.mysema.query.types.PathMetadataFactory.forVariable;
+import static com.mysema.query.types.PathMetadataFactory.*;
 
-import javax.annotation.Generated;
+import com.mysema.query.types.path.*;
 
-import com.mysema.query.types.Path;
 import com.mysema.query.types.PathMetadata;
-import com.mysema.query.types.path.DateTimePath;
-import com.mysema.query.types.path.NumberPath;
-import com.mysema.query.types.path.StringPath;
+import javax.annotation.Generated;
+import com.mysema.query.types.Path;
 
 
 /**
@@ -17,7 +15,7 @@ import com.mysema.query.types.path.StringPath;
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
 public class QAddress extends com.mysema.query.sql.RelationalPathBase<QAddress> {
 
-    private static final long serialVersionUID = 1134994530;
+    private static final long serialVersionUID = -665737867;
 
     public static final QAddress address = new QAddress("address");
 
@@ -39,7 +37,7 @@ public class QAddress extends com.mysema.query.sql.RelationalPathBase<QAddress> 
 
     public final StringPath contactLastName = createString("contact_last_name");
 
-    public final NumberPath<Byte> countryCodeIso3 = createNumber("country_code_iso3", Byte.class);
+    public final StringPath countryCodeIso3 = createString("country_code_iso3");
 
     public final DateTimePath<java.sql.Timestamp> createdDate = createDateTime("created_date", java.sql.Timestamp.class);
 
