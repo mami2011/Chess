@@ -7,10 +7,14 @@
 	<import resource="classpath:dal/Datasource.xml" />
 	
 	<bean id="accountDAO" class="com.vendertool.registration.dal.dao.AccountDaoImpl">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="invdbdataSource" />
 	</bean>
 	
 	<bean id="accountConfirmationDAO" class="com.vendertool.registration.dal.dao.AccountConfirmationDaoImpl">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="invdbdataSource" />
+	</bean>
+	
+	<bean id="passwordHistoryDAO" class="com.vendertool.registration.dal.dao.PasswordHistoryDaoImpl">
+		<property name="dataSource" ref="invdbdataSource" />
 	</bean>
 </beans>

@@ -10,12 +10,12 @@ import com.mysema.query.types.Path;
 
 
 /**
- * QProductVariation is a Querydsl query type for QProductVariation
+ * QProductVariation is a Querydsl query type for QBeanProductVariation
  */
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
-public class QProductVariation extends com.mysema.query.sql.RelationalPathBase<QProductVariation> {
+public class QProductVariation extends com.mysema.query.sql.RelationalPathBase<QBeanProductVariation> {
 
-    private static final long serialVersionUID = 2096775078;
+    private static final long serialVersionUID = -1560377738;
 
     public static final QProductVariation productVariation = new QProductVariation("product_variation");
 
@@ -35,19 +35,19 @@ public class QProductVariation extends com.mysema.query.sql.RelationalPathBase<Q
 
     public final StringPath url = createString("url");
 
-    public final com.mysema.query.sql.PrimaryKey<QProductVariation> primary = createPrimaryKey(productVariationId);
+    public final com.mysema.query.sql.PrimaryKey<QBeanProductVariation> primary = createPrimaryKey(productVariationId);
 
     public QProductVariation(String variable) {
-        super(QProductVariation.class, forVariable(variable), "null", "product_variation");
+        super(QBeanProductVariation.class, forVariable(variable), "null", "product_variation");
     }
 
     @SuppressWarnings("all")
-    public QProductVariation(Path<? extends QProductVariation> path) {
+    public QProductVariation(Path<? extends QBeanProductVariation> path) {
         super((Class)path.getType(), path.getMetadata(), "null", "product_variation");
     }
 
     public QProductVariation(PathMetadata<?> metadata) {
-        super(QProductVariation.class, metadata, "null", "product_variation");
+        super(QBeanProductVariation.class, metadata, "null", "product_variation");
     }
 
 }

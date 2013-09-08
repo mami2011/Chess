@@ -1,5 +1,6 @@
 package com.vendertool.registration.dal.dao;
 
+import java.sql.Timestamp;
 import java.util.Currency;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,11 +9,12 @@ import java.util.Set;
 
 import com.mysema.query.Tuple;
 import com.mysema.query.sql.RelationalPath;
-import com.mysema.query.sql.dml.Mapper;
 import com.mysema.query.types.Path;
+import com.vendertool.common.dal.dao.DALMapper;
 import com.vendertool.common.dal.exception.DatabaseException;
 import com.vendertool.common.validation.ValidationUtil;
 import com.vendertool.registration.dal.dao.codegen.QAccount;
+import com.vendertool.registration.dal.dao.codegen.QBeanAccount;
 import com.vendertool.sharedtypes.core.Account;
 import com.vendertool.sharedtypes.core.AccountRoleEnum;
 import com.vendertool.sharedtypes.core.AccountStatusEnum;
@@ -21,28 +23,27 @@ import com.vendertool.sharedtypes.core.ContactDetails;
 import com.vendertool.sharedtypes.core.Image;
 import com.vendertool.sharedtypes.core.Language;
 
-public class AccountMapper implements Mapper<Account> {
+public class AccountMapper implements DALMapper<Account> {
 //	private static final Logger logger = Logger.getLogger(AccountMapper.class);
 	ValidationUtil VUTIL = ValidationUtil.getInstance();
 
-	private Account account;
 	Path<?>[] paths;
-	
-	public Account getAccount() {
-		return account;
-	}
 
-	AccountMapper(Account account, Path<?>[] paths) throws DatabaseException {
-		if(VUTIL.isNotNull(paths) || VUTIL.isNotNull(account)) {
-			throw new DatabaseException("Null value passed to the mapper");
+	protected AccountMapper(Path<?>[] paths) throws DatabaseException {
+		if(VUTIL.isNull(paths)) {
+			throw new DatabaseException("Null paths passed to the mapper");
 		}
-		this.account = account;
+		
 		this.paths = paths;
 	}
 
 	@Override
 	public Map<Path<?>, Object> createMap(RelationalPath<?> path,
-			Account object) {
+			Account account) {
+		if(VUTIL.isNull(account)) {
+			return null;
+		}
+		
 		QAccount a = QAccount.account;
 		
 		Map<Path<?>, Object> map = new HashMap<Path<?>, Object>();
@@ -63,7 +64,11 @@ public class AccountMapper implements Mapper<Account> {
 			}
 			
 			if(a.createdDate.equals(rpath)) {
-				map.put(a.createdDate, account.getCreateDate());
+				Date date = account.getCreateDate();
+				if(date == null) {
+					date = new Date();
+				}
+				map.put(a.createdDate, new Timestamp(date.getTime()));
 			}
 			
 			if(a.currencyCodeIso3.equals(rpath)) {
@@ -96,7 +101,7 @@ public class AccountMapper implements Mapper<Account> {
 			}
 			
 			if(a.lastModifiedDate.equals(rpath)) {
-				map.put(a.lastModifiedDate, new Date());
+				map.put(a.lastModifiedDate, new Timestamp(new Date().getTime()));
 			}
 
 			if(a.lastName.equals(rpath)) {
@@ -141,7 +146,7 @@ public class AccountMapper implements Mapper<Account> {
 			}
 			
 			if(a.status.equals(rpath)) {
-				map.put(a.status, account.getAccountStatus().getId());
+				map.put(a.status, new Byte(account.getAccountStatus().getId()+""));
 			}
 		}
 		
@@ -152,8 +157,75 @@ public class AccountMapper implements Mapper<Account> {
 		return paths;
 	}
 	
-	public static Account convert(Tuple row, Path<?>[] paths) {
-		if((row == null) || (paths == null) || (paths.length <= 0)) {
+	public QBeanAccount populateBean(Account account) {
+		if(VUTIL.isNull(account)) {
+			return null;
+		}
+		
+		QBeanAccount bean = new QBeanAccount();
+		bean.setAccountId(account.getId());
+		bean.setAlternateEmail(account.getAlternateEmailId());
+		
+		Address baddr = account.getBillingAddress();
+		if(baddr != null) {
+			bean.setBillingAddrId(baddr.getId());
+		}
+		
+		Date cdate = account.getCreateDate();
+		if(cdate == null) {
+			cdate = new Date();
+		}
+		bean.setCreatedDate(new Timestamp(cdate.getTime()));
+		
+		if(account.getCurrency() != null) {
+			bean.setCurrencyCodeIso3(account.getCurrency().getCurrencyCode());
+		}
+		
+		bean.setEmailAddr(account.getEmailId());
+		
+		if(account.getContactDetails() != null) {
+			bean.setFirstName(account.getContactDetails().getFirstName());
+			bean.setLastName(account.getContactDetails().getLastName());
+			bean.setMiddleName(account.getContactDetails().getMiddleName());
+			if(account.getContactDetails().getAddress() != null) {
+				bean.setRegistrationAddrId(account.getContactDetails().getAddress().getId());
+			}
+		}
+		
+		if(account.getLanguage() != null) {
+			bean.setLanguage(account.getLanguage().getIsoLangCode());
+		}
+		
+		bean.setLastModifiedDate(new Timestamp(new Date().getTime()));
+		bean.setPassword(account.getPassword());
+		if(account.getPicture() != null) {
+			bean.setPicture(account.getPicture().getBytes());
+		}
+		
+		if(account.getRoles() != null) {
+			bean.setRoles(account.normalize(account.getRoles()));
+		}
+		
+		bean.setSalt(account.getPasswordSalt());
+		if(account.getAccountStatus() != null) {
+			bean.setStatus(new Byte(account.getAccountStatus().getId()+""));
+		}
+		
+		
+		return bean;
+		
+	}
+	
+	public Account convert(Tuple row, Path<?>[] paths) {
+		if(VUTIL.isNull(row)) {
+			return null;
+		}
+		
+		if(VUTIL.isNull(paths) || (paths.length <= 0)) {
+			paths = this.paths;
+		}
+		
+		if(VUTIL.isNull(paths) || (paths.length <= 0)) {
 			return null;
 		}
 		
@@ -180,7 +252,10 @@ public class AccountMapper implements Mapper<Account> {
 			}
 			
 			if(a.createdDate.equals(rpath)) {
-				account.setCreateDate(row.get(a.createdDate));
+				if(row.get(a.createdDate) == null) {
+					account.setCreateDate(null);
+				}
+				account.setCreateDate(new Date(row.get(a.createdDate).getTime()));
 			}
 			
 			if(a.currencyCodeIso3.equals(rpath)) {
@@ -215,6 +290,7 @@ public class AccountMapper implements Mapper<Account> {
 						account.setLanguage(lang);
 					}
 				}
+				account.setLanguage(null);
 			}
 			
 			if(a.lastModifiedApp.equals(rpath)) {
@@ -223,7 +299,10 @@ public class AccountMapper implements Mapper<Account> {
 			}
 			
 			if(a.lastModifiedDate.equals(rpath)) {
-				account.setLastModifiedDate(row.get(a.lastModifiedDate));
+				if(row.get(a.lastModifiedDate) != null) {
+					account.setLastModifiedDate(new Date(row.get(a.lastModifiedDate).getTime()));
+				}
+				account.setLastModifiedDate(null);
 			}
 
 			if(a.lastName.equals(rpath)) {
@@ -259,16 +338,18 @@ public class AccountMapper implements Mapper<Account> {
 			}
 
 			if(a.registrationAddrId.equals(rpath)) {
-				ContactDetails cd = account.getContactDetails();
-				if(cd == null) {
-					cd = new ContactDetails();
-					cd.setAddress(new Address());
-					account.setContactDetails(cd);
+				if(row.get(a.registrationAddrId) != null) {
+					ContactDetails cd = account.getContactDetails();
+					if(cd == null) {
+						cd = new ContactDetails();
+						cd.setAddress(new Address());
+						account.setContactDetails(cd);
+					}
+					if(cd.getAddress() == null) {
+						cd.setAddress(new Address());
+					}
+					cd.getAddress().setId(row.get(a.registrationAddrId));
 				}
-				if(cd.getAddress() == null) {
-					cd.setAddress(new Address());
-				}
-				cd.getAddress().setId(row.get(a.registrationAddrId));
 			}
 			
 			if(a.roles.equals(rpath)) {
@@ -284,16 +365,17 @@ public class AccountMapper implements Mapper<Account> {
 			}
 			
 			if(a.status.equals(rpath)) {
-				int sid = row.get(a.status);
-				AccountStatusEnum se = AccountStatusEnum.get(sid);
-				if(se == null) {
-					account.setAccountStatus(null);
+				if(row.get(a.status) != null) {
+					int sid = row.get(a.status).intValue();
+					AccountStatusEnum se = AccountStatusEnum.get(sid);
+					if(se == null) {
+						account.setAccountStatus(null);
+					}
+					account.setAccountStatus(se);
 				}
-				account.setAccountStatus(se);
 			}
 		}
 		
 		return account;
 	}
-	
 }

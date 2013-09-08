@@ -10,12 +10,12 @@ import com.mysema.query.types.Path;
 
 
 /**
- * QListing is a Querydsl query type for QListing
+ * QListing is a Querydsl query type for QBeanListing
  */
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
-public class QListing extends com.mysema.query.sql.RelationalPathBase<QListing> {
+public class QListing extends com.mysema.query.sql.RelationalPathBase<QBeanListing> {
 
-    private static final long serialVersionUID = -1622753254;
+    private static final long serialVersionUID = -1687420086;
 
     public static final QListing listing = new QListing("listing");
 
@@ -61,19 +61,19 @@ public class QListing extends com.mysema.query.sql.RelationalPathBase<QListing> 
 
     public final StringPath warranty = createString("warranty");
 
-    public final com.mysema.query.sql.PrimaryKey<QListing> primary = createPrimaryKey(listingId);
+    public final com.mysema.query.sql.PrimaryKey<QBeanListing> primary = createPrimaryKey(listingId);
 
     public QListing(String variable) {
-        super(QListing.class, forVariable(variable), "null", "listing");
+        super(QBeanListing.class, forVariable(variable), "null", "listing");
     }
 
     @SuppressWarnings("all")
-    public QListing(Path<? extends QListing> path) {
+    public QListing(Path<? extends QBeanListing> path) {
         super((Class)path.getType(), path.getMetadata(), "null", "listing");
     }
 
     public QListing(PathMetadata<?> metadata) {
-        super(QListing.class, metadata, "null", "listing");
+        super(QBeanListing.class, metadata, "null", "listing");
     }
 
 }

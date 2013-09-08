@@ -10,12 +10,12 @@ import com.mysema.query.types.Path;
 
 
 /**
- * QAccountConfirmation is a Querydsl query type for QAccountConfirmation
+ * QAccountConfirmation is a Querydsl query type for QBeanAccountConfirmation
  */
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
-public class QAccountConfirmation extends com.mysema.query.sql.RelationalPathBase<QAccountConfirmation> {
+public class QAccountConfirmation extends com.mysema.query.sql.RelationalPathBase<QBeanAccountConfirmation> {
 
-    private static final long serialVersionUID = 1993256501;
+    private static final long serialVersionUID = -60288283;
 
     public static final QAccountConfirmation accountConfirmation = new QAccountConfirmation("account_confirmation");
 
@@ -39,19 +39,19 @@ public class QAccountConfirmation extends com.mysema.query.sql.RelationalPathBas
 
     public final StringPath sessionId = createString("session_id");
 
-    public final com.mysema.query.sql.PrimaryKey<QAccountConfirmation> primary = createPrimaryKey(accountConfirmationId);
+    public final com.mysema.query.sql.PrimaryKey<QBeanAccountConfirmation> primary = createPrimaryKey(accountConfirmationId);
 
     public QAccountConfirmation(String variable) {
-        super(QAccountConfirmation.class, forVariable(variable), "null", "account_confirmation");
+        super(QBeanAccountConfirmation.class, forVariable(variable), "null", "account_confirmation");
     }
 
     @SuppressWarnings("all")
-    public QAccountConfirmation(Path<? extends QAccountConfirmation> path) {
+    public QAccountConfirmation(Path<? extends QBeanAccountConfirmation> path) {
         super((Class)path.getType(), path.getMetadata(), "null", "account_confirmation");
     }
 
     public QAccountConfirmation(PathMetadata<?> metadata) {
-        super(QAccountConfirmation.class, metadata, "null", "account_confirmation");
+        super(QBeanAccountConfirmation.class, metadata, "null", "account_confirmation");
     }
 
 }

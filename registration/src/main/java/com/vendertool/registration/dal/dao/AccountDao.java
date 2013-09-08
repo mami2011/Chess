@@ -33,6 +33,6 @@ public interface AccountDao extends BaseDao {
 	public void deleteAccount(String email)
 			throws DBConnectionException, DeleteException, DatabaseException;
 	
-	public String findAccountEmail(String email) 
+	public Long findAccountId(String email) 
 			throws DBConnectionException, FinderException, DatabaseException;
 }

@@ -10,12 +10,12 @@ import com.mysema.query.types.Path;
 
 
 /**
- * QFile is a Querydsl query type for QFile
+ * QFile is a Querydsl query type for QBeanFile
  */
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
-public class QFile extends com.mysema.query.sql.RelationalPathBase<QFile> {
+public class QFile extends com.mysema.query.sql.RelationalPathBase<QBeanFile> {
 
-    private static final long serialVersionUID = 482720971;
+    private static final long serialVersionUID = 292662555;
 
     public static final QFile file = new QFile("file");
 
@@ -39,19 +39,19 @@ public class QFile extends com.mysema.query.sql.RelationalPathBase<QFile> {
 
     public final NumberPath<Byte> useCase = createNumber("use_case", Byte.class);
 
-    public final com.mysema.query.sql.PrimaryKey<QFile> primary = createPrimaryKey(fileId);
+    public final com.mysema.query.sql.PrimaryKey<QBeanFile> primary = createPrimaryKey(fileId);
 
     public QFile(String variable) {
-        super(QFile.class, forVariable(variable), "null", "file");
+        super(QBeanFile.class, forVariable(variable), "null", "file");
     }
 
     @SuppressWarnings("all")
-    public QFile(Path<? extends QFile> path) {
+    public QFile(Path<? extends QBeanFile> path) {
         super((Class)path.getType(), path.getMetadata(), "null", "file");
     }
 
     public QFile(PathMetadata<?> metadata) {
-        super(QFile.class, metadata, "null", "file");
+        super(QBeanFile.class, metadata, "null", "file");
     }
 
 }

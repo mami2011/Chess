@@ -10,12 +10,12 @@ import com.mysema.query.types.Path;
 
 
 /**
- * QImage is a Querydsl query type for QImage
+ * QImage is a Querydsl query type for QBeanImage
  */
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
-public class QImage extends com.mysema.query.sql.RelationalPathBase<QImage> {
+public class QImage extends com.mysema.query.sql.RelationalPathBase<QBeanImage> {
 
-    private static final long serialVersionUID = -520413412;
+    private static final long serialVersionUID = 1603281100;
 
     public static final QImage image = new QImage("image");
 
@@ -43,19 +43,19 @@ public class QImage extends com.mysema.query.sql.RelationalPathBase<QImage> {
 
     public final NumberPath<Byte> sortOrderId = createNumber("sort_order_id", Byte.class);
 
-    public final com.mysema.query.sql.PrimaryKey<QImage> primary = createPrimaryKey(imageId);
+    public final com.mysema.query.sql.PrimaryKey<QBeanImage> primary = createPrimaryKey(imageId);
 
     public QImage(String variable) {
-        super(QImage.class, forVariable(variable), "null", "image");
+        super(QBeanImage.class, forVariable(variable), "null", "image");
     }
 
     @SuppressWarnings("all")
-    public QImage(Path<? extends QImage> path) {
+    public QImage(Path<? extends QBeanImage> path) {
         super((Class)path.getType(), path.getMetadata(), "null", "image");
     }
 
     public QImage(PathMetadata<?> metadata) {
-        super(QImage.class, metadata, "null", "image");
+        super(QBeanImage.class, metadata, "null", "image");
     }
 
 }

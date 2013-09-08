@@ -10,12 +10,12 @@ import com.mysema.query.types.Path;
 
 
 /**
- * QAddress is a Querydsl query type for QAddress
+ * QAddress is a Querydsl query type for QBeanAddress
  */
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
-public class QAddress extends com.mysema.query.sql.RelationalPathBase<QAddress> {
+public class QAddress extends com.mysema.query.sql.RelationalPathBase<QBeanAddress> {
 
-    private static final long serialVersionUID = -665737867;
+    private static final long serialVersionUID = 95222565;
 
     public static final QAddress address = new QAddress("address");
 
@@ -51,19 +51,19 @@ public class QAddress extends com.mysema.query.sql.RelationalPathBase<QAddress> 
 
     public final NumberPath<Byte> useCase = createNumber("use_case", Byte.class);
 
-    public final com.mysema.query.sql.PrimaryKey<QAddress> primary = createPrimaryKey(addressId);
+    public final com.mysema.query.sql.PrimaryKey<QBeanAddress> primary = createPrimaryKey(addressId);
 
     public QAddress(String variable) {
-        super(QAddress.class, forVariable(variable), "null", "address");
+        super(QBeanAddress.class, forVariable(variable), "null", "address");
     }
 
     @SuppressWarnings("all")
-    public QAddress(Path<? extends QAddress> path) {
+    public QAddress(Path<? extends QBeanAddress> path) {
         super((Class)path.getType(), path.getMetadata(), "null", "address");
     }
 
     public QAddress(PathMetadata<?> metadata) {
-        super(QAddress.class, metadata, "null", "address");
+        super(QBeanAddress.class, metadata, "null", "address");
     }
 
 }

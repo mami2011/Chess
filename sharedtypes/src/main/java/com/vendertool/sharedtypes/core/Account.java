@@ -210,11 +210,11 @@ public class Account {
 		}
 		
 		//since java.util.Set doesn't provide get(idx) method
-		AccountRoleEnum[] roles = (AccountRoleEnum[])_roles.toArray();
+		Object[] roles = _roles.toArray();
 		
 		StringBuffer sb = new StringBuffer();
 		for(int i=0; i<roles.length; i++) {
-			AccountRoleEnum role = roles[i];
+			AccountRoleEnum role = (AccountRoleEnum)roles[i];
 			sb.append(role.getValue());
 			if(i < (roles.length-1)) {
 				sb.append(VALUE_DELIMITER);

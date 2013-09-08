@@ -10,12 +10,12 @@ import com.mysema.query.types.Path;
 
 
 /**
- * QAccount is a Querydsl query type for QAccount
+ * QAccount is a Querydsl query type for QBeanAccount
  */
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
-public class QAccount extends com.mysema.query.sql.RelationalPathBase<QAccount> {
+public class QAccount extends com.mysema.query.sql.RelationalPathBase<QBeanAccount> {
 
-    private static final long serialVersionUID = -1253925408;
+    private static final long serialVersionUID = 264866448;
 
     public static final QAccount account = new QAccount("account");
 
@@ -55,19 +55,19 @@ public class QAccount extends com.mysema.query.sql.RelationalPathBase<QAccount> 
 
     public final NumberPath<Byte> status = createNumber("status", Byte.class);
 
-    public final com.mysema.query.sql.PrimaryKey<QAccount> primary = createPrimaryKey(accountId);
+    public final com.mysema.query.sql.PrimaryKey<QBeanAccount> primary = createPrimaryKey(accountId);
 
     public QAccount(String variable) {
-        super(QAccount.class, forVariable(variable), "null", "account");
+        super(QBeanAccount.class, forVariable(variable), "null", "account");
     }
 
     @SuppressWarnings("all")
-    public QAccount(Path<? extends QAccount> path) {
+    public QAccount(Path<? extends QBeanAccount> path) {
         super((Class)path.getType(), path.getMetadata(), "null", "account");
     }
 
     public QAccount(PathMetadata<?> metadata) {
-        super(QAccount.class, metadata, "null", "account");
+        super(QBeanAccount.class, metadata, "null", "account");
     }
 
 }

@@ -10,12 +10,12 @@ import com.mysema.query.types.Path;
 
 
 /**
- * QProduct is a Querydsl query type for QProduct
+ * QProduct is a Querydsl query type for QBeanProduct
  */
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
-public class QProduct extends com.mysema.query.sql.RelationalPathBase<QProduct> {
+public class QProduct extends com.mysema.query.sql.RelationalPathBase<QBeanProduct> {
 
-    private static final long serialVersionUID = -10044179;
+    private static final long serialVersionUID = 499158045;
 
     public static final QProduct product = new QProduct("product");
 
@@ -59,19 +59,19 @@ public class QProduct extends com.mysema.query.sql.RelationalPathBase<QProduct> 
 
     public final NumberPath<Double> width = createNumber("width", Double.class);
 
-    public final com.mysema.query.sql.PrimaryKey<QProduct> primary = createPrimaryKey(productId);
+    public final com.mysema.query.sql.PrimaryKey<QBeanProduct> primary = createPrimaryKey(productId);
 
     public QProduct(String variable) {
-        super(QProduct.class, forVariable(variable), "null", "product");
+        super(QBeanProduct.class, forVariable(variable), "null", "product");
     }
 
     @SuppressWarnings("all")
-    public QProduct(Path<? extends QProduct> path) {
+    public QProduct(Path<? extends QBeanProduct> path) {
         super((Class)path.getType(), path.getMetadata(), "null", "product");
     }
 
     public QProduct(PathMetadata<?> metadata) {
-        super(QProduct.class, metadata, "null", "product");
+        super(QBeanProduct.class, metadata, "null", "product");
     }
 
 }

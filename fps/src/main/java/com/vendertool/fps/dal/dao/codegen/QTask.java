@@ -10,12 +10,12 @@ import com.mysema.query.types.Path;
 
 
 /**
- * QTask is a Querydsl query type for QTask
+ * QTask is a Querydsl query type for QBeanTask
  */
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
-public class QTask extends com.mysema.query.sql.RelationalPathBase<QTask> {
+public class QTask extends com.mysema.query.sql.RelationalPathBase<QBeanTask> {
 
-    private static final long serialVersionUID = 483130580;
+    private static final long serialVersionUID = 293072164;
 
     public static final QTask task = new QTask("task");
 
@@ -43,19 +43,19 @@ public class QTask extends com.mysema.query.sql.RelationalPathBase<QTask> {
 
     public final NumberPath<Long> taskId = createNumber("task_id", Long.class);
 
-    public final com.mysema.query.sql.PrimaryKey<QTask> primary = createPrimaryKey(taskId);
+    public final com.mysema.query.sql.PrimaryKey<QBeanTask> primary = createPrimaryKey(taskId);
 
     public QTask(String variable) {
-        super(QTask.class, forVariable(variable), "null", "task");
+        super(QBeanTask.class, forVariable(variable), "null", "task");
     }
 
     @SuppressWarnings("all")
-    public QTask(Path<? extends QTask> path) {
+    public QTask(Path<? extends QBeanTask> path) {
         super((Class)path.getType(), path.getMetadata(), "null", "task");
     }
 
     public QTask(PathMetadata<?> metadata) {
-        super(QTask.class, metadata, "null", "task");
+        super(QBeanTask.class, metadata, "null", "task");
     }
 
 }

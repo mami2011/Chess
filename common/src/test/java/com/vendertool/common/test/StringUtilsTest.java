@@ -1,4 +1,4 @@
-package com.test.vendertool.common;
+package com.vendertool.common.test;
 
 import java.io.UnsupportedEncodingException;
 

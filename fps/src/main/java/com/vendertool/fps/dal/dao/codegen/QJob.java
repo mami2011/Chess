@@ -10,12 +10,12 @@ import com.mysema.query.types.Path;
 
 
 /**
- * QJob is a Querydsl query type for QJob
+ * QJob is a Querydsl query type for QBeanJob
  */
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
-public class QJob extends com.mysema.query.sql.RelationalPathBase<QJob> {
+public class QJob extends com.mysema.query.sql.RelationalPathBase<QBeanJob> {
 
-    private static final long serialVersionUID = 1123954318;
+    private static final long serialVersionUID = 1810560062;
 
     public static final QJob job = new QJob("job");
 
@@ -45,19 +45,19 @@ public class QJob extends com.mysema.query.sql.RelationalPathBase<QJob> {
 
     public final NumberPath<Byte> usecase = createNumber("usecase", Byte.class);
 
-    public final com.mysema.query.sql.PrimaryKey<QJob> primary = createPrimaryKey(jobId);
+    public final com.mysema.query.sql.PrimaryKey<QBeanJob> primary = createPrimaryKey(jobId);
 
     public QJob(String variable) {
-        super(QJob.class, forVariable(variable), "null", "job");
+        super(QBeanJob.class, forVariable(variable), "null", "job");
     }
 
     @SuppressWarnings("all")
-    public QJob(Path<? extends QJob> path) {
+    public QJob(Path<? extends QBeanJob> path) {
         super((Class)path.getType(), path.getMetadata(), "null", "job");
     }
 
     public QJob(PathMetadata<?> metadata) {
-        super(QJob.class, metadata, "null", "job");
+        super(QBeanJob.class, metadata, "null", "job");
     }
 
 }

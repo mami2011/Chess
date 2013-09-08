@@ -10,12 +10,12 @@ import com.mysema.query.types.Path;
 
 
 /**
- * QListingVariation is a Querydsl query type for QListingVariation
+ * QListingVariation is a Querydsl query type for QBeanListingVariation
  */
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
-public class QListingVariation extends com.mysema.query.sql.RelationalPathBase<QListingVariation> {
+public class QListingVariation extends com.mysema.query.sql.RelationalPathBase<QBeanListingVariation> {
 
-    private static final long serialVersionUID = -2041151719;
+    private static final long serialVersionUID = 1781649897;
 
     public static final QListingVariation listingVariation = new QListingVariation("listing_variation");
 
@@ -37,19 +37,19 @@ public class QListingVariation extends com.mysema.query.sql.RelationalPathBase<Q
 
     public final NumberPath<Integer> quantity = createNumber("quantity", Integer.class);
 
-    public final com.mysema.query.sql.PrimaryKey<QListingVariation> primary = createPrimaryKey(listingVariationId);
+    public final com.mysema.query.sql.PrimaryKey<QBeanListingVariation> primary = createPrimaryKey(listingVariationId);
 
     public QListingVariation(String variable) {
-        super(QListingVariation.class, forVariable(variable), "null", "listing_variation");
+        super(QBeanListingVariation.class, forVariable(variable), "null", "listing_variation");
     }
 
     @SuppressWarnings("all")
-    public QListingVariation(Path<? extends QListingVariation> path) {
+    public QListingVariation(Path<? extends QBeanListingVariation> path) {
         super((Class)path.getType(), path.getMetadata(), "null", "listing_variation");
     }
 
     public QListingVariation(PathMetadata<?> metadata) {
-        super(QListingVariation.class, metadata, "null", "listing_variation");
+        super(QBeanListingVariation.class, metadata, "null", "listing_variation");
     }
 
 }

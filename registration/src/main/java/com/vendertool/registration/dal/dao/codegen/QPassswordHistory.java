@@ -10,12 +10,12 @@ import com.mysema.query.types.Path;
 
 
 /**
- * QPassswordHistory is a Querydsl query type for QPassswordHistory
+ * QPassswordHistory is a Querydsl query type for QBeanPassswordHistory
  */
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
-public class QPassswordHistory extends com.mysema.query.sql.RelationalPathBase<QPassswordHistory> {
+public class QPassswordHistory extends com.mysema.query.sql.RelationalPathBase<QBeanPassswordHistory> {
 
-    private static final long serialVersionUID = -679602155;
+    private static final long serialVersionUID = -1702989467;
 
     public static final QPassswordHistory passswordHistory = new QPassswordHistory("passsword_history");
 
@@ -31,19 +31,19 @@ public class QPassswordHistory extends com.mysema.query.sql.RelationalPathBase<Q
 
     public final StringPath salat = createString("salat");
 
-    public final com.mysema.query.sql.PrimaryKey<QPassswordHistory> primary = createPrimaryKey(passswordHistoryId);
+    public final com.mysema.query.sql.PrimaryKey<QBeanPassswordHistory> primary = createPrimaryKey(passswordHistoryId);
 
     public QPassswordHistory(String variable) {
-        super(QPassswordHistory.class, forVariable(variable), "null", "passsword_history");
+        super(QBeanPassswordHistory.class, forVariable(variable), "null", "passsword_history");
     }
 
     @SuppressWarnings("all")
-    public QPassswordHistory(Path<? extends QPassswordHistory> path) {
+    public QPassswordHistory(Path<? extends QBeanPassswordHistory> path) {
         super((Class)path.getType(), path.getMetadata(), "null", "passsword_history");
     }
 
     public QPassswordHistory(PathMetadata<?> metadata) {
-        super(QPassswordHistory.class, metadata, "null", "passsword_history");
+        super(QBeanPassswordHistory.class, metadata, "null", "passsword_history");
     }
 
 }

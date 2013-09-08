@@ -10,12 +10,12 @@ import com.mysema.query.types.Path;
 
 
 /**
- * QSequenceData is a Querydsl query type for QSequenceData
+ * QSequenceData is a Querydsl query type for QBeanSequenceData
  */
 @Generated("com.mysema.query.sql.codegen.MetaDataSerializer")
-public class QSequenceData extends com.mysema.query.sql.RelationalPathBase<QSequenceData> {
+public class QSequenceData extends com.mysema.query.sql.RelationalPathBase<QBeanSequenceData> {
 
-    private static final long serialVersionUID = -619046054;
+    private static final long serialVersionUID = 1916320682;
 
     public static final QSequenceData sequenceData = new QSequenceData("sequence_data");
 
@@ -35,19 +35,19 @@ public class QSequenceData extends com.mysema.query.sql.RelationalPathBase<QSequ
 
     public final StringPath sequenceName = createString("sequence_name");
 
-    public final com.mysema.query.sql.PrimaryKey<QSequenceData> primary = createPrimaryKey(sequenceName);
+    public final com.mysema.query.sql.PrimaryKey<QBeanSequenceData> primary = createPrimaryKey(sequenceName);
 
     public QSequenceData(String variable) {
-        super(QSequenceData.class, forVariable(variable), "null", "sequence_data");
+        super(QBeanSequenceData.class, forVariable(variable), "null", "sequence_data");
     }
 
     @SuppressWarnings("all")
-    public QSequenceData(Path<? extends QSequenceData> path) {
+    public QSequenceData(Path<? extends QBeanSequenceData> path) {
         super((Class)path.getType(), path.getMetadata(), "null", "sequence_data");
     }
 
     public QSequenceData(PathMetadata<?> metadata) {
-        super(QSequenceData.class, metadata, "null", "sequence_data");
+        super(QBeanSequenceData.class, metadata, "null", "sequence_data");
     }
 
 }

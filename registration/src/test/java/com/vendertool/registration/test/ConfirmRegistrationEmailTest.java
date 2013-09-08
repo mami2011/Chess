@@ -12,7 +12,7 @@ import com.vendertool.registration.email.ConfirmRegistrationEmailDataModel;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class ConfirmRegistrationEmailTest 
 {
     public static void main(String args[]){
     	ConfirmRegistrationEmailDataModel emailModel = new ConfirmRegistrationEmailDataModel();
