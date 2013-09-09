@@ -46,7 +46,7 @@ public class RegisterController {
 		modelMap.addAttribute("languages", Language.getLanguages());
 		modelMap.addAttribute("langOptions", MenuBuilder.getLanguageOptions(locale));
 		modelMap.addAttribute("selectedLang", request.getParameter("lang"));
-		return "register";
+		return "register/register";
 	}
 	
 	
@@ -104,10 +104,10 @@ public class RegisterController {
 			//Added for debugging purpose, need to remove this
 			addJsonOutput(responseAccount, errorResponse, modelMap);
 			
-			return "register";
+			return "register/register";
 		}
 		
-		return "registersuccesspreconfirm";
+		return "register/registersuccesspreconfirm";
 	}
 	
 	private void addJsonOutput(Account account, ErrorResponse errorResponse, ModelMap modelMap) {

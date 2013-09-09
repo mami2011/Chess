@@ -5,10 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
-<t:page title="${sessiontimeout}">
-	<jsp:attribute name="header">
-		<t:header email="${email}" currentPage="sessiontimeout"/>
-	</jsp:attribute>
+<t:page title="${sessiontimeout}" currentPage="sessiontimeout" email="${email}">
 	
 	<jsp:attribute name="css">
 		<link href="<c:url value='/resources/css/register.css' />" rel="stylesheet" type="text/css" />

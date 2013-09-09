@@ -145,7 +145,7 @@ Page Header
 	width:15px;
 	height:8px;
 	display:inline-block;
-	background:url('../img/icons.png') no-repeat -40px 0; 
+	background:url('../resources/img/icons.png') no-repeat -40px 0; 
 }
 #languageMenu {
 	max-height:400px;
@@ -183,7 +183,7 @@ Page Header
 	width:15px;
 	height:8px;
 	display:inline-block;
-	background:url('../img/icons.png') no-repeat -40px 0; 
+	background:url('../resources/img/icons.png') no-repeat -40px 0; 
 }
 .hdr .ctls .srch {
 	float:right;
@@ -202,7 +202,7 @@ Page Header
 .hdr .ctls .srch button {
 	width:23px;
 	height:20px;
-	background:url('../img/icons.png') no-repeat -19px 0;
+	background:url('../resources/img/icons.png') no-repeat -19px 0;
 	border:0;
 	position:relative;
 	top:6px;

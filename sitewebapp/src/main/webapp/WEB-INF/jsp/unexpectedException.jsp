@@ -3,10 +3,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 
-<t:page title="Unexpected exception">
-	<jsp:attribute name="header">
-		<t:header email="${email}" currentPage="unexpectedException"/>
-	</jsp:attribute>
+<t:page title="Unexpected exception" currentPage="unexpectedException" email="${email}">
 	
 	<jsp:attribute name="css">
 		<link href="<c:url value='/resources/css/register.css' />" rel="stylesheet" type="text/css" />

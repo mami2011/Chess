@@ -6,11 +6,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
-<t:page title="VendorTool" angularAppName="profileApp">
-
-	<jsp:attribute name="header">
-		<t:header email="${account.emailId}" currentPage="profile"/>
-	</jsp:attribute>
+<t:page title="VendorTool" angularAppName="profileApp" currentPage="profile" email="${account.emailId}" >
 	
 	<jsp:attribute name="css">
 		<link href="<c:url value='/wro/profile.css' />" rel="stylesheet" type="text/css" />

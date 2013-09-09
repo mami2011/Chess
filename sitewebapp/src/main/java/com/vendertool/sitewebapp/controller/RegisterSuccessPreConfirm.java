@@ -15,6 +15,6 @@ public class RegisterSuccessPreConfirm {
 	public String getUnexpectedExcepView(ModelMap modelMap) {
 		logger.info("register GET controller invoked");
 		
-		return "registersuccesspreconfirm";
+		return "register/registersuccesspreconfirm";
 	}
 }

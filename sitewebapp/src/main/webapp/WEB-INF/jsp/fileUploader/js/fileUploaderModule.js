@@ -387,7 +387,7 @@ angular.module('fileUploaderModule', []).directive("fileUploader", function() {
 			uploadBtn.bind('click', uploadFiles);
 		
 		},
-		templateUrl:'sharedNgModules/fileUploaderModule',
+		templateUrl:'fileUploader/partial/fileUploaderModule',
 		scope: true
 		
 	};// End of returned statement

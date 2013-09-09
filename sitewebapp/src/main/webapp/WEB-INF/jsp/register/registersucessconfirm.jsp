@@ -4,13 +4,10 @@
 
 
 
-<t:page title="VendorTool registration">
-	<jsp:attribute name="header">
-		<t:header email="${email}" currentPage="registersuccessconfirm"/>
-	</jsp:attribute>
+<t:page title="VendorTool registration" currentPage="registersuccessconfirm"  email="${email}">
 	
 	<jsp:attribute name="css">
-		<link href="<c:url value='/resources/css/register.css' />" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/wro/register.css' />" rel="stylesheet" type="text/css" />
 	</jsp:attribute>
 	
 	<jsp:body>

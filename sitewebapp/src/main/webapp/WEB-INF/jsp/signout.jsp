@@ -4,11 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<t:page title="${signouttitle}" >
-	
-	<jsp:attribute name="header">
-		<t:header email="${email}" currentPage="signin"/>
-	</jsp:attribute>
+<t:page title="${signouttitle}" currentPage="signin" email="${email}">
 	
 	<jsp:attribute name="scripts">
 		<script src="<c:url value='/resources/js/lang-menu.js' />"></script>

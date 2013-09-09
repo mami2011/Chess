@@ -7,10 +7,7 @@
 
 <c:set var="email" value="ted@gmail.com"/>
 
-<t:page title="VendorTool">
-	<jsp:attribute name="header">
-		<t:header email="${email}" currentPage="home"/>
-	</jsp:attribute>
+<t:page title="VendorTool" currentPage="home" email="${email}">
 
 	<jsp:attribute name="css">
 		<link href="<c:url value='/resources/css/home.css' />" rel="stylesheet" type="text/css" />

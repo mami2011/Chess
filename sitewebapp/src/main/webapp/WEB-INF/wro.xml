@@ -10,6 +10,12 @@
 		<js>/resources/js/header.js</js>
 	</group>
 	
+	<group name="popup">
+		<css>/resources/css/popup.css</css>
+		<css>/resources/css/lib/bootstrap.css</css>
+		<js>/resources/js/lib/bootstrap.js</js>
+	</group>
+	
 	<group name="accounthub">
 		<css>/WEB-INF/jsp/accounthub/css/accounthub.css</css>
 	</group>
@@ -23,8 +29,12 @@
 	
 	<!-- fileUploader popup -->
 	<group name="fileUploader">
+		<css>/WEB-INF/jsp/fileUploader/css/fileUploaderModule.css</css>
+		
+		<js>/WEB-INF/jsp/fileUploader/js/fileUploaderModule.js</js>
 		<js>/WEB-INF/jsp/fileUploader/js/app.js</js>
 		<js>/WEB-INF/jsp/fileUploader/js/controllers.js</js>
+		
 	</group>
 	
 	<group name="profile">
@@ -33,6 +43,9 @@
 		<js>/WEB-INF/jsp/profile/js/controllers.js</js>
 	</group>
 	
-	
+	<group name="register">
+		<css>/WEB-INF/jsp/register/css/register.css</css>
+		<js>/WEB-INF/jsp/register/js/register.js</js>
+	</group>
 	
 </groups>

@@ -1,7 +1,8 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var uploadsApp = angular.module('uploadsApp', ['fileUploaderModule']);
+//var uploadsApp = angular.module('uploadsApp', ['fileUploaderModule']);
+var uploadsApp = angular.module('uploadsApp', []);
 
 uploadsApp.config(['$routeProvider', function($routeProvider) {
 	

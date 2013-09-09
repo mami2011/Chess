@@ -1,11 +1,11 @@
 <%@ tag pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <%--============
 Page fragments
 ================--%>
-<%@ attribute name="header"		fragment="true"%>
 <%@ attribute name="scripts"	fragment="true"%>
 <%@ attribute name="css"		fragment="true"%>
 <%@ attribute name="inlineJs"	fragment="true" %>
@@ -14,6 +14,8 @@ Page fragments
 Attributes
 ================--%>
 <%@ attribute name="title" required="false"%>
+<%@ attribute name="email" required="false"%>
+<%@ attribute name="currentPage" required="false"%>
 <%@ attribute name="angularAppName" required="false"%>
 
 <%--============
@@ -45,8 +47,7 @@ Variables
 	<body>
 		<div id="wrap">
 			<div id="content">
-				<%-- Page specific header section --%>
-				<jsp:invoke fragment="header"/>
+				<t:header email="${email}" currentPage="${currentPage}"/>
 				
 				<%-- Main contents --%>
 				<jsp:doBody/>
@@ -65,7 +66,6 @@ Variables
 		<c:if test="${!empty angularAppName}">
 			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 		</c:if>
-		
 
 		<script src='<c:url value="/wro/page.js" />'></script>
 		

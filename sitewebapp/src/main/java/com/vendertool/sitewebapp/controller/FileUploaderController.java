@@ -100,4 +100,10 @@ public class FileUploaderController {
 		return "fileUploader/fileUploader";
 	}
 	
+	@RequestMapping(value = "fileUploader/partial/fileUploaderModule", method = RequestMethod.GET)
+	public String getFileUploaderTemplate() {
+		logger.info("getFileUploaderTemplate controller invoked");
+		return "fileUploader/partial/fileUploaderModule";
+	}
+	
 }

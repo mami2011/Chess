@@ -4,10 +4,7 @@
 
 
 
-<t:page title="Unexpected error">
-	<jsp:attribute name="header">
-		<t:header email="${email}" currentPage="unexpectedError"/>
-	</jsp:attribute>
+<t:page title="Unexpected error" currentPage="unexpectedError" email="${email}" >
 	
 	<jsp:attribute name="css">
 		<link href="<c:url value='/resources/css/register.css' />" rel="stylesheet" type="text/css" />

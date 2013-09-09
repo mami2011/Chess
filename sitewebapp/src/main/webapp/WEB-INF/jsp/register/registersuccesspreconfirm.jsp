@@ -5,17 +5,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
-<t:page title="${title}">
-	<jsp:attribute name="header">
-		<t:header email="${email}" currentPage="registersuccesspreconfirm"/>
-	</jsp:attribute>
-	
-	<jsp:attribute name="scripts">
-		<script src="<c:url value='/resources/js/lang-menu.js' />"></script>
-	</jsp:attribute>
-	
+<t:page title="${title}" currentPage="registersuccesspreconfirm" email="${email}">
+
 	<jsp:attribute name="css">
-		<link href="<c:url value='/resources/css/register.css' />" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/wro/register.css' />" rel="stylesheet" type="text/css" />
 	</jsp:attribute>
 	
 	<jsp:body>

@@ -3,14 +3,8 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 
+<t:page title="Account hub" currentPage="accounthub" email="${email}">
 
-
-<t:page title="Account hub">
-	
-	<jsp:attribute name="header">
-		<t:header email="${email}" currentPage="accounthub"/>
-	</jsp:attribute>
-	
 	<jsp:attribute name="css">
 		<link href="<c:url value='/wro/accounthub.css' />" rel="stylesheet" type="text/css" />
 	</jsp:attribute>

@@ -33,8 +33,7 @@ Variables
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>${title}</title>
-		<link href='<c:url value="/resources/css/popup.css" />' rel="stylesheet" type="text/css"/>
-		<link href='<c:url value="/resources/css/lib/bootstrap.min.css" />' rel="stylesheet" type="text/css"/>
+		<link href='<c:url value="/wro/popup.css" />' rel="stylesheet" type="text/css"/>
 		
 		<%-- Page specific CSS tags --%>
 		<jsp:invoke fragment="css"/>
@@ -48,10 +47,10 @@ Variables
 		</div>
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script src='<c:url value="/resources/js/lib/bootstrap.min.js" />'></script>
 		<c:if test="${!empty angularAppName}">
 			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 		</c:if>
+		<script src='<c:url value="/wro/popup.js" />'></script>
 		
 		<%-- Page specific javascript tags --%>
 		<jsp:invoke fragment="scripts"/>
