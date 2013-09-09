@@ -12,7 +12,7 @@
 	</jsp:attribute>
 	
 	<jsp:attribute name="css">
-		<link href="<c:url value='/resources/css/accounthub.css' />" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/wro/accounthub.css' />" rel="stylesheet" type="text/css" />
 	</jsp:attribute>
 	
 	<jsp:body>

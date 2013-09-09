@@ -12,9 +12,13 @@
 		<t:header email="${account.emailId}" currentPage="profile"/>
 	</jsp:attribute>
 	
+	<jsp:attribute name="css">
+		<link href="<c:url value='/wro/profile.css' />" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/resources/css/sharedNgModules/errorResponseModule.css' />" rel="stylesheet" type="text/css" />
+	</jsp:attribute>
+	
 	<jsp:attribute name="scripts">
-		<script src="<c:url value='/resources/js/profile/app.js' />" type="text/javascript"></script>
-		<script src="<c:url value='/resources/js/profile/controllers.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/wro/profile.js' />" type="text/javascript"></script>
 		<script src="<c:url value='/resources/js/sharedNgModules/errorResponseModule.js' />" type="text/javascript"></script>
 	</jsp:attribute>
 	
@@ -26,11 +30,6 @@
 		</script>
 	</jsp:attribute>
 
-	<jsp:attribute name="css">
-		<link href="<c:url value='/resources/css/profile.css' />" rel="stylesheet" type="text/css" />
-		<link href="<c:url value='/resources/css/sharedNgModules/errorResponseModule.css' />" rel="stylesheet" type="text/css" />
-	</jsp:attribute>
-	
 	<jsp:body>
 	
 		<t:layoutTable ngController="ProfileCtrl">

@@ -31,7 +31,7 @@
   	<sec:http pattern="/confirmaccount" security="none"/>
   	<sec:http pattern="/confirmaccountsuccess" security="none"/>
   	<sec:http pattern="/confirmaccountfailed" security="none"/>
-  	
+  	<sec:http pattern="/wro/**" security="none"/>
   	
   	<!--
   	IMPORTANT!!!! 
