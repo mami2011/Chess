@@ -14,13 +14,17 @@
 	</group>
 	
 	<group name="bootstrap">
-		<css>/WEB-INF/tags/page/css/bootstrap.css</css>
-		<js>/WEB-INF/tags/page/js/bootstrap.js</js>
+		<css>/resources/css/lib/bootstrap.css</css>
+		<js>/resources/js/lib/bootstrap.js</js>
 	</group>
 	
 	<group name="errorResponseModule">
 		<css>/resources/css/sharedNgModules/errorResponseModule.css</css>
 		<js>/resources/js/sharedNgModules/errorResponseModule.js</js>
+	</group>
+	
+	<group name="errorResponseTag">
+		<css>/WEB-INF/tags/errorResponse/css/errorResponse.css</css>
 	</group>
 
 	<!-- fileUploader popup -->
@@ -53,8 +57,10 @@
 	</group>
 	
 	<group name="register">
+		<group-ref>errorResponseTag</group-ref>
 		<css>/WEB-INF/jsp/register/css/register.css</css>
 		<js>/WEB-INF/jsp/register/js/register.js</js>
+		<js>/WEB-INF/resources/js/lib/jquery.placeholder.js</js>
 	</group>
 	
 	<group name="uploads">

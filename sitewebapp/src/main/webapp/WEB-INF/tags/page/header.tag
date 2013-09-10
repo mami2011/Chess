@@ -1,6 +1,5 @@
 <%@ tag pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%--============
@@ -21,6 +20,7 @@ Attributes
 <%@ attribute name="currentPage"	required="false"%>
 
 <div id="header">
+	<div class="bg"></div>
 	<div class="hdr">
 		<div class="topnav inline">
 			<a href="${homeUrl}" class="home"><spring:message code="form.header.logo"/></a>
@@ -103,7 +103,7 @@ Attributes
 						
 					<a id="langBtn" href="javascript:;"><span class="lbl"><spring:message code="form.registration.lang"/>:</span> ${selectedLangText} <b class="arw"></b></a>
 					
-					<ul id="languageMenu" name="lang" class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu">
+					<ul id="languageMenu" name="lang" class="dropdown-menu pull-left" role="menu" aria-labelledby="dropdownMenu">
 						<c:forEach var="lang" items="${languages}">
 							<c:set var="selected" value="${lang.isoLangCode == selectedLang ? 'selected' : ''}"/>
 							<li><a tabindex="-1" href="?lang=${lang.isoLangCode}">${lang.nativeName}</a></li>

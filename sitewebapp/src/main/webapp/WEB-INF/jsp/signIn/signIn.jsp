@@ -10,8 +10,16 @@
 		<link href="<c:url value='/wro/register.css' />" rel="stylesheet" type="text/css" />
 	</jsp:attribute>
 	
+	<jsp:attribute name="scripts">
+		<script src="<c:url value='/wro/register.js' />" type="text/javascript"></script>
+	</jsp:attribute>
+	
+	<jsp:attribute name="inlineJs">
+		$('input').placeholder();
+	</jsp:attribute>
+	
 	<jsp:body>
-	    <div class="reg main input-group bx-rnd-shdw">
+	    <div class="reg main input-group">
 	    	<spring:message code="form.signin.signin" var="signintitle"/>
 	    	<spring:message code='form.submit' var="submit"/>
 	    	
@@ -49,7 +57,7 @@
 	            	<spring:message code='form.signin.password' var="passwordlabel"/>
 	            	<c:set var="password_path" value="password" />
 	                <!-- For spring login page we have to use the below -->
-	                <input id="password" class="form-control" name="j_password" type="password" placeholder="${passwordlabel}"/>
+	                <input id="password" class="form-control" name="j_password" type="password" placeholder="${passwordlabel}" autocomplete="off"/>
 	            </div>
 	            <div class="submit">
 	            	<input type="submit" class="btn btn-primary grn" value="${submit}" />

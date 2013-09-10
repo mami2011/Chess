@@ -1,14 +1,14 @@
 #wrap {
+	
+	/**
 	background:url('../resources/img/reflections.jpg') no-repeat center center fixed;
 	-webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-	/*
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;*/
+  **/
+  
+	background-color:#f2f1e9;
 }
 
 
@@ -25,11 +25,17 @@
 	margin: 30px auto 15px auto;
 	max-width: 1024px;
 	background-color:#fff;
-	border-left:1px solid #ccc;
-	
+	border:1px solid #ddd;
+	padding:20px 40px 45px 40px;
+}
+.reg.main .alert {
+	margin-bottom:10px;
 }
 .reg form > div {
 	margin-bottom:10px;
+}
+.reg .form-control {
+	width:320px;
 }
 .reg .opt {
 	width:400px;
@@ -102,5 +108,7 @@
 
 
 
-
+.reg .popover-content {
+	width:250px;
+}
 

@@ -16,7 +16,13 @@ body {
    	background-color: #e5e5e5 !important;**/
 }
 #header {
+	position:relative;
 	height: 45px;
+}
+#header .bg {
+	position:absolute;
+	height: 45px;
+	width:100%;
 	/**
 	background-color: #4274b9;**/
 	background-color: #53a55e;
@@ -24,16 +30,14 @@ body {
 
 	
 	/* This works in IE 8 & 9 too */
-	/* ... but also 5, 6, 7 
-	filter: alpha(opacity=80);*/
+	/* ... but also 5, 6, 7 */
+	filter: alpha(opacity=80);
     
 	/* Modern!
 	/* Firefox 0.9+, Safari 2?, Chrome any?
-	/* Opera 9+, IE 9+ 
-	opacity: 0.8;*/
-	
-	
-	
+	/* Opera 9+, IE 9+*/
+	opacity: 0.8; 
+
 }
 #footer {
 	clear: both;
@@ -57,7 +61,11 @@ Content
 	margin:0 0 30px 0;
 	font-weight:normal;
 	font-size:26px;
-	color:#FF8C19
+	
+	/** orange
+	color:#FF8C19; **/
+	
+	color:#5592e6;
 }
 .pg-msg {
 	min-height:50px;
@@ -133,6 +141,7 @@ Page Header
 }
 #languageMenu {
 	max-height:400px;
+	width:200px;
 	overflow-x: hidden;
 	overflow-y: scroll;
 }
@@ -210,14 +219,7 @@ Page Footer
 	margin-right:40px;
 }
 
-.bx-rnd-shdw {
-	border:1px solid #ccc;
-	background-color:#fff;
-	-webkit-box-shadow: 1px 1px 10px rgba(50, 50, 50, 0.20);
-	-moz-box-shadow:    1px 1px 10px rgba(50, 50, 50, 0.20);
-	box-shadow:         1px 1px 10px rgba(50, 50, 50, 0.20);
-	padding:20px 40px 45px 40px;
-}
+
 
 
 /**
@@ -262,8 +264,6 @@ Page Footer
 }
 
 
-
-
 /** Submit button and Cancel link set **/
 .sub-cncl .cncl.lg {
 	position:relative;
@@ -272,8 +272,9 @@ Page Footer
 	display:inline-block;
 }
 
-
-
-			
+/** style for mathiasbynens/jquery-placeholder **/
+.placeholder {
+	color: #aaa;
+}
 
 

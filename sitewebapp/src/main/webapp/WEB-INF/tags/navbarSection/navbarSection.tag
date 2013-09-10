@@ -1,5 +1,6 @@
 <%@ tag pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <%--============
 Get URLs
@@ -23,8 +24,8 @@ Attributes
 <c:set var="curr6" value="${current == 'subscription' ? 'active' : ''}"/>
 <c:set var="curr7" value="${current == 'role' ? 'active' : ''}"/>
 
-<div class="sec navbar navbar-default" role="navigation">
-	<ul class="nav navbar-nav">
+<div class="navbarSec" role="navigation">
+	<ul>
 		<li class="${curr1}"><a href="${accountHubUrl}">Summary</a></li>
 		<li class="${curr2}"><a href="${uploadsUrl}">Uploads</a></li>
 		<li class="${curr3}"><a href="orders">Orders</a></li>
@@ -33,4 +34,5 @@ Attributes
 		<li class="${curr6}"><a href="subscription">Subscription</a></li>
 		<li class="${curr7}"><a href="roles">Role Management</a></li>
 	</ul>
+	<div class="clr"></div>
 </div>

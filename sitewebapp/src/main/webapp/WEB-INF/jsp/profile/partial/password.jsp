@@ -10,14 +10,14 @@
 		<td class="col1"><label>New password:</label></td>
 		<td class="col2">
 			<input ng-model="changePasswordRequest.newPassword" class="form-control" type="password"/>
-			<div error field="newPassword" cname="com.vendertool.sharedtypes.rnr.ChangePasswordRequest"></div>
+			<div error field="newPassword" clss="com.vendertool.sharedtypes.rnr.ChangePasswordRequest"></div>
 		</td>
 	</tr>
 	<tr class="fldWrp">
 		<td class="col1"><label>Confirm new password:</label></td>
 		<td class="col2">
 			<input ng-model="changePasswordRequest.confirmPassword" class="form-control" type="password"/>
-			<div error field="confirmPassword" cname="com.vendertool.sharedtypes.rnr.ChangePasswordRequest"></div>
+			<div error field="confirmPassword" clss="com.vendertool.sharedtypes.rnr.ChangePasswordRequest"></div>
 		</td>
 	</tr>
 	<tr>
@@ -29,7 +29,7 @@
 		<td class="col1"><label>Current Password:</label></td>
 		<td class="col2">
 			<input ng-model="changePasswordRequest.oldPassword" class="form-control" type="password"/>
-			<div error field="oldPassword" cname="com.vendertool.sharedtypes.rnr.ChangePasswordRequest"></div>
+			<div error field="oldPassword" clss="com.vendertool.sharedtypes.rnr.ChangePasswordRequest"></div>
 		</td>
 	</tr>
 	<tr>

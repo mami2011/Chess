@@ -3,21 +3,26 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="t1" tagdir="/WEB-INF/tags/page" %>
+<%@ taglib prefix="t2" tagdir="/WEB-INF/tags/errorResponse" %>
 
 <t1:page title="${title}" currentPage="register" email="${email}">
-
-	<jsp:attribute name="scripts">
-		<script src="<c:url value='/wro/register.js' />"></script>
-	</jsp:attribute>
 	
 	<jsp:attribute name="css">
 		<link href="<c:url value='/wro/register.css' />" rel="stylesheet" type="text/css" />
 	</jsp:attribute>
 	
+	<jsp:attribute name="scripts">
+		<script src="<c:url value='/wro/register.js' />"></script>
+	</jsp:attribute>
+	
+	<jsp:attribute name="inlineJs">
+		$('input').placeholder();
+	</jsp:attribute>
+	
 	<jsp:body>
 		<spring:message code="form.registration.title" var="title"/>
 		<c:set var="email" value="${account.emailId}"/>
-		<div class="reg main input-group bx-rnd-shdw">
+		<div class="reg main input-group">
 			<h3 class="ttl"><spring:message code="form.registration.signup"/></h3>
 			<spring:message code='form.registration.firstname' var="firstname"/>
 			<spring:message code='form.registration.lastname' var="lastname"/>
@@ -32,106 +37,44 @@
 	
 			<form:form method="post" commandName="account">
 				<c:if test="${errorResponse.hasErrors()}">
-					<div class="errorblock">
-						<c:forEach items="${errorResponse.getVTErrors()}" var="vterror">
-							<span class="errorfont">
-								<c:out value="${vterror.getMessage()}" />
-							</span>
-							<br />
-						</c:forEach>
+					<div class="pg-msg">
+						<div class="alert alert-danger">
+							<c:forEach items="${errorResponse.getVTErrors()}" var="vterror">
+								${vterror.message}<br />
+							</c:forEach>
+						</div>
 					</div>
 				</c:if>
 				
 				<div>
-					<c:set var="firstname_rootpath" value="contactDetails.firstName" />
-					<c:set var="firstnamepath" value="firstName" />
-					<form:input class="form-control" placeholder="${firstname}"  path="${firstname_rootpath}"/>
-					<c:if test="${errorResponse.hasFieldError(account.getContactDetails().getClass().getName(), firstnamepath)}">
-						<div>
-							<c:forEach
-								items="${errorResponse.getFieldErrors(account.getContactDetails().getClass().getName(), firstnamepath)}"
-								var="vterror">
-								<span class="errorfont">
-									<c:out value="${vterror.getMessage()}" />
-								</span>
-								<br />
-							</c:forEach>
-						</div>
-					</c:if>
+					<form:input class="form-control" placeholder="${firstname}"  path="contactDetails.firstName"/>
+					<t2:errorResponse errorResponse="${errorResponse}" field="firstName" clss="com.vendertool.sharedtypes.core.ContactDetails"/>
 				</div>
 				<div>
-					<c:set var="lastname_rootpath" value="contactDetails.lastName" />
-					<c:set var="lastnamepath" value="lastName" />
-					<form:input class="form-control" placeholder="${lastname}"  path="${lastname_rootpath}"/>
-					<c:if test="${errorResponse.hasFieldError(account.getContactDetails().getClass().getName(), lastnamepath)}">
-						<div>
-							<c:forEach
-								items="${errorResponse.getFieldErrors(account.getContactDetails().getClass().getName(), lastnamepath)}"
-								var="vterror">
-								<span class="errorfont">
-									<c:out value="${vterror.getMessage()}" />
-								</span>
-								<br />
-							</c:forEach>
-						</div>
-					</c:if>
+					<form:input class="form-control" placeholder="${lastname}"  path="contactDetails.lastName"/>
+					<t2:errorResponse errorResponse="${errorResponse}" field="lastName" clss="com.vendertool.sharedtypes.core.ContactDetails"/>
 				</div>
 				<div>
 					<c:set var="emailIdpath" value="emailId" />
-					<form:input id="emailId" class="form-control info-msg-available" placeholder="${emailId}"  path="${emailIdpath}"/>
-					<c:if test="${errorResponse.hasFieldError(account.getClass().getName(), emailIdpath)}">
-						<div>
-							<c:forEach
-								items="${errorResponse.getFieldErrors(account.getClass().getName(), emailIdpath)}"
-								var="vterror">
-								<span class="errorfont">
-									<c:out value="${vterror.getMessage()}" />
-								</span>
-								<br />
-							</c:forEach>
-						</div>
-					</c:if>
-					<span id="email-info">${emailInfo}</span>
+					<form:input id="emailId" class="form-control info-msg-available" placeholder="${emailId}" path="${emailIdpath}" data-content="${emailInfo}"/>
+					<t2:errorResponse errorResponse="${errorResponse}" field="${emailIdpath}" clss="com.vendertool.sharedtypes.core.Account"/>
 				</div>
 				<div>
 					<c:set var="passwordpath" value="password" />
-					<form:password id="password" class="form-control info-msg-available" placeholder="${password}"  path="${passwordpath}"/>
-					<c:if test="${errorResponse.hasFieldError(account.getClass().getName(), passwordpath)}">
-						<div>
-							<c:forEach
-								items="${errorResponse.getFieldErrors(account.getClass().getName(), passwordpath)}"
-								var="vterror">
-								<span class="errorfont">
-									<c:out value="${vterror.getMessage()}" />
-								</span>
-								<br />
-							</c:forEach>
-						</div>
-					</c:if>
-					<span id="pwd-info">${pwdInfo}</span>
+					<form:password id="password" class="form-control info-msg-available" placeholder="${password}" path="${passwordpath}" data-content="${pwdInfo}"/>
+					<t2:errorResponse errorResponse="${errorResponse}" field="${passwordpath}" clss="com.vendertool.sharedtypes.core.Account"/>
 				</div>
 				<div>
 					<c:set var="confirmPasswordPath" value="confirmPassword" />
-					<form:password id="confirmpassword" class="form-control info-msg-available" placeholder="${confirmpassword}" path="${confirmPasswordPath}"/>
-					<c:if test="${errorResponse.hasFieldError(account.getClass().getName(), confirmPasswordPath)}">
-						<div>
-							<c:forEach
-								items="${errorResponse.getFieldErrors(account.getClass().getName(), confirmPasswordPath)}"
-								var="vterror">
-								<span class="errorfont">
-									<c:out value="${vterror.getMessage()}" />
-								</span>
-								<br />
-							</c:forEach>
-						</div>
-					</c:if>
-					<span id="conf-pwd-info">${confPwdInfo}</span>
+					<form:password id="confirmpassword" class="form-control info-msg-available" placeholder="${confirmpassword}" path="${confirmPasswordPath}"  data-content="${confPwdInfo}"/>
+					<t2:errorResponse errorResponse="${errorResponse}" field="${confirmPasswordPath}" clss="com.vendertool.sharedtypes.core.Account"/>
 				</div>
 
 				<div class="submit">
 					<input type="submit" class="btn btn-primary grn" value="${submit}" />
 				</div>
 				
+				<%-- 
 				<c:if test="${errorResponse.hasErrors()}">
 					<div>
 						<div>
@@ -144,6 +87,8 @@
 						</div>
 					</div>
 				</c:if>
+				--%>
+				
 			</form:form>
 		</div>
 	</jsp:body>

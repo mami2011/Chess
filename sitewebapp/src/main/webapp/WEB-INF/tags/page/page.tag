@@ -6,17 +6,17 @@
 <%--============
 Page fragments
 ================--%>
-<%@ attribute name="scripts"	fragment="true"%>
-<%@ attribute name="css"		fragment="true"%>
+<%@ attribute name="scripts"	fragment="true" %>
+<%@ attribute name="css"		fragment="true" %>
 <%@ attribute name="inlineJs"	fragment="true" %>
 
 <%--============
 Attributes
 ================--%>
-<%@ attribute name="title" required="false"%>
-<%@ attribute name="email" required="false"%>
-<%@ attribute name="currentPage" required="false"%>
-<%@ attribute name="angularAppName" required="false"%>
+<%@ attribute name="title" required="false" %>
+<%@ attribute name="email" required="false" %>
+<%@ attribute name="currentPage" required="false" %>
+<%@ attribute name="angularAppName" required="false" %>
 
 <%--============
 Variables
@@ -62,9 +62,9 @@ Variables
 			</div>
 		</div>
 
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<c:if test="${!empty angularAppName}">
-			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+			<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 		</c:if>
 
 		<script src='<c:url value="/wro/pageTag.js" />'></script>
@@ -73,8 +73,11 @@ Variables
 		<jsp:invoke fragment="scripts"/>
 		
 		<%-- Inline JS --%>
-		<jsp:invoke fragment="inlineJs"/>
-
+		<script type="text/javascript">
+			<jsp:invoke fragment="inlineJs"/>
+		</script>
+		
+	
 	</body>
 </html>
 
