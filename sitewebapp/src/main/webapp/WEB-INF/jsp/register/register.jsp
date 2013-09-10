@@ -20,6 +20,8 @@
 	</jsp:attribute>
 	
 	<jsp:body>
+		<div id="pgBg"><img src="resources/img/cafe.jpg" alt=""></div>
+	
 		<spring:message code="form.registration.title" var="title"/>
 		<c:set var="email" value="${account.emailId}"/>
 		<div class="reg main input-group">

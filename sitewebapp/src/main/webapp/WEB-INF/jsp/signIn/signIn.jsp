@@ -19,6 +19,8 @@
 	</jsp:attribute>
 	
 	<jsp:body>
+		<div id="pgBg"><img src="resources/img/cafe.jpg" alt=""></div>
+		
 	    <div class="reg main input-group">
 	    	<spring:message code="form.signin.signin" var="signintitle"/>
 	    	<spring:message code='form.submit' var="submit"/>
