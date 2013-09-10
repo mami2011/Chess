@@ -19,7 +19,7 @@ import com.vendertool.sitewebapp.util.MenuBuilder;
 public class SigninController {
 	private static final Logger logger = Logger.getLogger(SigninController.class);
 	
-	@RequestMapping(value="signin", method=RequestMethod.GET)
+	@RequestMapping(value="signIn", method=RequestMethod.GET)
 	public String getSigninView(Model model, HttpServletRequest request){
 		logger.info("signin GET controller invoked");
 		
@@ -31,7 +31,7 @@ public class SigninController {
 		model.addAttribute("langOptions", MenuBuilder.getLanguageOptions(locale));
 		model.addAttribute("selectedLang", request.getParameter("lang"));
 		
-		return "signin";
+		return "signIn/signIn";
 	}
 	
 //	@RequestMapping(value = "signin", method = RequestMethod.POST)

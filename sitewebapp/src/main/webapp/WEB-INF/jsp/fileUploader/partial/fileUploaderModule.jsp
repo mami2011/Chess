@@ -47,7 +47,7 @@
 				</div>
 			</div>
 			
-			<button ng-click="closePopup()" type="button" class="btn btn-default">Close</button>
+			<button ng-click="closePopup()" type="button" class="btn btn-default">Cancel</button>
 			<button ng-class="{disabled: allUploadsSuccessful || !fileWrappers || uploadInProgress}" type="button" class="qry-fup-upBtn btn btn-primary">Upload Files</button>
 		</div>
 	</div><!-- fup-content -->

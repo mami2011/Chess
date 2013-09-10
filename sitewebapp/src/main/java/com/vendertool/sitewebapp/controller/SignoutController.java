@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class SignoutController {
 //	private static final Logger logger = Logger.getLogger(SignoutController.class);
 	
-	@RequestMapping(value="signout", method=RequestMethod.GET)
+	@RequestMapping(value="signOut", method=RequestMethod.GET)
 	public String getSignoutView(Model model){
 //		logger.info("User initiated signout");
-		return "signout";
+		return "signOut/signOut";
 	}
 }

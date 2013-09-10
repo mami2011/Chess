@@ -1,21 +1,25 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="utf-8" %>
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="t1" tagdir="/WEB-INF/tags/page" %>
+<%@ taglib prefix="t2" tagdir="/WEB-INF/tags/layoutTable" %>
 
-
-<t:page title="VendorTool" angularAppName="profileApp" currentPage="profile" email="${account.emailId}" >
+<t1:page title="VendorTool" angularAppName="profileApp" currentPage="profile" email="${account.emailId}" >
 	
 	<jsp:attribute name="css">
 		<link href="<c:url value='/wro/profile.css' />" rel="stylesheet" type="text/css" />
+		<%-- 
 		<link href="<c:url value='/resources/css/sharedNgModules/errorResponseModule.css' />" rel="stylesheet" type="text/css" />
+		--%>
 	</jsp:attribute>
 	
 	<jsp:attribute name="scripts">
 		<script src="<c:url value='/wro/profile.js' />" type="text/javascript"></script>
+		<%-- 
 		<script src="<c:url value='/resources/js/sharedNgModules/errorResponseModule.js' />" type="text/javascript"></script>
+		--%>
 	</jsp:attribute>
 	
 	<jsp:attribute name="inlineJs">
@@ -28,7 +32,7 @@
 
 	<jsp:body>
 	
-		<t:layoutTable ngController="ProfileCtrl">
+		<t2:layoutTable ngController="ProfileCtrl">
 			<jsp:attribute name="leftNav">
 				<h3 class="ttl">Profile</h3>
 				<div class="list-group">
@@ -47,11 +51,11 @@
 				
 				<div ng-view></div>
 			</jsp:attribute>
-		</t:layoutTable>
+		</t2:layoutTable>
 		
 	</jsp:body>
 
-</t:page>
+</t1:page>
 
 
 

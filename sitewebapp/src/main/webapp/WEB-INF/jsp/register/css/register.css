@@ -21,6 +21,12 @@
 }
 .reg.main {
 	min-height:200px;
+	
+	margin: 30px auto 15px auto;
+	max-width: 1024px;
+	background-color:#fff;
+	border-left:1px solid #ccc;
+	
 }
 .reg form > div {
 	margin-bottom:10px;

@@ -17,7 +17,23 @@ body {
 }
 #header {
 	height: 45px;
-	background-color: #4274b9;
+	/**
+	background-color: #4274b9;**/
+	background-color: #53a55e;
+	
+
+	
+	/* This works in IE 8 & 9 too */
+	/* ... but also 5, 6, 7 
+	filter: alpha(opacity=80);*/
+    
+	/* Modern!
+	/* Firefox 0.9+, Safari 2?, Chrome any?
+	/* Opera 9+, IE 9+ 
+	opacity: 0.8;*/
+	
+	
+	
 }
 #footer {
 	clear: both;
@@ -31,30 +47,6 @@ body {
 }
 #content {
 	padding-bottom: 100px;
-}
-.main {
-	margin: 10px auto 15px auto;
-	min-height: 600px;
-	max-width: 1024px;
-	background-color:#fff;
-	border-left:1px solid #ccc;
-	/*
-	-webkit-box-shadow: 1px 1px 10px rgba(50, 50, 50, 0.20);
-	-moz-box-shadow:    1px 1px 10px rgba(50, 50, 50, 0.20);
-	box-shadow:         1px 1px 10px rgba(50, 50, 50, 0.20);*/
-}
-.main td {
-	vertical-align: top;
-}
-.main .c1 {
-	min-width: 200px;
-	padding: 15px 20px;
-}
-.main .c2 {
-	padding: 10px;
-}
-.main .cell-pad {
-	visibility: hidden;
 }
 
 /**************************************
@@ -86,15 +78,7 @@ label {
 .clr {
 	clear:both;
 }
-.main .c1 .list-group .list-group-item {
-	border:0;
-	border-bottom:1px solid #ddd;
-	border-top:1px solid #ddd;
-	border-top-right-radius: 0;
-	border-top-left-radius: 0;
-	white-space:nowrap;
-	padding-right:0px;
-}
+
 /**************************************
 Page Header
 ***************************************/
@@ -108,7 +92,7 @@ Page Header
 .hdr a {
 	text-decoration:none;
 	font-size:14px;
-	color:#a8c0e0;
+	color:#333;
 	display:inline-block;
 }
 .hdr a:hover {
@@ -193,7 +177,7 @@ Page Header
 .hdr .ctls .srch input {
 	width:175px;
 	font-size:14px;
-	background-color:#6d93c6;
+	background-color:#9ad0a1;
 	border:0;
 	color:#fff;
 	padding-left:5px;

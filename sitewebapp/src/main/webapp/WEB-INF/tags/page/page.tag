@@ -1,7 +1,7 @@
 <%@ tag pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags/page" %>
 
 <%--============
 Page fragments
@@ -38,7 +38,7 @@ Variables
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>${title}</title>
 
-		<link href='<c:url value="/wro/page.css" />' rel="stylesheet" type="text/css"/>
+		<link href='<c:url value="/wro/pageTag.css" />' rel="stylesheet" type="text/css"/>
 		
 		<%-- Page specific CSS tags --%>
 		<jsp:invoke fragment="css"/>
@@ -67,7 +67,7 @@ Variables
 			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 		</c:if>
 
-		<script src='<c:url value="/wro/page.js" />'></script>
+		<script src='<c:url value="/wro/pageTag.js" />'></script>
 		
 		<%-- Page specific javascript tags --%>
 		<jsp:invoke fragment="scripts"/>

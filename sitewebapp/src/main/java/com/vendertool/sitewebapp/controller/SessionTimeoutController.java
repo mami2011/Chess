@@ -25,6 +25,6 @@ public class SessionTimeoutController {
 		modelMap.addAttribute("langOptions", MenuBuilder.getLanguageOptions(locale));
 		modelMap.addAttribute("selectedLang", request.getParameter("lang"));
 		
-		return "sessiontimeout";
+		return "sessionTimeout/sessionTimeout";
 	}
 }
