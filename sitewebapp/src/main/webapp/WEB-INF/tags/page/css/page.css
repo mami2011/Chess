@@ -100,7 +100,7 @@ Page Header
 .hdr a {
 	text-decoration:none;
 	font-size:14px;
-	color:#333;
+	color:#000;
 	display:inline-block;
 }
 .hdr a:hover {

@@ -19,7 +19,7 @@
 	</jsp:attribute>
 	
 	<jsp:body>
-		<div id="pgBg"><img src="resources/img/cafe.jpg" alt=""></div>
+		<div id="pgBg"><img src="resources/img/cafe2.jpg" alt=""></div>
 		
 	    <div class="reg main input-group">
 	    	<spring:message code="form.signin.signin" var="signintitle"/>
