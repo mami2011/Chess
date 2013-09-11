@@ -43,7 +43,7 @@
 		<div class="fup-footer">
 			<div class="progress progress-striped active">
 				<div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width:{{percentDone}}%">
-					<span class="sr-only">{{percentDone}}% Complete</span>
+					<span>{{percentDone}}% Complete</span>
 				</div>
 			</div>
 			

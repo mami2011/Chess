@@ -31,12 +31,8 @@
 	<group name="fileUploader">
 		<css>/WEB-INF/jsp/fileUploader/css/fileUploaderModule.css</css>
 		<js>/WEB-INF/jsp/fileUploader/js/fileUploaderModule.js</js>
-		<js>/WEB-INF/jsp/fileUploader/js/app.js</js>
-		<js>/WEB-INF/jsp/fileUploader/js/controllers.js</js>
 	</group>
-	
-	
-	
+
    	<group name="pageTag">
    		<group-ref>bootstrap</group-ref>
 		<css>/WEB-INF/tags/page/css/page.css</css>

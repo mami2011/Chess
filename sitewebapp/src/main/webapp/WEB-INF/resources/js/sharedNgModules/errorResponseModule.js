@@ -1,6 +1,9 @@
 
-
-angular.module('errorResponseModule', []).directive("error", function() {
+/**
+ * Needs the scope.errorResponse to be defined in the controller.
+ * scope.errorResponse the json model of com.vendertool.sharedtypes.rnr.ErrorResponse.
+ */
+angular.module('errorResponseModule', []).directive("errorResponse", function() {
 	'use strict';
 
 	return {

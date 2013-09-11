@@ -4,7 +4,7 @@
 
 
 
-<t1:popup title="File uploader" angularAppName="fileUploaderApp">
+<t1:popup title="File uploader" angularAppName="fileUploaderModule">
 	
 	<jsp:attribute name="css">
 		<link href="<c:url value='/wro/fileUploader.css' />" rel="stylesheet" type="text/css" />
@@ -15,9 +15,6 @@
 	</jsp:attribute>
 
 	<jsp:body>
-		<div ngController="FileUploaderCtrl">
-			
-			<div file-uploader upload-url="uploadFile" all-done-url="x"></div>
-		</div>
+		<div file-uploader upload-url="uploadFile" all-done-url="x"></div>
 	</jsp:body>
 </t1:popup>
