@@ -5,15 +5,15 @@
 <%--============
 Attributes
 ================ --%>
-<%@ attribute name="errorResponse" required="true" type="com.vendertool.sharedtypes.rnr.ErrorResponse" %>
+<%@ attribute name="model" required="true" type="com.vendertool.sharedtypes.rnr.ErrorResponse" %>
 <%@ attribute name="field" required="true"%>
 <%@ attribute name="clss" required="true"%>
 
 
 
-<c:if test="${errorResponse.hasFieldError(clss, field)}">
-	<div class="errResp">
-		<c:forEach items="${errorResponse.getFieldErrors(clss, field)}" var="vterror">
+<c:if test="${model.hasFieldError(clss, field)}">
+	<div class="errResp qry-errResp">
+		<c:forEach items="${model.getFieldErrors(clss, field)}" var="vterror">
 			<div>${vterror.message}</div>
 		</c:forEach>
 	</div>

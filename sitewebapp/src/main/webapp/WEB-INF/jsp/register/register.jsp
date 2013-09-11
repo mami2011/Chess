@@ -50,32 +50,32 @@
 				
 				<div>
 					<form:input class="form-control" placeholder="${firstname}"  path="contactDetails.firstName"/>
-					<t2:errorResponse errorResponse="${errorResponse}" field="firstName" clss="com.vendertool.sharedtypes.core.ContactDetails"/>
+					<t2:errorResponse model="${errorResponse}" field="firstName" clss="com.vendertool.sharedtypes.core.ContactDetails"/>
 				</div>
 				<div>
 					<form:input class="form-control" placeholder="${lastname}"  path="contactDetails.lastName"/>
-					<t2:errorResponse errorResponse="${errorResponse}" field="lastName" clss="com.vendertool.sharedtypes.core.ContactDetails"/>
+					<t2:errorResponse model="${errorResponse}" field="lastName" clss="com.vendertool.sharedtypes.core.ContactDetails"/>
 				</div>
 				<div>
 					<c:set var="emailIdpath" value="emailId" />
 					<form:input id="emailId" class="form-control info-msg-available" placeholder="${emailId}" path="${emailIdpath}" data-content="${emailInfo}"/>
-					<t2:errorResponse errorResponse="${errorResponse}" field="${emailIdpath}" clss="com.vendertool.sharedtypes.core.Account"/>
+					<t2:errorResponse model="${errorResponse}" field="${emailIdpath}" clss="com.vendertool.sharedtypes.core.Account"/>
 				</div>
 				<div>
 					<c:set var="passwordpath" value="password" />
 					<form:password id="password" class="form-control info-msg-available" placeholder="${password}" path="${passwordpath}" data-content="${pwdInfo}"/>
-					<t2:errorResponse errorResponse="${errorResponse}" field="${passwordpath}" clss="com.vendertool.sharedtypes.core.Account"/>
+					<t2:errorResponse model="${errorResponse}" field="${passwordpath}" clss="com.vendertool.sharedtypes.core.Account"/>
 				</div>
 				<div>
 					<c:set var="confirmPasswordPath" value="confirmPassword" />
 					<form:password id="confirmpassword" class="form-control info-msg-available" placeholder="${confirmpassword}" path="${confirmPasswordPath}"  data-content="${confPwdInfo}"/>
-					<t2:errorResponse errorResponse="${errorResponse}" field="${confirmPasswordPath}" clss="com.vendertool.sharedtypes.core.Account"/>
+					<t2:errorResponse model="${errorResponse}" field="${confirmPasswordPath}" clss="com.vendertool.sharedtypes.core.Account"/>
 				</div>
 
 				<div class="submit">
 					<input type="submit" class="btn btn-primary grn" value="${submit}" />
 				</div>
-				
+
 				<%-- 
 				<c:if test="${errorResponse.hasErrors()}">
 					<div>

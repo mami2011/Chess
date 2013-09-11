@@ -24,6 +24,7 @@
 	</group>
 	
 	<group name="errorResponseTag">
+		<js>/WEB-INF/tags/errorResponse/js/errorResponse.js</js>
 		<css>/WEB-INF/tags/errorResponse/css/errorResponse.css</css>
 	</group>
 
