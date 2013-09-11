@@ -1,10 +1,11 @@
 package com.vendertool.registration.test.dal;
 
-import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.vendertool.common.SessionIdGenerator;
+import com.vendertool.common.dal.dao.BaseDao;
 import com.vendertool.common.dal.exception.DBConnectionException;
 import com.vendertool.common.dal.exception.DatabaseException;
 import com.vendertool.common.dal.exception.InsertException;
@@ -34,9 +35,8 @@ public class AccountConfirmationDaoTest extends BaseDaoTest{
 	
 	@Override
 	protected void setupTestData() {
-		RegistrationDaoFactory factory = RegistrationDaoFactory.getInstance();
-		dao = factory.getAccountConfirmationDao();
 		ac = QAccountConfirmation.accountConfirmation;
+		dao = (AccountConfirmationDao) getDao();
 		
 		accConfs = new AccountConfirmation[ACCOUNT_COUNT];
 		for(int idx = 0; idx < ACCOUNT_COUNT; idx++) {
@@ -57,9 +57,6 @@ public class AccountConfirmationDaoTest extends BaseDaoTest{
 	public void testCRUD() throws DBConnectionException, InsertException,
 			DatabaseException, SQLException {
 		
-		log("======== connection pool init =======");
-		initConnPool();
-		
 		//dal insert
 		log("======== DAL insert =======");
 		insert();
@@ -67,18 +64,24 @@ public class AccountConfirmationDaoTest extends BaseDaoTest{
 		log("======== DAL find latest account confirmation =======");
 		AccountConfirmation dbaccConf = 
 				dao.findLatestAccountConfirmation(START_ACCOUNT_ID);
-		log("DB account conf: " + dbaccConf.toString());
+		log("DB account conf: " + "id="+dbaccConf.getId() + ", created_dt="+dbaccConf.getCreateDate());
 		
 		log("======== DAL update attempts for one account =======");
 		long id = dbaccConf.getId();
 		dao.updateConfirmationAttempts(START_ACCOUNT_ID, id, 1);
 		
 		log("======== DAL insert one more for first account id =======");
+		AccountConfirmation nac = accConfs[0];
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DATE, 1); //add  by 1 day
+        nac.setCreateDate(cal.getTime());
+        log("New date added is = " + cal.getTime());
 		dao.insertAccountConfirmation(START_ACCOUNT_ID, accConfs[0]);
 		
 		log("======== DAL find latest account confirmation after new insert =======");
 		dbaccConf = dao.findLatestAccountConfirmation(START_ACCOUNT_ID);
-		log("DB account conf: " + dbaccConf.getCreateDate());
+		log("DB account conf: " + "id="+dbaccConf.getId() + ", created_dt="+dbaccConf.getCreateDate());
 		
 		
 		log("======== DAL delete =======");
@@ -98,26 +101,19 @@ public class AccountConfirmationDaoTest extends BaseDaoTest{
 			dao.insertAccountConfirmation(aid++, aconf);
 		}
 	}
-
-	private void initConnPool() throws DBConnectionException, SQLException {
-		//Connection pool set up
-		Connection c = null;
-		try {
-			long start = System.currentTimeMillis();
-			c = dao.getConnection();
-			long end = System.currentTimeMillis();
-			log("Connection pool set up time: " + (end - start));
-		} finally {
-			c.close();
-		}
-	}
 	
 	@Override
 	protected void cleanup() {
 		dao.cleanup();
 	}
 
-	private void log(String msg) {
-		System.err.println(msg);
+	@Override
+	protected BaseDao getDao() {
+		if(dao == null) {
+			RegistrationDaoFactory factory = RegistrationDaoFactory.getInstance();
+			dao = factory.getAccountConfirmationDao();
+		}
+		
+		return dao;
 	}
 }

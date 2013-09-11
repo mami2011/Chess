@@ -92,7 +92,6 @@ public class AccountMapper implements DALMapper<Account> {
 				if(lang != null) {
 					map.put(a.language, lang.getIsoLangCode());
 				}
-				map.put(a.language, null);
 			}
 			
 			if(a.lastModifiedApp.equals(rpath)) {
@@ -135,10 +134,9 @@ public class AccountMapper implements DALMapper<Account> {
 			
 			if(a.roles.equals(rpath)) {
 				Set<AccountRoleEnum> roles = account.getRoles();
-				if((roles == null) || (roles.isEmpty())) {
-					map.put(a.roles, null);
+				if((roles != null) && (!roles.isEmpty())) {
+					map.put(a.roles, account.normalize(roles));
 				}
-				map.put(a.roles, account.normalize(roles));
 			}
 			
 			if(a.salt.equals(rpath)) {
@@ -252,10 +250,9 @@ public class AccountMapper implements DALMapper<Account> {
 			}
 			
 			if(a.createdDate.equals(rpath)) {
-				if(row.get(a.createdDate) == null) {
-					account.setCreateDate(null);
+				if(row.get(a.createdDate) != null) {
+					account.setCreateDate(new Date(row.get(a.createdDate).getTime()));
 				}
-				account.setCreateDate(new Date(row.get(a.createdDate).getTime()));
 			}
 			
 			if(a.currencyCodeIso3.equals(rpath)) {
@@ -290,7 +287,6 @@ public class AccountMapper implements DALMapper<Account> {
 						account.setLanguage(lang);
 					}
 				}
-				account.setLanguage(null);
 			}
 			
 			if(a.lastModifiedApp.equals(rpath)) {
@@ -302,7 +298,6 @@ public class AccountMapper implements DALMapper<Account> {
 				if(row.get(a.lastModifiedDate) != null) {
 					account.setLastModifiedDate(new Date(row.get(a.lastModifiedDate).getTime()));
 				}
-				account.setLastModifiedDate(null);
 			}
 
 			if(a.lastName.equals(rpath)) {
@@ -329,12 +324,11 @@ public class AccountMapper implements DALMapper<Account> {
 			
 			if(a.picture.equals(rpath)) {
 				byte[] bytes = row.get(a.picture);
-				if((bytes == null) || (bytes.length <= 0)) {
-					account.setPicture(null);
+				if((bytes != null) && (bytes.length > 0)) {
+					Image img = new Image();
+					img.setBytes(bytes);
+					account.setPicture(img);
 				}
-				Image img = new Image();
-				img.setBytes(bytes);
-				account.setPicture(img);
 			}
 
 			if(a.registrationAddrId.equals(rpath)) {
@@ -354,10 +348,9 @@ public class AccountMapper implements DALMapper<Account> {
 			
 			if(a.roles.equals(rpath)) {
 				String roles = row.get(a.roles);
-				if((roles == null) || (roles.trim().isEmpty())) {
-					account.setRoles(null);
+				if((roles != null) && (!roles.trim().isEmpty())) {
+					account.setRoles(account.denormalize(roles));
 				}
-				account.setRoles(account.denormalize(roles));
 			}
 			
 			if(a.salt.equals(rpath)) {
@@ -368,10 +361,9 @@ public class AccountMapper implements DALMapper<Account> {
 				if(row.get(a.status) != null) {
 					int sid = row.get(a.status).intValue();
 					AccountStatusEnum se = AccountStatusEnum.get(sid);
-					if(se == null) {
-						account.setAccountStatus(null);
+					if(se != null) {
+						account.setAccountStatus(se);
 					}
-					account.setAccountStatus(se);
 				}
 			}
 		}

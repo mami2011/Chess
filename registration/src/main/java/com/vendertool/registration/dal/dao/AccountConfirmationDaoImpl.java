@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.mysema.query.Tuple;
 import com.mysema.query.sql.SQLQuery;
+import com.mysema.query.sql.SQLSubQuery;
 import com.mysema.query.sql.dml.SQLDeleteClause;
 import com.mysema.query.sql.dml.SQLInsertClause;
 import com.mysema.query.sql.dml.SQLUpdateClause;
@@ -192,14 +193,13 @@ public class AccountConfirmationDaoImpl extends BaseDaoImpl implements
 			
 			QAccountConfirmation ac = QAccountConfirmation.accountConfirmation;
 			
-//			SQLQuery query = from(con, ac)
-//					.groupBy(ac.accountId)
-//					.innerJoin(new SQLSubQuery().from(ac).where(ac.accountId.eq(accountId)).list(ac.createdDate.max()))
-//					.where(ac.accountId.eq(accountId)
-//							.and(ac.createdDate.eq(ac.createdDate.max())));
-			
 			SQLQuery query = from(con, ac)
+					.groupBy(ac.accountId)
+					.innerJoin(new SQLSubQuery().from(ac).where(ac.accountId.eq(accountId)).list(ac.createdDate.max()), ac)
 					.where(ac.accountId.eq(accountId));
+			
+//			SQLQuery query = from(con, ac)
+//					.where(ac.accountId.eq(accountId));
 			
 	    	//Always log the query before executing it
 	    	logger.info("DAL QUERY: " + query.toString());

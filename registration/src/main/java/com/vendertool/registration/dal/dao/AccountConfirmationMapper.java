@@ -127,14 +127,12 @@ public class AccountConfirmationMapper implements DALMapper<AccountConfirmation>
 				if(VUTIL.isNotNull(code)){
 					accConf.setConfirmCode(new Integer(code.intValue()));
 				}
-				accConf.setConfirmCode(null);
 			}
 			
 			if(ac.confirmationDate.equals(rpath)) {
 				if(VUTIL.isNotNull(row.get(ac.confirmationDate))) {
 					accConf.setConfirmationDate(new Date(row.get(ac.confirmationDate).getTime()));
 				}
-				accConf.setConfirmationDate(null);
 			}
 			
 			if(ac.sessionId.equals(rpath)) {
@@ -145,7 +143,6 @@ public class AccountConfirmationMapper implements DALMapper<AccountConfirmation>
 				if(VUTIL.isNotNull(row.get(ac.createdDate))) {
 					accConf.setCreateDate(new Date(row.get(ac.createdDate).getTime()));
 				}
-				accConf.setCreateDate(null);
 			}
 			
 			if(ac.numberOfAttempts.equals(rpath)) {
@@ -157,5 +154,4 @@ public class AccountConfirmationMapper implements DALMapper<AccountConfirmation>
 		
 		return accConf;
 	}
-
 }

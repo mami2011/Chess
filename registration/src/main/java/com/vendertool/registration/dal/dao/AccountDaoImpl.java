@@ -85,7 +85,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	public Account findAccountProfile(String email) throws DBConnectionException,
 			FinderException, DatabaseException {
 		
-		return findAccountByReadSet(email, FieldSets.READSET.PROFILE);
+		return findAccountByReadSet(email, FieldSets.ACCOUNT_READSET.PROFILE);
 	}
 	
 	@Override

@@ -1,0 +1,94 @@
+package com.vendertool.registration.test.dal;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import junit.framework.Assert;
+
+import com.vendertool.common.dal.dao.BaseDao;
+import com.vendertool.common.dal.exception.DBConnectionException;
+import com.vendertool.common.dal.exception.DatabaseException;
+import com.vendertool.common.dal.exception.InsertException;
+import com.vendertool.common.test.dal.BaseDaoTest;
+import com.vendertool.registration.dal.dao.PasswordHistoryDao;
+import com.vendertool.registration.dal.dao.RegistrationDaoFactory;
+import com.vendertool.registration.dal.dao.codegen.QPassswordHistory;
+
+public class PasswordHistoryDaoTest extends BaseDaoTest {
+
+	private static final int PWD_COUNT = 3;
+	private static final long ACCOUNT_ID = 600;
+	
+	String[] passwords;
+	String[] salts;
+	PasswordHistoryDao dao;
+	QPassswordHistory ph;
+	
+	protected PasswordHistoryDaoTest() {
+		super();
+	}
+	
+	public static void main(String[] args) throws DBConnectionException,
+			InsertException, DatabaseException, SQLException {
+		new PasswordHistoryDaoTest().testCRUD();
+	}
+	
+	private void testCRUD() throws DBConnectionException, InsertException, DatabaseException {
+		//dal insert
+		log("======== DAL insert =======");
+		insert();
+		
+		log("======== DAL find all passwords inserted =======");
+		List<String> dbpwds = dao.findAllPreviousPasswords(ACCOUNT_ID);
+		Assert.assertNotNull(dbpwds);
+		for(String pwd : passwords) {
+			Assert.assertTrue(dbpwds.contains(pwd));
+		}
+		
+		log("======== DAL find exact matching pwd =======");
+		String dbpwd = dao.findMatchingPassword(ACCOUNT_ID, passwords[0]);
+		Assert.assertEquals(passwords[0], dbpwd);
+		
+		log("======== DAL delete pwds =======");
+		dao.deletePreviousPasswords(ACCOUNT_ID, null);
+		
+		dbpwds = dao.findAllPreviousPasswords(ACCOUNT_ID);
+		Assert.assertNull(dbpwds);
+		
+		log("******   TEST DONE!!!   ******");
+	}
+
+	private void insert() throws DBConnectionException, InsertException, DatabaseException {
+		for(int i=0; i<PWD_COUNT; i++) {
+			dao.insertPreviousPassword(ACCOUNT_ID, passwords[i], salts[i]);
+		}
+	}
+
+	@Override
+	protected void setupTestData() {
+		dao = (PasswordHistoryDao) getDao();
+		ph = QPassswordHistory.passswordHistory;
+		passwords = new String[PWD_COUNT];
+		salts = new String[PWD_COUNT];
+		
+		for(int idx=0; idx < PWD_COUNT; idx++){
+			passwords[idx] = "testpasswordnothashed" + idx;
+			salts[idx] = "slat" + idx;
+		}
+	}
+
+	@Override
+	protected void cleanup() {
+		dao.cleanup();
+	}
+
+	@Override
+	protected BaseDao getDao() {
+		if(dao == null) {
+			dao = RegistrationDaoFactory.getInstance().getPasswordHistoryDao();
+		}
+		
+		return dao;
+	}
+
+}

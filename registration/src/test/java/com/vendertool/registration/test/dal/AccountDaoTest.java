@@ -1,12 +1,12 @@
 package com.vendertool.registration.test.dal;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
 
 import junit.framework.Assert;
 
 import com.mysema.query.types.Path;
+import com.vendertool.common.dal.dao.BaseDao;
 import com.vendertool.common.dal.exception.DBConnectionException;
 import com.vendertool.common.dal.exception.DatabaseException;
 import com.vendertool.common.dal.exception.DeleteException;
@@ -41,9 +41,8 @@ public class AccountDaoTest extends BaseDaoTest{
 	
 	@Override
 	protected void setupTestData() {
-		RegistrationDaoFactory factory = RegistrationDaoFactory.getInstance();
-		dao = factory.getAccountDao();
 		qa = QAccount.account;
+		dao = (AccountDao) getDao();
 		
 		accounts = new Account[ACCOUNT_COUNT];
 		for(int idx = 0; idx < ACCOUNT_COUNT; idx++) {
@@ -74,8 +73,6 @@ public class AccountDaoTest extends BaseDaoTest{
 	public void testCRUD() throws DBConnectionException, InsertException,
 			DatabaseException, SQLException {
 		
-		initConnPool();
-		
 		//DAL insert
 		log("======== INSERT TEST =======");
 		insert();
@@ -94,7 +91,7 @@ public class AccountDaoTest extends BaseDaoTest{
 		
 		//DAL update
 		log("======== UPDATE ACCOUNT TO THE DATABASE =======");
-		update(accounts[0], FieldSets.UPDATESET.PROFILE);
+		update(accounts[0], FieldSets.ACCOUNT_UPDATESET.PROFILE);
 		
 		//DAL find
 		log("======== FIND PROFILE TEST =======");
@@ -113,7 +110,7 @@ public class AccountDaoTest extends BaseDaoTest{
 		
 		//DAL find by readset
 		log("======== FIND WITH READ SET TEST =======");
-		dbaccount = findAccount(accounts[0].getEmailId(), FieldSets.READSET.SIGNIN);
+		dbaccount = findAccount(accounts[0].getEmailId(), FieldSets.ACCOUNT_READSET.SIGNIN);
 		
 		//JUnit assert read set
 		Assert.assertNull(dbaccount.getContactDetails());
@@ -135,19 +132,6 @@ public class AccountDaoTest extends BaseDaoTest{
 		}
 		
 		log("******   TEST DONE!!!   ******");
-	}
-
-	private void initConnPool() throws DBConnectionException, SQLException {
-		//Connection pool set up
-		Connection c = null;
-		try {
-			long start = System.currentTimeMillis();
-			c = dao.getConnection();
-			long end = System.currentTimeMillis();
-			log("Connection pool set up time: " + (end - start));
-		} finally {
-			c.close();
-		}
 	}
 	
 	private void updateLocalAccount(int idx) {
@@ -201,13 +185,19 @@ public class AccountDaoTest extends BaseDaoTest{
 			DeleteException, DatabaseException {
 		dao.deleteAccount(email);
 	}
-	
-	private void log(String msg) {
-		System.err.println(msg);
-	}
 
 	@Override
 	protected void cleanup() {
 		dao.cleanup();
+	}
+
+	@Override
+	protected BaseDao getDao() {
+		if(dao == null) {
+			RegistrationDaoFactory factory = RegistrationDaoFactory.getInstance();
+			dao = factory.getAccountDao();
+		}
+		
+		return dao;
 	}
 }
