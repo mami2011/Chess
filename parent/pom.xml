@@ -18,6 +18,7 @@
 			<!-- <jackson-version>1.9.13</jackson-version> -->
 			<jackson-version>2.2.3</jackson-version>
 			<querydsl-version>3.2.3</querydsl-version>
+			<wro4j-version>1.7.0</wro4j-version>
 		</properties>
 		
 		<dependencyManagement>
@@ -341,6 +342,18 @@
 				<groupId>org.apache.tomcat</groupId>
 				<artifactId>tomcat-jdbc</artifactId>
 				<version>7.0.42</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>ro.isdc.wro4j</groupId>
+				<artifactId>wro4j-core</artifactId>
+				<version>${wro4j-version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>ro.isdc.wro4j</groupId>
+				<artifactId>wro4j-extensions</artifactId>
+				<version>${wro4j-version}</version>
 			</dependency>
 			
 		  </dependencies>

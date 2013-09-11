@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups xmlns="http://www.isdc.ro/wro"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
+   	
+   	<group name="accounthubCss">
+		<css>/WEB-INF/jsp/accounthub/css/accounthub.css</css>
+		<css>/WEB-INF/tags/layoutTable/css/layoutTable.css</css>
+		<css>/WEB-INF/tags/navbarSection/css/navbarSection.css</css>
+	</group>
+	
+   	<group name="accounthub">
+		<group-ref>accounthubCss</group-ref>
+	</group>
+	
+	<group name="bootstrap">
+		<css>/resources/css/lib/bootstrap.css</css>
+		<js>/resources/js/lib/bootstrap.js</js>
+	</group>
+	
+	<group name="errorResponseModule">
+		<css>/resources/css/sharedNgModules/errorResponseModule.css</css>
+		<js>/resources/js/sharedNgModules/errorResponseModule.js</js>
+	</group>
+	
+	<group name="errorResponseTag">
+		<css>/WEB-INF/tags/errorResponse/css/errorResponse.css</css>
+	</group>
+
+	<!-- fileUploader popup -->
+	<group name="fileUploader">
+		<css>/WEB-INF/jsp/fileUploader/css/fileUploaderModule.css</css>
+		<js>/WEB-INF/jsp/fileUploader/js/fileUploaderModule.js</js>
+	</group>
+
+   	<group name="pageTag">
+   		<group-ref>bootstrap</group-ref>
+		<css>/WEB-INF/tags/page/css/page.css</css>
+		<js>/WEB-INF/tags/page/js/header.js</js>
+	</group>
+	
+	<group name="popupTag">
+		<group-ref>bootstrap</group-ref>
+		<css>/WEB-INF/tags/popup/css/popup.css</css>
+	</group>
+	
+	<group name="profile">
+		<group-ref>errorResponseModule</group-ref>
+		<css>/WEB-INF/jsp/profile/css/profile.css</css>
+		<css>/WEB-INF/tags/layoutTable/css/layoutTable.css</css>
+		<js>/WEB-INF/jsp/profile/js/app.js</js>
+		<js>/WEB-INF/jsp/profile/js/controllers.js</js>
+	</group>
+	
+	<group name="register">
+		<group-ref>errorResponseTag</group-ref>
+		<css>/WEB-INF/jsp/register/css/register.css</css>
+		<js>/WEB-INF/jsp/register/js/register.js</js>
+		<js>/WEB-INF/resources/js/lib/jquery.placeholder.js</js>
+	</group>
+	
+	<group name="uploads">
+		<group-ref>accounthubCss</group-ref>
+		<js>/WEB-INF/jsp/uploads/js/app.js</js>
+		<js>/WEB-INF/jsp/uploads/js/controllers.js</js>
+	</group>
+	
+	
+	
+
+	
+	
+	
+</groups>

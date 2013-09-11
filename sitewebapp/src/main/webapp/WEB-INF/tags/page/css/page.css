@@ -1,0 +1,280 @@
+/**************************************
+Layout
+***************************************/
+html, body, #wrap {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+body > #wrap {
+	height: auto;
+	min-height: 100%;
+}
+body {
+	font-family: helvetica, arial, san-serif;
+	/**
+   	background-color: #e5e5e5 !important;**/
+}
+#header {
+	position:relative;
+	height: 45px;
+}
+#header .bg {
+	position:absolute;
+	height: 45px;
+	width:100%;
+	/**
+	background-color: #4274b9;**/
+	background-color: #53a55e;
+	
+
+	
+	/* This works in IE 8 & 9 too */
+	/* ... but also 5, 6, 7 */
+	filter: alpha(opacity=80);
+    
+	/* Modern!
+	/* Firefox 0.9+, Safari 2?, Chrome any?
+	/* Opera 9+, IE 9+*/
+	opacity: 0.8; 
+
+}
+#footer {
+	clear: both;
+	position: relative;
+	z-index: 10;
+	height: 100px;
+	margin-top: -100px;
+	/*
+	background: #606a78;*/
+	background-color: #333;
+}
+#content {
+	padding-bottom: 100px;
+}
+
+/**************************************
+Content
+***************************************/
+.ttl {
+	padding:0;
+	margin:0 0 30px 0;
+	font-weight:normal;
+	font-size:26px;
+	
+	/** orange
+	color:#FF8C19; **/
+	
+	color:#5592e6;
+}
+.pg-msg {
+	min-height:50px;
+	border:1px solid #fff;
+}
+.pg-msg .alert {
+	margin-bottom:0;
+}
+a {
+	text-decoration:none;
+}
+label {
+	font-weight:normal;
+}
+.inline {
+	display:inline-block;
+}
+.clr {
+	clear:both;
+}
+
+/**************************************
+Page Header
+***************************************/
+.hdr {
+	position:relative;
+	min-width:500px;
+	max-width:1024px;
+	margin:0 auto;
+	padding-left:30px;
+}
+.hdr a {
+	text-decoration:none;
+	font-size:14px;
+	color:#000;
+	display:inline-block;
+}
+.hdr a:hover {
+	color:#fff;
+}
+.hdr .topnav  {
+	float:left;
+}
+.hdr .topnav a {
+	margin:0;
+	padding:12px 30px;
+}
+.hdr .topnav .curr {
+	/*
+	background-color:#26599e;*/
+	color:#fff;
+}
+
+.hdr .ctls {
+	position:absolute;
+	right:0;
+	top:6px;
+}
+.hdr .ctls .lang {
+	float:right;
+	margin:5px 15px 0 0;
+	color:#333;
+	font-size:12px;
+}
+.hdr .ctls .lang .lbl {
+	color:#ccc;
+}
+.hdr .ctls .lang .arw {
+	width:15px;
+	height:8px;
+	display:inline-block;
+	background:url('../resources/img/icons.png') no-repeat -40px 0; 
+}
+#languageMenu {
+	max-height:400px;
+	width:200px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+.hdr .ctls .sign-in {
+	float:right;
+	font-size:12px;
+}
+.hdr .ctls .sign-in i {
+	margin:0 7px 0 0;
+	color:#ccc;
+	font-style: normal;
+}
+.hdr .ctls .sign-in a {
+	padding:7px 5px;
+	font-size:12px;
+}
+.hdr .ctls.sign-in .join {
+	background-color:#ccc;
+	padding:2px 15px;
+	border-radius:3px;
+	color:#333;
+}
+.hdr .ctls .user {
+	float:right;
+	padding:7px 5px;
+	position:relative;
+}
+.hdr .ctls .user a {
+	font-size:12px;
+}
+.hdr .ctls .user .arw {
+	width:15px;
+	height:8px;
+	display:inline-block;
+	background:url('../resources/img/icons.png') no-repeat -40px 0; 
+}
+.hdr .ctls .srch {
+	float:right;
+	margin-right:20px;
+	margin-top:3px;
+}
+.hdr .ctls .srch input {
+	width:175px;
+	font-size:14px;
+	background-color:#9ad0a1;
+	border:0;
+	color:#fff;
+	padding-left:5px;
+}
+
+.hdr .ctls .srch button {
+	width:23px;
+	height:20px;
+	background:url('../resources/img/icons.png') no-repeat -19px 0;
+	border:0;
+	position:relative;
+	top:6px;
+	cursor:pointer;
+}
+
+/**************************************
+Page Footer
+***************************************/
+.ftr {
+	min-width:500px;
+	max-width:1024px;
+	margin:15px auto;
+	position:relative;
+	padding-left:30px;
+}
+.ftr a {
+	color:#ccc;
+	font-size:12px;
+	padding:5px 3px;
+	margin-right:40px;
+}
+
+
+
+
+/**
+.err-icn {
+	display:inline;
+	padding-top:1px;
+	padding-left:17px;
+	margin-right:5px;
+	background:url('/listing-tool/img/icons.png') no-repeat 0 0;
+}
+**/
+
+.list-group .curr {
+	background-color:#eee;
+}
+
+.btn.btn-primary.grn {
+	/*
+	background-color:#5eb161;
+	border:1px solid #5eb161;
+	
+	background-color:#ebc358;
+	border:1px solid #ebc358;
+	background-color:#8fa1b3;
+	border:1px solid #8fa1b3;*/
+	
+	
+	
+	font-size:17px;
+	padding-left:50px;
+	padding-right:50px;
+	
+}
+.btn.btn-primary.grn:hover {
+	/*
+	background-color:#529b55;
+	border:1px solid #eba138;
+	background-color:#eba138;
+	
+	background-color:#6f96bf;
+	border:1px solid #6f96bf;*/
+}
+
+
+/** Submit button and Cancel link set **/
+.sub-cncl .cncl.lg {
+	position:relative;
+	top:3px;
+	margin-left:20px;
+	display:inline-block;
+}
+
+/** style for mathiasbynens/jquery-placeholder **/
+.placeholder {
+	color: #aaa;
+}
+
+

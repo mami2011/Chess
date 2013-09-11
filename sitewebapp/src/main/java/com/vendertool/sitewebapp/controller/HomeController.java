@@ -28,6 +28,6 @@ public class HomeController {
 		modelMap.addAttribute("langOptions", MenuBuilder.getLanguageOptions(locale));
 		modelMap.addAttribute("selectedLang", request.getParameter("lang"));
 		
-		return "home";
+		return "home/home";
 	}
 }

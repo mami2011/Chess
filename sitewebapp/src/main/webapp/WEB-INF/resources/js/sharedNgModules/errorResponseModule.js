@@ -1,13 +1,16 @@
 
-
-angular.module('errorResponseModule', []).directive("error", function() {
+/**
+ * Needs the scope.errorResponse to be defined in the controller.
+ * scope.errorResponse the json model of com.vendertool.sharedtypes.rnr.ErrorResponse.
+ */
+angular.module('errorResponseModule', []).directive("errorResponse", function() {
 	'use strict';
 
 	return {
 		link: function(scope, element, attrs) {
 			
 			var getErrorMsgs = function() {
-				scope.errorMsgs = ErrorUtil.getErrorMsgs(attrs.cname, attrs.field, scope.errorResponse);
+				scope.errorMsgs = ErrorUtil.getErrorMsgs(attrs.clss, attrs.field, scope.errorResponse);
 
 				var wrap = element.closest('.fldWrp');
 				

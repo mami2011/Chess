@@ -26,6 +26,6 @@ public class UnexpectedErrorPageController {
 		modelMap.addAttribute("langOptions", MenuBuilder.getLanguageOptions(locale));
 		modelMap.addAttribute("selectedLang", request.getParameter("lang"));
 		
-		return "unexpectedError";
+		return "errors/unexpectedError";
 	}
 }

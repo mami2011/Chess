@@ -23,15 +23,15 @@
   	<sec:http pattern="/apple-touch-icon.png" security="none"/>
   	<sec:http pattern="/index.jsp" security="none"/>
   	<sec:http pattern="/resources/**" security="none"/>
-  	<sec:http pattern="/signin" security="none"/>
-  	<sec:http pattern="/signout" security="none"/>
+  	<sec:http pattern="/signIn" security="none"/>
+  	<sec:http pattern="/signOut" security="none"/>
   	<sec:http pattern="/register" security="none"/>
   	<sec:http pattern="/registersuccesspreconfirm" security="none"/>
   	<sec:http pattern="/home" security="none"/>
   	<sec:http pattern="/confirmaccount" security="none"/>
   	<sec:http pattern="/confirmaccountsuccess" security="none"/>
   	<sec:http pattern="/confirmaccountfailed" security="none"/>
-  	
+  	<sec:http pattern="/wro/**" security="none"/>
   	
   	<!--
   	IMPORTANT!!!! 
@@ -52,8 +52,8 @@
 		<sec:intercept-url pattern="/index" access="permitAll"/>
 		<sec:intercept-url pattern="/resources/**" access="permitAll"/>
 		<sec:intercept-url pattern="/home" access="permitAll"/>
-		<sec:intercept-url pattern="/signin" access="permitAll"/>
-		<sec:intercept-url pattern="/signout" access="permitAll"/>
+		<sec:intercept-url pattern="/signIn" access="permitAll"/>
+		<sec:intercept-url pattern="/signOut" access="permitAll"/>
 		<sec:intercept-url pattern="/register" access="permitAll"/>
 		<sec:intercept-url pattern="/registersuccesspreconfirm" access="permitAll"/>
 		<sec:intercept-url pattern="/confirmaccount" access="permitAll"/>
@@ -66,13 +66,13 @@
 		<sec:intercept-url pattern="/**" access="hasRole('ROLE_USER_MASTER')" />
 		
 		<!-- default-target-url="/accounthub" -->
-		<sec:form-login login-page="/signin" 
-			authentication-failure-url="/signin?error=true" 
+		<sec:form-login login-page="/signIn" 
+			authentication-failure-url="/signIn?error=true" 
 			always-use-default-target='true'
 			default-target-url="/accounthub" />
 		
 		<!-- logout-url="/signout" -->
-		<sec:logout logout-success-url="/signin" 
+		<sec:logout logout-success-url="/signIn" 
 				invalidate-session="true"
             	delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE" />
         
