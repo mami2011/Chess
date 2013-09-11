@@ -69,13 +69,25 @@ Attributes
 					User Menu
 					=====================--%>
 					<div class="user inline">
+					
+						<%-- Remove later 
 						<a id="profileBtn" href="javascript:;">${email} <b class="arw"></b></a>
-						
 						<ul id="profileMenu" class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu">
 						  <li><a tabindex="-1" href="${profileUrl}">Profile</a></li>
 						  <li class="divider"></li>
 						  <li><a tabindex="-1" href="<c:url value="j_spring_security_logout" />">Sign-out</a></li>
 						</ul>
+						--%>
+						
+						<div class="dropdown">
+							<a data-toggle="dropdown" href="#"> ${email} <span class="caret"></span></a>
+							<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+								<li role="presentation"><a role="menuitem" tabindex="-1" href="${profileUrl}">Profile</a></li>
+								<li role="presentation" class="divider"></li>
+								<li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="j_spring_security_logout" />">Sign-out</a></li>
+							</ul>
+						</div>
+					
 					</div>
 					<%--=================
 					Search Box
@@ -100,15 +112,27 @@ Attributes
 					<c:if test="${empty selectedLangText}">
 						<c:set var="selectedLangText" value="Select language"/>
 					</c:if>
-						
-					<a id="langBtn" href="javascript:;"><span class="lbl"><spring:message code="form.registration.lang"/>:</span> ${selectedLangText} <b class="arw"></b></a>
 					
+					<%-- Remove later
+					<a id="langBtn" href="javascript:;"><span class="lbl"><spring:message code="form.registration.lang"/>:</span> ${selectedLangText} <b class="arw"></b></a>
 					<ul id="languageMenu" name="lang" class="dropdown-menu pull-left" role="menu" aria-labelledby="dropdownMenu">
 						<c:forEach var="lang" items="${languages}">
 							<c:set var="selected" value="${lang.isoLangCode == selectedLang ? 'selected' : ''}"/>
 							<li><a tabindex="-1" href="?lang=${lang.isoLangCode}">${lang.nativeName}</a></li>
 						</c:forEach>
 					</ul>
+					--%>
+					
+					<div class="dropdown">
+						<span class="lbl"><spring:message code="form.registration.lang"/>:</span><a data-toggle="dropdown" href="#"> ${selectedLangText} <span class="caret"></span></a>
+						<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+							<c:forEach var="lang" items="${languages}">
+								<c:set var="selected" value="${lang.isoLangCode == selectedLang ? 'selected' : ''}"/>
+								<li role="presentation"><a role="menuitem" tabindex="-1" href="?lang=${lang.isoLangCode}">${lang.nativeName}</a></li>
+							</c:forEach>
+						</ul>
+					</div>
+				
 				</div>
 			</c:if>
 			
