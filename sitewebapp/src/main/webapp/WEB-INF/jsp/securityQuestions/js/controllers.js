@@ -6,12 +6,12 @@ all the function params as strings in same order.
 ********************/
 securityQuestionsApp.controller('SecurityQuestionsCtrl', ['$scope', '$http', '$location', 'Data', function($scope, $http, $location, Data) {
 	
-	var removeOption;
+	var removeQuestion;
 	
 	$scope.question1;
 	$scope.question2;
-	$scope.question1Options = angular.copy(Data.questions);
-	$scope.question2Options = angular.copy(Data.questions);
+	$scope.questionList1 = angular.copy(Data.questionList);
+	$scope.questionList2 = angular.copy(Data.questionList);
 	$scope.answer1;
 	$scope.answer2;
 	
@@ -23,13 +23,19 @@ securityQuestionsApp.controller('SecurityQuestionsCtrl', ['$scope', '$http', '$l
 	//
 	$scope.$watch("question1", function() {
 		if ($scope.question1) {
-			$scope.question2Options = removeOption($scope.question1, $scope.question2Options);
+			$scope.questionList2 = removeQuestion($scope.question1, $scope.questionList2);
+		}
+		else {
+			$scope.questionList2 = angular.copy(Data.questionList);
 		}
 	});
 
 	$scope.$watch("question2", function() {
 		if ($scope.question2) {
-			 $scope.question1Options = removeOption($scope.question2, $scope.question1Options);
+			 $scope.questionList1 = removeQuestion($scope.question2, $scope.questionList1);
+		}
+		else {
+			$scope.questionList1 = angular.copy(Data.questionList);
 		}
 	});
 	
@@ -44,38 +50,31 @@ securityQuestionsApp.controller('SecurityQuestionsCtrl', ['$scope', '$http', '$l
 		$http.post('questions/save', questionsResp).
 			success(function (data, status, headers, config) {
 				
-				//alert('all good');
-				
-				$location.path('accounthub'); 
-				
-				//$scope.$apply(function() { });
-				
-				/**
-				$scope.accountEdit = data.account;
+				console.log('all good');
+
 				$scope.errorResponse = data.errorResponse;
-				
+
 				if ($scope.errorResponse.fieldBindingErrors.length > 0) {
 					showPageErrorMsg();
 				}
 				else {
 					// Only update this if no errors
-					$scope.accountOrig = data.account;
 					$scope.errorResponse = undefined;
 					
-					// Take user to profile page
-					//$location.path('/profile'); // path not hash
-					showPageSuccessMsg('profile');
-				}**/
+					// Take user to success page
+					$location.path('/success');
+				}
 			}).
 			error(function(data, status, headers, config) {
+				
 				
 				alert('error');
 			});
 	};
 	
-	removeOption = function(questionId, questions) {
+	removeQuestion = function(questionId, questions) {
 		// Start with full original list
-		questions = angular.copy(Data.questions);
+		questions = angular.copy(Data.questionList);
 		
 		for (var i=0, n=questions.length; i<n; i++) {
 			if (questionId === questions[i].id) {
@@ -84,6 +83,10 @@ securityQuestionsApp.controller('SecurityQuestionsCtrl', ['$scope', '$http', '$l
 			}
 		}
 	};
+	
+	var showPageErrorMsg = function() {
+  		$('.alert-danger').show();
+  	};
 	
 	
 	

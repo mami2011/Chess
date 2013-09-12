@@ -4,13 +4,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="t1" tagdir="/WEB-INF/tags/page" %>
 
-<spring:message code="form.securityquestions.title" var="title"/>
-<spring:message code='form.submit' var="submit"/>
+
 
 <t1:page title="VendorTool" angularAppName="securityQuestionsApp" currentPage="questions" email="${email}" >
 
 	<jsp:attribute name="css">
-		<link href="<c:url value='/wro/register.css' />" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/wro/securityQuestions.css' />" rel="stylesheet" type="text/css" />
 	</jsp:attribute>
 	
 	<jsp:attribute name="scripts">
@@ -30,40 +29,7 @@
 		<div id="pgBg"><img src="resources/img/cafe2.jpg" alt=""></div>
 		
 	    <div class="reg main input-group" ng-controller="SecurityQuestionsCtrl">
-	    	
-	        <h3 class="ttl">${title}</h3>
-			
-			<c:if test="${errorResponse.hasErrors()}">
-				<div class="pg-msg">
-					<div class="alert alert-danger">
-						<c:forEach items="${errorResponse.getVTErrors()}" var="vterror">
-							${vterror.getMessage()}<br/>
-						</c:forEach>
-					</div>
-				</div>
-			</c:if>
-
-			<form>
-
-				<select ng-model="question1" ng-options="q.id as q.text for q in question1Options">
-					<option value="">- Select a question -</option>
-		        </select>
-	            <div>
-	                <input class="form-control" ng-model="answer1" placeholder="Your answer to question" autocomplete="off"/>
-	            </div>
-				
-				<select ng-model="question2" ng-options="q.id as q.text for q in question2Options">
-					<option value="">- Select a second question -</option>
-		        </select>
-	            <div>
-	                <input class="form-control" ng-model="answer2" placeholder="Your answer to second question" autocomplete="off"/>
-	            </div>
-				
-	            <div class="submit">
-	            	<button ng-click="save()" type="button" class="btn btn-primary grn">Submit</button>
-	            </div>
-
-	        </form>
+	    	<div ng-view></div>
 	    </div>
 	</jsp:body>
 </t1:page>
