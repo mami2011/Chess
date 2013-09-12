@@ -60,6 +60,14 @@
 		<js>/WEB-INF/resources/js/lib/jquery.placeholder.js</js>
 	</group>
 	
+	<group name="securityQuestions">
+		<group-ref>errorResponseModule</group-ref>
+		<css>/WEB-INF/jsp/securityQuestions/css/securityQuestions.css</css> 
+		<js>/WEB-INF/jsp/securityQuestions/js/app.js</js>
+		<js>/WEB-INF/jsp/securityQuestions/js/controllers.js</js>
+		<js>/WEB-INF/resources/js/lib/jquery.placeholder.js</js>
+	</group>
+	
 	<group name="uploads">
 		<group-ref>accounthubCss</group-ref>
 		<js>/WEB-INF/jsp/uploads/js/app.js</js>

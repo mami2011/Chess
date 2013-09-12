@@ -4,40 +4,34 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="t1" tagdir="/WEB-INF/tags/page" %>
 
-<t1:page title="${title}" currentPage="questions" email="${email}">
+<spring:message code="form.securityquestions.title" var="title"/>
+<spring:message code='form.submit' var="submit"/>
+
+<t1:page title="VendorTool" angularAppName="securityQuestionsApp" currentPage="questions" email="${email}" >
 
 	<jsp:attribute name="css">
 		<link href="<c:url value='/wro/register.css' />" rel="stylesheet" type="text/css" />
 	</jsp:attribute>
 	
 	<jsp:attribute name="scripts">
-		<script src="<c:url value='/wro/register.js' />" type="text/javascript"></script>
+		<script src="<c:url value='/wro/securityQuestions.js' />" type="text/javascript"></script>
 	</jsp:attribute>
 	
 	<jsp:attribute name="inlineJs">
+		securityQuestionsApp.factory('Data', function() {
+			return ${modelMapJson};
+		});
+		
+		// IE placeholder text
 		$('input').placeholder();
 	</jsp:attribute>
 	
 	<jsp:body>
 		<div id="pgBg"><img src="resources/img/cafe2.jpg" alt=""></div>
 		
-	    <div class="reg main input-group">
-	    	<spring:message code="form.securityquestions.title" var="title"/>
-	    	<spring:message code='form.submit' var="submit"/>
+	    <div class="reg main input-group" ng-controller="SecurityQuestionsCtrl">
 	    	
 	        <h3 class="ttl">${title}</h3>
-	        <c:if test="${param.justConfAccount}" >
-	        	<spring:message code="form.registration.welcome"/>
-	        </c:if>
-
-			<c:if test="${!empty SPRING_SECURITY_LAST_EXCEPTION.message}">
-			    <div class="pg-msg">
-					<div class="alert alert-danger">
-						${SPRING_SECURITY_LAST_EXCEPTION.message}
-						<c:remove var = "SPRING_SECURITY_LAST_EXCEPTION" scope = "session" />
-					</div>
-				</div>
-			</c:if>
 			
 			<c:if test="${errorResponse.hasErrors()}">
 				<div class="pg-msg">
@@ -48,35 +42,27 @@
 					</div>
 				</div>
 			</c:if>
-			
-			<form action="<c:url value="" />" method="POST">
-				<div class="dropdown">
-					<a data-toggle="dropdown" href="#">Select question 1 <span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-					</ul>
-				</div>
+
+			<form>
+
+				<select ng-model="question1" ng-options="q.id as q.text for q in question1Options">
+					<option value="">- Select a question -</option>
+		        </select>
 	            <div>
-	                <input class="form-control" name="answer1" placeholder="Your answer to question 1" autocomplete="off"/>
+	                <input class="form-control" ng-model="answer1" placeholder="Your answer to question" autocomplete="off"/>
 	            </div>
-	            <div class="dropdown">
-					<a data-toggle="dropdown" href="#">Select question 2 <span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-					</ul>
-				</div>
+				
+				<select ng-model="question2" ng-options="q.id as q.text for q in question2Options">
+					<option value="">- Select a second question -</option>
+		        </select>
 	            <div>
-	                <input class="form-control" name="answer1" placeholder="Your answer to question 2" autocomplete="off"/>
+	                <input class="form-control" ng-model="answer2" placeholder="Your answer to second question" autocomplete="off"/>
 	            </div>
+				
 	            <div class="submit">
-	            	<input type="submit" class="btn btn-primary grn" value="${submit}" />
+	            	<button ng-click="save()" type="button" class="btn btn-primary grn">Submit</button>
 	            </div>
-				
-				
+
 	        </form>
 	    </div>
 	</jsp:body>
