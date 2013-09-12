@@ -12,7 +12,7 @@
 	
 	<jsp:body>
 	
-		<t2:layoutTable ngController="AcctHubCtrl">
+		<t2:layoutTable angularController="AcctHubCtrl">
 			<jsp:attribute name="leftNav">
 				<h3 class="ttl">Summary</h3>
 				<div class="list-group">

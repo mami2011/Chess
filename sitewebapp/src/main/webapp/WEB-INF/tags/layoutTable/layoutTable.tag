@@ -10,10 +10,10 @@ Page fragments
 <%--============
 Attributes
 ================ --%>
-<%@ attribute name="ngController" required="false"%>
+<%@ attribute name="angularController" required="false"%>
 
 
-<table class="layout input-group" ng-controller="${ngController}" cellpadding="0" cellspacing="0">
+<table class="layout input-group" ng-controller="${angularController}" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="c1">
 			<jsp:invoke fragment="leftNav"/>

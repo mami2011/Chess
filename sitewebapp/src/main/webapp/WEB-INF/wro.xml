@@ -24,6 +24,7 @@
 	</group>
 	
 	<group name="errorResponseTag">
+		<js>/WEB-INF/tags/errorResponse/js/errorResponse.js</js>
 		<css>/WEB-INF/tags/errorResponse/css/errorResponse.css</css>
 	</group>
 
@@ -56,6 +57,14 @@
 		<group-ref>errorResponseTag</group-ref>
 		<css>/WEB-INF/jsp/register/css/register.css</css>
 		<js>/WEB-INF/jsp/register/js/register.js</js>
+		<js>/WEB-INF/resources/js/lib/jquery.placeholder.js</js>
+	</group>
+	
+	<group name="securityQuestions">
+		<group-ref>errorResponseModule</group-ref>
+		<css>/WEB-INF/jsp/securityQuestions/css/securityQuestions.css</css> 
+		<js>/WEB-INF/jsp/securityQuestions/js/app.js</js>
+		<js>/WEB-INF/jsp/securityQuestions/js/controllers.js</js>
 		<js>/WEB-INF/resources/js/lib/jquery.placeholder.js</js>
 	</group>
 	

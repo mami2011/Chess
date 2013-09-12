@@ -37,8 +37,16 @@
   min-width: 50%;
   min-height: 50%;
 }
-
-
+#rememberMe {
+	color:#666;
+}
+#forgotPsswd {
+	display:block;
+	margin-top:5px;
+}
+.forgotRemember {
+	margin-top:15px;
+}
 
 .reg {
 	position:relative;
@@ -96,21 +104,6 @@
 .reg .submit .btn {
 	margin-top:15px;
 }
-
-
-
-
-.reg .remember {
-	color:#666;
-}
-.reg .forgot {
-	display:inline-block;
-	position:relative;
-	top:10px;
-	margin-left:20px;
-}
-
-
 .reg-cfm {
 	position:relative;
 	width:400px;
@@ -133,7 +126,6 @@
 #conf-pwd-info {
 	display:none;
 }
-
 
 
 .reg .popover-content {

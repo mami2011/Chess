@@ -16,7 +16,7 @@
 	</jsp:attribute>
 
 	<jsp:body>
-		<t2:layoutTable ngController="UploadsCtrl">
+		<t2:layoutTable angularController="UploadsCtrl">
 			<jsp:attribute name="leftNav">
 				<h3 class="ttl">Uploads</h3>
 				<div class="list-group">

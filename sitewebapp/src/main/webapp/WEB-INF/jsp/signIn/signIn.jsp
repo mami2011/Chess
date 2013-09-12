@@ -21,11 +21,11 @@
 	<jsp:body>
 		<div id="pgBg"><img src="resources/img/cafe2.jpg" alt=""></div>
 		
-	    <div class="reg main input-group">
+	    <div class="reg main input-group" style="padding-bottom:15px;">
 	    	<spring:message code="form.signin.signin" var="signintitle"/>
 	    	<spring:message code='form.submit' var="submit"/>
 	    	
-	        <h3 class="ttl"><c:out value="${signintitle}" /></h3>
+	        <h3 class="ttl">${signintitle}</h3>
 	        <c:if test="${param.justConfAccount}" >
 	        	<spring:message code="form.registration.welcome"/>
 	        </c:if>
@@ -64,6 +64,13 @@
 	            <div class="submit">
 	            	<input type="submit" class="btn btn-primary grn" value="${submit}" />
 	            </div>
+	            
+	            <div class="forgotRemember">
+					<input id="rememberMe" type="checkbox"/> <label for="rememberMe">Remember me</label>
+					<a id="forgotPsswd" href="#">Forgot password</a>
+				</div>
+				
+				
 	        </form>
 	    </div>
 	</jsp:body>

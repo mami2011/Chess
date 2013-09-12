@@ -24,7 +24,7 @@
 
 	<jsp:body>
 	
-		<t2:layoutTable ngController="ProfileCtrl">
+		<t2:layoutTable angularController="ProfileCtrl">
 			<jsp:attribute name="leftNav">
 				<h3 class="ttl">Profile</h3>
 				<div class="list-group">

@@ -124,27 +124,23 @@ Page Header
 	right:0;
 	top:6px;
 }
-.hdr .ctls .lang {
-	float:right;
+
+
+.hdr .lang .dropdown {
 	margin:5px 15px 0 0;
 	color:#333;
-	font-size:12px;
 }
-.hdr .ctls .lang .lbl {
+.hdr .lang .dropdown .lbl {
 	color:#ccc;
+	margin-right:5px;
 }
-.hdr .ctls .lang .arw {
-	width:15px;
-	height:8px;
-	display:inline-block;
-	background:url('../resources/img/icons.png') no-repeat -40px 0; 
-}
-#languageMenu {
+.hdr .lang .dropdown .dropdown-menu {
 	max-height:400px;
 	width:200px;
 	overflow-x: hidden;
 	overflow-y: scroll;
 }
+
 .hdr .ctls .sign-in {
 	float:right;
 	font-size:12px;
@@ -164,20 +160,14 @@ Page Header
 	border-radius:3px;
 	color:#333;
 }
-.hdr .ctls .user {
+
+.hdr .user {
 	float:right;
 	padding:7px 5px;
 	position:relative;
 }
-.hdr .ctls .user a {
-	font-size:12px;
-}
-.hdr .ctls .user .arw {
-	width:15px;
-	height:8px;
-	display:inline-block;
-	background:url('../resources/img/icons.png') no-repeat -40px 0; 
-}
+
+
 .hdr .ctls .srch {
 	float:right;
 	margin-right:20px;
