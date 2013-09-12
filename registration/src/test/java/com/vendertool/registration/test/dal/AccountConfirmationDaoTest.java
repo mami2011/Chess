@@ -8,7 +8,10 @@ import com.vendertool.common.SessionIdGenerator;
 import com.vendertool.common.dal.dao.BaseDao;
 import com.vendertool.common.dal.exception.DBConnectionException;
 import com.vendertool.common.dal.exception.DatabaseException;
+import com.vendertool.common.dal.exception.DeleteException;
+import com.vendertool.common.dal.exception.FinderException;
 import com.vendertool.common.dal.exception.InsertException;
+import com.vendertool.common.dal.exception.UpdateException;
 import com.vendertool.common.test.dal.BaseDaoTest;
 import com.vendertool.registration.dal.dao.AccountConfirmationDao;
 import com.vendertool.registration.dal.dao.RegistrationDaoFactory;
@@ -29,7 +32,7 @@ public class AccountConfirmationDaoTest extends BaseDaoTest{
 	}
 	
 	public static void main(String[] args) throws DBConnectionException,
-			InsertException, DatabaseException, SQLException {
+			InsertException, DatabaseException, SQLException, FinderException, UpdateException, DeleteException {
 		new AccountConfirmationDaoTest().testCRUD();
 	}
 	
@@ -55,7 +58,7 @@ public class AccountConfirmationDaoTest extends BaseDaoTest{
 	}
 	
 	public void testCRUD() throws DBConnectionException, InsertException,
-			DatabaseException, SQLException {
+			DatabaseException, SQLException, FinderException, UpdateException, DeleteException {
 		
 		//dal insert
 		log("======== DAL insert =======");

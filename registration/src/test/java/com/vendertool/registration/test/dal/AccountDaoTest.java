@@ -33,7 +33,7 @@ public class AccountDaoTest extends BaseDaoTest{
 	}
 	
 	public static void main(String[] args) throws DBConnectionException,
-			InsertException, DatabaseException, SQLException {
+			InsertException, DatabaseException, SQLException, DeleteException, FinderException, UpdateException {
 		AccountDaoTest test = new AccountDaoTest();
 		test.testCRUD();
 		test.cleanup();
@@ -71,7 +71,7 @@ public class AccountDaoTest extends BaseDaoTest{
 	}
 	
 	public void testCRUD() throws DBConnectionException, InsertException,
-			DatabaseException, SQLException {
+			DatabaseException, SQLException, DeleteException, FinderException, UpdateException {
 		
 		//DAL insert
 		log("======== INSERT TEST =======");

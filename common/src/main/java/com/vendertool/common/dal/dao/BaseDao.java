@@ -5,7 +5,7 @@ import java.sql.Connection;
 import javax.sql.DataSource;
 
 import com.vendertool.common.dal.exception.DBConnectionException;
-import com.vendertool.common.dal.exception.FinderException;
+import com.vendertool.common.dal.exception.DatabaseException;
 
 public interface BaseDao {
 	public static final String SELECT = "select";
@@ -18,7 +18,10 @@ public interface BaseDao {
 	public boolean hasSequenceGenerator();
 	
 	public Long generateNextSequence(Connection connection)
-			throws DBConnectionException, FinderException;
+			throws DBConnectionException, DatabaseException;
+	
+	public Long generateNextSequence() throws DBConnectionException,
+				DatabaseException;
 	
 	public String getSequenceProcedureName();
 	

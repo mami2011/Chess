@@ -44,4 +44,12 @@ public class AccountReadSet {
 		ACCOUNT.accountId, 
 		ACCOUNT.emailAddr
 	};
+	
+	public final Path<?>[] PASSWORD = {
+		ACCOUNT.accountId,
+		ACCOUNT.emailAddr,
+		ACCOUNT.password,
+		ACCOUNT.salt,
+		ACCOUNT.status
+	};
 }

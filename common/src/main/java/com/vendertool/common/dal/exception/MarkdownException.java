@@ -1,6 +1,6 @@
 package com.vendertool.common.dal.exception;
 
-public class MarkdownException extends DatabaseException {
+public class MarkdownException extends Exception {
 	
 	private static final long serialVersionUID = -3291709382710445744L;
 
