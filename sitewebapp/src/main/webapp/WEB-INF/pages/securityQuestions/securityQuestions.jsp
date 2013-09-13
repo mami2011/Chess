@@ -29,6 +29,13 @@
 		<div id="pgBg"><img src="resources/img/cafe2.jpg" alt=""></div>
 		
 	    <div class="reg main input-group" ng-controller="SecurityQuestionsCtrl">
+	    	<spring:message code="form.securityquestions.title" var="title"/>
+				
+			<h3 class="ttl">${title}</h3>
+			
+			<div class="alert alert-danger" style="display:none">Please correct errors below.</div>
+			<div class="alert alert-success" style="display:none">Your security questions have been saved.</div>
+
 	    	<div ng-view></div>
 	    </div>
 	</jsp:body>

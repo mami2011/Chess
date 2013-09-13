@@ -2,7 +2,10 @@
 	color:red !important;
 }
 .err input {
-	border:1px solid red;
+	border:1px solid red !important;
+}
+.err select {
+	border:1px solid red !important;
 }
 .err .err-msg {
 	display:block;

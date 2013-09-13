@@ -63,6 +63,7 @@
 	<group name="securityQuestions">
 		<group-ref>errorResponseModule</group-ref>
 		<css>/WEB-INF/pages/register/css/register.css</css>
+		<css>/WEB-INF/pages/securityQuestions/css/securityQuestions.css</css>
 		<js>/WEB-INF/pages/securityQuestions/js/app.js</js>
 		<js>/WEB-INF/pages/securityQuestions/js/controllers.js</js>
 		<js>/WEB-INF/resources/js/lib/jquery.placeholder.js</js>

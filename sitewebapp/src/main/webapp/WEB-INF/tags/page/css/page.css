@@ -58,7 +58,7 @@ Content
 ***************************************/
 .ttl {
 	padding:0;
-	margin:0 0 30px 0;
+	margin:0 0 25px 0;
 	font-weight:normal;
 	font-size:26px;
 	
@@ -277,4 +277,9 @@ Page Footer
 	color: #aaa;
 }
 
+
+select {
+	height: 30px;
+	border: 1px solid #ccc;
+}
 

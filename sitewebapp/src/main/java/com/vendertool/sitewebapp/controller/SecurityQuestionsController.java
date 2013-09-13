@@ -46,12 +46,13 @@ public class SecurityQuestionsController {
 		SecurityQuestion q4 = new SecurityQuestion();
 		q4.setId(4);
 		q4.setText("What street did you grow up on");
-		List<SecurityQuestion> questions = new ArrayList<SecurityQuestion>();
-		questions.add(q1);
-		questions.add(q2);
-		questions.add(q3);
-		questions.add(q4);
-		modelMap.addAttribute("questionList", questions);
+		List<SecurityQuestion> questionList = new ArrayList<SecurityQuestion>();
+		
+		questionList.add(q1);
+		questionList.add(q2);
+		questionList.add(q3);
+		questionList.add(q4);
+		modelMap.addAttribute("questionList", questionList);
 
 		// Add JSON for Angular
 		try {
@@ -69,13 +70,13 @@ public class SecurityQuestionsController {
 	}
 	
 	@RequestMapping(value="questions/save", method=RequestMethod.POST)
-	public @ResponseBody Map<String, Object> saveQuestionAnswers(@RequestBody SecurityQuestionsResponse res) {
+	public @ResponseBody Map<String, Object> saveQuestionAnswers(@RequestBody SecurityQuestionsResponse resp) {
 		
 		ErrorResponse errorResponse = new ErrorResponse();
 		
-		if (res != null && !res.getQuestionAnswers().isEmpty()) {
+		if (resp != null && !resp.getQuestionAnswers().isEmpty()) {
 			int count = 1;
-			for (SecurityQuestionAnswer qa : res.getQuestionAnswers()) {
+			for (SecurityQuestionAnswer qa : resp.getQuestionAnswers()) {
 				
 				if (qa.getQuestionId() == null) {
 					errorResponse.addFieldBindingError(
@@ -84,7 +85,7 @@ public class SecurityQuestionsController {
 							"question" + count);
 				}
 				
-				if (qa.getAnswer() == null) {
+				if (qa.getAnswer() == null || qa.getAnswer().isEmpty()) {
 					errorResponse.addFieldBindingError(
 							Errors.REGISTRATION.MISSING_SECURITY_ANSWER,
 							SecurityQuestionAnswer.class.getName(),
@@ -97,8 +98,8 @@ public class SecurityQuestionsController {
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-
 		map.put("errorResponse", errorResponse);
+		map.put("securityQuestionsResponse", resp);
 		
 		return map;
 	}
@@ -127,12 +128,12 @@ public class SecurityQuestionsController {
 
 /** Mock classes. Replace later **/
 class SecurityQuestion {
-	private int id;
+	private Integer id;
 	private String text;
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getText() {
@@ -163,17 +164,23 @@ class SecurityQuestionAnswer {
 }
 
 class SecurityQuestionsResponse {
-	
+	private List<SecurityQuestion> questions;
 	private List<SecurityQuestionAnswer> questionAnswers;
-
+	public List<SecurityQuestion> getQuestions() {
+		return questions;
+	}
+	public void setQuestions(List<SecurityQuestion> questions) {
+		this.questions = questions;
+	}
 	public List<SecurityQuestionAnswer> getQuestionAnswers() {
 		return questionAnswers;
 	}
-
 	public void setQuestionAnswers(List<SecurityQuestionAnswer> questionAnswers) {
 		this.questionAnswers = questionAnswers;
 	}
 }
+
+
 
 
 

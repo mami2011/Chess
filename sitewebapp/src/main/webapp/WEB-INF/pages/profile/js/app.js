@@ -6,10 +6,11 @@ var profileApp = angular.module('profileApp', ['errorResponseModule']);
 profileApp.config(['$routeProvider', function($routeProvider) {
 	
 	// When there is something after the hashtag
-	$routeProvider.when('/profile',		{templateUrl: 'profile/partial/account',	controller: 'ProfileCtrl'});
-	$routeProvider.when('/email',		{templateUrl: 'profile/partial/email',		controller: 'ProfileCtrl'});
-	$routeProvider.when('/password',	{templateUrl: 'profile/partial/password',	controller: 'ProfileCtrl'});
+	$routeProvider.when('/info',		{templateUrl: 'profile/partial/account',	controller: 'AccountCtrl'});
+	$routeProvider.when('/email',		{templateUrl: 'profile/partial/email',		controller: 'EmailCtrl'});
+	$routeProvider.when('/password',	{templateUrl: 'profile/partial/password',	controller: 'PasswordCtrl'});
+	$routeProvider.when('/questions',	{templateUrl: 'profile/partial/questions',	controller: 'QuestionsCtrl'});
 	
 	// Otherwise when no hashtag or hashtag path can't be found, add a hashtag
-	$routeProvider.otherwise({redirectTo: '/profile'});
+	$routeProvider.otherwise({redirectTo: '/info'});
 }]);

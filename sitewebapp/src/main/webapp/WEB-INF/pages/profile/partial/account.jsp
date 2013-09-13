@@ -1,19 +1,13 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%-- 
-<script>
-    var $element = $('table[ng-controller="ProfileCtrl"]');
-    var scope = angular.element($element).scope();
-   	alert(scope.accountOrig.emailId);
-</script>
---%>
 
-
-<table class="info" cellspacing="0" cellpadding="0">
+<table ng-controller="AccountCtrl" class="info" cellspacing="0" cellpadding="0">
+	<%-- 
 	<tr>
 		<td class="col1"><label>Email:</label></td>
 		<td class="col2"><input ng-model="accountOrig.emailId" class="form-control readonly" readonly/></td>
-	</tr>
+	</tr>--%>
 	<tr class="fldWrp">
 		<td class="col1"><label>First name:</label></td>
 		<td class="col2">
@@ -121,7 +115,7 @@
 			<hr class="sep"/>
 		</td>
 	</tr>
-	<tr>
+	<tr class="fldWrp">
 		<td class="col1"><label>Current Password:</label></td>
 		<td class="col2">
 			<input ng-model="accountOrig.password" class="form-control" type="password"/>

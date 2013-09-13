@@ -32,10 +32,8 @@
 	height:30px;
 	display:block;
 }
-.info .cntryMenu {
+.info select {
 	width:385px;
-	height:30px;
-	border:1px solid #ccc;
 }
 .info td  {
 	font-size:16px;
@@ -75,7 +73,14 @@
 	margin:15px 0 0 0;
 }
 
-
+.pg-msg {
+	min-height:44px;
+	margin-bottom:15px;
+}
+.pg-msg .alert {
+	padding-top:10px;
+	padding-bottom:10px;
+}
 
 
 

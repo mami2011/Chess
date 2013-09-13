@@ -12,8 +12,14 @@ Attributes
 ================ --%>
 <%@ attribute name="angularController" required="false"%>
 
-
-<table class="layout input-group" ng-controller="${angularController}" cellpadding="0" cellspacing="0">
+<c:choose>
+	<c:when test="${angularController}">
+		<table class="layout input-group" ng-controller="${angularController}" cellpadding="0" cellspacing="0">
+	</c:when>
+	<c:otherwise>
+		<table class="layout input-group" cellpadding="0" cellspacing="0">
+	</c:otherwise>
+</c:choose>
 	<tr>
 		<td class="c1">
 			<jsp:invoke fragment="leftNav"/>
