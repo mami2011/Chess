@@ -1,6 +1,6 @@
 package com.vendertool.common.dal.exception;
 
-public class FailoverException extends DatabaseException {
+public class FailoverException extends Exception {
 
 	private static final long serialVersionUID = -5630924008947069875L;
 

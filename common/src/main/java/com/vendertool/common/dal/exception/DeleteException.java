@@ -1,6 +1,6 @@
 package com.vendertool.common.dal.exception;
 
-public class DeleteException extends DatabaseException {
+public class DeleteException extends Exception {
 	
 	private static final long serialVersionUID = -2890943422815669778L;
 

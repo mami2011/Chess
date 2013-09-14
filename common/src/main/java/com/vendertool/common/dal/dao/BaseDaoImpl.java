@@ -17,7 +17,7 @@ import com.mysema.query.sql.dml.SQLInsertClause;
 import com.mysema.query.sql.dml.SQLUpdateClause;
 import com.mysema.query.types.Expression;
 import com.vendertool.common.dal.exception.DBConnectionException;
-import com.vendertool.common.dal.exception.FinderException;
+import com.vendertool.common.dal.exception.DatabaseException;
 import com.vendertool.common.validation.ValidationUtil;
 
 public abstract class BaseDaoImpl implements BaseDao {
@@ -104,7 +104,9 @@ public abstract class BaseDaoImpl implements BaseDao {
 	}
 	
 	@Override
-	public Long generateNextSequence(Connection connection) throws DBConnectionException, FinderException {
+	public Long generateNextSequence(Connection connection)
+			throws DBConnectionException, DatabaseException {
+		
 		if(!hasSequenceGenerator() || VUTIL.isNull(getSequenceProcedureName())) {
 			return null;
 		}
@@ -119,15 +121,39 @@ public abstract class BaseDaoImpl implements BaseDao {
 				return new Long(rs.getLong(1));
 			}
 		} catch (SQLException e) {
-			FinderException fe = new FinderException(
+			DatabaseException fe = new DatabaseException(
 					"Unable to generate next sequence value for "
 							+ getSequenceProcedureName());
 			logger.debug(fe.getMessage(), fe);
 			throw fe;
 		}
 		
-		throw new FinderException(
+		throw new DatabaseException(
 				"Unable to generate next sequence value for "
 						+ getSequenceProcedureName());
+	}
+	
+	@Override
+	public Long generateNextSequence() throws DBConnectionException,
+			DatabaseException {
+		
+		if(!hasSequenceGenerator() || VUTIL.isNull(getSequenceProcedureName())) {
+			return null;
+		}
+		
+		Connection conn = null;
+		
+		try {
+			conn = getConnection();
+			return generateNextSequence(conn);
+		} finally {
+			try {
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				logger.debug(e.getMessage(), e);
+			}
+		}
 	}
 }

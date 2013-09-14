@@ -1,6 +1,6 @@
 package com.vendertool.common.dal.exception;
 
-public class InsertException extends DatabaseException {
+public class InsertException extends Exception {
 	
 	private static final long serialVersionUID = -5359266794440692878L;
 

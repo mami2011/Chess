@@ -1,6 +1,6 @@
 package com.vendertool.common.dal.exception;
 
-public class QuerySyntaxException extends DatabaseException {
+public class QuerySyntaxException extends Exception {
 	
 	private static final long serialVersionUID = -1154151698528705660L;
 

@@ -1,6 +1,6 @@
 package com.vendertool.common.dal.exception;
 
-public class FinderException extends DatabaseException {
+public class FinderException extends Exception {
 	
 	private static final long serialVersionUID = -3869385456229055089L;
 

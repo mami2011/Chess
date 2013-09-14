@@ -37,7 +37,7 @@ public class PasswordHistoryDaoImpl extends BaseDaoImpl implements
 	}
 
 	@Override
-	public void insertPreviousPassword(Long accountId, String password,
+	public Long insertPreviousPassword(Long accountId, String password,
 			String salt) throws DBConnectionException, InsertException,
 			DatabaseException {
 		
@@ -62,7 +62,7 @@ public class PasswordHistoryDaoImpl extends BaseDaoImpl implements
 	    	logger.info("DAL QUERY: " + s.toString());
 	    	
 	    	try {
-	    		s.execute();
+	    		return s.executeWithKey(ph.passswordHistoryId);
 	    	} catch (Exception e) {
 	    		InsertException ie = new InsertException(e);
 				logger.debug(ie.getMessage(), ie);
@@ -201,6 +201,47 @@ public class PasswordHistoryDaoImpl extends BaseDaoImpl implements
 	    	
 	    	return rows;
 	    	
+		} finally {
+			try {
+				if(con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				logger.debug(e.getMessage(), e);
+			}
+		}
+	}
+
+	@Override
+	public void deletePasswordHistory(Long pwdHistoryId)
+			throws DBConnectionException, DeleteException, DatabaseException {
+		
+		if(VUTIL.isNull(pwdHistoryId)) {
+			DeleteException fe = new DeleteException("Cannot delete with null id");
+			logger.debug(fe.getMessage(), fe);
+			throw fe;
+		}
+		
+		Connection con = null;
+		
+		try {
+			con = getConnection();
+			
+			QPassswordHistory ph = QPassswordHistory.passswordHistory;
+			
+			SQLDeleteClause s = delete(con, ph).where(
+					ph.passswordHistoryId.eq(pwdHistoryId));
+			
+	    	//Always log the query before executing it
+	    	logger.info("DAL QUERY: " + s.toString());
+	    	
+	    	try {
+	    		s.execute();
+	    	} catch (Exception e) {
+	    		DeleteException ie = new DeleteException(e);
+				logger.debug(ie.getMessage(), ie);
+				throw ie;
+	    	}
 		} finally {
 			try {
 				if(con != null) {

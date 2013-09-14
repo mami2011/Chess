@@ -44,13 +44,17 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 			con = getConnection();
 			
 			QAccount a = QAccount.account;
-			Long seq = generateNextSequence(con);
-			if(VUTIL.isNull(seq) || (seq.longValue() <= 0)) {
-	    		InsertException ie = new InsertException("Unable to generate valid sequence");
-				logger.debug(ie.getMessage(), ie);
-				throw ie;
+			
+			Long accountId = account.getId();
+			if(VUTIL.isNull(accountId) || (accountId.longValue() <= 0)) {
+				Long seq = generateNextSequence(con);
+				if(VUTIL.isNull(seq) || (seq.longValue() <= 0)) {
+		    		InsertException ie = new InsertException("Unable to generate valid sequence");
+					logger.debug(ie.getMessage(), ie);
+					throw ie;
+				}
+				account.setId(seq);
 			}
-			account.setId(seq);
 	
 	    	// YOU CAN DO THIS...
 	//		SQLInsertClause s = insert(con, a)
