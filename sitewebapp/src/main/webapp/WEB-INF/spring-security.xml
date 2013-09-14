@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+  	
+ <!-- 
+ The auto-config is shorthand for
+   <http>
+    <form-login />
+    <http-basic />
+    <logout />
+  </http>
+  The <http> element is responsible for creating a FilterChainProxy and the 
+  filter beans which it uses. Common problems like incorrect filter ordering 
+  are no longer an issue as the filter positions are predefined.
+  -->
+  
+  <!-- NOTE: IMPORTANT - Ordering of filter pattern is important -->
+  <!-- This is to bypass auth for login & css, else it will be an infinite loop -->
+    <sec:http pattern="/favicon.ico" security="none"/>
+  	<sec:http pattern="/apple-touch-icon.png" security="none"/>
+  	<sec:http pattern="/index.jsp" security="none"/>
+  	<sec:http pattern="/resources/**" security="none"/>
+  	<sec:http pattern="/signIn" security="none"/>
+  	<sec:http pattern="/signOut" security="none"/>
+  	<sec:http pattern="/register" security="none"/>
+  	<sec:http pattern="/registersuccesspreconfirm" security="none"/>
+  	<sec:http pattern="/home" security="none"/>
+  	<sec:http pattern="/confirmaccount" security="none"/>
+  	<sec:http pattern="/confirmaccountsuccess" security="none"/>
+  	<sec:http pattern="/confirmaccountfailed" security="none"/>
+  	<sec:http pattern="/wro/**" security="none"/>
+  	
+  	<!--
+  	IMPORTANT!!!! 
+  	REMOVE LATER: ADDING ONLY FOR DEV WORK.
+  	-->
+  	<sec:http pattern="/profile/**" security="none"/>
+  	<sec:http pattern="/accounthub/**" security="none"/>
+  	<sec:http pattern="/uploads/**" security="none"/>
+  	<sec:http pattern="/fileUpload/**" security="none"/>
+  	<sec:http pattern="/sharedNgModules/**" security="none"/>
+  	<sec:http pattern="/fileUploader/**" security="none"/>
+  	<sec:http pattern="/uploadFile/**" security="none"/>
+  	<sec:http pattern="/questions/**" security="none"/>
+  	
+  	<!-- NOTE: IMPORTANT - Ordering of filter pattern is important -->
+  	<!-- 
+		<sec:intercept-url pattern="/favicon.ico" access="permitAll"/>
+		<sec:intercept-url pattern="/apple-touch-icon.png" access="permitAll"/>
+		<sec:intercept-url pattern="/index" access="permitAll"/>
+		<sec:intercept-url pattern="/resources/**" access="permitAll"/>
+		<sec:intercept-url pattern="/home" access="permitAll"/>
+		<sec:intercept-url pattern="/signIn" access="permitAll"/>
+		<sec:intercept-url pattern="/signOut" access="permitAll"/>
+		<sec:intercept-url pattern="/register" access="permitAll"/>
+		<sec:intercept-url pattern="/registersuccesspreconfirm" access="permitAll"/>
+		<sec:intercept-url pattern="/confirmaccount" access="permitAll"/>
+		<sec:intercept-url pattern="/confirmaccountsuccess" access="permitAll"/>
+		<sec:intercept-url pattern="/confirmaccountfailed" access="permitAll"/>  	
+  	 -->
+  	 
+  	 <!--  access="hasRole('ROLE_USER') -->
+	<sec:http auto-config="true" use-expressions="true">
+		<sec:intercept-url pattern="/**" access="hasRole('ROLE_USER_MASTER')" />
+		
+		<!-- default-target-url="/accounthub" -->
+		<sec:form-login login-page="/signIn" 
+			authentication-failure-url="/signIn?error=true" 
+			always-use-default-target='true'
+			default-target-url="/accounthub" />
+		
+		<!-- logout-url="/signout" -->
+		<sec:logout logout-success-url="/signIn" 
+				invalidate-session="true"
+            	delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE" />
+        
+        
+        <!-- REMEMBER-ME: Change this later to more secure & persistent 
+        implementation with a key attribute --> 
+        <!-- 
+        If you wish to exercise this functionality, you can also use browser 
+        plug-ins to manipulate (remove) session cookies, such as 
+        Firecookie (http://www.softwareishard.com/blog/firecookie/). 
+        This can often save time and annoyance during development and 
+        verification of this type of feature on the site. 
+        -->
+        <!--
+         Debugging remember me cookies:
+				There are two difficulties when attempting to debug issues with remember me cookies. The first is getting 
+				the cookie value at all! Spring Security doesn't offer any log level that will log the cookie value that 
+				was set. We'd suggest a browser-based tool such as Chris Pederick's Web Developer plug-in 
+				(http://chrispederick.com/work/web-developer/) for Mozilla Firefox. Browser-based development tools typically 
+				allow selective examination (and even editing) of cookie values. The second (admittedly minor) difficulty is 
+				decoding the cookie value. You can feed the cookie value into an online or offline Base64 decoder 
+				(remember to add a trailing = sign to make it a valid Base64-encoded string!) 
+         -->
+        <sec:remember-me services-ref="customTokenBasedRememberMeServices" 
+        	key="fc53de7fa46d83d7942e444a2d274ff6109c4f9ae5edaadce16d60887c9ed72d" />
+        
+        
+        <!-- 
+        This will prevent a user from logging in multiple times - a second login will cause the first to be invalidated.
+        The second login will then be rejected. By “rejected”, we mean that the user will be sent to the authentication-failure-url 
+        if form-based login is being used. If the second authentication takes place through another non-interactive mechanism, 
+        such as “remember-me”, an “unauthorized” (402) error will be sent to the client. If instead you want to use an error page, 
+        you can add the attribute session-authentication-error-url to the session-management element.
+         -->
+        <sec:session-management invalid-session-url="/sessiontimeout">
+        	<sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+    	</sec:session-management>
+	</sec:http>
+ 
+ 
+	<sec:authentication-manager alias="authenticationManager">
+	  <sec:authentication-provider user-service-ref="userDetailsService">
+	  	<sec:password-encoder ref="passwordEncoder">
+    		<sec:salt-source ref="passwordSaltSource"/>
+  		</sec:password-encoder>
+	  </sec:authentication-provider>
+	</sec:authentication-manager>
+ 
+ 
+     <!-- key is used to MD5 hash along w/ user name, password & 
+    token validity time. The key ideally needs to be 36 chars long, 
+    stronger than a typical password. Setting initially the token validity to 
+    be for 2 days (48 hrs - (48 x 60 x 60)) -->
+    <!-- SHA256 hash value of key text "2013-06_SpreadMyInventory!" -->
+	<bean class="com.vendertool.sitewebapp.security.CustomTokenBasedRememberMeServices" 
+			id="customTokenBasedRememberMeServices">
+	  <constructor-arg name="key" index="0">
+	  	<value>fc53de7fa46d83d7942e444a2d274ff6109c4f9ae5edaadce16d60887c9ed72d</value>
+	  </constructor-arg>
+	  <constructor-arg name="userDetailsService" index="1" ref="userDetailsService"/>
+	  <property name="tokenValiditySeconds" value="172800" />
+	  <property name="parameter" value="rememberme" /> <!-- use the value in the login page as remember-me checkbox value -->
+	  <property name="cookieName" value="REMEMBER_ME" />
+	</bean>
+	
+	<bean id="passwordSaltSource" 
+			class="com.vendertool.sitewebapp.security.PasswordSaltSource">
+	</bean>
+	
+	<!-- This needs to be same on site & services layer -->
+	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+        <constructor-arg index="0" value="256"/>
+    </bean>
+    
+    <bean id="userDetailsService" class="com.vendertool.sitewebapp.security.CustomUserDetailsService"/>
+	
+</beans>

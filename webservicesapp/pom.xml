@@ -1,0 +1,175 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.vendertool.serviceparent</groupId>
+		<artifactId>serviceparent</artifactId>
+		<version>1.0</version>
+		<relativePath>../serviceparent/pom.xml</relativePath>
+	</parent>
+
+	<groupId>com.vendertool.webservicesapp</groupId>
+	<artifactId>webservicesapp</artifactId>
+	<packaging>war</packaging>
+	<name>Vendertool Webservices App</name>
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.vendertool.sharedtypes</groupId>
+			<artifactId>sharedtypes</artifactId>
+			<version>${vendertool-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vendertool.common</groupId>
+			<artifactId>common</artifactId>
+			<version>${vendertool-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vendertool.metadata</groupId>
+			<artifactId>metadata</artifactId>
+			<version>${vendertool-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vendertool.registration</groupId>
+			<artifactId>registration</artifactId>
+			<version>${vendertool-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vendertool.rolemanagement</groupId>
+			<artifactId>rolemanagement</artifactId>
+			<version>${vendertool-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vendertool.inventory</groupId>
+			<artifactId>inventory</artifactId>
+			<version>${vendertool-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vendertool.listing</groupId>
+			<artifactId>listing</artifactId>
+			<version>${vendertool-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.vendertool.mercadolibreadapter</groupId>
+			<artifactId>mercadolibreadapter</artifactId>
+			<version>${vendertool-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vendertool.fps</groupId>
+			<artifactId>fps</artifactId>
+			<version>${vendertool-version}</version>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<finalName>services</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<version>1.1</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-appCtx</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<encoding>UTF-8</encoding>
+							<outputDirectory>${project.build.directory}/src/resources/emailtemplates</outputDirectory>
+							<overwrite>true</overwrite>
+							<resources>
+								<resource>
+									<directory>../registration/src/main/resources/emailtemplates</directory>
+									<includes>
+										<include>ConfirmRegistration.vm</include>
+										<include>RegistrationComplete.vm</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>qa</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.7</version>
+						<executions>
+							<execution>
+								<phase>test</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<tasks>
+										<!-- <delete
+											file="${project.build.outputDirectory}/environment.properties" /> -->
+										<copy file="../fps/src/main/resources/config/qa/aws-credentials/AwsCredentials.properties"
+											tofile="${project.build.outputDirectory}/AwsCredentials.properties" />
+										<copy file="src/main/resources/security/qa/security-credentials.xml"
+											tofile="${project.build.outputDirectory}/security/security-credentials.xml" />
+										<copy file="../common/src/main/resources/config/qa/dal/Datasource.xml"
+											todir="${project.build.outputDirectory}/dal" />
+										<copy file="../common/src/main/resources/CommonDAL.xml"
+											todir="${project.build.outputDirectory}/dal" />	
+										<copy file="../registration/src/main/resources/RegistrationDAL.xml"
+											todir="${project.build.outputDirectory}/dal" />	
+											
+									</tasks>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>2.16</version>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</plugin>
+					
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

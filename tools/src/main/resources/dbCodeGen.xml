@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					   http://www.springframework.org/schema/util
+	   					   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<util:list id="dbList" list-class="java.util.ArrayList">
+		<!-- Add all DB for which code needs to be generated. -->
+		<ref bean="commonDAL" />
+		<ref bean="registrationDAL" />
+		<ref bean="inventoryDAL" />
+		<ref bean="listingDAL" />
+		<ref bean="fpsDAL" />
+	</util:list>
+
+
+	<!-- COMMON ***** Start ***** -->
+	<bean id="commonDAL" class="com.vendertool.tools.db.codegen.DBConnectionData">
+		<property name="url"
+			value="jdbc:mysql://ec2-54-234-99-88.compute-1.amazonaws.com:3306/invdb" />
+		<property name="user" value="user5" />
+		<property name="password" value="password" />
+		<property name="codeGenDetails" ref="commonTableDetails" />
+	</bean>
+
+	<util:list id="commonTableDetails" list-class="java.util.ArrayList">
+		<!-- Add all DB for which code needs to be generated. -->
+		<ref bean="commonTables" />
+		<!-- <ref bean="productDB2" /> -->
+	</util:list>
+
+	<bean id="commonTables" class="com.vendertool.tools.db.codegen.DBCodeGenDetails">
+		<property name="packageName" value="com.vendertool.common.dal.dao.codegen" />
+		<property name="targetFolder" value="../common/src/main/java" />
+		<property name="tableNamePattern" value="image,address" />
+	</bean>
+	<!-- COMMON **** End ***** -->
+
+
+
+	<!-- Registration ***** Start ***** -->
+	<bean id="registrationDAL" class="com.vendertool.tools.db.codegen.DBConnectionData">
+		<property name="url"
+			value="jdbc:mysql://ec2-54-234-99-88.compute-1.amazonaws.com:3306/invdb" />
+		<property name="user" value="user5" />
+		<property name="password" value="password" />
+		<property name="codeGenDetails" ref="registrationTableDetails" />
+	</bean>
+
+	<util:list id="registrationTableDetails" list-class="java.util.ArrayList">
+		<!-- Add all DB for which code needs to be generated. -->
+		<ref bean="registrationTables" />
+		<!-- <ref bean="productDB2" /> -->
+	</util:list>
+
+	<bean id="registrationTables" class="com.vendertool.tools.db.codegen.DBCodeGenDetails">
+		<property name="packageName" value="com.vendertool.registration.dal.dao.codegen" />
+		<property name="targetFolder" value="../registration/src/main/java" />
+		<property name="tableNamePattern" value="account,account_confirmation,passsword_history" />
+	</bean>
+	<!-- Registration **** End ***** -->
+	
+	
+	<!-- inventoryDB ***** Start ***** -->
+	<bean id="inventoryDAL" class="com.vendertool.tools.db.codegen.DBConnectionData">
+		<property name="url"
+			value="jdbc:mysql://ec2-54-234-99-88.compute-1.amazonaws.com:3306/invdb" />
+		<property name="user" value="user5" />
+		<property name="password" value="password" />
+		<property name="codeGenDetails" ref="inventoryTableDetails" />
+	</bean>
+
+	<util:list id="inventoryTableDetails" list-class="java.util.ArrayList">
+		<!-- Add all DB for which code needs to be generated. -->
+		<ref bean="inventoryTables" />
+		<!-- <ref bean="productDB2" /> -->
+	</util:list>
+
+	<!-- Table Details -->
+	<bean id="inventoryTables" class="com.vendertool.tools.db.codegen.DBCodeGenDetails">
+		<property name="packageName" value="com.vendertool.inventory.dal.dao.codegen" />
+		<property name="targetFolder" value="../inventory/src/main/java" />
+		<property name="tableNamePattern" value="product,product_attribute,product_variation" />
+	</bean>
+	<!-- inventoryDB **** End ***** -->
+	
+	
+	
+	<!-- Listing ***** Start ***** -->
+	<bean id="listingDAL" class="com.vendertool.tools.db.codegen.DBConnectionData">
+		<property name="url"
+			value="jdbc:mysql://ec2-54-234-99-88.compute-1.amazonaws.com:3306/invdb" />
+		<property name="user" value="user5" />
+		<property name="password" value="password" />
+		<property name="codeGenDetails" ref="listingTableDetails" />
+	</bean>
+
+	<util:list id="listingTableDetails" list-class="java.util.ArrayList">
+		<!-- Add all DB for which code needs to be generated. -->
+		<ref bean="listingTables" />
+		<!-- <ref bean="productDB2" /> -->
+	</util:list>
+
+	<bean id="listingTables" class="com.vendertool.tools.db.codegen.DBCodeGenDetails">
+		<property name="packageName" value="com.vendertool.listing.dal.dao.codegen" />
+		<property name="targetFolder" value="../listing/src/main/java" />
+		<property name="tableNamePattern" value="listing,listing_variation" />
+	</bean>
+	<!-- Listing **** End ***** -->
+	
+	
+	
+	<!-- FPS ***** Start ***** -->
+	<bean id="fpsDAL" class="com.vendertool.tools.db.codegen.DBConnectionData">
+		<property name="url"
+			value="jdbc:mysql://ec2-54-234-99-88.compute-1.amazonaws.com:3306/batchdb" />
+		<property name="user" value="user5" />
+		<property name="password" value="password" />
+		<property name="codeGenDetails" ref="fpsTableDetails" />
+	</bean>
+
+	<util:list id="fpsTableDetails" list-class="java.util.ArrayList">
+		<!-- Add all DB for which code needs to be generated. -->
+		<ref bean="fpsTables" />
+		<!-- <ref bean="productDB2" /> -->
+	</util:list>
+
+	<bean id="fpsTables" class="com.vendertool.tools.db.codegen.DBCodeGenDetails">
+		<property name="packageName" value="com.vendertool.fps.dal.dao.codegen" />
+		<property name="targetFolder" value="../fps/src/main/java" />
+		<property name="tableNamePattern" value="file,job,task,sequence_data" />
+	</bean>
+	<!-- FPS **** End ***** -->
+</beans>

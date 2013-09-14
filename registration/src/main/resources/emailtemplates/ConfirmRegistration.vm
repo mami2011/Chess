@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>$msgSource.getMessage('email.registration.confirmreg.subject', null, $locale)</title>
+	<style>
+		body
+		{
+			font-family: verdana,sans-serif;
+		}
+		
+		div.container 
+		{
+			max-width: 800px;
+			border-style:solid;
+			border-width:medium;
+			border-color:#98bf21;
+			border-style:groove;
+			background-color: #F0F8FF;
+			margin: 1px auto;
+		}
+		
+		* 
+		{
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div>
+			<h2>$msgSource.getMessage('email.registration.confirmreg.heading', null, $locale)</h2> <br/>
+			
+			<p>$msgSource.getMessage('email.greeting', null, $locale) ${emailData.toName}! </p><br/><br/>
+			
+			<p>$msgSource.getMessage('email.registration.confirmreg.introduction', null, $locale)<br/></p>
+			
+			<p>$msgSource.getMessage('email.registration.confirmreg.instruction', null, $locale)<br/></p>
+		   	
+		   	<p>${emailData.confirmationUrl}<br/><br/></p>
+			
+			<p>$msgSource.getMessage('email.thankyou', null, $locale),<br/>
+			$msgSource.getMessage('email.company.name', null, $locale)</p>
+		</div>
+	</div>
+</body>
+</html>
