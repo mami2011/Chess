@@ -16,20 +16,15 @@
 	</jsp:attribute>
 
 	<jsp:body>
-		<t2:layoutTable angularController="UploadsCtrl">
-			<jsp:attribute name="leftNav">
-				<h3 class="ttl">Uploads</h3>
-				<div class="list-group">
-					<a href="#/files" 		ng-class="getClass('/accounthub')" 	class="list-group-item">Files</a>
-					<a href="#/uploader"	ng-class="getClass('/uploader')" 	class="list-group-item">Upload</a>
-					<a href="#/selling"		ng-class="getClass('/selling')" 	class="list-group-item">Orders</a>
-					<a href="#/selling"		ng-class="getClass('/selling')" 	class="list-group-item">Selling</a>
-					<a href="#/inventory"	ng-class="getClass('/inventory')"	class="list-group-item">Inventory</a>
-				</div>
-			</jsp:attribute>
-			<jsp:attribute name="content">
+		<t2:layoutTable>
+		
+			<jsp:attribute name="pageTitle">Uploads</jsp:attribute>
+
+			<jsp:attribute name="topNav">
 				<t3:navbarSection current="uploads"/>
-				
+			</jsp:attribute>
+			
+			<jsp:attribute name="content">
 				<div class="msg">
 					<div class="alert alert-success" style="display:none;">Profile information updated.</div>
 					<div class="alert alert-danger"  style="display:none;">Sorry, there's been an error.</div>

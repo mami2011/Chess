@@ -12,9 +12,11 @@
 	
 	<jsp:body>
 	
-		<t2:layoutTable angularController="AcctHubCtrl">
+		<t2:layoutTable>
+			
+			<jsp:attribute name="pageTitle">Summary</jsp:attribute>
+			
 			<jsp:attribute name="leftNav">
-				<h3 class="ttl">Summary</h3>
 				<div class="list-group">
 					<a href="${accountHubUrl}" 	ng-class="getClass('/accounthub')" 	class="list-group-item">Overview</a>
 					<a href="#/selling"		ng-class="getClass('/selling')" 	class="list-group-item">Selling</a>
@@ -23,9 +25,12 @@
 					<a href="#/inventory"	ng-class="getClass('/inventory')"	class="list-group-item">Inventory</a>
 				</div>
 			</jsp:attribute>
-			<jsp:attribute name="content">
+			
+			<jsp:attribute name="topNav">
 				<t3:navbarSection current="summary"/>
-				
+			</jsp:attribute>
+
+			<jsp:attribute name="content">
 				<div class="msg">
 					<div class="alert alert-success" style="display:none;">Profile information updated.</div>
 					<div class="alert alert-danger"  style="display:none;">Sorry, there's been an error.</div>

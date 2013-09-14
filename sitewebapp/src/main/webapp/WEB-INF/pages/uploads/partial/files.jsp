@@ -1,46 +1,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<div>
+<div ng-controller="UploadsCtrl">
 
-	<a id="fileUploader" href="javascript:;">upload</a>
-	
-	
-	<script>
-		
-		var Popup = function() {
-			
-			var left,
-				top,
-				width = 575,
-				height = 325,
-				props
-			;
+	<a ng-click="openPopup()" href="javascript:;" type="button" class="btn btn-primary iconBtn uploads">
+		<div class="bg"></div><i class="icon"></i>
+		<b>Upload Files</b>
+	</a>
 
-			$('#fileUploader').bind('click', function() {
-				
-				wLeft = window.screenLeft ? window.screenLeft : window.screenX;
-				wTop = window.screenTop ? window.screenTop : window.screenY;
-				
-				left = wLeft + (window.innerWidth/2) - (width/2);
-				top = wTop + (window.innerHeight/2) - (height/2);
-				
-				// Prevent top of popup from being above parent window
-				if (top < wTop) {
-					top = wTop;
-				}
-				
-				props = 'left=' + left + ',top=' + top + ',width=' + width + ',height=' + height + ',toolbar=0,location=0,status=0,menubar=0,resizable=1';
-				
-				 var popup = window.open('../fileUploader', 'popup', props);
-			});
-		}
-		
-		var p = Popup();
-		
-	
-	</script>
-	a list of uploaded files
+	<table class="table table-striped uploadTable">
+		<tr>
+			<th>Files</th>
+			<th>Job Id</th>
+			<th>Status</th>
+			<th>Upload Date</th>
+			<th>Processed Files</th>
+			<th>Job Complete Date</th>
+		</tr>
+	</table>
+
 </div>
 
 

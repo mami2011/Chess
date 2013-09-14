@@ -17,6 +17,29 @@ uploadsApp.controller('UploadsCtrl', ['$scope', '$http', '$routeParams', '$locat
 		//alert(files[0] + 'xxx');
 	};
 	
+	$scope.openPopup = function() {
+		
+		var left,
+			top,
+			width = 575,
+			height = 325,
+			props
+		;
+	
+		wLeft = window.screenLeft ? window.screenLeft : window.screenX;
+		wTop = window.screenTop ? window.screenTop : window.screenY;
+		
+		left = wLeft + (window.innerWidth/2) - (width/2);
+		top = wTop + (window.innerHeight/2) - (height/2);
+		
+		// Prevent top of popup from being above parent window
+		if (top < wTop) {
+			top = wTop;
+		}
+		
+		props = 'left=' + left + ',top=' + top + ',width=' + width + ',height=' + height + ',toolbar=0,location=0,status=0,menubar=0,resizable=1';
+		window.open('../fileUploader', 'popup', props);
+	};
 	
 	
 	//alert('hello' + URL.uploadsUrl);

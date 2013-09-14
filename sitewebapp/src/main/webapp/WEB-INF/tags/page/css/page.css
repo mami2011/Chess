@@ -15,6 +15,16 @@ body {
 	/**
    	background-color: #e5e5e5 !important;**/
 }
+select {
+	height: 30px;
+	border: 1px solid #ccc;
+}
+a {
+	text-decoration:none;
+}
+label {
+	font-weight:normal;
+}
 #header {
 	position:relative;
 	height: 45px;
@@ -74,12 +84,7 @@ Content
 .pg-msg .alert {
 	margin-bottom:0;
 }
-a {
-	text-decoration:none;
-}
-label {
-	font-weight:normal;
-}
+
 .inline {
 	display:inline-block;
 }
@@ -278,8 +283,34 @@ Page Footer
 }
 
 
-select {
-	height: 30px;
-	border: 1px solid #ccc;
+/**************************************
+Button with icon 
+***************************************/
+.iconBtn {
+	position:relative;
+	overflow:hidden;
+	height:38px;
+	color:#000;
 }
+.iconBtn .bg {
+	display:inline-block;
+	height:50px;
+	position:absolute;
+	top:0;
+	left:0;
+}
+.iconBtn .icon {
+	position:relative;
+	display:inline-block;
+	left:-7px;
+	height:28px;
+	margin:0;
+}
+.iconBtn b {
+	display:inline;
+	position:relative;
+	font-weight:normal;
+	top:-9px;
+}
+
 

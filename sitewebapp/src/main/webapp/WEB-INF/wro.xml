@@ -71,6 +71,7 @@
 	
 	<group name="uploads">
 		<group-ref>accounthubCss</group-ref>
+		<css>/WEB-INF/pages/uploads/css/uploads.css</css>
 		<js>/WEB-INF/pages/uploads/js/app.js</js>
 		<js>/WEB-INF/pages/uploads/js/controllers.js</js>
 	</group>

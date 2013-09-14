@@ -24,9 +24,11 @@
 
 	<jsp:body>
 	
-		<t2:layoutTable angularController="ProfileCtrl">
+		<t2:layoutTable>
+			
+			<jsp:attribute name="pageTitle">Profile</jsp:attribute>
+			
 			<jsp:attribute name="leftNav">
-				<h3 class="ttl">Profile</h3>
 				<div class="list-group" ng-controller="NavCtrl">
 					<a href="#/info"		ng-class="getClass('/info')" 		class="list-group-item">Change info</a>
 					<a href="#/email"		ng-class="getClass('/email')" 		class="list-group-item">Change email</a>
@@ -34,6 +36,7 @@
 					<a href="#/questions"	ng-class="getClass('/questions')"	class="list-group-item">Change security questions</a>
 				</div>
 			</jsp:attribute>
+			
 			<jsp:attribute name="content">
 				<div class="pg-msg">
 					<div class="alert alert-success profile" 	style="display:none;">Profile has been updated.</div>
