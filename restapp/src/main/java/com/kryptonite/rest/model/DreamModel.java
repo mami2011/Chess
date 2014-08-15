@@ -21,6 +21,7 @@ public class DreamModel {
 	private List<String> followerUserIds;
 	private String categoryId;
 	private int likeCount;
+	private int commentCount;
 	
 	@JsonIgnore
 	private List<Node> enablerUserNodes;
@@ -126,6 +127,14 @@ public class DreamModel {
 
 	public void setLikeCount(int likeCount) {
 		this.likeCount = likeCount;
+	}
+
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
 	}
 
 	

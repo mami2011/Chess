@@ -228,6 +228,7 @@ public class Dream {
 	   			dream.setLikes(likes);
 	   			
 	   			dream.setLikeCount(dao.getLikesCountForDream(dreamId));
+	   			dream.setCommentCount(dao.getCommentsCountForDream(dreamId));
     		}
     		else {
        			throw new WebApplicationException(Response.status(404).entity("Dream not found: " + dreamId).build());

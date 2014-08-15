@@ -621,4 +621,19 @@ public int getLikesCountForDream(String id) {
 	int count = nodeList.size();
 	return count;
 }
+
+public int getCommentsCountForDream(String id) {
+	
+	if(StringUtils.isEmpty(id)) {
+		throw new IllegalArgumentException("Dream Id cannot be empty");
+	}
+	
+	StringBuilder query = new StringBuilder();
+	query.append("match (a:dream { id:'").append(id).append("' })<-[r:commented]-(b:user) return r");
+	List<Node> nodeList = getNodes(query.toString(),"a");
+	int count = nodeList.size();
+	return count;
+}
+
+
 }
