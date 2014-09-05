@@ -1,6 +1,7 @@
 package com.kryptonite.rest.resource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -24,6 +25,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
 
+import com.kryptonite.constants.Limits;
 import com.kryptonite.constants.LoginType;
 import com.kryptonite.constants.NPLabels;
 import com.kryptonite.constants.NPRelationships;
@@ -145,7 +147,12 @@ public class User {
     			retVal.setState((String)userNode.getProperty("state",null));
        			retVal.setZipcode((String)userNode.getProperty("zipcode",null));
        			retVal.setEmail((String)userNode.getProperty("email",null));
-       			
+       			       			    			
+       			String[] imageKeys = (String[])userNode.getProperty("imagekeys",null);
+	    		if(imageKeys != null) {
+	    			retVal.setImageKeys(Arrays.asList(imageKeys));
+	    		}
+   				
        			
        			String loginType = (String)userNode.getProperty("logintype",null);
        			if(!StringUtils.isEmpty(loginType)) {
@@ -407,6 +414,22 @@ public class User {
 						(String)dreamNodeToFollow.getProperty("userid"));
 			}
 		}
+		
+	
+		
+		if(user.getImageKeys() != null) {	
+			String[] currentImageLinks = (String[])userNode.getProperty("imagelinks",null);
+			
+			if(currentImageLinks != null) {
+				if(currentImageLinks.length + user.getImageKeys().size() > Limits.MAX_NUM_IMAGES) {
+					throw new IllegalArgumentException("Max number of Images exceeded");
+				}
+				user.getImageKeys().addAll(Arrays.asList(currentImageLinks));
+			}
+			
+			userNode.setProperty("imagekeys", user.getImageKeys());
+		}
+		
 	}
 	   
 	private void populateEnablerDetails(Node user, EnablerModel enabler, String id) {

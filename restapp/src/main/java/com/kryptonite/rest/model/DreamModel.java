@@ -17,6 +17,7 @@ public class DreamModel {
 	private String creationDate;
 	private List<CommentModel> comments;
 	private List<LikeModel> likes;
+	private List<String> imageKeys;
 	private List<String> videoLinks;
 	private List<String> followerUserIds;
 	private String categoryId;
@@ -32,6 +33,15 @@ public class DreamModel {
 
 	public void setAchieverUserId(String achieverId) {
 		this.achieverUserId = achieverId;
+	}
+	
+
+	public List<String> getImageKeys() {
+		return imageKeys;
+	}
+
+	public void setImageKeys(List<String> imageKeys) {
+		this.imageKeys = imageKeys;
 	}
 
 	public String getDesc() {

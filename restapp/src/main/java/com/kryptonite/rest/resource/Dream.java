@@ -229,6 +229,11 @@ public class Dream {
 	   			
 	   			dream.setLikeCount(dao.getLikesCountForDream(dreamId));
 	   			dream.setCommentCount(dao.getCommentsCountForDream(dreamId));
+	   			
+	   			String[] imageKeys = (String[])dreamNode.getProperty("imagekeys",null);
+	    		if(imageKeys != null) {
+	    			dream.setImageKeys(Arrays.asList(imageKeys));
+	    		}
     		}
     		else {
        			throw new WebApplicationException(Response.status(404).entity("Dream not found: " + dreamId).build());
@@ -284,6 +289,19 @@ public class Dream {
 			}
 			
 			dreamNode.setProperty("videolinks", dream.getVideoLinks());
+		}
+		
+		if(dream.getImageKeys() != null) {	
+			String[] currentImageLinks = (String[])dreamNode.getProperty("imagelinks",null);
+			
+			if(currentImageLinks != null) {
+				if(currentImageLinks.length + dream.getImageKeys().size() > Limits.MAX_NUM_IMAGES) {
+					throw new IllegalArgumentException("Max number of Images exceeded");
+				}
+				dream.getImageKeys().addAll(Arrays.asList(currentImageLinks));
+			}
+			
+			dreamNode.setProperty("imagekeys", dream.getImageKeys());
 		}
     }
     

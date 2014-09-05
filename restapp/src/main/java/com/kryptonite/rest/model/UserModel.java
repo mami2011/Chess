@@ -36,7 +36,16 @@ public class UserModel {
 	private List<EnableRequestModel> enableRequestsReceivedForOtherUserDreams;	//enable requests received for other users dreanms
 	private List<EnableRequestModel> enableRequestsSentForThisUserDreams;	//enable requests sent for this user dreams
 	private List<EnableRequestModel> enableRequestsSentForOtherUserDreams;	//enable requests sent for other user dreams
+	private List<String> imageKeys;
 	
+	public List<String> getImageKeys() {
+		return imageKeys;
+	}
+
+	public void setImageKeys(List<String> imageKeys) {
+		this.imageKeys = imageKeys;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}

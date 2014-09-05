@@ -94,6 +94,8 @@ public class Message {
 		return Response.status(200).entity("Updated message " + id).build();
 	}
 
+	
+	
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -152,6 +154,7 @@ public class Message {
 		List<Node> messageNodes = dao.getMessagesByUserId(userId);
 
 			for(Node messageNode:messageNodes) {
+				if (messageNode != null )
 				retVal.add(getMessageModel(messageNode));
 			}
 		}
