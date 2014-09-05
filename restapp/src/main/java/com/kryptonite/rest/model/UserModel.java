@@ -6,6 +6,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.neo4j.graphdb.Node;
 
+import com.kryptonite.constants.AccountType;
 import com.kryptonite.constants.LoginType;
 
 @JsonSerialize(include=JsonSerialize.Inclusion.NON_EMPTY)
@@ -37,7 +38,16 @@ public class UserModel {
 	private List<EnableRequestModel> enableRequestsSentForThisUserDreams;	//enable requests sent for this user dreams
 	private List<EnableRequestModel> enableRequestsSentForOtherUserDreams;	//enable requests sent for other user dreams
 	private List<String> imageKeys;
+	private AccountType accountType;
 	
+	public AccountType getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(AccountType accountType) {
+		this.accountType = accountType;
+	}
+
 	public List<String> getImageKeys() {
 		return imageKeys;
 	}

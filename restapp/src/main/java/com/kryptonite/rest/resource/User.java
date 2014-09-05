@@ -25,6 +25,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
 
+import com.kryptonite.constants.AccountType;
 import com.kryptonite.constants.Limits;
 import com.kryptonite.constants.LoginType;
 import com.kryptonite.constants.NPLabels;
@@ -157,6 +158,11 @@ public class User {
        			String loginType = (String)userNode.getProperty("logintype",null);
        			if(!StringUtils.isEmpty(loginType)) {
        				retVal.setLoginType(LoginType.valueOf(loginType));
+       			}
+       			
+       			String accountType = (String)userNode.getProperty("accounttype",null);
+       			if(!StringUtils.isEmpty(accountType)) {
+       				retVal.setLoginType(LoginType.valueOf(accountType));
        			}
        			
    				//users following this user
@@ -307,6 +313,10 @@ public class User {
 			}
 		}
 		
+		if(!(userModel.getAccountType().equals(AccountType.ACHIVER)) || (userModel.getAccountType().equals(AccountType.ACHIVER))) {
+			throw new IllegalArgumentException("AccountType is not correct");
+		}
+		
 		validateUserModel(userModel);
 	}
 		
@@ -381,6 +391,9 @@ public class User {
 		}
 		if(user.getLoginType() != null) {
 			userNode.setProperty("logintype", user.getLoginType().name());
+		}
+		if(user.getAccountType() != null) {
+			userNode.setProperty("accounttype", user.getAccountType().name());
 		}
 		
 		if(user.getFollowingUserNodes() != null) {

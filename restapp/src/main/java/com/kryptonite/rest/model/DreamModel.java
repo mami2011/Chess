@@ -21,11 +21,21 @@ public class DreamModel {
 	private List<String> videoLinks;
 	private List<String> followerUserIds;
 	private String categoryId;
+	private String categoryName;
 	private int likeCount;
 	private int commentCount;
 	
 	@JsonIgnore
 	private List<Node> enablerUserNodes;
+	
+	
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 
 	public String getAchieverUserId() {
 		return achieverUserId;

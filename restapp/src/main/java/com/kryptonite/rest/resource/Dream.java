@@ -62,7 +62,6 @@ public class Dream {
 	    		dreamNode.setProperty("name", dream.getName());
     			dreamNode.setProperty("userid", dream.getAchieverUserId());
 	    		dreamNode.setProperty("creationdate", (new Date()).toString());
-	    		
 	    		populateDreamNode(dreamNode,dream);
     			dao.addLabel(id, NPLabels.DREAM.name());
     			dao.addLabel(dream.getAchieverUserId(), NPLabels.ACHIEVER.name());
@@ -178,7 +177,7 @@ public class Dream {
 	    		dream.setCreationDate(dreamNode.getProperty("creationdate").toString());
 	    		dream.setDesc((String)dreamNode.getProperty("desc"));
 	    		dream.setCategoryId((String)dreamNode.getProperty("categoryid"));
-	    		
+	    		dream.setCategoryName((String)dreamNode.getProperty("categoryname"));
 				//users enabling this dream
 				List<String> enablerIds = new ArrayList<String>();
 				for(Node enabler:dao.getEnablersForDream(dreamId)) {
@@ -284,7 +283,8 @@ public class Dream {
     private void populateDreamNode(Node dreamNode, DreamModel dream) {
     	
 		if(!StringUtils.isEmpty(dream.getCategoryId())) {
-			dreamNode.setProperty("categoryid", dream.getCategoryId());
+			dreamNode.setProperty("categoryid", dream.getCategoryId());			
+			dreamNode.setProperty("categoryname", dream.getCategoryName());
 		}
 		
 		if(!StringUtils.isEmpty(dream.getDesc())) {
@@ -335,6 +335,8 @@ public class Dream {
 			
 			if(categoryNode == null) {
 				throw new IllegalArgumentException("Category not found");
+			} else {
+				dream.setCategoryName((String) categoryNode.getProperty("name"));
 			}
 		}
 		
