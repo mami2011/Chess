@@ -247,6 +247,18 @@ public class Dream {
     }
     
     @GET
+    @Path("/user/{userId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<DreamModel> getAllDreamsForUser(@PathParam("userId") String userId) {
+    	
+    	List<Node> dreamList = (List<Node>) dao.getDreamsForAchiever(userId);
+    	List<DreamModel> dreams = new ArrayList<DreamModel>();
+		for(Node dreamNode:dreamList) {	 			
+    		dreams.add(getDream((String)dreamNode.getProperty("id")));
+    	}  	
+    	return dreams;
+    }
+    @GET
     @Path("/search/{searchstring}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<DreamModel> getDreamsForSearchString(@PathParam("searchstring") String searchString) {
