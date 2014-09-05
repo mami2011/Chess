@@ -162,7 +162,7 @@ public class User {
        			
        			String accountType = (String)userNode.getProperty("accounttype",null);
        			if(!StringUtils.isEmpty(accountType)) {
-       				retVal.setLoginType(LoginType.valueOf(accountType));
+       				retVal.setAccountType(AccountType.valueOf(accountType));
        			}
        			
    				//users following this user
@@ -313,7 +313,7 @@ public class User {
 			}
 		}
 		
-		if(!(userModel.getAccountType().equals(AccountType.ACHIVER)) || (userModel.getAccountType().equals(AccountType.ACHIVER))) {
+		if(!((userModel.getAccountType().equals(AccountType.ACHIVER)) || (userModel.getAccountType().equals(AccountType.ENABLER)))) {
 			throw new IllegalArgumentException("AccountType is not correct");
 		}
 		
