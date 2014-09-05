@@ -1,5 +1,7 @@
 package com.kryptonite.rest.resource;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -207,7 +209,18 @@ private MessageModel getMessageModel(Node messageNode) {
     	String msg = (String)messageNode.getProperty("message");
     	message.setMessage(msg);
     	String senderId = (String)messageNode.getProperty("senderid");
-    	message.setSenderId(senderId);
+    	message.setSenderId(senderId);    	
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");     
+    	Date creationDate = null;
+		try {
+			creationDate = dateFormat.parse((String)messageNode.getProperty("creationdate"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	message.setCreationDate(creationDate);
+    	boolean isRead = (boolean)messageNode.getProperty("isread");
+    	message.setRead(isRead);
     	return message;
     }
 

@@ -1,5 +1,6 @@
 package com.kryptonite.rest.model;
 
+import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -17,7 +18,15 @@ public class MessageModel  {
 	private String typeId;
 	private String message;
 	private boolean isRead = false;
+	private Date creationDate;
 	
+	
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 	public String getSenderId() {
 		return senderId;
 	}
