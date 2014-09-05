@@ -29,6 +29,14 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
             </props>
         </property>
     </bean>
+    
+    <!--pre-configured message -->
+    <bean id="registrationMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="nutped2014@gmail.com"></property>
+        <property name="subject" value="Registration - Thank you registering to NutPeddler !!"/>
+        <property name="messageBody" value="Dear NutPeddler - Thank you for registering to NutPeddler. Dream Big and we can make it happen together. "/>
+    </bean>
+    
      
    
 </beans>

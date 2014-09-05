@@ -601,13 +601,15 @@ public List<Node> getMessagesByUserId(String id) {
 	StringBuilder query = new StringBuilder();
 	query.append("match (a:message { userid:'")
 	.append(id)
-	.append("'}) return a");
+	.append("'}) return a ORDER BY a.creationdate desc");
 	
 	List<Node> nodeList = getNodes(query.toString(),"a");
 	
 
 	return nodeList;
 }
+
+
 
 public int getLikesCountForDream(String id) {
 	

@@ -9,8 +9,11 @@ import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.QueueingConsumer.Delivery;
 import com.rabbitmq.client.ShutdownSignalException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 public class EmailConsumer {
 
 	private Connection connection = null;
@@ -30,8 +33,11 @@ public class EmailConsumer {
 	private int channelNumber = 1234;
 	private ApplicationMailer mailer;
 
-	public EmailConsumer init() throws Exception {		 
 
+    
+	public EmailConsumer init() throws Exception {		 
+		
+		
 		ApplicationContext context = 
 				new ClassPathXmlApplicationContext("sendMail.xml");
 
@@ -171,10 +177,7 @@ public class EmailConsumer {
 								channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);  // ignore the message by ACK so that it will not clog in the Q
 							}
 							else { 
-								mailer.sendMail(
-											tokens[0],
-											tokens[1], 
-											"Testing only \n\n Hello Thanks for  registring to NutPeddler");
+								mailer.sendMail(tokens[0],tokens[3]);
 								channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);   // ack one message
 
 							}
