@@ -177,7 +177,7 @@ public class Dream {
 	    		dream.setCreationDate(dreamNode.getProperty("creationdate").toString());
 	    		dream.setDesc((String)dreamNode.getProperty("desc"));
 	    		dream.setCategoryId((String)dreamNode.getProperty("categoryid"));
-	    		dream.setCategoryName((String)dreamNode.getProperty("categoryname"));
+	    		dream.setCategoryName((String)dreamNode.getProperty("categoryname",null));
 				//users enabling this dream
 				List<String> enablerIds = new ArrayList<String>();
 				for(Node enabler:dao.getEnablersForDream(dreamId)) {
