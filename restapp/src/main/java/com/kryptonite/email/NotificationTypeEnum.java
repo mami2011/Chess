@@ -6,7 +6,8 @@ public enum NotificationTypeEnum {
 	CHANGEPROFILE   (3, "changeProfile"),
 	COMMENT   (4, "comment"),
 	FOLLOW   (5, "follow"),
-	LIKE (6, "like");
+	LIKE (6, "like"),
+	NEWPASSWORD (7, "newPassword"),;
 	
 	private int id;
 	private String notificationType;

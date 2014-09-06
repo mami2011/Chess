@@ -30,13 +30,32 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
         </property>
     </bean>
     
-    <!--pre-configured message -->
+    <!--registration welcome Message pre-configured message -->
     <bean id="registrationMessage" class="org.springframework.mail.SimpleMailMessage">
         <property name="from" value="nutped2014@gmail.com"></property>
         <property name="subject" value="Registration - Thank you registering to NutPeddler !!"/>
         <property name="messageBody" value="Dear NutPeddler - Thank you for registering to NutPeddler. Dream Big and we can make it happen together. "/>
     </bean>
     
-     
+    <!--password Change Message pre-configured message -->
+    <bean id="passwordChangeMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="nutped2014@gmail.com"></property>
+        <property name="subject" value="NutPeddler Password Chnage request"/>
+        <property name="messageBody" value="Dear NutPeddler - Your Password has chnaged sucessfull. Dream Big and we can make it happen together. "/>
+    </bean>
+    
+         <!--profile Change Message pre-configured message -->
+    <bean id="profileChangeMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="nutped2014@gmail.com"></property>
+        <property name="subject" value="NutPeddler Password Chnage request"/>
+        <property name="messageBody" value="Dear NutPeddler - Your Profile has chnaged sucessfull. Dream Big and we can make it happen together. "/>
+    </bean>
+    
+      <!--password Change Message pre-configured message -->
+    <bean id="newPasswordMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="nutped2014@gmail.com"></property>
+        <property name="subject" value="NutPeddler New Password"/>
+        <property name="messageBody" value="Dear NutPeddler - Your new Password is:  . Dream Big and we can make it happen together. "/>
+    </bean>
    
 </beans>

@@ -177,7 +177,20 @@ public class EmailConsumer {
 								channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);  // ignore the message by ACK so that it will not clog in the Q
 							}
 							else { 
-								mailer.sendMail(tokens[0],tokens[3]);
+								switch (Integer.getInteger(tokens[3])) {
+								case 1:
+									mailer.sendRegistrationMessage(tokens[0]);
+									break;
+								case 2:
+									mailer.sendPasswordChangeMessage(tokens[0]);
+									break;
+								case 7:
+									mailer.sendNewPasswordMessage(tokens[0]);
+									break;
+								default:
+									
+									
+								}
 								channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);   // ack one message
 
 							}
