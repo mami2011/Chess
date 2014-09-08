@@ -9,10 +9,12 @@ public class WallModel {
 	
 	private String userId;
 	private String userSessionId;
-	private List<DreamModel> dreams;
+	private List<DreamModel> userDreams;
+	private List<DreamModel> recommendedUserDreams;
+	private List<DreamModel> topDreams;
 	private List<String> recommendedAchieverUserIds;
 	private List<String> recommendedEnablerUserIds;
-	private List<String> recommendedDreamIds;
+//	private List<String> recommendedDreamIds;
 	
 
 	public String getId() {
@@ -31,12 +33,28 @@ public class WallModel {
 		this.userSessionId = userSessionId;
 	}
 
-	public List<DreamModel> getDreams() {
-		return dreams;
+	public List<DreamModel> getUserDreams() {
+		return userDreams;
 	}
 
-	public void setDreams(List<DreamModel> dreams) {
-		this.dreams = dreams;
+	public void setUserDreams(List<DreamModel> dreams) {
+		this.userDreams = dreams;
+	}
+
+	public List<DreamModel> getRecommendedUserDreams() {
+		return recommendedUserDreams;
+	}
+
+	public void setRecommendedUserDreams(List<DreamModel> recommendedUserDreams) {
+		this.recommendedUserDreams = recommendedUserDreams;
+	}
+
+	public List<DreamModel> getTopDreams() {
+		return topDreams;
+	}
+
+	public void setTopDreams(List<DreamModel> topDreams) {
+		this.topDreams = topDreams;
 	}
 
 	public List<String> getRecommendedAchieverUserIds() {
@@ -57,12 +75,12 @@ public class WallModel {
 		this.recommendedEnablerUserIds = recommendedEnablerUserIds;
 	}
 
-	public List<String> getRecommendedDreamIds() {
+/*	public List<String> getRecommendedDreamIds() {
 		return recommendedDreamIds;
 	}
 
 	public void setRecommendedDreamIds(List<String> recommendedDreamIds) {
 		this.recommendedDreamIds = recommendedDreamIds;
-	}
+	}*/
 	
 }

@@ -127,7 +127,7 @@ public class Message {
 	}
 
 	@GET
-	@Path("/usercount/{userid}")
+	@Path("/user/{userid}/unreadcount")
 	@Produces(MediaType.APPLICATION_JSON)
 	public int getUnreadMessageCountByUser(@PathParam("userid") String userId) {
 

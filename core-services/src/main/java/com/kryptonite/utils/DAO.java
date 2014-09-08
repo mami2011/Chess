@@ -335,6 +335,18 @@ public class DAO {
 	    return retNodes;
 	}
 	
+	private List<Integer> getIntResults(String query, String columnName) {
+
+		List<Integer> results = new ArrayList<Integer> ();
+		
+			QueryResult<Map<String,Object>> result = engine.query(query, null);
+		    
+			for(Map<String, Object> row :result) {
+				results.add((Integer) row.get(columnName));
+			}
+		
+	    return results;
+	}
 	
 	private List<Relationship> getRelationships(String query, String columnName) {
 		
@@ -433,6 +445,9 @@ public class DAO {
 	 * Dreams with recent Likes
 	 */
 	
+	
+	// TODO Add Follow Logic
+	
 	public List<Node> getUserDreamsWithRecentCommentsOrLikes(String userId)
 	{
 		if(StringUtils.isEmpty(userId)) {
@@ -443,31 +458,80 @@ public class DAO {
 		
 		query.append("MATCH (u:user)-[r:commented]->(n:dream  {userid:'")
 		.append(userId)
-		.append("'}) WHERE has(r.`comment`) with n, r ORDER BY r.creationdate DESC LIMIT 5 RETURN distinct n")
+		.append("'}) WHERE has(r.`comment`) with n, r ORDER BY r.creationdate DESC LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS+" RETURN distinct n")
 		.append(" UNION ")
 		.append("MATCH (u:user)-[r:liked]->(n:dream  {userid:'")
 		.append(userId)
-		.append("'}) WHERE has(r.id) with n, r ORDER BY r.creationdate DESC LIMIT 5 RETURN distinct n");
+		.append("'}) WHERE has(r.id) with n, r ORDER BY r.creationdate DESC LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS+" RETURN distinct n");
 				
 		return getNodes(query.toString(),"n");
 	}
 	
 	
 	/**
+	 * Tops Dreams in User's Categories
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	
+	//TODO Sort Dreams in descending order by the count of Likes and Comments
+	
+	public List<Node> getTopDreamsInUserCategories(String userId)
+	{
+		if(StringUtils.isEmpty(userId)) {
+			throw new IllegalArgumentException("User Id is not valid");
+		}
+		
+		StringBuilder query = new StringBuilder();
+		
+		query.append("match (c:category) with c match (d:dream {userid:'"+userId+"', categoryid: c.id}) <- [r:commented]- (:user) with d,r return d, count(r.id) as finalc "
+				+ "union "
+				+ "match (c:category) with c match (d:dream {userid:'"+userId+"', categoryid: c.id}) <- [r:liked]- (:user) with d,r return d, count(r.id) as finalc order by finalc desc"
+				);
+
+		return getNodes(query.toString(),"d");
+
+	}
+	
+	
+	/**
+	 * Tops Dreams in any Categories
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	
+	//TODO Sort Dreams in descending order by the count of Likes and Comments
+	
+	public List<Node> getTopDreamsInAllCategories()
+	{
+		StringBuilder query = new StringBuilder();
+		
+		query.append("match (c:category) with c match (d:dream {categoryid: c.id}) <- [r:commented]- (:user) with d,r return d, count(r.id) as finalc "
+				+ "union "
+				+ "match (c:category) with c match (d:dream {categoryid: c.id}) <- [r:liked]- (:user) with d,r return d, count(r.id) as finalc order by finalc desc"
+				);
+
+		return getNodes(query.toString(),"d");
+	}
+	
+	/**
 	 * Users you might want to follow
 	 * 
 	 * Query:
 	 * 
-	 * MATCH (a:user{id:'harsh'})-[:`following`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) RETURN c LIMIT 5 
+	 * MATCH (a:user{id:'harsh'})-[:`following`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) WHERE NOT (a)-->(c) RETURN c LIMIT 5 
 	 * 	UNION ALL 
-	 * MATCH (a:user{id:'harsh'})-[:`enabling`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) RETURN c LIMIT 5 
+	 * MATCH (a:user{id:'harsh'})-[:`enabling`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) WHERE NOT (a)-->(c) RETURN c LIMIT 5 
 	 * 	UNION ALL 
-	 * MATCH (a:user{id:'harsh'})-[:`commented`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) RETURN c LIMIT 5
+	 * MATCH (a:user{id:'harsh'})-[:`commented`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) WHERE NOT (a)-->(c) RETURN c LIMIT 5
 	 * 
 	 * @param searchString
 	 * @return
 	 */
 	
+	//TODO Add logic to return some default Users if no activity
 	public List<Node> getUsersYouMayLike(String userId)
 	{
 		if(StringUtils.isEmpty(userId)) {
@@ -478,15 +542,15 @@ public class DAO {
 		
 		query.append("MATCH (a:user {id:'")
 		.append(userId)
-		.append("'})-[:`following`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) RETURN c LIMIT 5")
+		.append("'})-[:`following`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) WHERE NOT (a)-->(c) RETURN c LIMIT 5")
 		.append(" UNION ")
 		.append("MATCH (a:user {id:'")
 		.append(userId)
-		.append("'})-[:`enabling`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) RETURN c LIMIT 5")
+		.append("'})-[:`enabling`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) WHERE NOT (a)-->(c) RETURN c LIMIT 5")
 		.append(" UNION ")
 		.append("MATCH (a:user {id:'")
 		.append(userId)
-		.append("'})-[:`commented`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) RETURN c LIMIT 5");
+		.append("'})-[:`commented`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) WHERE NOT (a)-->(c) RETURN c LIMIT 5");
 						
 		return getNodes(query.toString(),"c");
 	}
@@ -583,11 +647,11 @@ public int getUnreadMessageCountByUserId(String id) {
 	StringBuilder query = new StringBuilder();
 	query.append("match (a:message { userid:'")
 	.append(id)
-	.append("', isread:false}) return a");
+	.append("', isread:false}) return count(a) as b");
 	
-	List<Node> nodeList = getNodes(query.toString(),"a");
+	List<Integer> result = getIntResults(query.toString(),"b");
 	
-	int count = nodeList.size();
+	int count = result.get(0);
 	
 	return count;
 }
