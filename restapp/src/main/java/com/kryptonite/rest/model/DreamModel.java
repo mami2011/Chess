@@ -24,6 +24,10 @@ public class DreamModel {
 	private String categoryName;
 	private int likeCount;
 	private int commentCount;
+	private int nextCursor;
+	private String nextCursorString;
+	private int previousCursor;
+	private String previousCursorString;
 	
 	@JsonIgnore
 	private List<Node> enablerUserNodes;
@@ -61,6 +65,7 @@ public class DreamModel {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
+	
 
 	public String getCreationDate() {
 		return creationDate;
@@ -155,6 +160,42 @@ public class DreamModel {
 
 	public void setCommentCount(int commentCount) {
 		this.commentCount = commentCount;
+	}
+
+	public int getNextCursor() {
+		return nextCursor;
+	}
+
+	public void setNextCursor(int nextCursor) {
+		this.nextCursor = nextCursor;
+	}
+
+	public String getNextCursorString() {
+		return nextCursorString;
+	}
+
+	public void setNextCursorString(String nextCursorString) {
+		this.nextCursorString = nextCursorString;
+	}
+
+	public int getPreviousCursor() {
+		return previousCursor;
+	}
+
+	public void setPreviousCursor(int previousCursor) {
+		this.previousCursor = previousCursor;
+	}
+
+	public String getPreviousCursorString() {
+		return previousCursorString;
+	}
+
+	public void setPreviousCursorString(String previousCursorString) {
+		this.previousCursorString = previousCursorString;
+	}
+
+	public List<LikeModel> getLikes() {
+		return likes;
 	}
 
 	

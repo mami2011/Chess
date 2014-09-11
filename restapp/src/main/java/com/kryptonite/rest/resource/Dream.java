@@ -169,74 +169,7 @@ public class Dream {
     	try {
     		Node dreamNode = dao.getDream(dreamId);
     		
-    		if(dreamNode != null) {
-
-	    		dream.setAchieverUserId((String)dreamNode.getProperty("userid"));
-	    		dream.setName((String)dreamNode.getProperty("name"));
-	    		dream.setId((String)dreamNode.getProperty("id"));
-	    		dream.setCreationDate(dreamNode.getProperty("creationdate").toString());
-	    		dream.setDesc((String)dreamNode.getProperty("desc"));
-	    		dream.setCategoryId((String)dreamNode.getProperty("categoryid"));
-	    		dream.setCategoryName((String)dreamNode.getProperty("categoryname",null));
-				//users enabling this dream
-				List<String> enablerIds = new ArrayList<String>();
-				for(Node enabler:dao.getEnablersForDream(dreamId)) {
-					enablerIds.add((String)enabler.getProperty("id"));
-				}
-	    		
-	    		dream.setEnablerUserIds(enablerIds);
-	    		String[] videoLinks = (String[])dreamNode.getProperty("videolinks",null);
-	    		if(videoLinks != null) {
-	    			dream.setVideoLinks(Arrays.asList(videoLinks));
-	    		}
-	    		
-				//users following this dream
-	   			List<String> followerIds = new ArrayList<String>();
-	   			for(Node n:dao.getFollowersForDream((String)dreamNode.getProperty("id"))) {
-	   				followerIds.add((String)n.getProperty("id"));
-	   			}
-	   			dream.setFollowerUserIds(followerIds);
-	   			
-	   			//comments
-	   			List<CommentModel> comments = new ArrayList<CommentModel>();
-	   			for(Relationship r:dao.getCommentsForDream((String)dreamNode.getProperty("id"))) {
-	   				CommentModel comment = new CommentModel();
-	   				comment.setId((String)r.getProperty("id"));
-	   				comment.setComment((String)r.getProperty("comment"));
-	   				comment.setCommenterUserId((String)r.getProperty("commenteruserid"));
-	   				comment.setCreationDate((String)r.getProperty("creationdate"));
-	   				try {
-	   					comment.setParentCommentId((String)r.getProperty("parentcommentid"));
-	   				}
-	   				catch(NotFoundException nfe) {}
-	   				comment.setIsValid((boolean)r.getProperty("isvalid"));
-	   				comments.add(comment);
-	   			}
-	   			dream.setComments(comments);
-	   			
-	   			//likes
-	   			List<LikeModel> likes = new ArrayList<LikeModel>();
-	   			for(Relationship r:dao.getLikesForDream((String)dreamNode.getProperty("id"))) {
-	   				LikeModel like = new LikeModel();
-	   				like.setId((String)r.getProperty("id"));
-	   				like.setLikerUserId((String)r.getProperty("likeruserid"));
-	   				like.setCreationDate((String)r.getProperty("creationdate"));
-	   				like.setIsValid((boolean)r.getProperty("isvalid"));
-	   				likes.add(like);
-	   			}
-	   			dream.setLikes(likes);
-	   			
-	   			dream.setLikeCount(dao.getLikesCountForDream(dreamId));
-	   			dream.setCommentCount(dao.getCommentsCountForDream(dreamId));
-	   			
-	   			String[] imageKeys = (String[])dreamNode.getProperty("imagekeys",null);
-	    		if(imageKeys != null) {
-	    			dream.setImageKeys(Arrays.asList(imageKeys));
-	    		}
-    		}
-    		else {
-       			throw new WebApplicationException(Response.status(404).entity("Dream not found: " + dreamId).build());
-    		}
+    		dream = populateDreamModel(dreamNode);
     	}
     	catch(Exception e) {
 			throw new WebApplicationException(Response.status(500).entity("Unable to get dream: " + e).build());
@@ -244,6 +177,89 @@ public class Dream {
     	
     	return dream;
     }
+
+	/**
+	 * @param dreamId
+	 * @param dreamNode
+	 */
+    
+    //TODO Consolidate Wall.populateDreamModel and Dream.populateDreamModel
+    
+	public DreamModel populateDreamModel(Node dreamNode) {
+		
+		DreamModel dream = new DreamModel();
+		
+		if(dreamNode != null) {
+
+			dream.setAchieverUserId((String)dreamNode.getProperty("userid"));
+			dream.setName((String)dreamNode.getProperty("name"));
+			dream.setId((String)dreamNode.getProperty("id"));
+			dream.setCreationDate(dreamNode.getProperty("creationdate").toString());
+			dream.setDesc((String)dreamNode.getProperty("desc"));
+			dream.setCategoryId((String)dreamNode.getProperty("categoryid"));
+			dream.setCategoryName((String)dreamNode.getProperty("categoryname",null));
+			//users enabling this dream
+			List<String> enablerIds = new ArrayList<String>();
+			for(Node enabler:dao.getEnablersForDream(dream.getId())) {
+				enablerIds.add((String)enabler.getProperty("id"));
+			}
+			
+			dream.setEnablerUserIds(enablerIds);
+			String[] videoLinks = (String[])dreamNode.getProperty("videolinks",null);
+			if(videoLinks != null) {
+				dream.setVideoLinks(Arrays.asList(videoLinks));
+			}
+			
+			//users following this dream
+			List<String> followerIds = new ArrayList<String>();
+			for(Node n:dao.getFollowersForDream((String)dreamNode.getProperty("id"))) {
+				followerIds.add((String)n.getProperty("id"));
+			}
+			dream.setFollowerUserIds(followerIds);
+			
+			//comments
+			List<CommentModel> comments = new ArrayList<CommentModel>();
+			for(Relationship r:dao.getCommentsForDream((String)dreamNode.getProperty("id"))) {
+				CommentModel comment = new CommentModel();
+				comment.setId((String)r.getProperty("id"));
+				comment.setComment((String)r.getProperty("comment"));
+				comment.setCommenterUserId((String)r.getProperty("commenteruserid"));
+				comment.setCreationDate((String)r.getProperty("creationdate"));
+				try {
+					comment.setParentCommentId((String)r.getProperty("parentcommentid"));
+				}
+				catch(NotFoundException nfe) {}
+				comment.setIsValid((boolean)r.getProperty("isvalid"));
+				comments.add(comment);
+			}
+			dream.setComments(comments);
+			
+			//likes
+			List<LikeModel> likes = new ArrayList<LikeModel>();
+			for(Relationship r:dao.getLikesForDream((String)dreamNode.getProperty("id"))) {
+				LikeModel like = new LikeModel();
+				like.setId((String)r.getProperty("id"));
+				like.setLikerUserId((String)r.getProperty("likeruserid"));
+				like.setCreationDate((String)r.getProperty("creationdate"));
+				like.setIsValid((boolean)r.getProperty("isvalid"));
+				likes.add(like);
+			}
+			dream.setLikes(likes);
+			
+			dream.setLikeCount(dao.getLikesCountForDream(dream.getId()));
+			dream.setCommentCount(dao.getCommentsCountForDream(dream.getId()));
+			
+			String[] imageKeys = (String[])dreamNode.getProperty("imagekeys",null);
+			if(imageKeys != null) {
+				dream.setImageKeys(Arrays.asList(imageKeys));
+			}
+		}
+		else {
+			throw new WebApplicationException(Response.status(404).entity("Dream not found: " + dream.getId()).build());
+		}
+		
+		return dream;
+	}
     
     @GET
     @Path("/user/{userId}")

@@ -448,7 +448,7 @@ public class DAO {
 	
 	// TODO Add Follow Logic
 	
-	public List<Node> getUserDreamsWithRecentCommentsOrLikes(String userId)
+	public List<Node> getUserDreamsWithRecentCommentsOrLikes(String userId, long cursor)
 	{
 		if(StringUtils.isEmpty(userId)) {
 			throw new IllegalArgumentException("User Id is not valid");
@@ -456,13 +456,13 @@ public class DAO {
 		
 		StringBuilder query = new StringBuilder();
 		
-		query.append("MATCH (u:user)-[r:commented]->(n:dream  {userid:'")
+		query.append("MATCH (u:user)-[r:commented|:liked]->(n:dream  {userid:'")
 		.append(userId)
-		.append("'}) WHERE has(r.`comment`) with n, r ORDER BY r.creationdate DESC LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS+" RETURN distinct n")
-		.append(" UNION ")
+		.append("'}) WHERE has(r.id) with n, r ORDER BY r.creationdate DESC RETURN distinct n SKIP "+cursor+" LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS);
+		/*.append(" UNION ")
 		.append("MATCH (u:user)-[r:liked]->(n:dream  {userid:'")
 		.append(userId)
-		.append("'}) WHERE has(r.id) with n, r ORDER BY r.creationdate DESC LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS+" RETURN distinct n");
+		.append("'}) WHERE has(r.id) with n, r ORDER BY r.creationdate DESC LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS+" RETURN distinct n");*/
 				
 		return getNodes(query.toString(),"n");
 	}
@@ -477,7 +477,7 @@ public class DAO {
 	
 	//TODO Sort Dreams in descending order by the count of Likes and Comments
 	
-	public List<Node> getTopDreamsInUserCategories(String userId)
+	public List<Node> getTopDreamsInUserCategories(String userId, long cursor)
 	{
 		if(StringUtils.isEmpty(userId)) {
 			throw new IllegalArgumentException("User Id is not valid");
@@ -485,10 +485,10 @@ public class DAO {
 		
 		StringBuilder query = new StringBuilder();
 		
-		query.append("match (c:category) with c match (d:dream {userid:'"+userId+"', categoryid: c.id}) <- [r:commented]- (:user) with d,r return d, count(r.id) as finalc "
-				+ "union "
+		query.append("match (c:category) with c match (d:dream {userid:'"+userId+"', categoryid: c.id}) <- [r:commented|:liked]- (:user) with d,r return d, count(r.id) as finalc order by finalc desc skip "+cursor);
+				/*+ "union "
 				+ "match (c:category) with c match (d:dream {userid:'"+userId+"', categoryid: c.id}) <- [r:liked]- (:user) with d,r return d, count(r.id) as finalc order by finalc desc"
-				);
+				);*/
 
 		return getNodes(query.toString(),"d");
 
@@ -504,14 +504,14 @@ public class DAO {
 	
 	//TODO Sort Dreams in descending order by the count of Likes and Comments
 	
-	public List<Node> getTopDreamsInAllCategories()
+	public List<Node> getTopDreamsInAllCategories(long cursor)
 	{
 		StringBuilder query = new StringBuilder();
 		
-		query.append("match (c:category) with c match (d:dream {categoryid: c.id}) <- [r:commented]- (:user) with d,r return d, count(r.id) as finalc "
-				+ "union "
-				+ "match (c:category) with c match (d:dream {categoryid: c.id}) <- [r:liked]- (:user) with d,r return d, count(r.id) as finalc order by finalc desc"
-				);
+		query.append("match (c:category) with c match (d:dream {categoryid: c.id}) <- [r:commented]- (:user) with d,r return d, count(r.id) as finalc order by finalc desc skip "+ cursor);
+				/*+ "union "
+				+ "match (c:category) with c match (d:dream {categoryid: c.id}) <- [r:liked]- (:user) with d,r return d, count(r.id) as finalc "
+				);*/
 
 		return getNodes(query.toString(),"d");
 	}
