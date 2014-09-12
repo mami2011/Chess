@@ -28,6 +28,7 @@ public class DreamModel {
 	private String nextCursorString;
 	private int previousCursor;
 	private String previousCursorString;
+	private boolean isLikedByCurrentUser = false;
 	
 	@JsonIgnore
 	private List<Node> enablerUserNodes;
@@ -196,6 +197,14 @@ public class DreamModel {
 
 	public List<LikeModel> getLikes() {
 		return likes;
+	}
+
+	public boolean isLikedByCurrentUser() {
+		return isLikedByCurrentUser;
+	}
+
+	public void setLikedByCurrentUser(boolean isLikeByCurrentUser) {
+		this.isLikedByCurrentUser = isLikeByCurrentUser;
 	}
 
 	

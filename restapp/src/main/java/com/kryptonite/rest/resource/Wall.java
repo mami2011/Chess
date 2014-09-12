@@ -266,6 +266,11 @@ DAO dao;
 				like.setCreationDate((String)r.getProperty("creationdate"));
 				like.setIsValid((boolean)r.getProperty("isvalid"));
 				likes.add(like);
+				
+				if(!dream.isLikedByCurrentUser())
+					if(((String) (r.getProperty("likeruserid"))).equals(dream.getAchieverUserId()))
+						dream.setLikedByCurrentUser(true);
+				
 			}
 			dream.setLikes(likes);
 			
