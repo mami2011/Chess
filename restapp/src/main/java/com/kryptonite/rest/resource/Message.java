@@ -42,9 +42,10 @@ public class Message {
 
 		String id = null;
 
-		if(StringUtils.isEmpty(message.getDreamId())) {
+		//Allowing user to send message without dream id .
+		/*if(StringUtils.isEmpty(message.getDreamId())) {
 			throw new IllegalArgumentException("Dream id is required");
-		}
+		}*/
 
 		validateMessageModel(message);
 
