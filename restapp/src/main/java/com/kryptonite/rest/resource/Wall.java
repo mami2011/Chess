@@ -110,8 +110,21 @@ DAO dao;
     		dreams = updateDreamModel(topCategoryDreamList,currentDream);   	
     		
     		wallData.setTopDreams(dreams);
-    	
-    	// 4. Get Enablers you may Like 
+    		
+    	// 4. Get dreams you may want to enable
+    		List<Node> recommendedDreamsForEnabler = dao.getRecommendedDreamsForEnabler(userId);
+    		List<DreamModel> recommendedDreamsForEnablerList = new ArrayList<DreamModel>();
+    		
+    		for(int i = 0; i<recommendedDreamsForEnabler.size(); i++)
+        	{
+        		Node dreamNode = (Node) recommendedDreamsForEnabler.get(i);
+        		DreamModel dreamModel = updateDreamModel(dreamNode);
+        		recommendedDreamsForEnablerList.add(dreamModel);
+        	}
+    		
+    		wallData.setRecommendedUserDreams(recommendedDreamsForEnablerList);
+
+    	// 5. Get Enablers you may Like 
     		
     	//TODO Get ONLY USER IDs instead of Whole UserObjects
     	
@@ -126,7 +139,7 @@ DAO dao;
     			userIds.add((String)userNode.getProperty("id"));
     	}
     	
-    	wallData.setRecommendedAchieverUserIds(userIds);
+    	//wallData.setRecommendedAchieverUserIds(userIds);
     	
     	//TODO Implement query to load Recommended Enabler Ids
     	

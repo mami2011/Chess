@@ -701,5 +701,32 @@ public int getCommentsCountForDream(String id) {
 	return count;
 }
 
+/**
+ * Get Recommended DreamIds for an Enabler
+ * 
+ * Algorithm:
+ * 
+ * 1) Get All Dreams enabled by this Enabler - E1.
+ * 2) Get Categories of these dreams C1
+ * 3) Get all Dreams in C1 and Sub Categories of C1
+ * 4) Recommend Dreams from 3) and not enabled by E1 or any one
+ * 
+ * An enhancement would be to Recommend Dreams not enabled by anyone first and then rest
+ */
 
+public List<Node> getRecommendedDreamsForEnabler(String enablerId)
+{
+	if(StringUtils.isEmpty(enablerId)) {
+		throw new IllegalArgumentException("Enabler Id cannot be empty");
+	}
+	
+	StringBuilder query = new StringBuilder();
+	query.append("MATCH (d1: dream) - [:enabling] - (a:enabler {id:'"+enablerId+"'}) ")
+		.append("MATCH (c:category {id:d1.categoryid})-[:superCategory*0..]-(ca:category) ")
+		.append("MATCH (d2:dream {categoryid: ca.id}) WHERE NOT (d2 - [:enabling]-(:enabler {id:'"+enablerId+"'})) return distinct d2");
+	
+	List<Node> nodeList = getNodes(query.toString(),"d2");
+	
+	return nodeList;
+}
 }

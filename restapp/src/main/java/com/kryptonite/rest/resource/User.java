@@ -209,7 +209,14 @@ public class User {
    						dreamIds.add((String)dream.getProperty("id"));
    					}
    					enablerDetails.setEnablingDreamIds(dreamIds);
-   					enablerDetails.setPreferredCategories((String[])userNode.getProperty("preferredcategories",null));
+   					
+   					//TODO FIx the Preferred Categories issue
+   					
+   					//String preferredCategories = (String) userNode.getProperty("preferredcategories",null);
+   					
+   					//String[]categoryList = Arrays.asList(userNode.getProperty("preferredcategories",null)).toArray(new String[preferredCategories.length]);
+   					
+   					//enablerDetails.setPreferredCategories(categoryList);
    					
    					retVal.setEnablerDetails(enablerDetails);
    				}
