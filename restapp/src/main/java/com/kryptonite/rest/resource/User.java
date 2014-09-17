@@ -362,8 +362,8 @@ public class User {
 	private void populateUserDetails(Node userNode, UserModel user) {
 
 		if(!StringUtils.isEmpty(user.getPassword())) {
-			//userNode.setProperty( "password", user.getPassword() );
-			userNode.setProperty( "password", "t-fly.com" );
+			userNode.setProperty( "password", user.getPassword() );
+			//userNode.setProperty( "password", "t-fly.com" );
 		}
 		if(!StringUtils.isEmpty(user.getCity())) {
 			userNode.setProperty("city", user.getCity());

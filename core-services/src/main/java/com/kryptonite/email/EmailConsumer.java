@@ -1,6 +1,13 @@
 package com.kryptonite.email;
 import java.io.IOException;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+
+import com.kryptonite.email.ConsumerConstants;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -8,16 +15,15 @@ import com.rabbitmq.client.ConsumerCancelledException;
 import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.QueueingConsumer.Delivery;
 import com.rabbitmq.client.ShutdownSignalException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+
 public class EmailConsumer {
 
 	private Connection connection = null;
 	private Channel channel = null;
+	private MailSender mailSender;
 
 	private QueueingConsumer consumer;
 
@@ -32,21 +38,20 @@ public class EmailConsumer {
 	private String consumerTag = "nutped";
 	private int channelNumber = 1234;
 	private ApplicationMailer mailer;
-
-
-    
-	public EmailConsumer init() throws Exception {		 
-		
+	MailServiceSender mailServiceSender;
+	
+			
+	public EmailConsumer init() throws Exception {	
 		
 		ApplicationContext context = 
 				new ClassPathXmlApplicationContext("sendMail.xml");
-
-		//Get the mailer instance
-		mailer = (ApplicationMailer) context.getBean("mailService");
-
-
+		 mailer = (ApplicationMailer) context.getBean("mailService");
+		
+		
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost(ConsumerConstants.Rabbitmq.RABBIT_AMQP_HOST);
+		
+		
 
 		connection = factory.newConnection();		 
 		try {
@@ -54,16 +59,11 @@ public class EmailConsumer {
 			channel = connection.createChannel(channelNumber);
 			// if channel created successfully
 			if(channel!=null){
-		
 				channel.queueDeclare(queueName, durableQueue, false, false, null);
-
 				channel.queueBind(queueName, exchangeName, "");
-
 				channel.basicQos(totalMsgsToPrefetch);
-
 				// create a queueing consumer
 				consumer = new QueueingConsumer(channel);
-
 				// Create a consumer and manually ack message after processing
 				String crConsumerTag = channel.basicConsume(queueName, autoAck,consumerTag, consumer);
 				// cancel consumer if consumer cannot be created
@@ -129,7 +129,7 @@ public class EmailConsumer {
 		if (connection != null) {
 			try {
 				connection.close();
-				
+
 			}
 			catch (IOException ignore) {}
 		}
@@ -177,19 +177,27 @@ public class EmailConsumer {
 								channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);  // ignore the message by ACK so that it will not clog in the Q
 							}
 							else { 
-								switch (Integer.getInteger(tokens[3])) {
+								int mailType = 1; //Integer.parseInt(tokens[3]);
+								switch (mailType) {
 								case 1:
 									mailer.sendRegistrationMessage(tokens[0]);
+								//	mailer.sendMail(tokens[0],"Test Subject", "Testing body");
+									
+									//mailer.sendRegistrationMessage("mbeedala@gmail.com");
+									/*mailServiceSender.sendRegistrationMessage(tokens[0]);
 									break;
 								case 2:
-									mailer.sendPasswordChangeMessage(tokens[0]);
+									mailServiceSender.sendRegistrationMessage(tokens[0]);
+									break;
+								case 3:
+									mailServiceSender.sendRegistrationMessage(tokens[0]);
 									break;
 								case 7:
-									mailer.sendNewPasswordMessage(tokens[0]);
+									mailServiceSender.sendRegistrationMessage(tokens[0]);
 									break;
-								default:
-									
-									
+								default :
+									mailServiceSender.sendRegistrationMessage(tokens[0]);*/
+									break;
 								}
 								channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);   // ack one message
 

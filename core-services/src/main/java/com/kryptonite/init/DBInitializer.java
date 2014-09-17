@@ -30,7 +30,8 @@ public class DBInitializer {
 					//graphDb = new GraphDatabaseFactory().newEmbeddedDatabase( "/Users/saran/db" );
 					//queryEngine = new ExecutionEngine(graphDb);
 					
-					graphDb = new RestGraphDatabase( "http://localhost:7474/db/data/" );
+					//graphDb = new RestGraphDatabase( "http://localhost:7474/db/data/" );
+					graphDb = new RestGraphDatabase( "http://54.193.46.145:7474/db/data/" );
 					queryEngine = new RestCypherQueryEngine(((RestGraphDatabase)graphDb).getRestAPI());
 					registerShutdownHook(graphDb );
 				}

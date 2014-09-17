@@ -1,5 +1,7 @@
 package com.kryptonite.rest.resource;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 import javax.inject.Inject;
@@ -26,7 +28,7 @@ public class Image {
 
 	@POST
 	@Consumes( MediaType.MULTIPART_FORM_DATA )
-	public String uploadImage(@MultipartForm  InputStream   images) {
+	public String uploadImage(@MultipartForm  InputStream    images) throws IOException {
 		 String key = AWSHelper.getInstance().uploadImage2AWS(images);
 		 return key;
 	}

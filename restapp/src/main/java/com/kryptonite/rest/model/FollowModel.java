@@ -9,7 +9,14 @@ public class FollowModel implements Notifiable {
 	private String followerUserId;
 	private String creationDate;
 	private String dreamId;
+	private Boolean acked;
 	
+	public Boolean getAcked() {
+		return acked;
+	}
+	public void setAcked(Boolean acked) {
+		this.acked = acked;
+	}
 	public String getId() {
 		return id;
 	}
