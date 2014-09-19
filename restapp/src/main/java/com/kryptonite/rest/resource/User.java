@@ -24,6 +24,8 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Transaction;
+import org.neo4j.shell.util.json.JSONException;
+import org.neo4j.shell.util.json.JSONObject;
 
 import com.kryptonite.constants.AccountType;
 import com.kryptonite.constants.Limits;
@@ -127,6 +129,57 @@ public class User {
         return Response.status(200).entity("Updated user " + userId).build();
     }
     
+    @GET
+    @Path("/dologin/{id}/{password}")
+    @Produces(MediaType.APPLICATION_JSON) 
+    public String doLogin(@PathParam("id") String userId, @PathParam("password") String pwd){
+        String response = "";
+        if(checkCredentials(userId, pwd)){
+            response = constructJSON("login",true);
+        }else{
+            response = constructJSON("login", false);
+        }
+    return response;        
+    }
+ 
+    public static String constructJSON(String tag, boolean status) {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("tag", tag);
+            obj.put("status", new Boolean(status));
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+        }
+        return obj.toString();
+    }
+    
+    /**
+     * Method to check whether the entered credential is valid
+     * 
+     * @param uname
+     * @param pwd
+     * @return
+     */
+    private boolean checkCredentials(String userId, String pwd){
+        System.out.println("Inside checkCredentials");
+        boolean result = false;
+        if(!userId.isEmpty() && !pwd.isEmpty()){
+            try {
+            	Node userNode = dao.getUser(userId);
+        		if(userNode != null) {
+        			if(pwd.equals(userNode.getProperty("password"))) {
+        				result = true;	
+        			}
+        		}
+            } catch (Exception e) {
+                result = false;
+            }
+        }else{
+             result = false;
+        }
+ 
+        return result;
+    }
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
