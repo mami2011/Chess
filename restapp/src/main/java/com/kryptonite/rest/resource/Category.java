@@ -81,7 +81,7 @@ public class Category {
 		updateCategory(category.getParentId(),parentCategoryModel);
 		}
 	
-		return Response.status(200).entity("Created category " + id).build();
+		return Response.status(200).entity("Created category with id:" + id).build();
 	}
 
 	@POST
@@ -206,7 +206,7 @@ public class Category {
 	private void populateCategoryNode(Node categoryNode , CategoryModel category) {
 
 		if(!StringUtils.isEmpty(category.getName())) {
-			categoryNode.setProperty( "name", category.getName() );	
+			categoryNode.setProperty( "name", category.getName().toLowerCase() );	
 		}
 		categoryNode.setProperty( "isActive", category.getIsActive() );
 

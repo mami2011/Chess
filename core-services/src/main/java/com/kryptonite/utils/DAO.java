@@ -30,7 +30,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (u { id:'").append(id).append("' }) return u");
+		query.append("match (u { id:'").append(id.toLowerCase()).append("' }) return u");
 		return(getNode(query.toString(),"u"));
 	}
 	
@@ -41,7 +41,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a)<-[r:enableRequested { id:'").append(id).append("' }]-(e) return r");
+		query.append("match (a)<-[r:enableRequested { id:'").append(id.toLowerCase()).append("' }]-(e) return r");
 		return(getRelationship(query.toString(),"r"));
 	}
 	
@@ -52,7 +52,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (d:dream { userid:'").append(userId).append("' })-[er:enableRequested]->(u:user) return d.id ,er");
+		query.append("match (d:dream { userid:'").append(userId.toLowerCase()).append("' })-[er:enableRequested]->(u:user) return d.id ,er");
 		return(getRelationshipMap(query.toString(),"d.id","er"));
 	}
 
@@ -63,7 +63,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (u:user { id:'").append(userId).append("' })-[er:enableRequested]->(d:dream) return d.id ,er");
+		query.append("match (u:user { id:'").append(userId.toLowerCase()).append("' })-[er:enableRequested]->(d:dream) return d.id ,er");
 		return(getRelationshipMap(query.toString(),"d.id","er"));
 	}
 	
@@ -74,7 +74,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (d:dream { userid:'").append(userId).append("' })<-[er:enableRequested]-(u) return d.id ,er");
+		query.append("match (d:dream { userid:'").append(userId.toLowerCase()).append("' })<-[er:enableRequested]-(u) return d.id ,er");
 		return(getRelationshipMap(query.toString(),"d.id","er"));
 	}
 	
@@ -85,7 +85,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (d:dream)-[er:enableRequested]->(u:user { id:'").append(userId).append("' }) return d.id ,er");
+		query.append("match (d:dream)-[er:enableRequested]->(u:user { id:'").append(userId.toLowerCase()).append("' }) return d.id ,er");
 		return(getRelationshipMap(query.toString(),"d.id","er"));
 	}
 	
@@ -96,7 +96,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:achiever { id:'").append(id).append("' }) return a");
+		query.append("match (a:achiever { id:'").append(id.toLowerCase()).append("' }) return a");
 		return(getNode(query.toString(),"a"));
 	}
 	
@@ -107,7 +107,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:dream { id:'").append(id).append("' }) return a");
+		query.append("match (a:dream { id:'").append(id.toLowerCase()).append("' }) return a");
 		return(getNode(query.toString(),"a"));
 	}
 
@@ -118,7 +118,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:user)-[r:commented {id:'").append(id).append("'}]->(b:dream { userid:'" + userId + "'}) return r");
+		query.append("match (a:user)-[r:commented {id:'").append(id.toLowerCase()).append("'}]->(b:dream { userid:'" + userId.toLowerCase() + "'}) return r");
 		return(getRelationship(query.toString(),"r"));
 	}
 
@@ -129,7 +129,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:user)-[r:liked {id:'").append(id).append("'}]->(b:dream { userid:'" + userId + "'}) return r");
+		query.append("match (a:user)-[r:liked {id:'").append(id.toLowerCase()).append("'}]->(b:dream { userid:'" + userId.toLowerCase() + "'}) return r");
 		return(getRelationship(query.toString(),"r"));
 	}
 	
@@ -140,7 +140,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:dream { id:'").append(id).append("' })<-[r:commented]-(b:user) return r");
+		query.append("match (a:dream { id:'").append(id.toLowerCase()).append("' })<-[r:commented]-(b:user) return r");
 		return(getRelationships(query.toString(),"r"));
 	}
 
@@ -151,7 +151,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:dream { id:'").append(id).append("' })<-[r:liked]-(b:user) return r");
+		query.append("match (a:dream { id:'").append(id.toLowerCase()).append("' })<-[r:liked]-(b:user) return r");
 		return(getRelationships(query.toString(),"r"));
 	}
 
@@ -162,7 +162,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:achiever { id:'").append(id).append("' })<-[:enabling]-(b) return b");
+		query.append("match (a:achiever { id:'").append(id.toLowerCase()).append("' })<-[:enabling]-(b) return b");
 		return(getNodes(query.toString(),"b"));
 	}
 
@@ -184,7 +184,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:dream)<-[:enabling]-(b { id:'").append(enablerId).append("' }) return a");
+		query.append("match (a:dream)<-[:enabling]-(b { id:'").append(enablerId.toLowerCase()).append("' }) return a");
 		return(getNodes(query.toString(),"a"));
 	}
 
@@ -195,7 +195,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:enabler)-[:enabling]->(b { id:'").append(dreamId).append("' }) return a");
+		query.append("match (a:enabler)-[:enabling]->(b { id:'").append(dreamId.toLowerCase()).append("' }) return a");
 		return(getNodes(query.toString(),"a"));
 	}
 
@@ -206,7 +206,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (d:dream { id:'").append(id).append("' })<-[:following]-(b) return b");
+		query.append("match (d:dream { id:'").append(id.toLowerCase()).append("' })<-[:following]-(b) return b");
 		return(getNodes(query.toString(),"b"));
 	}
 	
@@ -217,7 +217,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:achiever)<-[:enabling]-(b:enabler { id:'").append(id).append("' }) return a");
+		query.append("match (a:achiever)<-[:enabling]-(b:enabler { id:'").append(id.toLowerCase()).append("' }) return a");
 		return(getNodes(query.toString(),"a"));
 	}
 	
@@ -228,7 +228,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a { id:'").append(id).append("' })<-[:following]-(b:user) return b");
+		query.append("match (a { id:'").append(id.toLowerCase()).append("' })<-[:following]-(b:user) return b");
 		return(getNodes(query.toString(),"b"));
 	}
 	
@@ -239,7 +239,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a { id:'").append(id).append("' })-[:following]->(b:user) return b");
+		query.append("match (a { id:'").append(id.toLowerCase()).append("' })-[:following]->(b:user) return b");
 		return(getNodes(query.toString(),"b"));
 	}
 	
@@ -250,7 +250,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:user)-[r:following {id:'").append(id).append("'}]->(b) return r");
+		query.append("match (a:user)-[r:following {id:'").append(id.toLowerCase()).append("'}]->(b) return r");
 		return(getRelationship(query.toString(),"r"));
 	}
 	
@@ -261,7 +261,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a { id:'").append(id).append("' })-[:following]->(b:dream) return b");
+		query.append("match (a { id:'").append(id.toLowerCase()).append("' })-[:following]->(b:dream) return b");
 		return(getNodes(query.toString(),"b"));
 	}
 
@@ -272,7 +272,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (e:enabler { id:'").append(id).append("' }) return e");
+		query.append("match (e:enabler { id:'").append(id.toLowerCase()).append("' }) return e");
 		return(getNode(query.toString(),"e"));
 	}
 		
@@ -397,7 +397,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:category { id:'").append(id).append("' }) return a");
+		query.append("match (a:category { id:'").append(id.toLowerCase()).append("' }) return a");
 		return(getNode(query.toString(),"a"));
 	}
 	
@@ -408,7 +408,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:notification { id:'").append(id).append("' }) return a");
+		query.append("match (a:notification { id:'").append(id.toLowerCase()).append("' }) return a");
 		return(getNode(query.toString(),"a"));
 	}
 	
@@ -421,7 +421,7 @@ public class DAO {
 		List<Node> retNodes = new ArrayList<>();
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:notification { userid:'").append(userId).append("', acked:false}) return a");
+		query.append("match (a:notification { userid:'").append(userId.toLowerCase()).append("', acked:false}) return a");
 		retNodes.addAll(getNodes(query.toString(),"a"));
 		
 		return retNodes;
@@ -457,7 +457,7 @@ public class DAO {
 		StringBuilder query = new StringBuilder();
 		
 		query.append("MATCH (u:user)-[r:commented|:liked]->(n:dream  {userid:'")
-		.append(userId)
+		.append(userId.toLowerCase())
 		.append("'}) WHERE has(r.id) with n, r ORDER BY r.creationdate DESC RETURN distinct n SKIP "+cursor+" LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS);
 		/*.append(" UNION ")
 		.append("MATCH (u:user)-[r:liked]->(n:dream  {userid:'")
@@ -485,7 +485,7 @@ public class DAO {
 		
 		StringBuilder query = new StringBuilder();
 		
-		query.append("match (c:category) with c match (d:dream {userid:'"+userId+"', categoryid: c.id}) <- [r:commented|:liked]- (:user) with d,r return d, count(r.id) as finalc order by finalc desc skip "+cursor);
+		query.append("match (c:category) with c match (d:dream {userid:'"+userId.toLowerCase()+"', categoryid: c.id}) <- [r:commented|:liked]- (:user) with d,r return d, count(r.id) as finalc order by finalc desc skip "+cursor);
 				/*+ "union "
 				+ "match (c:category) with c match (d:dream {userid:'"+userId+"', categoryid: c.id}) <- [r:liked]- (:user) with d,r return d, count(r.id) as finalc order by finalc desc"
 				);*/
@@ -541,15 +541,15 @@ public class DAO {
 		StringBuilder query = new StringBuilder();
 		
 		query.append("MATCH (a:user {id:'")
-		.append(userId)
+		.append(userId.toLowerCase())
 		.append("'})-[:`following`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) WHERE NOT (a)-->(c) RETURN c LIMIT 5")
 		.append(" UNION ")
 		.append("MATCH (a:user {id:'")
-		.append(userId)
+		.append(userId.toLowerCase())
 		.append("'})-[:`enabling`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) WHERE NOT (a)-->(c) RETURN c LIMIT 5")
 		.append(" UNION ")
 		.append("MATCH (a:user {id:'")
-		.append(userId)
+		.append(userId.toLowerCase())
 		.append("'})-[:`commented`]->(b:dream) with a,b MATCH (c:user {id: b.userid}) WHERE NOT (a)-->(c) RETURN c LIMIT 5");
 						
 		return getNodes(query.toString(),"c");
@@ -565,11 +565,11 @@ public class DAO {
 		
 		StringBuilder query = new StringBuilder();
 		query.append("match (a:category) where a.name =~ '.*")
-			.append(searchString)
+			.append(searchString.toLowerCase())
 			.append(".*' return a as cat limit " 
 			+ Limits.MAX_CATEGORIES_SEARCH_RESULTS)
 			.append(" union match (a:category) where a.name =~ '.*")
-			.append(searchString)
+			.append(searchString.toLowerCase())
 			.append(".*' with a match (a:category)-[:subCategory]->(b:category) return b as cat limit " 
 			+ Limits.MAX_CATEGORIES_SEARCH_RESULTS);
 		
@@ -578,11 +578,11 @@ public class DAO {
 		if(retNodes.size() < Limits.MAX_CATEGORIES_SEARCH_RESULTS) {
 			query = new StringBuilder();
 			query.append("match (a:category) where any ( t in a.tags where t =~ '.*")
-				.append(searchString)
+				.append(searchString.toLowerCase())
 				.append(".*') return a as cat limit " 
 				+ (Limits.MAX_CATEGORIES_SEARCH_RESULTS - retNodes.size()))
 				.append(" union match (a:category) where any ( t in a.tags where t =~ '.*")
-				.append(searchString)
+				.append(searchString.toLowerCase())
 				.append(".*') with a match (a:category)-[:subCategory]->(b:category) return b as cat limit " 
 				+ Limits.MAX_CATEGORIES_SEARCH_RESULTS);
 			retNodes.addAll(getNodes(query.toString(),"cat"));
@@ -607,7 +607,7 @@ public class DAO {
 			
 			StringBuilder query = new StringBuilder();
 			query.append("match (d:dream)<-[r:liked]-(u:user) where d.categoryid='")
-				.append(thisCatId)
+				.append(thisCatId.toLowerCase())
 				.append("' return d,count(r) as numlikes order by numlikes limit ")
 				.append(Limits.MAX_DREAMS_SEARCH_RESULTS);
 			
@@ -616,7 +616,7 @@ public class DAO {
 			if(retNodes.size() < Limits.MAX_DREAMS_SEARCH_RESULTS) {
 				query = new StringBuilder();
 				query.append("match (d:dream) where d.categoryid='")
-					.append(thisCatId)
+					.append(thisCatId.toLowerCase())
 					.append("' return d limit ")
 					.append(Limits.MAX_DREAMS_SEARCH_RESULTS - retNodes.size());
 
@@ -634,7 +634,7 @@ public Node getMessageById(String id) {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:message { id:'").append(id).append("' }) return a");
+		query.append("match (a:message { id:'").append(id.toLowerCase()).append("' }) return a");
 		return(getNode(query.toString(),"a"));
 	}
 
@@ -646,7 +646,7 @@ public int getUnreadMessageCountByUserId(String id) {
 	
 	StringBuilder query = new StringBuilder();
 	query.append("match (a:message { userid:'")
-	.append(id)
+	.append(id.toLowerCase())
 	.append("', isread:false}) return count(a) as b");
 	
 	List<Integer> result = getIntResults(query.toString(),"b");
@@ -664,7 +664,7 @@ public List<Node> getMessagesByUserId(String id) {
 	
 	StringBuilder query = new StringBuilder();
 	query.append("match (a:message { userid:'")
-	.append(id)
+	.append(id.toLowerCase())
 	.append("'}) return a ORDER BY a.creationdate desc");
 	
 	List<Node> nodeList = getNodes(query.toString(),"a");
@@ -682,7 +682,7 @@ public int getLikesCountForDream(String id) {
 	}
 	
 	StringBuilder query = new StringBuilder();
-	query.append("match (a:dream { id:'").append(id).append("' })<-[r:liked]-(b:user) return r");
+	query.append("match (a:dream { id:'").append(id.toLowerCase()).append("' })<-[r:liked]-(b:user) return r");
 	List<Node> nodeList = getNodes(query.toString(),"a");
 	int count = nodeList.size();
 	return count;
@@ -695,11 +695,38 @@ public int getCommentsCountForDream(String id) {
 	}
 	
 	StringBuilder query = new StringBuilder();
-	query.append("match (a:dream { id:'").append(id).append("' })<-[r:commented]-(b:user) return r");
+	query.append("match (a:dream { id:'").append(id.toLowerCase()).append("' })<-[r:commented]-(b:user) return r");
 	List<Node> nodeList = getNodes(query.toString(),"a");
 	int count = nodeList.size();
 	return count;
 }
 
+/**
+ * Get Recommended DreamIds for an Enabler
+ * 
+ * Algorithm:
+ * 
+ * 1) Get All Dreams enabled by this Enabler - E1.
+ * 2) Get Categories of these dreams C1
+ * 3) Get all Dreams in C1 and Sub Categories of C1
+ * 4) Recommend Dreams from 3) and not enabled by E1 or any one
+ * 
+ * TODO: An enhancement would be to Recommend Dreams not enabled by anyone first and then rest
+ */
 
+public List<Node> getRecommendedDreamsForEnabler(String enablerId)
+{
+	if(StringUtils.isEmpty(enablerId)) {
+		throw new IllegalArgumentException("Enabler Id cannot be empty");
+	}
+	
+	StringBuilder query = new StringBuilder();
+	query.append("MATCH (d1: dream) - [:enabling] - (a:enabler {id:'"+enablerId.toLowerCase()+"'}) ")
+		.append("MATCH (c:category {id:d1.categoryid})-[:superCategory*0..]-(ca:category) ")
+		.append("MATCH (d2:dream {categoryid: ca.id}) WHERE NOT (d2 - [:enabling]-(:enabler {id:'"+enablerId.toLowerCase()+"'})) return distinct d2");
+	
+	List<Node> nodeList = getNodes(query.toString(),"d2");
+	
+	return nodeList;
+}
 }
