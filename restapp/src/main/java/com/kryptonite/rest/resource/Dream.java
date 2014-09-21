@@ -300,8 +300,10 @@ dream.setAchievements((String)dreamNode.getProperty("achievements",null));
     private void populateDreamNode(Node dreamNode, DreamModel dream) {
     	
 		if(!StringUtils.isEmpty(dream.getCategoryId())) {
-			dreamNode.setProperty("categoryid", dream.getCategoryId());			
-			dreamNode.setProperty("categoryname", dream.getCategoryName());
+			dreamNode.setProperty("categoryid", dream.getCategoryId());	
+		}
+		if(!StringUtils.isEmpty(dream.getCategoryName())) {
+		dreamNode.setProperty("categoryname", dream.getCategoryName());
 		}
 		
 		if(!StringUtils.isEmpty(dream.getDesc())) {
