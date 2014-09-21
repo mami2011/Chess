@@ -73,7 +73,7 @@ public class User {
     	    	{
 	    			//create new user
 		    		userNode = db.createNode();
-		    		userNode.setProperty( "id", id );
+		    		userNode.setProperty( "id", id.toLowerCase() );
 		    		populateUserDetails(userNode,user);
 		    		
 		    		if(user.getEnablerDetails() != null) {
@@ -135,7 +135,7 @@ public class User {
     	UserModel retVal = null;
     	
     	try {
-    		Node userNode = dao.getUser(id);
+    		Node userNode = dao.getUser(id.toLowerCase());
     		if(userNode != null) {
     			
     			retVal = new UserModel();

@@ -206,7 +206,7 @@ public class Category {
 	private void populateCategoryNode(Node categoryNode , CategoryModel category) {
 
 		if(!StringUtils.isEmpty(category.getName())) {
-			categoryNode.setProperty( "name", category.getName() );	
+			categoryNode.setProperty( "name", category.getName().toLowerCase() );	
 		}
 		categoryNode.setProperty( "isActive", category.getIsActive() );
 
