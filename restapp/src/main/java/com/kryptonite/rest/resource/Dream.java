@@ -198,6 +198,7 @@ public class Dream {
 			dream.setDesc((String)dreamNode.getProperty("desc"));
 			dream.setCategoryId((String)dreamNode.getProperty("categoryid"));
 			dream.setCategoryName((String)dreamNode.getProperty("categoryname",null));
+			dream.setAchievements((String)dreamNode.getProperty("achievements",null));
 			//users enabling this dream
 			List<String> enablerIds = new ArrayList<String>();
 			for(Node enabler:dao.getEnablersForDream(dream.getId())) {
@@ -330,6 +331,9 @@ public class Dream {
 			}
 			
 			dreamNode.setProperty("imagekeys", dream.getImageKeys());
+		}
+		if(!StringUtils.isEmpty(dream.getAchievements())) {
+			dreamNode.setProperty("achievements", dream.getAchievements());
 		}
     }
     
