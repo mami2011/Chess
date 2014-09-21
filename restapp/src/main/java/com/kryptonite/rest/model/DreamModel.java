@@ -207,6 +207,8 @@ public class DreamModel {
 	public void setLikedByCurrentUser(boolean isLikeByCurrentUser) {
 		this.isLikedByCurrentUser = isLikeByCurrentUser;
 	}
+	
+	//achievements section
 
 	public String getAchievements() {
 		return achievements;

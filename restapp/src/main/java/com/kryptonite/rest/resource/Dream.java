@@ -198,6 +198,7 @@ public class Dream {
 			dream.setDesc((String)dreamNode.getProperty("desc"));
 			dream.setCategoryId((String)dreamNode.getProperty("categoryid"));
 			dream.setCategoryName((String)dreamNode.getProperty("categoryname",null));
+			//achievements section
 			dream.setAchievements((String)dreamNode.getProperty("achievements"));
 			//users enabling this dream
 			List<String> enablerIds = new ArrayList<String>();
