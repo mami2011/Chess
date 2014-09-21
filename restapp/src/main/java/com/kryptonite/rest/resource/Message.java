@@ -202,14 +202,14 @@ public class Message {
 	
 private MessageModel getMessageModel(Node messageNode) {
     	MessageModel message = new MessageModel();
-    	String userId = (String)messageNode.getProperty("userid");
+    	String userId = (String)messageNode.getProperty("userid",null);
     	message.setUserId(userId);
-    	message.setId((String)messageNode.getProperty("id"));
-    	String dreamId = (String)messageNode.getProperty("dreamid");
+    	message.setId((String)messageNode.getProperty("id",null));
+    	String dreamId = (String)messageNode.getProperty("dreamid",null);
     	message.setDreamId(dreamId);
-    	String msg = (String)messageNode.getProperty("message");
+    	String msg = (String)messageNode.getProperty("message",null);
     	message.setMessage(msg);
-    	String senderId = (String)messageNode.getProperty("senderid");
+    	String senderId = (String)messageNode.getProperty("senderid",null);
     	message.setSenderId(senderId);    	
     	SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy");     
     	Date creationDate = null;
@@ -220,7 +220,7 @@ private MessageModel getMessageModel(Node messageNode) {
 			e.printStackTrace();
 		}
     	message.setCreationDate(creationDate);
-    	boolean isRead = (boolean)messageNode.getProperty("isread");
+    	boolean isRead = (boolean)messageNode.getProperty("isread",null);
     	message.setRead(isRead);
     	return message;
     }
