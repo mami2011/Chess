@@ -29,6 +29,7 @@ public class DreamModel {
 	private int previousCursor;
 	private String previousCursorString;
 	private boolean isLikedByCurrentUser = false;
+	private String achievements;
 	
 	@JsonIgnore
 	private List<Node> enablerUserNodes;
@@ -205,6 +206,14 @@ public class DreamModel {
 
 	public void setLikedByCurrentUser(boolean isLikeByCurrentUser) {
 		this.isLikedByCurrentUser = isLikeByCurrentUser;
+	}
+
+	public String getAchievements() {
+		return achievements;
+	}
+
+	public void setAchievements(String achievements) {
+		this.achievements = achievements;
 	}
 
 	
