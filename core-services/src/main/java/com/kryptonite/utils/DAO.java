@@ -449,7 +449,9 @@ public class DAO {
 	 * Returns list of all nodes searched by relationship property:
 	 * 
 	 * Dreams with recent comments of User
-	 * Dreams with recent Likes
+	 * Dreams with recent Likes by User
+	 * User's Dreams with recent comments
+	 * User's Dreams with recent Likes
 	 */
 	
 	
@@ -463,14 +465,20 @@ public class DAO {
 		
 		StringBuilder query = new StringBuilder();
 		
-		query.append("MATCH (u:user)-[r:commented|:liked]->(n:dream  {userid:'")
+		query.append("MATCH (u:user)-[r:commented|:liked|:enabling]->(n:dream  {userid:'")
 		.append(userId.toLowerCase())
-		.append("'}) WHERE has(r.id) with n, r ORDER BY r.creationdate DESC RETURN distinct n SKIP "+cursor+" LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS);
+		.append("'}) WHERE has(r.id) with n, r ORDER BY r.creationdate DESC RETURN distinct n SKIP "+cursor+" LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS)
+		.append(" UNION MATCH (u:user {id:'")
+		.append(userId.toLowerCase())
+		.append("'})-[r:commented|:liked|:enabling]->(n:dream) WHERE has(r.id) with n, r ORDER BY r.creationdate DESC RETURN distinct n SKIP "+cursor+" LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS)
+		.append(" UNION MATCH (n:dream {userid:'")
+		.append(userId.toLowerCase())
+		.append("'}) WITH n ORDER BY n.creationdate DESC RETURN DISTINCT n SKIP "+cursor+" LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS);
 		/*.append(" UNION ")
 		.append("MATCH (u:user)-[r:liked]->(n:dream  {userid:'")
 		.append(userId)
 		.append("'}) WHERE has(r.id) with n, r ORDER BY r.creationdate DESC LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS+" RETURN distinct n");*/
-				
+		
 		return getNodes(query.toString(),"n");
 	}
 	
