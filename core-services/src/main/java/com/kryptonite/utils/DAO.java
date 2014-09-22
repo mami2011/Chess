@@ -467,10 +467,10 @@ public class DAO {
 		
 		query.append("MATCH (u:user)-[r:commented|:liked|:enabling]->(n:dream  {userid:'")
 		.append(userId.toLowerCase())
-		.append("'}) WHERE has(r.id) with n, r ORDER BY r.creationdate DESC RETURN distinct n SKIP "+cursor+" LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS)
+		.append("'}) with n, r ORDER BY r.creationdate DESC RETURN distinct n SKIP "+cursor+" LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS)
 		.append(" UNION MATCH (u:user {id:'")
 		.append(userId.toLowerCase())
-		.append("'})-[r:commented|:liked|:enabling]->(n:dream) WHERE has(r.id) with n, r ORDER BY r.creationdate DESC RETURN distinct n SKIP "+cursor+" LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS)
+		.append("'})-[r:commented|:liked|:enabling]->(n:dream) with n, r ORDER BY r.creationdate DESC RETURN distinct n SKIP "+cursor+" LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS)
 		.append(" UNION MATCH (n:dream {userid:'")
 		.append(userId.toLowerCase())
 		.append("'}) WITH n ORDER BY n.creationdate DESC RETURN DISTINCT n SKIP "+cursor+" LIMIT "+Limits.MAX_DREAMS_WALL_RESULTS);
