@@ -128,6 +128,10 @@ DAO dao;
     	
     	wallData.setRecommendedAchieverUserIds(userIds);
     	
+    	//5. Dream enablers might want to enable
+    	List<Node> dreamNodes = (List<Node>) dao.getDreamsForEnabler(userId);
+    	
+    	
     	//TODO Implement query to load Recommended Enabler Ids
     	
     	wallData.setRecommendedEnablerUserIds(userIds);
