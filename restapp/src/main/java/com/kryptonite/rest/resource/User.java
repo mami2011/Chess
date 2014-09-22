@@ -138,20 +138,17 @@ public class User {
     @Path("/dologin/{id}/{password}")
     @Produces(MediaType.APPLICATION_JSON) 
     public String doLogin(@PathParam("id") String userId, @PathParam("password") String pwd){
-        String response = "";
-        if(checkCredentials(userId, pwd)){
-            response = constructJSON("login",true);
-        }else{
-            response = constructJSON("login", false);
-        }
-    return response;        
+    	 String  response = checkCredentials(userId, pwd);
+    	 return response;
+             
     }
  
-    public static String constructJSON(String tag, boolean status) {
+    public static String constructJSON(String tag, boolean status,String accountType) {
         JSONObject obj = new JSONObject();
         try {
             obj.put("tag", tag);
             obj.put("status", new Boolean(status));
+            obj.put("accountType", accountType);
         } catch (JSONException e) {
             // TODO Auto-generated catch block
         }
@@ -165,26 +162,29 @@ public class User {
      * @param pwd
      * @return
      */
-    private boolean checkCredentials(String userId, String pwd){
-        System.out.println("Inside checkCredentials");
-        boolean result = false;
+    private  String checkCredentials(String userId, String pwd){
+       // System.out.println("Inside checkCredentials");
+        String result = null;
         if(!userId.isEmpty() && !pwd.isEmpty()){
             try {
             	Node userNode = dao.getUser(userId);
         		if(userNode != null) {
         			if(pwd.equals(userNode.getProperty("password"))) {
-        				result = true;	
+        				return result = constructJSON("login",true,(String) userNode.getProperty("accounttype"));	
         			}
+        			return result = constructJSON("login",false,"");
         		}
+        		return result = constructJSON("login",false,"");
             } catch (Exception e) {
-                result = false;
+                result = constructJSON("login",false,"");
             }
         }else{
-             result = false;
+             result = constructJSON("login",false,"");
         }
  
         return result;
     }
+    
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
