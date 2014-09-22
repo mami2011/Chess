@@ -75,13 +75,15 @@ public class User {
     	    	{
 	    			//create new user
 		    		userNode = db.createNode();
-		    		userNode.setProperty( "id", id );
+		    		userNode.setProperty( "id", id.toLowerCase() );
 		    		populateUserDetails(userNode,user);
 		    		
 		    		if(user.getEnablerDetails() != null) {
 		    			populateEnablerDetails(userNode, user.getEnablerDetails(),id);
 		    		}
-		    		
+		    		else
+		    			dao.addLabel(id, NPLabels.ACHIEVER.name());
+
 		    		dao.addLabel(id, NPLabels.USER.name());
 		    	    tx.success();
 		    	    rabbitMQPublisher.publishEvent(user.getEmail(),NotificationModeEnum.EMAIL,NotificationTypeEnum.REGISTRATION,Locale.US);
@@ -114,6 +116,9 @@ public class User {
 	    			
 		    		if(user.getEnablerDetails() != null) {
 		    			populateEnablerDetails(userNode, user.getEnablerDetails(), userId);
+		    		}
+		    		else{
+			    		dao.addLabel(userId, NPLabels.ACHIEVER.name());
 		    		}
 		    	    tx.success();
     	    	}
@@ -188,7 +193,7 @@ public class User {
     	UserModel retVal = null;
     	
     	try {
-    		Node userNode = dao.getUser(id);
+    		Node userNode = dao.getUser(id.toLowerCase());
     		if(userNode != null) {
     			
     			retVal = new UserModel();
@@ -262,7 +267,14 @@ public class User {
    						dreamIds.add((String)dream.getProperty("id"));
    					}
    					enablerDetails.setEnablingDreamIds(dreamIds);
-   					enablerDetails.setPreferredCategories((String[])userNode.getProperty("preferredcategories",null));
+   					
+   					//TODO FIx the Preferred Categories issue
+   					
+   					//String preferredCategories = (String) userNode.getProperty("preferredcategories",null);
+   					
+   					//String[]categoryList = Arrays.asList(userNode.getProperty("preferredcategories",null)).toArray(new String[preferredCategories.length]);
+   					
+   					//enablerDetails.setPreferredCategories(categoryList);
    					
    					retVal.setEnablerDetails(enablerDetails);
    				}
@@ -504,5 +516,8 @@ public class User {
 		if(enabler.getPreferredCategories() != null) {
 			user.setProperty("preferredcategories", enabler.getPreferredCategories());
 		}
+		
+		dao.addLabel(id, NPLabels.ENABLER.name());
+		dao.removeLabel(id, NPLabels.ACHIEVER.name());
 	}
 }

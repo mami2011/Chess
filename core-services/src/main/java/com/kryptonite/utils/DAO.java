@@ -283,6 +283,13 @@ public class DAO {
 		engine.query(query.toString(), null);
 	}
 	
+	public void removeLabel(String id, String label) {
+		//https://github.com/neo4j/java-rest-binding/issues/62 - use cypher query to add labels	
+		StringBuilder query = new StringBuilder();
+		query.append("match (n { id:'").append(id).append("' }) remove n:" + label);
+		engine.query(query.toString(), null);
+	}
+	
 	private Node getNode(String query, String columnName) {
 		
 		Node retNode = null;
