@@ -160,6 +160,7 @@ DAO dao;
     		if(dreams.containsKey(dreamModel.getId()) == false) //doesn't contain the dream in question already
     		{
     			currentDreams.add(dreamModel);
+    			dreams.put(dreamModel.getId(), dreamModel);
     		}
     	}
     	
@@ -221,6 +222,8 @@ DAO dao;
 			dream.setDesc((String)dreamNode.getProperty("desc"));
 			dream.setCategoryId((String)dreamNode.getProperty("categoryid"));
 			dream.setCategoryName((String)dreamNode.getProperty("categoryname",null));
+			dream.setAchievements((String)dreamNode.getProperty("achievements"));
+
 			//users enabling this dream
 			List<String> enablerIds = new ArrayList<String>();
 			for(Node enabler:dao.getEnablersForDream(dream.getId())) {
