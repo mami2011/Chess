@@ -14,7 +14,7 @@ public class WallModel {
 	private List<DreamModel> topDreams;
 	private List<String> recommendedAchieverUserIds;
 	private List<String> recommendedEnablerUserIds;
-//	private List<String> recommendedDreamIds;
+	private List<DreamModel> recommendedDreamsToEnable;
 	
 
 	public String getId() {
@@ -75,12 +75,12 @@ public class WallModel {
 		this.recommendedEnablerUserIds = recommendedEnablerUserIds;
 	}
 
-/*	public List<String> getRecommendedDreamIds() {
-		return recommendedDreamIds;
+	public List<DreamModel> getRecommendedDreamsToEnable() {
+		return recommendedDreamsToEnable;
 	}
 
-	public void setRecommendedDreamIds(List<String> recommendedDreamIds) {
-		this.recommendedDreamIds = recommendedDreamIds;
-	}*/
+	public void setRecommendedDreamsToEnable(List<DreamModel> recommendedDreamsToEnable) {
+		this.recommendedDreamsToEnable = recommendedDreamsToEnable;
+	}
 	
 }

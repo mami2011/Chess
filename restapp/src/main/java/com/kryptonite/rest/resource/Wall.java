@@ -127,14 +127,13 @@ DAO dao;
     	}
     	
     	wallData.setRecommendedAchieverUserIds(userIds);
-    	
-    	//5. Dream enablers might want to enable
-    	List<Node> dreamNodes = (List<Node>) dao.getDreamsForEnabler(userId);
-    	
-    	
     	//TODO Implement query to load Recommended Enabler Ids
     	
     	wallData.setRecommendedEnablerUserIds(userIds);
+    	
+    	//5. Dream enablers might want to enable
+    	List<Node> dreamNodes = (List<Node>) dao.getRecommendedDreamsForEnabler(userId);
+    	wallData.setRecommendedDreamsToEnable(updateDreamModel(dreamNodes));
     	
     	return wallData;
     }
@@ -171,6 +170,21 @@ DAO dao;
     	return currentDreams;
     }
     
+    private List<DreamModel> updateDreamModel(List<Node> dreamList)
+    {
+    	List<DreamModel> currentDreams = new ArrayList<DreamModel>();
+    	
+    	//TODO Clean up the dream model
+    	for(int i = 0; i<dreamList.size(); i++)
+    	{
+    		Node dreamNode = (Node) dreamList.get(i);
+    		DreamModel dreamModel = updateDreamModel(dreamNode);
+    		currentDreams.add(dreamModel);    			
+    	}
+    	
+    	return currentDreams;
+    }
+    		
     private DreamModel updateDreamModel(Node dreamNode)
     {
 
@@ -220,13 +234,13 @@ DAO dao;
 		if(dreamNode != null) {
 
 			dream.setAchieverUserId((String)dreamNode.getProperty("userid"));
-			dream.setName((String)dreamNode.getProperty("name"));
+			dream.setName((String)dreamNode.getProperty("name",null));
 			dream.setId((String)dreamNode.getProperty("id"));
 			dream.setCreationDate(dreamNode.getProperty("creationdate").toString());
-			dream.setDesc((String)dreamNode.getProperty("desc"));
+			dream.setDesc((String)dreamNode.getProperty("desc",null));
 			dream.setCategoryId((String)dreamNode.getProperty("categoryid"));
 			dream.setCategoryName((String)dreamNode.getProperty("categoryname",null));
-			dream.setAchievements((String)dreamNode.getProperty("achievements"));
+			dream.setAchievements((String)dreamNode.getProperty("achievements",null));
 
 			//users enabling this dream
 			List<String> enablerIds = new ArrayList<String>();
