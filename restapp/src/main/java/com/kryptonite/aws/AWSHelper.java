@@ -6,6 +6,7 @@ import static org.imgscalr.Scalr.pad;
 import static org.imgscalr.Scalr.resize;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -20,13 +21,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageInputStream;
+import javax.ws.rs.core.MultivaluedMap;
 
 
+import org.apache.commons.io.IOUtils;
 import org.imgscalr.Scalr;
 import org.imgscalr.Scalr.Method;
+import org.jboss.resteasy.plugins.providers.multipart.InputPart;
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
@@ -67,21 +74,37 @@ public class AWSHelper {
 	}
 
 
-	public String uploadImage2AWS (InputStream  image) throws IOException {
+	public String uploadImage2AWS (MultipartFormDataInput   images,int size,String fileName) throws IOException {
 		String key = null;
 		try {
-			 key = "nutped_"+ new Date().getTime()+ ".JPG";	 			
-			/* InputStream resizedImage = null;
-			try {
-				resizedImage = (InputStream) ImageIO.createImageInputStream(resizeImage(image));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-			 BufferedImage testTN = createThumbnail(image);
-			PutObjectRequest putObjectRequest = new PutObjectRequest(UPLOAD_REQ_BUCKET, key, image,new ObjectMetadata());
+			if (fileName == null){
+			key = "nutped_"+ new Date().getTime()+ ".JPG";	
+			} else {
+				key = fileName;
+			}
+			Map<String, List<InputPart>> uploadForm = images.getFormDataMap();
+			List<InputPart> inputParts = uploadForm.get("uploadedFile");
+			InputStream inputStream = null;
+			BufferedImage reimg = null;
+			for (InputPart inputPart : inputParts) {					 
+				try {			 
+					MultivaluedMap<String, String> header = inputPart.getHeaders();
+					inputStream = inputPart.getBody(InputStream.class,null);
+					InputStream is = new BufferedInputStream(inputStream);
+					reimg = Scalr.resize(ImageIO.read(is), Method.SPEED, size, OP_ANTIALIAS, OP_BRIGHTER);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			//convert BufferedImage to InputStream
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write(reimg, "png", baos);
+			InputStream isReimg = new ByteArrayInputStream(baos.toByteArray());				
+
+			PutObjectRequest putObjectRequest = new PutObjectRequest(UPLOAD_REQ_BUCKET, key, isReimg,new ObjectMetadata());
 			PutObjectResult result = s3client.putObject(putObjectRequest); 
-			} catch (AmazonServiceException ase) {
+
+		} catch (AmazonServiceException ase) {
 			System.out.println("Caught an AmazonServiceException, which " +
 					"means your request made it " +
 					"to Amazon S3, but was rejected with an error response" +
@@ -91,15 +114,15 @@ public class AWSHelper {
 			System.out.println("AWS Error Code:   " + ase.getErrorCode());
 			System.out.println("Error Type:       " + ase.getErrorType());
 			System.out.println("Request ID:       " + ase.getRequestId());
-			} catch (AmazonClientException ace) {
-				System.out.println("Caught an AmazonClientException, which " +
-						"means the client encountered " +
-						"an internal error while trying to " +
-						"communicate with S3, " +
-						"such as not being able to access the network.");
-				System.out.println("Error Message: " + ace.getMessage());
-			}
-		
+		} catch (AmazonClientException ace) {
+			System.out.println("Caught an AmazonClientException, which " +
+					"means the client encountered " +
+					"an internal error while trying to " +
+					"communicate with S3, " +
+					"such as not being able to access the network.");
+			System.out.println("Error Message: " + ace.getMessage());
+		}
+
 		return key;
 	}
 
@@ -108,26 +131,26 @@ public class AWSHelper {
 	}
 
 	public BufferedImage convertInputStreamToBufferedImage(final InputStream is) throws IOException {
-	    BufferedImage image = null;
-	    if (is != null) {
-	        image = ImageIO.read(is);
-	    }
-	    return image;
+		BufferedImage image = null;
+		if (is != null) {
+			image = ImageIO.read(is);
+		}
+		return image;
 	}
 	public static BufferedImage createThumbnail(InputStream img) {
-		  // Create quickly, then smooth and brighten it.
+		// Create quickly, then smooth and brighten it.
 		BufferedImage reimg = null;
 		InputStream is = new BufferedInputStream(img);
 		//BufferedImage bimg = ImageIO.read(is);
 
 		try {
-		 reimg = Scalr.resize(ImageIO.read(is), Method.SPEED, 125, OP_ANTIALIAS, OP_BRIGHTER);
+			reimg = Scalr.resize(ImageIO.read(is), Method.SPEED, 125, OP_ANTIALIAS, OP_BRIGHTER);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		 
-		  // Let's add a little border before we return result.
-		  return pad(reimg, 4);
+
+		// Let's add a little border before we return result.
+		return pad(reimg, 4);
 	}
 
 	public void downloadFileToLocal( String key, String localFile) {
@@ -147,11 +170,11 @@ public class AWSHelper {
 		} catch (IOException ie) {
 		}
 	}
-	
+
 	public boolean deleteFile( String key) {
 		try {
-		s3client.deleteObject(new DeleteObjectRequest(UPLOAD_REQ_BUCKET, key));
-		return true;
+			s3client.deleteObject(new DeleteObjectRequest(UPLOAD_REQ_BUCKET, key));
+			return true;
 		} catch (Exception e){
 			return false;	
 		}

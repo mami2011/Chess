@@ -12,7 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
-import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
+//import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.neo4j.graphdb.GraphDatabaseService;
 
 import com.kryptonite.aws.AWSHelper;
@@ -27,29 +28,32 @@ public class Image {
 	DAO dao;
 
 	@POST
-	@Consumes( MediaType.MULTIPART_FORM_DATA )
-	public String uploadImage(@MultipartForm  InputStream    images) throws IOException {
-		 String key = AWSHelper.getInstance().uploadImage2AWS(images);
-		 return key;
+	//@Consumes( MediaType.MULTIPART_FORM_DATA )
+	@Consumes("multipart/form-data")
+	public String uploadImage(MultipartFormDataInput      images) throws IOException {
+		String key = null; 
+		key = AWSHelper.getInstance().uploadImage2AWS(images,450,key);
+		key = AWSHelper.getInstance().uploadImage2AWS(images,125,"THUMB_"+key);
+		return key;
 	}
-	
+
 	@GET
 	@Path("{id}")
 	@Consumes( MediaType.MULTIPART_FORM_DATA )
 	public InputStream downloadImage(@PathParam("id") String id) {
 		String key = id;
 		return AWSHelper.getInstance().downloadFileFromwAWS(key);
-         
+
 	}
-	
+
 	@GET
 	@Path("{id}")
 	@Consumes( MediaType.MULTIPART_FORM_DATA )
 	public boolean deleteImage(@PathParam("id") String id) {
 		String key = id;
 		return AWSHelper.getInstance().deleteFile(key);
-         
+
 	}
-	
-	
+
+
 }
