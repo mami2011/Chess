@@ -68,11 +68,7 @@ public class AWSHelper {
 	public String uploadImage2AWS (MultipartFormDataInput   images,int size,String fileName) throws IOException {
 		String key = null;
 		try {
-			if (fileName == null){
-			key = "nutped_"+ new Date().getTime()+ ".JPG";	
-			} else {
-				key = fileName;
-			}
+		
 			Map<String, List<InputPart>> uploadForm = images.getFormDataMap();
 			List<InputPart> inputParts = uploadForm.get("uploadedImage");
 			InputStream inputStream = null;
@@ -80,6 +76,11 @@ public class AWSHelper {
 			for (InputPart inputPart : inputParts) {					 
 				try {			 
 					MultivaluedMap<String, String> header = inputPart.getHeaders();
+					if (fileName == null){
+					key = "nutped_"+ new Date().getTime()+"_"+getFileName(header);
+					} else {
+						key=fileName;
+					}
 					inputStream = inputPart.getBody(InputStream.class,null);
 					InputStream is = new BufferedInputStream(inputStream);
 					reimg = Scalr.resize(ImageIO.read(is), Method.SPEED, size, OP_ANTIALIAS, OP_BRIGHTER);
@@ -117,6 +118,21 @@ public class AWSHelper {
 		return key;
 	}
 
+	private String getFileName(MultivaluedMap<String, String> header) {
+		 
+		String[] contentDisposition = header.getFirst("Content-Disposition").split(";");
+ 
+		for (String filename : contentDisposition) {
+			if ((filename.trim().startsWith("filename"))) {
+ 
+				String[] name = filename.split("=");
+ 
+				String finalFileName = name[1].trim().replaceAll("\"", "");
+				return finalFileName;
+			}
+		}
+		return "unknown";
+	}
 	public InputStream downloadFileFromwAWS(String key) {
 		return s3client.getObject(new GetObjectRequest(UPLOAD_REQ_BUCKET, key)).getObjectContent();
 	}
