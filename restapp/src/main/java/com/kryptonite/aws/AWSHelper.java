@@ -3,33 +3,25 @@ package com.kryptonite.aws;
 import static org.imgscalr.Scalr.OP_ANTIALIAS;
 import static org.imgscalr.Scalr.OP_BRIGHTER;
 import static org.imgscalr.Scalr.pad;
-import static org.imgscalr.Scalr.resize;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
 import javax.ws.rs.core.MultivaluedMap;
 
-
-import org.apache.commons.io.IOUtils;
 import org.imgscalr.Scalr;
 import org.imgscalr.Scalr.Method;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
@@ -46,12 +38,11 @@ import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
-import com.amazonaws.services.s3.model.S3DataSource;
 import com.amazonaws.services.s3.model.S3Object;
 
 
 public class AWSHelper {
-	private static final String UPLOAD_REQ_BUCKET = "nutped2/";
+	private static final String UPLOAD_REQ_BUCKET = "nutped2";
 	private static AWSHelper s_self = null;
 	private static AmazonS3 s3client = null;
 	AWSHelper() {
@@ -83,7 +74,7 @@ public class AWSHelper {
 				key = fileName;
 			}
 			Map<String, List<InputPart>> uploadForm = images.getFormDataMap();
-			List<InputPart> inputParts = uploadForm.get("uploadedFile");
+			List<InputPart> inputParts = uploadForm.get("uploadedImage");
 			InputStream inputStream = null;
 			BufferedImage reimg = null;
 			for (InputPart inputPart : inputParts) {					 
