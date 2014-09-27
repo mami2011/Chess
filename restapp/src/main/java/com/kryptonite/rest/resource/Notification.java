@@ -169,6 +169,7 @@ public class Notification {
     		Relationship receivedEnableRequest = dao.getEnableRequest(typeId);
     		if(receivedEnableRequest != null) {
     			EnableRequestModel enableRequestRecvModel = new EnableRequestModel();
+    			enableRequestRecvModel.setId((String)receivedEnableRequest.getProperty("id"));
     			enableRequestRecvModel.setDateCreated((String)receivedEnableRequest.getProperty("creationdate"));
     			enableRequestRecvModel.setDreamId((String)receivedEnableRequest.getProperty("dreamid"));
     			enableRequestRecvModel.setSenderUserId((String)receivedEnableRequest.getProperty("senderuserid"));
@@ -179,6 +180,7 @@ public class Notification {
     		Relationship acceptedEnableRequest = dao.getEnableRequest(typeId);
     		if(acceptedEnableRequest != null) {
     			EnableRequestModel enableRequestAcceptModel = new EnableRequestModel();
+    			enableRequestAcceptModel.setId((String)acceptedEnableRequest.getProperty("id"));
     			enableRequestAcceptModel.setDreamId((String)acceptedEnableRequest.getProperty("dreamid"));
     			enableRequestAcceptModel.setReceiverUserId((String)acceptedEnableRequest.getProperty("receiveruserid"));
     			enableRequestAcceptModel.setDateLastUpdated((String)acceptedEnableRequest.getProperty("reqackdate"));
@@ -189,6 +191,7 @@ public class Notification {
     		Relationship deniedEnableRequest = dao.getEnableRequest(typeId);
     		if(deniedEnableRequest != null) {
     			EnableRequestModel enableRequestAcceptModel = new EnableRequestModel();
+    			enableRequestAcceptModel.setId((String)deniedEnableRequest.getProperty("id"));
     			enableRequestAcceptModel.setDreamId((String)deniedEnableRequest.getProperty("dreamid"));
     			enableRequestAcceptModel.setReceiverUserId((String)deniedEnableRequest.getProperty("receiveruserid"));
     			enableRequestAcceptModel.setDateLastUpdated((String)deniedEnableRequest.getProperty("reqackdate"));
