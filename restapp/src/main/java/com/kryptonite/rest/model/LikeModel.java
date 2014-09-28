@@ -16,8 +16,15 @@ public class LikeModel implements Notifiable {
 	private Node likerUserNode;
 	@JsonIgnore
 	private Relationship likeRelationship;
+	private String dreamId;
 
 	
+	public String getDreamId() {
+		return dreamId;
+	}
+	public void setDreamId(String dreamId) {
+		this.dreamId = dreamId;
+	}
 	public String getCreationDate() {
 		return creationDate;
 	}

@@ -105,6 +105,7 @@ public class Dream {
 	    	    				r.setProperty("creationdate", new Date().toString());
 	    	    				r.setProperty("commenteruserid", comment.getCommenterUserId());
 	    	    				r.setProperty("comment", comment.getComment());
+	    	    				r.setProperty("dreamid", comment.getDreamId());
 	    	    				if(comment.getParentCommentId() != null) {
 	    	    					r.setProperty("parentcommentid", comment.getParentCommentId());
 	    	    				}
@@ -133,6 +134,7 @@ public class Dream {
 	    	    				r.setProperty("creationdate", new Date().toString());
 	    	    				r.setProperty("likeruserid", like.getLikerUserId());
 	    	    				r.setProperty("isvalid", true);
+	    	    				r.setProperty("dreamid", like.getDreamId());
 	    	    				
 	    	    				//like notification
 	    	    				utils.addNotification(NotificationType.LIKE, 

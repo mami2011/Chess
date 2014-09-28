@@ -53,6 +53,29 @@ public class Image {
 
 	}
 
+	@Path("/videos")
+	@POST
+	//@Consumes( MediaType.MULTIPART_FORM_DATA )
+	@Consumes("video/mp4")
+	public String uploadVideo(MultipartFormDataInput      images) throws IOException {
+		String key = null;
+		String url = null;
+		List<String> imageLinks = new ArrayList<String>();;
+		key = AWSHelper.getInstance().uploadImage2AWS(images,450,key);
+		if (key != null) {
+			url="https://s3.amazonaws.com/nutped2/"+key;
+			imageLinks.add(url);
+		}
+		key = AWSHelper.getInstance().uploadImage2AWS(images,125,"thumb"+key);
+		if (key != null) {
+			url="https://s3.amazonaws.com/nutped2/"+key;
+			imageLinks.add(url);
+		}
+		String result = constructJSON(imageLinks);
+		return result;
+
+	}
+	
 	public static String constructJSON(List<String> links) {
 		JSONObject obj = new JSONObject();
 		try {

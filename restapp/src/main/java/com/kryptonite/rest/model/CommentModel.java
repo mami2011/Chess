@@ -18,8 +18,15 @@ public class CommentModel implements Notifiable {
 	private Node commenterUserNode;
 	@JsonIgnore
 	private Relationship commentRelationship;
+	private String dreamId;
 
 	
+	public String getDreamId() {
+		return dreamId;
+	}
+	public void setDreamId(String dreamId) {
+		this.dreamId = dreamId;
+	}
 	public String getComment() {
 		return comment;
 	}

@@ -152,6 +152,7 @@ public class Notification {
 	    		commentModel.setComment((String)comment.getProperty("comment"));
 	    		commentModel.setCommenterUserId((String)comment.getProperty("commenteruserid"));
 	    		commentModel.setCreationDate((String)comment.getProperty("creationdate"));
+	    		commentModel.setDreamId((String)comment.getProperty("dreamid",null));
 	    		notification.setNotifiableModel(commentModel);
     		}
     		break;
@@ -162,6 +163,7 @@ public class Notification {
 	    		likeModel.setLikerUserId((String)like.getProperty("likeruserid"));
 	    		likeModel.setCreationDate((String)like.getProperty("creationdate"));
 	    		likeModel.setIsValid((boolean)like.getProperty("isvalid"));
+	    		likeModel.setDreamId((String)like.getProperty("dreamid",null));
 	    		notification.setNotifiableModel(likeModel);
     		}
     		break;
