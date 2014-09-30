@@ -133,6 +133,7 @@ public class DAO {
 		return(getRelationship(query.toString(),"r"));
 	}
 	
+
 	public List<Relationship> getCommentsForDream(String id) {
 		
 		if(StringUtils.isEmpty(id)) {
@@ -606,6 +607,52 @@ public class DAO {
 		return retNodes;
 	}
 	
+public List<Node> getEnablersBySearchString(String searchString) {
+		
+		if(StringUtils.isEmpty(searchString)) {
+			throw new IllegalArgumentException("Search string cannot be empty");
+		}
+		
+		List<Node> retNodes = new ArrayList<>();
+				
+		if(retNodes.size() < Limits.MAX_USERS_SEARCH_RESULTS) {
+			StringBuilder query = new StringBuilder();
+			query.append("match (u:user) where ( u.firstname=~ '(?i)")
+			.append(searchString)
+			.append(".*' OR")
+			.append("  u.lastname=~ '(?i)")
+			.append(searchString)
+			.append(".*' ) AND u.accounttype ='ENABLER' return u limit ")
+			.append(Limits.MAX_USERS_SEARCH_RESULTS );
+			retNodes.addAll(getNodes(query.toString(),"u"));
+		}
+		
+		return retNodes;
+	}
+	
+public List<Node> getAchieversBySearchString(String searchString) {
+	
+	if(StringUtils.isEmpty(searchString)) {
+		throw new IllegalArgumentException("Search string cannot be empty");
+	}
+	
+	List<Node> retNodes = new ArrayList<>();
+			
+	if(retNodes.size() < Limits.MAX_USERS_SEARCH_RESULTS) {
+		StringBuilder query = new StringBuilder();
+		query.append("match (u:user) where ( u.firstname=~ '(?i)")
+		.append(searchString)
+		.append(".*' OR")
+		.append("  u.lastname=~ '(?i)")
+		.append(searchString)
+		.append(".*' ) AND u.accounttype ='ACHIVER' return u limit ")
+		.append(Limits.MAX_USERS_SEARCH_RESULTS );
+		retNodes.addAll(getNodes(query.toString(),"u"));
+	}
+	
+	return retNodes;
+}
+
 	public List<Node> getDreamsBySearchString(String searchString) {
 		
 		if(StringUtils.isEmpty(searchString)) {
@@ -638,6 +685,16 @@ public class DAO {
 				retNodes.addAll(getNodes(query.toString(),"d"));
 			}
 		}
+		
+		//search dream  title  case insensitive 
+		
+		StringBuilder query = new StringBuilder();
+				query.append("match (d:dream) where d.name=~ '(?i).*")
+					.append(searchString)
+					.append(".*' return d limit ")
+					.append(Limits.MAX_DREAMS_SEARCH_RESULTS - retNodes.size());
+				
+				retNodes.addAll(getNodes(query.toString(),"d"));
 		
 		return retNodes;
 	}	

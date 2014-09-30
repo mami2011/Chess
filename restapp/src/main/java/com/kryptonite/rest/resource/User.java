@@ -20,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -37,6 +38,7 @@ import com.kryptonite.email.NotificationModeEnum;
 import com.kryptonite.email.NotificationTypeEnum;
 import com.kryptonite.email.RabbitMQPublisher;
 import com.kryptonite.rest.model.AchieverModel;
+import com.kryptonite.rest.model.CategoryModel;
 import com.kryptonite.rest.model.EnableRequestModel;
 import com.kryptonite.rest.model.EnablerModel;
 import com.kryptonite.rest.model.UserModel;
@@ -520,4 +522,55 @@ public class User {
 		dao.addLabel(id, NPLabels.ENABLER.name());
 		dao.removeLabel(id, NPLabels.ACHIEVER.name());
 	}
+	
+	@GET
+	@Path("/search/enabler/{name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<UserModel> getAchiversByName(@PathParam("name") String searchString) {
+
+		List<UserModel> retVal = new ArrayList<>();
+
+		try {
+			List<Node> userNodes = dao.getEnablersBySearchString(searchString);
+
+			for(Node userNode:userNodes) {
+				UserModel thisUsrModel = new UserModel();
+				thisUsrModel.setId((String)userNode.getProperty("id"));
+				thisUsrModel.setFirstName((String)userNode.getProperty("firstname"));
+				thisUsrModel.setLastName((String)userNode.getProperty("lastname"));
+				retVal.add(thisUsrModel);
+			}
+		}
+		catch(Exception e) {
+			throw new WebApplicationException(Response.status(500).entity("Unable to get Users for search string: " + searchString).build());
+		}
+
+		return retVal;
+	}
+	
+	@GET
+	@Path("/search/achiever/{name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<UserModel> getEnablersByName(@PathParam("name") String searchString) {
+
+		List<UserModel> retVal = new ArrayList<>();
+
+		try {
+			List<Node> userNodes = dao.getAchieversBySearchString(searchString);
+
+			for(Node userNode:userNodes) {
+				UserModel thisUsrModel = new UserModel();
+				thisUsrModel.setId((String)userNode.getProperty("id"));
+				thisUsrModel.setFirstName((String)userNode.getProperty("firstname"));
+				thisUsrModel.setLastName((String)userNode.getProperty("lastname"));
+				retVal.add(thisUsrModel);
+			}
+		}
+		catch(Exception e) {
+			throw new WebApplicationException(Response.status(500).entity("Unable to get Users for search string: " + searchString).build());
+		}
+
+		return retVal;
+	}
+	
 }

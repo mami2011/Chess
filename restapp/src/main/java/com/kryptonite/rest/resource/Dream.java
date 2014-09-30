@@ -289,6 +289,7 @@ dream.setAchievements((String)dreamNode.getProperty("achievements",null));
     		for(Node dreamNode:dreamNodes) {
     			DreamModel dm = new DreamModel();
     			dm.setId((String)dreamNode.getProperty("id"));
+    			dm.setName((String)dreamNode.getProperty("name"));
     			retVal.add(dm);
     		}
     	}
