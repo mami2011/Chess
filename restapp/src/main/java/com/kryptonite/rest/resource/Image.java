@@ -34,9 +34,14 @@ public class Image {
 	@POST
 	//@Consumes( MediaType.MULTIPART_FORM_DATA )
 	@Consumes("multipart/form-data")
-	public String uploadImage(MultipartFormDataInput      images) throws IOException {
+	public String uploadImage(MultipartFormDataInput  images) throws IOException {
 		String key = null;
 		String url = null;
+		//String userId = null;
+		//for profile upload file name is always userid
+		/*if(userId != null){
+			key = userId;
+		}*/
 		List<String> imageLinks = new ArrayList<String>();;
 		key = AWSHelper.getInstance().uploadImage2AWS(images,450,key);
 		if (key != null) {
@@ -53,13 +58,17 @@ public class Image {
 
 	}
 
-	@Path("/videos")
 	@POST
-	//@Consumes( MediaType.MULTIPART_FORM_DATA )
-	@Consumes("video/mp4")
-	public String uploadVideo(MultipartFormDataInput      images) throws IOException {
+    @Path("{id}")
+	@Consumes("multipart/form-data")
+	public String uploadProfileImage(MultipartFormDataInput  images,@PathParam("id") String userId) throws IOException {
 		String key = null;
 		String url = null;
+		//String userId = null;
+		//for profile upload file name is always userid
+		if(userId != null){
+			key = userId;
+		}
 		List<String> imageLinks = new ArrayList<String>();;
 		key = AWSHelper.getInstance().uploadImage2AWS(images,450,key);
 		if (key != null) {
