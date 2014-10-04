@@ -10,11 +10,13 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -37,6 +39,7 @@ import com.kryptonite.email.NotificationModeEnum;
 import com.kryptonite.email.NotificationTypeEnum;
 import com.kryptonite.email.RabbitMQPublisher;
 import com.kryptonite.rest.model.AchieverModel;
+import com.kryptonite.rest.model.ConnectionsModel;
 import com.kryptonite.rest.model.EnableRequestModel;
 import com.kryptonite.rest.model.EnablerModel;
 import com.kryptonite.rest.model.UserModel;
@@ -598,10 +601,7 @@ public class User {
 			List<Node> userNodes = dao.getEnablersBySearchString(searchString);
 
 			for(Node userNode:userNodes) {
-				UserModel thisUsrModel = new UserModel();
-				thisUsrModel.setId((String)userNode.getProperty("id"));
-				thisUsrModel.setFirstName((String)userNode.getProperty("firstname"));
-				thisUsrModel.setLastName((String)userNode.getProperty("lastname"));
+				UserModel thisUsrModel = populateBasicUserDetails(userNode);
 				retVal.add(thisUsrModel);
 			}
 		}
@@ -623,10 +623,7 @@ public class User {
 			List<Node> userNodes = dao.getAchieversBySearchString(searchString);
 
 			for(Node userNode:userNodes) {
-				UserModel thisUsrModel = new UserModel();
-				thisUsrModel.setId((String)userNode.getProperty("id"));
-				thisUsrModel.setFirstName((String)userNode.getProperty("firstname"));
-				thisUsrModel.setLastName((String)userNode.getProperty("lastname"));
+				UserModel thisUsrModel = populateBasicUserDetails(userNode);
 				retVal.add(thisUsrModel);
 			}
 		}
@@ -636,5 +633,81 @@ public class User {
 
 		return retVal;
 	}
+	
+	@GET
+	@Path("/{id}/contacts")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ConnectionsModel getContacts(@PathParam("id") String userId, @QueryParam("type") @DefaultValue("achiever") String userType) {
+
+		ConnectionsModel connections = new ConnectionsModel();
+
+		try {
+			List<UserModel> followingUserModelList = new ArrayList<>();
+			List<Node> followingUserNodes = dao.getFollowers(userId);
+
+			for(Node userNode:followingUserNodes) {
+				UserModel thisUsrModel = populateBasicUserDetails(userNode);
+				followingUserModelList.add(thisUsrModel);
+			}
+			
+			connections.setFollowing(followingUserModelList);
+			
+			List<UserModel> followerUserModelList = new ArrayList<>();
+			List<Node> followerUserNodes = dao.getFollowingUsers(userId);
+
+			for(Node userNode:followerUserNodes) {
+				UserModel thisUsrModel = populateBasicUserDetails(userNode);
+				followerUserModelList.add(thisUsrModel);
+			}
+			
+			connections.setFollowers(followerUserModelList);
+			
+			if(userType.equalsIgnoreCase(NPLabels.ENABLER.toString()))
+			{
+				List<UserModel> achieverUserModelList = new ArrayList<>();
+				List<Node> achieverUserNodes = dao.getConnectedEnablersOrAchievers(userId, userType);
+
+				for(Node userNode:achieverUserNodes) {
+					UserModel thisUsrModel = populateBasicUserDetails(userNode);
+					achieverUserModelList.add(thisUsrModel);
+				}
+				
+				connections.setAchievers(achieverUserModelList);
+			}
+			else
+			{
+				List<UserModel> enablerUserModelList = new ArrayList<>();
+				List<Node> enablerUserNodes = dao.getConnectedEnablersOrAchievers(userId, "achiever");
+
+				for(Node userNode:enablerUserNodes) {
+					UserModel thisUsrModel = populateBasicUserDetails(userNode);
+					enablerUserModelList.add(thisUsrModel);
+				}
+				
+				connections.setEnablers(enablerUserModelList);
+			}	
+			
+			
+		}
+		catch(Exception e) {
+			throw new WebApplicationException(Response.status(500).entity("Internal Error: Connections cannot be accessed for user:" + userId).build());
+		}
+
+		return connections;
+	}
+	
+
+	/**
+	 * @param userNode
+	 * @return
+	 */
+	private UserModel populateBasicUserDetails(Node userNode) {
+		UserModel thisUsrModel = new UserModel();
+		thisUsrModel.setId((String)userNode.getProperty("id"));
+		thisUsrModel.setFirstName((String)userNode.getProperty("firstname"));
+		thisUsrModel.setLastName((String)userNode.getProperty("lastname"));
+		return thisUsrModel;
+	}
+	
 	
 }

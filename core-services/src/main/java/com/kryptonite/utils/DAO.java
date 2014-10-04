@@ -15,6 +15,7 @@ import org.neo4j.rest.graphdb.query.RestCypherQueryEngine;
 import org.neo4j.rest.graphdb.util.QueryResult;
 
 import com.kryptonite.constants.Limits;
+import com.kryptonite.constants.NPLabels;
 
 @Singleton
 public class DAO {
@@ -163,7 +164,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:achiever { id:'").append(id.toLowerCase()).append("' })<-[:enabling]-(b) return b");
+		query.append("match (a:achiever { id:'").append(id.toLowerCase()).append("' })<-[:enabling]-(b:enabler) return b");
 		return(getNodes(query.toString(),"b"));
 	}
 
@@ -185,7 +186,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a:dream)<-[:enabling]-(b { id:'").append(enablerId.toLowerCase()).append("' }) return a");
+		query.append("match (a:dream)<-[:enabling]-(b:enabler { id:'").append(enablerId.toLowerCase()).append("' }) return a");
 		return(getNodes(query.toString(),"a"));
 	}
 
@@ -229,7 +230,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a { id:'").append(id.toLowerCase()).append("' })<-[:following]-(b:user) return b");
+		query.append("match (a:user { id:'").append(id.toLowerCase()).append("' })<-[:following]-(b:user) return b");
 		return(getNodes(query.toString(),"b"));
 	}
 	
@@ -240,7 +241,7 @@ public class DAO {
 		}
 		
 		StringBuilder query = new StringBuilder();
-		query.append("match (a { id:'").append(id.toLowerCase()).append("' })-[:following]->(b:user) return b");
+		query.append("match (a:user { id:'").append(id.toLowerCase()).append("' })-[:following]->(b:user) return b");
 		return(getNodes(query.toString(),"b"));
 	}
 	
@@ -798,6 +799,26 @@ public List<Node> getRecommendedDreamsForEnabler(String enablerId)
 		.append("MATCH (d2:dream {categoryid: ca.id}) WHERE NOT (d2 - [:enabling]-(:enabler {id:'"+enablerId.toLowerCase()+"'})) return distinct d2");
 	
 	List<Node> nodeList = getNodes(query.toString(),"d2");
+	
+	return nodeList;
+}
+
+
+public List<Node> getConnectedEnablersOrAchievers(String userId, String type)
+{
+	if(StringUtils.isEmpty(userId)) {
+		throw new IllegalArgumentException("Enabler Id cannot be empty");
+	}
+	
+	StringBuilder query = new StringBuilder();
+
+	if(type.equalsIgnoreCase(NPLabels.ENABLER.toString()))
+		query.append("MATCH (n:`enabler` {id:'"+userId+"'} )-[:enabling]->(d:dream) MATCH (u:user {id: d.userid}) RETURN u");		
+	else		
+		query.append("MATCH (u:`enabler`)-[:enabling]->(d:dream { userid:'"+userId+"'}) MATCH (n:user {id: d.userid}) RETURN u");	
+
+	
+	List<Node> nodeList = getNodes(query.toString(),"u");
 	
 	return nodeList;
 }
