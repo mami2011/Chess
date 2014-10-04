@@ -20,7 +20,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
-import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -38,7 +37,6 @@ import com.kryptonite.email.NotificationModeEnum;
 import com.kryptonite.email.NotificationTypeEnum;
 import com.kryptonite.email.RabbitMQPublisher;
 import com.kryptonite.rest.model.AchieverModel;
-import com.kryptonite.rest.model.CategoryModel;
 import com.kryptonite.rest.model.EnableRequestModel;
 import com.kryptonite.rest.model.EnablerModel;
 import com.kryptonite.rest.model.UserModel;
@@ -277,7 +275,24 @@ public class User {
    					//String[]categoryList = Arrays.asList(userNode.getProperty("preferredcategories",null)).toArray(new String[preferredCategories.length]);
    					
    					//enablerDetails.setPreferredCategories(categoryList);
+   					enablerDetails.setEnablerTermsOfAgreement((String) userNode.getProperty("enablerTermsOfAgreement",null));
+   					enablerDetails.setEnablerDescription((String) userNode.getProperty("enablerDescription",null));
+
+   					String[] enablerImageKeys = (String[])userNode.getProperty("enablerImagekeys",null);
+   		    		if(enablerImageKeys != null) {
+   		    			enablerDetails.setEnablerImageKeys(Arrays.asList(enablerImageKeys));
+   		    		}
    					
+   		    		String[] enablerVideoLinks = (String[])userNode.getProperty("enablerVideoLinks",null);
+   		    		if(enablerVideoLinks != null) {
+   		    			enablerDetails.setEnablerVideoLinks(Arrays.asList(enablerVideoLinks));
+   		    		}
+   		    		
+   		    		String[] enablerAchievements = (String[])userNode.getProperty("enablerAchievements",null);
+   		    		if(enablerAchievements != null) {
+   		    			enablerDetails.setEnablerAchievements(Arrays.asList(enablerAchievements));
+   		    		}
+   		    		
    					retVal.setEnablerDetails(enablerDetails);
    				}
    				
@@ -513,15 +528,64 @@ public class User {
 		
 	}
 	   
-	private void populateEnablerDetails(Node user, EnablerModel enabler, String id) {
+	private void populateEnablerDetails(Node userNode, EnablerModel enabler, String id) {
 
 		if(enabler.getPreferredCategories() != null) {
-			user.setProperty("preferredcategories", enabler.getPreferredCategories());
+			userNode.setProperty("preferredcategories", enabler.getPreferredCategories());
+		}
+		
+		if(enabler.getEnablerTermsOfAgreement() != null) {
+			userNode.setProperty("enablerTermsOfAgreement", enabler.getEnablerTermsOfAgreement());
+		}
+		
+		if(enabler.getEnablerDescription() != null) {
+			userNode.setProperty("enablerDescription", enabler.getEnablerDescription());
+		}
+		
+		if(enabler.getEnablerImageKeys() != null) {
+			String[] currentImageLinks = (String[])userNode.getProperty("enablerImagelinks",null);
+			
+			if(currentImageLinks != null) {
+				if(currentImageLinks.length + enabler.getEnablerImageKeys().size() > Limits.MAX_NUM_IMAGES) {
+					throw new IllegalArgumentException("Max number of Images exceeded");
+				}
+				enabler.getEnablerImageKeys().addAll(Arrays.asList(currentImageLinks));
+			}
+			
+			userNode.setProperty("enablerImagekeys", enabler.getEnablerImageKeys());
+		}
+		
+		if(enabler.getEnablerVideoLinks() != null) {
+			String[] currentEnablerVideoLinks= (String[])userNode.getProperty("enablerVideoLinks",null);
+			
+			if(currentEnablerVideoLinks != null) {
+				if(currentEnablerVideoLinks.length + enabler.getEnablerVideoLinks().size() > Limits.MAX_VIDEO_LINKS) {
+					throw new IllegalArgumentException("Max number of videos links exceeded");
+				}
+				enabler.getEnablerVideoLinks().addAll(Arrays.asList(currentEnablerVideoLinks));
+			}
+			
+			userNode.setProperty("enablerVideoLinks", enabler.getEnablerVideoLinks());
+		}
+		
+		if(enabler.getEnablerAchievements() != null) {
+			String[] currentEnablerAchievements= (String[])userNode.getProperty("enablerAchievements",null);
+			
+			if(currentEnablerAchievements != null) {
+				if(currentEnablerAchievements.length + enabler.getEnablerAchievements().size() > Limits.MAX_ENABLER_ACHIEVEMENTS) {
+					throw new IllegalArgumentException("Max number of Achievements exceeded");
+				}
+				enabler.getEnablerAchievements().addAll(Arrays.asList(currentEnablerAchievements));
+			}
+			
+			userNode.setProperty("enablerAchievements", enabler.getEnablerAchievements());
 		}
 		
 		dao.addLabel(id, NPLabels.ENABLER.name());
 		dao.removeLabel(id, NPLabels.ACHIEVER.name());
-	}
+}
+
+
 	
 	@GET
 	@Path("/search/enabler/{name}")
