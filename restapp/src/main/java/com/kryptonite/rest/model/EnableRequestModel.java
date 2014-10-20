@@ -15,12 +15,15 @@ public class EnableRequestModel implements Notifiable {
 	private String dateLastUpdated;	//accept/deny date
 	private Boolean isAccepted;
 	private Boolean isDenied;
+	private String scopeId;
+	
 	@JsonIgnore
 	private Node userNode;
 	@JsonIgnore
 	private Node dreamNode;
 	@JsonIgnore
 	private Boolean isSentFromAchiever;
+	
 	
 	public String getId() {
 		return id;
@@ -39,6 +42,12 @@ public class EnableRequestModel implements Notifiable {
 	}
 	public void setDenied(Boolean isDenied) {
 		this.isDenied = isDenied;
+	}
+	public String getScopeId() {
+		return scopeId;
+	}
+	public void setScopeId(String scopeId) {
+		this.scopeId = scopeId;
 	}
 	public Node getUserNode() {
 		return userNode;

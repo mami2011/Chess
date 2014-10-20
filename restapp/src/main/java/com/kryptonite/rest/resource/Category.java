@@ -2,7 +2,6 @@ package com.kryptonite.rest.resource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -28,7 +27,9 @@ import org.neo4j.graphdb.Transaction;
 import com.kryptonite.constants.NPLabels;
 import com.kryptonite.constants.NPRelationships;
 import com.kryptonite.rest.model.CategoryModel;
+import com.kryptonite.rest.model.EnableScopeModel;
 import com.kryptonite.utils.DAO;
+import com.kryptonite.rest.resource.Scope;
 
 @Path("categories")
 public class Category {
@@ -73,7 +74,7 @@ public class Category {
 		Node parentCategoryNode = dao.getCategoryById(category.getParentId());
 		CategoryModel parentCategoryModel = new CategoryModel();
 		parentCategoryModel.setId((String)parentCategoryNode.getProperty("id"));
-		List<String> childCategories = new ArrayList();
+		List<String> childCategories = new ArrayList<String>();
 		//childCategories.addAll((List<String>) parentCategoryNode.getProperty("childIds"));
 		childCategories.add(id);
 		parentCategoryModel.setChildIds(childCategories);
@@ -177,6 +178,13 @@ public class Category {
 		}
 		thisCatModel.setChildIds(childIds);
 
+		List<EnableScopeModel> scopeList = new ArrayList<EnableScopeModel>();
+		for(Relationship scopeRel:categoryNode.getRelationships(NPRelationships.HAS_SCOPE,Direction.OUTGOING)) {
+			EnableScopeModel scopeModel = populateScopeModel((String) scopeRel.getOtherNode(categoryNode).getProperty("id"), scopeRel.getOtherNode(categoryNode));
+			scopeList.add(scopeModel);
+		}
+		thisCatModel.setScopeList(scopeList);
+		
 		return thisCatModel;
 	}
 
@@ -200,6 +208,19 @@ public class Category {
 				childCategoryNodes.add(childCategoryNode);
 			}
 			category.setChildNodes(childCategoryNodes);
+		}
+		
+		// Populate Enable Scope Nodes from the Ids
+		if(category.getScopeIds()!= null){
+			List<Node> scopeNodeList = new ArrayList<>();
+			for(String scopeId:category.getScopeIds()) {
+				Node scopeNode = dao.getEnablerScopes(scopeId);
+				if(scopeNode == null) {
+					throw new IllegalArgumentException("Scope id " + scopeId + " does not exist");
+				}
+				scopeNodeList.add(scopeNode);
+			}
+			category.setScopeNodeList(scopeNodeList);
 		}
 	}
 
@@ -231,6 +252,26 @@ public class Category {
 			String[] tags = new String[category.getTags().size()];
 			categoryNode.setProperty("tags", category.getTags().toArray(tags));
 		}
+		
+		//Create Enabler Scope
+		if(category.getScopeNodeList() != null)
+		{
+			//check if the scopes exist previously
+			for(Node scopeNode:category.getScopeNodeList()) {
+				categoryNode.createRelationshipTo(scopeNode, NPRelationships.HAS_SCOPE);
+			}
+		}
+	}
+	
+	private EnableScopeModel populateScopeModel(String scopeId, Node scopeNode) {
+		EnableScopeModel scope = new EnableScopeModel();
+		scope.setId(scopeId);
+		scope.setName((String) scopeNode.getProperty("name")); 
+		scope.setAchieverScopeText((String) scopeNode.getProperty("achieverScopeText")); 
+		scope.setEnablerScopeText((String) scopeNode.getProperty("enablerScopeText")); 
+		scope.setDateCreated((String) scopeNode.getProperty("dateCreated")); 
+		scope.setDateLastUpdated((String) scopeNode.getProperty("dateLastUpdated")); 	
+		return scope;
 	}
 
 }

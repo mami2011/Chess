@@ -15,9 +15,14 @@ public class CategoryModel  {
 	private boolean isActive = true;
 	private List<String> tags;
 	private List<String> childIds;
+	private List<String> scopeIds;
+	private List<EnableScopeModel> scopeList;
+	
 	@JsonIgnore
 	private Node parentNode;
 	private List<Node> childNodes;
+	@JsonIgnore
+	private List<Node> scopeNodeList;
 	
 	public String getId() {
 		return id;
@@ -49,6 +54,18 @@ public class CategoryModel  {
 	public void setTags(List<String> tags) {
 		this.tags = tags;
 	}
+	public List<String> getScopeIds() {
+		return scopeIds;
+	}
+	public void setScopeIds(List<String> scopeIds) {
+		this.scopeIds = scopeIds;
+	}
+	public List<EnableScopeModel> getScopeList() {
+		return scopeList;
+	}
+	public void setScopeList(List<EnableScopeModel> scopeList) {
+		this.scopeList = scopeList;
+	}
 	public List<String> getChildIds() {
 		return childIds;
 	}
@@ -66,6 +83,12 @@ public class CategoryModel  {
 	}
 	public void setChildNodes(List<Node> childNodes) {
 		this.childNodes = childNodes;
+	}
+	public List<Node> getScopeNodeList() {
+		return scopeNodeList;
+	}
+	public void setScopeNodeList(List<Node> scopeNodeList) {
+		this.scopeNodeList = scopeNodeList;
 	}
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;

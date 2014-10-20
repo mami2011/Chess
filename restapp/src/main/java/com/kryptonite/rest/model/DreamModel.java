@@ -2,6 +2,8 @@ package com.kryptonite.rest.model;
 
 import java.util.List;
 
+import com.kryptonite.constants.State;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.neo4j.graphdb.Node;
@@ -30,6 +32,8 @@ public class DreamModel {
 	private String previousCursorString;
 	private boolean isLikedByCurrentUser = false;
 	private String achievements;
+	private int currentState = State.NOT_STARTED;
+	private String listedUserid;
 	
 	@JsonIgnore
 	private List<Node> enablerUserNodes;
@@ -216,6 +220,22 @@ public class DreamModel {
 
 	public void setAchievements(String achievements) {
 		this.achievements = achievements;
+	}
+
+	public int getCurrentState() {
+		return currentState;
+	}
+
+	public void setCurrentState(int currentState) {
+		this.currentState = currentState;
+	}
+
+	public String getListedUserid() {
+		return listedUserid;
+	}
+
+	public void setListedUserid(String listedUserid) {
+		this.listedUserid = listedUserid;
 	}
 
 	

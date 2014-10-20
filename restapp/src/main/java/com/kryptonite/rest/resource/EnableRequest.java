@@ -66,6 +66,7 @@ public class EnableRequest {
 	    		r.setProperty("dreamid", enableRequest.getDreamId());
 	    		r.setProperty("senderuserid", enableRequest.getSenderUserId());
 	    		r.setProperty("receiveruserid", enableRequest.getReceiverUserId());
+	    		r.setProperty("scopeid", enableRequest.getScopeId());
 	    		
 	    		//enable request received notification
 	    		utils.addNotification(NotificationType.ENABLE_REQUEST_RECV, 
@@ -112,7 +113,8 @@ public class EnableRequest {
     	    			}
     	    			
     	    			enablingRel.setProperty("reqackdate", new Date().toString());
-    	    			
+    	    			enablingRel.setProperty("scopeid", enableRequest.getScopeId());
+    	    		   	    			
     	    			//enable request accepted notification
     	    			utils.addNotification(NotificationType.ENABLE_REQUEST_ACCEPT, 
     	    					enableRequestId, 
@@ -155,8 +157,10 @@ public class EnableRequest {
     		if(r != null) {
     			enableRequest.setAccepted((boolean)r.getProperty("isaccepted",false));
     			enableRequest.setDenied((boolean)r.getProperty("isdenied",false));
+    			enableRequest.setDateCreated((String)r.getProperty("scopeid",null));
     			enableRequest.setDateLastUpdated((String)r.getProperty("lastupdatedate",null));
     			enableRequest.setDateCreated((String)r.getProperty("creationdate",null));
+
     			//enableRequest.setSentFromAchiever((boolean)r.getProperty("issentfromachiever",null));
     		}
 			else {
@@ -216,6 +220,8 @@ public class EnableRequest {
     	enableRequestModel.setDreamId((String)enableRequest.getProperty("dreamid"));
     	enableRequestModel.setSenderUserId((String)enableRequest.getProperty("senderuserid"));
     	enableRequestModel.setReceiverUserId((String)enableRequest.getProperty("receiveruserid"));
+    	enableRequestModel.setScopeId((String)enableRequest.getProperty("scopeid"));
+
     	
     	validateEnableRequestModel(enableRequestModel);
     	

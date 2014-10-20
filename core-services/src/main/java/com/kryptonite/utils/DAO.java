@@ -16,6 +16,7 @@ import org.neo4j.rest.graphdb.util.QueryResult;
 
 import com.kryptonite.constants.Limits;
 import com.kryptonite.constants.NPLabels;
+import com.kryptonite.constants.State;
 
 @Singleton
 public class DAO {
@@ -187,6 +188,17 @@ public class DAO {
 		
 		StringBuilder query = new StringBuilder();
 		query.append("match (a:dream)<-[:enabling]-(b:enabler { id:'").append(enablerId.toLowerCase()).append("' }) return a");
+		return(getNodes(query.toString(),"a"));
+	}
+	
+	public List<Node> getAccomplishmentsForUser(String enablerId) {
+		
+		if(StringUtils.isEmpty(enablerId)) {
+			throw new IllegalArgumentException("Enabler Id cannot be empty");
+		}
+		
+		StringBuilder query = new StringBuilder();
+		query.append("match (a:dream { listedUserId:'").append(enablerId.toLowerCase()).append("' }) where a.currentState = "+State.LISTED+" return a");
 		return(getNodes(query.toString(),"a"));
 	}
 
@@ -822,4 +834,58 @@ public List<Node> getConnectedEnablersOrAchievers(String userId, String type)
 	
 	return nodeList;
 }
+
+
+public List<Node> getEnablerScopesForCategory(String categoryId)
+{
+	if(StringUtils.isEmpty(categoryId)) {
+		throw new IllegalArgumentException("Category Id cannot be empty");
+	}
+	
+	StringBuilder query = new StringBuilder();
+
+	query.append("match (a:category {id:'")
+	.append(categoryId)
+	.append("'})-[:hasEnableScope]->(b:scope) return b");		
+	
+	return getNodes(query.toString(),"b");
+}
+
+public Node getEnablerScopes(String id)
+{
+	if(StringUtils.isEmpty(id)) {
+		throw new IllegalArgumentException("Id cannot be empty");
+	}
+
+	StringBuilder query = new StringBuilder();
+
+	query.append("match (a:scope {id:'").append(id)
+	.append("'}) return a");		
+	
+	return getNode(query.toString(),"a");
+}
+
+public List<Node> getEnablerScopes(String name, String achieverScopeText, String enablerScopeText)
+{
+	if(StringUtils.isEmpty(name)) {
+		throw new IllegalArgumentException("Name cannot be empty");
+	}
+	
+	if(StringUtils.isEmpty(name)) {
+		throw new IllegalArgumentException("Achiever Scope cannot be empty");
+	}
+	
+	if(StringUtils.isEmpty(name)) {
+		throw new IllegalArgumentException("Enabler Scope cannot be empty");
+	}
+	
+	StringBuilder query = new StringBuilder();
+
+	query.append("match (a:scope {name:'").append(name)
+	.append("',achieverScopeText:'").append(achieverScopeText)
+	.append("',enablerScopeText:'").append(enablerScopeText).append("'}) return a");		
+	
+	return getNodes(query.toString(),"a");
+}
+
 }

@@ -12,4 +12,6 @@ public final class NPRelationships {
 	public static RelationshipType SUPERCATEGORY = DynamicRelationshipType.withName("superCategory");
 	public static RelationshipType SUBCATEGORY = DynamicRelationshipType.withName("subCategory");
 	public static RelationshipType LIKED = DynamicRelationshipType.withName("liked");	
+	public static RelationshipType HAS_SCOPE = DynamicRelationshipType.withName("has_scope");
+
 }

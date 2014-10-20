@@ -13,4 +13,6 @@ public final class NPLabels {
 	public static Label CATEGORY = DynamicLabel.label("category");
 	public static Label NOTIFICATION = DynamicLabel.label("notification");
 	public static Label MESSAGE = DynamicLabel.label("message");
+	public static Label SCOPE = DynamicLabel.label("scope");
+
 }

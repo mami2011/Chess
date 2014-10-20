@@ -3,7 +3,9 @@ package com.kryptonite.rest.resource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -202,7 +204,9 @@ public class Dream {
 			dream.setDesc((String)dreamNode.getProperty("desc"));
 			dream.setCategoryId((String)dreamNode.getProperty("categoryid"));
 			dream.setCategoryName((String)dreamNode.getProperty("categoryname",null));
-dream.setAchievements((String)dreamNode.getProperty("achievements",null));
+			dream.setAchievements((String)dreamNode.getProperty("achievements",null));
+			dream.setCurrentState((int) dreamNode.getProperty("currentState",0));
+			dream.setListedUserid((String)dreamNode.getProperty("listedUserId", null));
 			//users enabling this dream
 			List<String> enablerIds = new ArrayList<String>();
 			for(Node enabler:dao.getEnablersForDream(dream.getId())) {
@@ -269,7 +273,9 @@ dream.setAchievements((String)dreamNode.getProperty("achievements",null));
     @GET
     @Path("/user/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<DreamModel> getAllDreamsForUser(@PathParam("userId") String userId, @QueryParam("type") @DefaultValue("achiever") String userType) {
+    public Map<String, List<DreamModel>> getAllDreamsForUser(@PathParam("userId") String userId, @QueryParam("type") @DefaultValue("achiever") String userType) {
+    	
+    	Map<String, List<DreamModel>> allDreams = new HashMap<String, List<DreamModel>>();
     	
     	List<Node> dreamList = null;
     	
@@ -281,9 +287,23 @@ dream.setAchievements((String)dreamNode.getProperty("achievements",null));
     	List<DreamModel> dreams = new ArrayList<DreamModel>();
 		for(Node dreamNode:dreamList) {	 			
     		dreams.add(getDream((String)dreamNode.getProperty("id")));
-    	}  	
-    	return dreams;
+    	} 		
+		
+		allDreams.put("Dreams", dreams);
+		
+		List<Node> accomplishmentList = null;
+			accomplishmentList = (List<Node>) dao.getAccomplishmentsForUser(userId);
+
+		List<DreamModel> accomplishments = new ArrayList<DreamModel>();
+		for(Node dreamNode:accomplishmentList) {	 			
+			accomplishments.add(getDream((String)dreamNode.getProperty("id")));
+    	} 
+				
+		allDreams.put("Accomplishments", accomplishments);
+		
+    	return allDreams;
     }
+    
     @GET
     @Path("/search/{searchstring}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -346,9 +366,18 @@ dream.setAchievements((String)dreamNode.getProperty("achievements",null));
 			
 			dreamNode.setProperty("imagekeys", dream.getImageKeys());
 		}
-if(!StringUtils.isEmpty(dream.getAchievements())) {
+		
+		if(!StringUtils.isEmpty(dream.getAchievements())) {
 			dreamNode.setProperty("achievements", dream.getAchievements());
-		}    }
+		}  
+		
+		dreamNode.setProperty("currentState", dream.getCurrentState());
+		
+		if(!StringUtils.isEmpty(dream.getListedUserid())) {
+			dreamNode.setProperty("listedUserId", dream.getListedUserid());
+		}  
+
+    }
     
     private void validateNewDreamModel(DreamModel dream) {
     	
@@ -373,16 +402,11 @@ if(!StringUtils.isEmpty(dream.getAchievements())) {
 			}
 		}
 		
-		if(!StringUtils.isEmpty(dream.getAchieverUserId())) {
-			Node achieverNode = dao.getUser(dream.getAchieverUserId());
+		if(StringUtils.isEmpty(dream.getAchieverUserId()) && StringUtils.isEmpty(dream.getListedUserid())) {
 			
-			if(achieverNode == null) {
-				throw new IllegalArgumentException("Achiever not found");
-			}
+			throw new IllegalArgumentException("Achiever Id or Listed User id is required");
 		}
-		else {
-			throw new IllegalArgumentException("Achiever Id is required");
-		}
+		
     }
 
     private void validateExistingDreamModel(DreamModel dream) {
