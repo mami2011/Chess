@@ -593,7 +593,7 @@ public class User {
 	@GET
 	@Path("/search/enabler/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<UserModel> getAchiversByName(@PathParam("name") String searchString) {
+	public List<UserModel> getEnablersByName(@PathParam("name") String searchString) {
 
 		List<UserModel> retVal = new ArrayList<>();
 
@@ -615,7 +615,7 @@ public class User {
 	@GET
 	@Path("/search/achiever/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<UserModel> getEnablersByName(@PathParam("name") String searchString) {
+	public List<UserModel> getAchieversByName(@PathParam("name") String searchString) {
 
 		List<UserModel> retVal = new ArrayList<>();
 

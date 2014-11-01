@@ -635,7 +635,9 @@ public List<Node> getEnablersBySearchString(String searchString) {
 			.append(".*' OR")
 			.append("  u.lastname=~ '(?i)")
 			.append(searchString)
-			.append(".*' ) AND u.accounttype ='ENABLER' return u limit ")
+			.append(".*'  OR u.id=~ '(?i)")
+			.append(searchString)
+			.append(".*') AND u.accounttype ='ENABLER' return u limit ")
 			.append(Limits.MAX_USERS_SEARCH_RESULTS );
 			retNodes.addAll(getNodes(query.toString(),"u"));
 		}
@@ -658,7 +660,9 @@ public List<Node> getAchieversBySearchString(String searchString) {
 		.append(".*' OR")
 		.append("  u.lastname=~ '(?i)")
 		.append(searchString)
-		.append(".*' ) AND u.accounttype ='ACHIVER' return u limit ")
+		.append(".*'  OR u.id=~ '(?i)")
+		.append(searchString)
+		.append(".*') AND (u.accounttype ='ACHIEVER' OR u.accounttype ='ACHIVER') return u limit ")
 		.append(Limits.MAX_USERS_SEARCH_RESULTS );
 		retNodes.addAll(getNodes(query.toString(),"u"));
 	}
@@ -680,22 +684,22 @@ public List<Node> getAchieversBySearchString(String searchString) {
 			
 			String thisCatId = (String)categoryNode.getProperty("id");
 			
-			StringBuilder query = new StringBuilder();
-			query.append("match (d:dream)<-[r:liked]-(u:user) where d.categoryid='")
+			StringBuilder subQuery = new StringBuilder();
+			subQuery.append("match (d:dream)<-[r:liked]-(u:user) where d.categoryid='")
 				.append(thisCatId.toLowerCase())
 				.append("' return d,count(r) as numlikes order by numlikes limit ")
 				.append(Limits.MAX_DREAMS_SEARCH_RESULTS);
 			
-			retNodes.addAll(getNodes(query.toString(),"d"));
+			retNodes.addAll(getNodes(subQuery.toString(),"d"));
 			
 			if(retNodes.size() < Limits.MAX_DREAMS_SEARCH_RESULTS) {
-				query = new StringBuilder();
-				query.append("match (d:dream) where d.categoryid='")
+				subQuery = new StringBuilder();
+				subQuery.append("match (d:dream) where d.categoryid='")
 					.append(thisCatId.toLowerCase())
 					.append("' return d limit ")
 					.append(Limits.MAX_DREAMS_SEARCH_RESULTS - retNodes.size());
 
-				retNodes.addAll(getNodes(query.toString(),"d"));
+				retNodes.addAll(getNodes(subQuery.toString(),"d"));
 			}
 		}
 		
@@ -703,6 +707,8 @@ public List<Node> getAchieversBySearchString(String searchString) {
 		
 		StringBuilder query = new StringBuilder();
 				query.append("match (d:dream) where d.name=~ '(?i).*")
+					.append(searchString)
+					.append(".*' OR  d.desc=~ '(?i).*")
 					.append(searchString)
 					.append(".*' return d limit ")
 					.append(Limits.MAX_DREAMS_SEARCH_RESULTS - retNodes.size());
